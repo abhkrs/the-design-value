@@ -32,7 +32,7 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="pr-6 text-center lg:text-start">
+            <div className="lg:pr-6 pr-auto text-center lg:text-start">
                 <H3>Research</H3>
                 <P>Gain insights and understand user needs to inform the design process.</P>
             </div>
@@ -54,7 +54,7 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="pr-6 text-center lg:text-start">
+            <div className="lg:pr-6 pr-auto text-center lg:text-start">
                 <H3>Research</H3>
                 <P>Gain insights and understand user needs to inform the design process.</P>
             </div>
@@ -76,7 +76,7 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="pr-6 text-center lg:text-start">
+            <div className="lg:pr-6 pr-auto text-center lg:text-start">
                 <H3>Research</H3>
                 <P>Gain insights and understand user needs to inform the design process.</P>
             </div>
@@ -91,7 +91,7 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="pr-6 text-center lg:text-start">
+            <div className="lg:pr-6 pr-auto text-center lg:text-start">
                 <H3>Research</H3>
                 <P>Gain insights and understand user needs to inform the design process.</P>
             </div>
