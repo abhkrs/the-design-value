@@ -1,21 +1,21 @@
-import Header from '@/components/Header'
+import Header from '@/components/sections/Header'
 import './globals.css'
-import { Poppins } from 'next/font/google'
-import Footer from '@/components/Footer'
+import { Inter } from 'next/font/google'
+import Footer from '@/components/sections/Footer'
 
-const poppins = Poppins({
+const inter = Inter({
   weight: ['400', '700'],
    subsets: ['latin'] })
 
 export const metadata = {
-  title: 'abhkrs',
-  description: 'Demo Project created by Abhishek Kumar[Find me by searching abh.krs => socialmedia || abhkrs => linkedin && github]',
+  title: 'The Design Value',
+  description: 'India’s first UI/UX design school with Paid internships',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={inter.className}>
         <Header />
         {children}
         <Footer/>

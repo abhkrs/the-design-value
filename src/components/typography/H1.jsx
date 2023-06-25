@@ -1,6 +1,6 @@
 function H1({ children, className }) {
     return (
-      <h1 className={`${className} text-xl md:text-2xl lg:text-3xl`}>{children}</h1>
+      <h1 className={`${className} text-2xl sm:text-3xl md:text-4xl lg:text-5xl`}>{children}</h1>
     );
   }
   
