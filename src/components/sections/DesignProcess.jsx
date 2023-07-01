@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-undef */
 import React from "react";
-import Section from "../typography/Section";
+import Section from "../uielements/Section";
 import H2 from "../typography/H2";
 import Image from "next/image";
 import H3 from "../typography/H3";
@@ -32,10 +32,13 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="lg:pr-6 pr-auto text-center lg:text-start">
-                <H3>Research</H3>
-                <P>Gain insights and understand user needs to inform the design process.</P>
-            </div>
+          <div className="lg:pr-6 pr-auto text-center lg:text-start">
+            <H3>Research</H3>
+            <P>
+              Gain insights and understand user needs to inform the design
+              process.
+            </P>
+          </div>
         </div>
         <div className="mt-10">
           <div className="flex h-20 mb-4 justify-center">
@@ -54,10 +57,13 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="lg:pr-6 pr-auto text-center lg:text-start">
-                <H3>Research</H3>
-                <P>Gain insights and understand user needs to inform the design process.</P>
-            </div>
+          <div className="lg:pr-6 pr-auto text-center lg:text-start">
+            <H3>Research</H3>
+            <P>
+              Gain insights and understand user needs to inform the design
+              process.
+            </P>
+          </div>
         </div>
         <div className="mt-10">
           <div className="flex h-20 mb-4 justify-center">
@@ -76,10 +82,13 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="lg:pr-6 pr-auto text-center lg:text-start">
-                <H3>Research</H3>
-                <P>Gain insights and understand user needs to inform the design process.</P>
-            </div>
+          <div className="lg:pr-6 pr-auto text-center lg:text-start">
+            <H3>Research</H3>
+            <P>
+              Gain insights and understand user needs to inform the design
+              process.
+            </P>
+          </div>
         </div>
         <div className="mt-10">
           <div className="flex h-20 mb-4 justify-center lg:justify-start">
@@ -91,10 +100,13 @@ export default function DesignProcess() {
               />
             </div>
           </div>
-            <div className="lg:pr-6 pr-auto text-center lg:text-start">
-                <H3>Research</H3>
-                <P>Gain insights and understand user needs to inform the design process.</P>
-            </div>
+          <div className="lg:pr-6 pr-auto text-center lg:text-start">
+            <H3>Research</H3>
+            <P>
+              Gain insights and understand user needs to inform the design
+              process.
+            </P>
+          </div>
         </div>
       </div>
     </Section>

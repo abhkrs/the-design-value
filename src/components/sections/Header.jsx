@@ -9,7 +9,7 @@ import P from "../typography/P";
 const menu = [
   {
     name: "Courses",
-    url: "/",
+    url: "/courses",
   },
   {
     name: "Articles",
@@ -33,6 +33,8 @@ function Header() {
     for (let i = 0; i < menu.length; i++) {
       if (menu[i].url === pathName) {
         return i;
+      }else{
+        return null
       }
     }
   };
@@ -62,7 +64,7 @@ function Header() {
       </div>
       <nav className="md:py-4">
         <div className="mx-auto 2xl:container px-6 lg:px-10 container-fluid flex items-center justify-center md:justify-between">
-          <Link href="/" className="text-3xl font-bold mt-3 md:mt-0 dm-sans">
+          <Link href="/" className="text-3xl font-bold mt-3 md:mt-0 dm-sans" onClick={() => setActive(null)}>
             The<span className="text-primary">Design</span>Value
           </Link>
           <div className="md:flex hidden">

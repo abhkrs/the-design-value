@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 import H1 from "../typography/H1";
-import Section from "../typography/Section";
+import Section from "../uielements/Section";
 import P from "../typography/P";
 
 export default function HomeBanner() {
@@ -22,17 +22,17 @@ export default function HomeBanner() {
             specifically for working professionals and ambitious students.
           </P>
           <Link
-          href=" "
-          className="bg-black text-white mt-10 rounded-3xl px-6 py-3 hover:bg-primary block max-w-max mx-auto md:mx-0"
+            href=" "
+            className="bg-black text-white mt-10 rounded-3xl px-6 py-3 hover:bg-primary block max-w-max mx-auto md:mx-0"
           >
             View Courses
           </Link>
         </div>
         <div className="relative min-h-[300px]">
-          <Image 
-          src="/images/objects.png"
-          fill={true}
-          className="object-contain"
+          <Image
+            src="/images/objects.png"
+            fill={true}
+            className="object-contain"
           />
         </div>
       </div>

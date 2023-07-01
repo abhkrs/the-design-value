@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Image from "next/image";
-import Section from "../typography/Section";
+import Section from "../uielements/Section";
 import H2 from "../typography/H2";
-import H5 from "../typography/H5";
 import P from "../typography/P";
 import H4 from "../typography/H4";
 

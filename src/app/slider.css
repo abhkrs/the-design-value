@@ -1,0 +1,20 @@
+/* carousel.css */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .carousel-dots li {
+    position: relative;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .carousel-dots li.carousel-dot__active {
+    background-color: #ff0000;
+  }
