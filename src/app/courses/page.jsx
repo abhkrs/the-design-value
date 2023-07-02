@@ -6,6 +6,7 @@ import Section from "@/components/uielements/Section";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FaCircle } from "react-icons/fa";
 
 export default function page() {
   const coureseData = [
@@ -20,7 +21,7 @@ export default function page() {
       for: "Beginner to Masterclass",
       type: "Paid Internship",
       perMonth: "2,800",
-      url: "/",
+      url: "/courses/workshop-with-internship",
     },
     {
       name: "UI/UX Design Certification",
@@ -32,7 +33,7 @@ export default function page() {
       for: "Beginner to Masterclass",
       type: "Paid Internship",
       perMonth: "2,800",
-      url: "/",
+      url: "/courses/workshop-with-intrnship",
     },
     {
       name: "UI/UX Design Certification with Paid Internship",
@@ -45,7 +46,7 @@ export default function page() {
       for: "Beginner to Masterclass",
       type: "Paid Internship",
       perMonth: "2,800",
-      url: "/",
+      url: "/courses/workshop-with-intrnship",
     },
     {
       name: "UI/UX Design Certification with",
@@ -57,7 +58,7 @@ export default function page() {
       for: "Beginner to Masterclass",
       type: "Paid Internship",
       perMonth: "2,800",
-      url: "/",
+      url: "/courses/workshop-with-intrnship",
     },
   ];
   return (
@@ -99,10 +100,8 @@ export default function page() {
                 <P className="text-secondary font-semibold min-h-[18px] mt-6">
                   {program.liveClass}
                 </P>
-                <P className="text-gray-600">
-                  {program.duration}&nbsp;&#x2022;&nbsp;{program.for}
-                  &nbsp;&#x2022;&nbsp;{program.type}
-                </P>
+                {program.duration}<FaCircle className="inline mx-2 w-2 h-2 mb-1" />{program.for}
+                  <FaCircle className="inline mx-2 w-2 h-2 mb-1" />{program.type}
               </div>
               <div className="flex flex-col justify-end">
                 <P className="font-bold text-black mb-2 ms-2">

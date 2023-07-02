@@ -56,7 +56,7 @@ function Header() {
         <P className="capitalize cursor-default mr-10"> Admissions open for batches starting from May!</P>
         <P className="mt-3 mb-5 text-[#E0E0E0] capitalize">All courses at a discount of <span className="font-bold text-white uppercase">Flat 50%</span></P>
         <Link
-        href="/"
+        href="/courses"
         className="underline font-bold"
         >
         Check Now
@@ -81,9 +81,9 @@ function Header() {
               </Link>
             ))}
           </div>
-          <button className="bg-primary rounded-[40px] w-40 text-white p-2 hidden md:inline-block">
+          <Link href="/student-login" className="bg-primary text-center rounded-[40px] w-40 text-white p-2 hidden md:inline-block">
             Student Log In
-          </button>
+          </Link>
         </div>
         <div className="bg-black block md:hidden container-fluid text-white mt-3 px-3 py-3">
           <div className="flex justify-between">
@@ -104,9 +104,9 @@ function Header() {
                 X
               </div>
             </button>
-            <button className="bg-white text-black hover:bg-secondary hover:text-white rounded-[30px] w-40 p-1">
+            <Link href="/student-login" className="bg-white text-center text-black hover:bg-secondary hover:text-white rounded-[30px] w-40 p-1">
               Student Log In
-            </button>
+            </Link>
           </div>
           <div className={`${showToggledNav ? "flex" : "hidden"} flex-col`}>
             {menu.map((data, index) => (
@@ -129,7 +129,7 @@ function Header() {
       >
         <P className="capitalize cursor-default mr-2"> Admissions open for batches starting from May – </P>
         <Link
-        href="/">
+        href="/courses">
         Enroll Now!
         </Link>
         <button
