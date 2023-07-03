@@ -3,6 +3,7 @@ import H2 from "@/components/typography/H2";
 import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
 import Section from "@/components/uielements/Section";
+import SectionDark from "@/components/uielements/SectionDark";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -118,8 +119,8 @@ export default function page() {
           ))}
         </div>
       </Section>
-      <Section className="mb-16">
-        <div className="flex flex-row bg-primary p-2 lg:py-6 relative">
+      <SectionDark className="mb-16">
+        <div className="flex flex-row p-2 lg:py-6 relative">
           <div className="col-span-3 p-6 text-white">
             <H2>Looking for a personal batch for yourself?</H2>
             <P className="my-6">
@@ -142,7 +143,7 @@ export default function page() {
             />
           </div>
         </div>
-      </Section>
+      </SectionDark>
     </main>
   );
 }

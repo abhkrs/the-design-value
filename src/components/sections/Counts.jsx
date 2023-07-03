@@ -1,12 +1,12 @@
 import React from "react";
-import Section from "../uielements/Section";
 import H2 from "../typography/H2";
 import H3 from "../typography/H3";
 import P from "../typography/P";
+import SectionDark from "../uielements/SectionDark";
 
 export default function Counts() {
     return (
-        <Section bg="bg-black py-16 text-white text-center">
+        <SectionDark className="py-16 text-white text-center">
             <H2 className="font-bold capitalize">Some count that matters</H2>
             <P className="md:my-5 mt-3 mb-5">
                 Our achievement in the journey depicted in numbers
@@ -32,6 +32,6 @@ export default function Counts() {
                     <P>Students Enrolled so far</P>
                 </div>
             </div>
-        </Section>
+        </SectionDark>
     );
 }
