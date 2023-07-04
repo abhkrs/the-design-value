@@ -17,7 +17,7 @@ const menu = [
   },
   {
     name: "FAQs",
-    url: "/",
+    url: "/faqs",
   },
 ];
 
@@ -74,7 +74,7 @@ function Header() {
                 href={data.url}
                 className={` ${
                   active === index && "!text-primary"
-                } 'text-black capitalize hover:text-primary text-lg px-4 py-2 bg-transparent rounded-md relative z-10`}
+                } 'text-black font-semibold capitalize hover:text-primary text-lg px-4 py-2 bg-transparent rounded-md relative z-10`}
                 onClick={() => setActive(index)}
               >
                 {data.name}

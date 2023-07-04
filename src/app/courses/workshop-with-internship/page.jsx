@@ -1,5 +1,5 @@
+'use client'
 import Testimonials from "@/components/sections/Testimonials";
-import H1 from "@/components/typography/H1";
 import H2 from "@/components/typography/H2";
 import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
@@ -7,9 +7,19 @@ import Section from "@/components/uielements/Section";
 import SectionDark from "@/components/uielements/SectionDark";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { FaCheck, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
-export default function page() {
+export default function Page() {
+  const [callBackForm, setCallBackForm] = useState(false);
+  const [registerCourseForm, setRegisterCourseForm] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+// submit fucntion
+  };
   return (
     <main>
       <SectionDark className="flex pt-12 pb-8 justify-between relative max-h-min">
@@ -78,11 +88,63 @@ export default function page() {
               <span className=" text-primary mr-2 font-bold">INR 2,500 per month</span>
               <span className="line-through text-gray-600">INR 6,000 per month</span>
             </div>
-            <button className="font-bold px-8 py-2 rounded-full shadow-md border w-full hover:bg-secondary">☎️  Get a Call Back</button>
-            <button className="font-bold px-8 py-2 rounded-full bg-black hover:bg-primary text-white shadow-md w-full my-3">Register for Internship & Course</button>
+            <button onClick={() => {setCallBackForm(true)}} className="font-bold px-8 py-2 rounded-full shadow-md border w-full hover:bg-secondary">☎️  Get a Call Back</button>
+            <button onClick={() => {setRegisterCourseForm(true)}} className="font-bold px-8 py-2 rounded-full bg-black hover:bg-primary text-white shadow-md w-full my-3">Register for Internship & Course</button>
           </div>
         </div>
       </SectionDark>
+      {callBackForm && (
+          <div className="fixed top-0 left-0 right-0 bottom-0 bg-white bg-opacity-75 z-50 flex items-center justify-center">
+            <div className="bg-white p-8 rounded shadow-lg w-1/2">
+              <form onSubmit={handleSubmit} className="relative">
+                <button
+                  onClick={()=>{setCallBackForm(false)}}
+                  className="absolute -top-2 right-0 text-red-500"
+                >
+                  Close
+                </button>
+                <div className="mb-4">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="border border-gray-300 p-1 rounded ml-6"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="border border-gray-300 p-1 rounded ml-6"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="phone">Phone</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="border border-gray-300 p-1 rounded ml-6"
+                  />
+                </div>
+                
+                
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white py-1 px-4 rounded"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
       <Section className="my-6">
         <div className="w-2/3 grid gap-8 pr-8">
           <div className="bg-white px-12 py-10 rounded shadow ">
