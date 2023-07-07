@@ -67,7 +67,7 @@ const Accordion = () => {
                   <button
                     className={`${
                       index === activeIndex ? "bg-black" : "bg-secondary text-xl font-bold"
-                    }  rounded-full text-white ml-auto min-h-[28px] max-h-[28px] min-w-[28px] text-center`}
+                    }  rounded-full !text-white ml-auto min-h-[28px] max-h-[28px] min-w-[28px] text-center`}
                   >
                     <span className="-mt-2">{index === activeIndex ? "x" : "+"}</span>
                   </button>

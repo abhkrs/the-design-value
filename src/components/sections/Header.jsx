@@ -45,7 +45,7 @@ function Header() {
   return (
     <header className="sticky !top-0 left-0 right-0 bg-light md:bg-white z-50 w-full">
       <div 
-      className={`${topbar ? "md:hidden" : "hidden"} bg-primary text-white p-6`}
+      className={`${topbar ? "md:hidden" : "hidden"} bg-primary !text-white p-6`}
       >
         <button
         onClick = {()=>setTopbar(false)}
@@ -54,7 +54,7 @@ function Header() {
           X
         </button>
         <P className="capitalize cursor-default mr-10"> Admissions open for batches starting from May!</P>
-        <P className="mt-3 mb-5 text-[#E0E0E0] capitalize">All courses at a discount of <span className="font-bold text-white uppercase">Flat 50%</span></P>
+        <P className="mt-3 mb-5 text-[#E0E0E0] capitalize">All courses at a discount of <span className="font-bold !text-white uppercase">Flat 50%</span></P>
         <Link
         href="/courses"
         className="underline font-bold"
@@ -74,24 +74,24 @@ function Header() {
                 href={data.url}
                 className={` ${
                   active === index && "!text-primary"
-                } 'text-black capitalize hover:text-primary text-lg px-4 py-2 bg-transparent rounded-md relative z-10`}
+                } '!text-black capitalize hover:text-primary text-lg px-4 py-2 bg-transparent rounded-md relative z-10`}
                 onClick={() => setActive(index)}
               >
                 {data.name}
               </Link>
             ))}
           </div>
-          <Link href="/student-login" className="bg-primary text-center rounded-[40px] w-40 text-white p-2 hidden md:inline-block">
+          <Link href="/student-login" className="bg-primary text-center rounded-[40px] w-40 !text-white p-2 hidden md:inline-block">
             Student Log In
           </Link>
         </div>
-        <div className="bg-black block md:hidden container-fluid text-white mt-3 px-3 py-3">
+        <div className="bg-black block md:hidden container-fluid !text-white mt-3 px-3 py-3">
           <div className="flex justify-between">
             <button
               kind=""
               onClick={toogleHeader}
               type="button"
-              className="w-10 border-0 bg-transparent text-white ml-2"
+              className="w-10 border-0 bg-transparent !text-white ml-2"
             >
               <FaBars
                 className={`${!showToggledNav ? "text-base" : "hidden"}`}
@@ -104,7 +104,7 @@ function Header() {
                 X
               </div>
             </button>
-            <Link href="/student-login" className="bg-white text-center text-black hover:bg-secondary hover:text-white rounded-[30px] w-40 p-1">
+            <Link href="/student-login" className="bg-white text-center !text-black hover:bg-secondary hover:!text-white rounded-[30px] w-40 p-1">
               Student Log In
             </Link>
           </div>
@@ -115,7 +115,7 @@ function Header() {
                 href={data.url}
                 className={` ${
                   active === index && "!text-secondary"
-                } 'text-black capitalize hover:text-secondary text-md px-3 py-1 rounded-md`}
+                } '!text-black capitalize hover:text-secondary text-md px-3 py-1 rounded-md`}
                 onClick={() => setActive(index) & setShowToggledNav(false)}
               >
                 {data.name}
@@ -125,7 +125,7 @@ function Header() {
         </div>
       </nav>
       <div 
-      className={`${topbar ? "hidden md:flex" : "hidden"} bg-black text-white p-3 justify-center`}
+      className={`${topbar ? "hidden md:flex" : "hidden"} bg-black !text-white p-3 justify-center`}
       >
         <P className="capitalize cursor-default mr-2"> Admissions open for batches starting from May – </P>
         <Link

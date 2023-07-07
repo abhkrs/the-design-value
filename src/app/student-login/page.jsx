@@ -63,7 +63,7 @@ export default function page() {
                 </P>
               </div>
               <div className="flex flex-col justify-end">
-                <P className="font-bold text-black mb-3 ms-1">
+                <P className="font-bold !text-black mb-3 ms-1">
                   <FaCheckSquare
                   className="text-[#00D100] inline mr-2 w-6 h-6"
                   />
@@ -71,7 +71,7 @@ export default function page() {
                 </P>
                 <Link
                   href={program.payment}
-                  className="rounded-2xl bg-black text-white hover:bg-primary px-6 py-1 max-w-max min-w-max mx-auto md:mr-auto"
+                  className="rounded-2xl bg-black !text-white hover:bg-primary px-6 py-1 max-w-max min-w-max mx-auto md:mr-auto"
                 >
                   Pay Fee for the next month
                 </Link>
@@ -84,7 +84,7 @@ export default function page() {
           <H3 className="!text-2xl text-secondary my-6">For any queries or doubts</H3>
           <Link
                   href="/contact"
-                  className="rounded-md bg-black text-white text-xl hover:bg-primary px-6 py-3 max-w-max min-w-max mx-auto"
+                  className="rounded-md bg-black !text-white text-xl hover:bg-primary px-6 py-3 max-w-max min-w-max mx-auto"
                 >
                   CONTACT US
                 </Link>

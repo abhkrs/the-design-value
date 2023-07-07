@@ -6,7 +6,7 @@ import SectionDark from "../uielements/SectionDark";
 
 export default function Counts() {
     return (
-        <SectionDark className="py-16 text-white text-center">
+        <SectionDark className="py-16 !text-white text-center">
             <H2 className="font-bold capitalize">Some count that matters</H2>
             <P className="md:my-5 mt-3 mb-5">
                 Our achievement in the journey depicted in numbers

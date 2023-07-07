@@ -48,7 +48,7 @@ const MentorsForm = () => {
           {!isOpen && (
             <button
               onClick={toggleForm}
-              className="bg-black text-white py-2 px-10 rounded-full"
+              className="bg-black !text-white py-2 px-10 rounded-full"
             >
               Apply Now
             </button>
@@ -128,7 +128,7 @@ const MentorsForm = () => {
                 </div>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white py-1 px-4 rounded"
+                  className="bg-blue-500 !text-white py-1 px-4 rounded"
                 >
                   Submit
                 </button>

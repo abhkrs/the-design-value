@@ -12,7 +12,7 @@ import P from "../typography/P";
 
 export default function Footer() {
   return (
-    <footer className="bg-center bg-cover bg-no-repeat text-white bottom-0 p-4 pt-8 md:pt-4" style={{ backgroundImage: `url('/images/bglgr.png')` }}>
+    <footer className="bg-center bg-cover bg-no-repeat !text-white bottom-0 p-4 pt-8 md:pt-4" style={{ backgroundImage: `url('/images/bglgr.png')` }}>
       <div className="flex flex-col md:flex-row justify-between">
         <Link href="/" className="text-xl">
           The<span className="text-primary">Design</span>Value

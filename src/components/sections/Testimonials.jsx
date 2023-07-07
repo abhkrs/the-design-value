@@ -64,7 +64,7 @@ function Testimonials() {
             />
           </div>
           <div>
-            <P className="text-black mt-2 font-semibold capitalize text-start">
+            <P className="!text-black mt-2 font-semibold capitalize text-start">
               {card.authorName}
             </P>
             <P className="mt-2 capitalize">{card.authorJob}</P>

@@ -23,7 +23,7 @@ export default function HomeBanner() {
           </P>
           <Link
             href=" "
-            className="bg-black text-white mt-10 rounded-3xl px-6 py-3 hover:bg-primary block max-w-max mx-auto md:mx-0"
+            className="bg-black !text-white mt-10 rounded-3xl px-6 py-3 hover:bg-primary block max-w-max mx-auto md:mx-0"
           >
             View Courses
           </Link>

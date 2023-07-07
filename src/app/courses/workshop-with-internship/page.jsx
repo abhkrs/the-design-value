@@ -24,10 +24,10 @@ export default function Page() {
     <main>
       <SectionDark className="flex pt-12 pb-8 justify-between relative max-h-min">
         <div className="w-2/3">
-          <H2 className="text-white !text-4xl">
+          <H2 className="!text-white !text-4xl">
             UI/UX Design with 100% Paid Internship
           </H2>
-          <P className="my-6 text-white !text-lg">
+          <P className="my-6 !text-white !text-lg">
             Master the essentials of UI/UX design with our comprehensive course
             covering topics such as user research, wireframing, prototyping, and
             interaction design.{" "}
@@ -40,7 +40,7 @@ export default function Page() {
             <FaStar className="mx-1 mt-1" />
             <FaStarHalfAlt className="mx-1 mt-1" />
           </div>
-          <H3 className="bg-secondary px-2 py-1 text-white max-w-max font-normal">
+          <H3 className="bg-secondary px-2 py-1 !text-white max-w-max font-normal">
             86% Placement Rate after internship
           </H3>
           <div className="text-gray-400 mt-6 flex justify-start">
@@ -89,7 +89,7 @@ export default function Page() {
               <span className="line-through text-gray-600">INR 6,000 per month</span>
             </div>
             <button onClick={() => {setCallBackForm(true)}} className="font-bold px-8 py-2 rounded-full shadow-md border w-full hover:bg-secondary">☎️  Get a Call Back</button>
-            <button onClick={() => {setRegisterCourseForm(true)}} className="font-bold px-8 py-2 rounded-full bg-black hover:bg-primary text-white shadow-md w-full my-3">Register for Internship & Course</button>
+            <button onClick={() => {setRegisterCourseForm(true)}} className="font-bold px-8 py-2 rounded-full bg-black hover:bg-primary !text-white shadow-md w-full my-3">Register for Internship & Course</button>
           </div>
         </div>
       </SectionDark>
@@ -137,7 +137,7 @@ export default function Page() {
                 
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white py-1 px-4 rounded"
+                  className="bg-blue-500 !text-white py-1 px-4 rounded"
                 >
                   Submit
                 </button>
@@ -177,7 +177,7 @@ export default function Page() {
         </div>
       </Section>
       <SectionDark>
-        <div className="w-2/3 px-8 text-white py-6">
+        <div className="w-2/3 px-8 !text-white py-6">
         <H2 className="!text-4xl !font-normal">Earn a certificate in UI/UX design along with Internship</H2>
         <P className="my-4 !text-lg">Add this credential to your LinkedIn profile, resume, or CV Share it on social media and in your performance review</P>
         <Link href="#" className="px-8 rounded-full bg-white !text-black py-1">👀 View Certificate</Link>

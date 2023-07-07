@@ -105,12 +105,12 @@ export default function page() {
                   <FaCircle className="inline mx-2 w-2 h-2 mb-1" />{program.type}
               </div>
               <div className="flex flex-col justify-end">
-                <P className="font-bold text-black mb-2 ms-2">
+                <P className="font-bold !text-black mb-2 ms-2">
                   INR&nbsp;{program.perMonth}&nbsp;per month
                 </P>
                 <Link
                   href={program.url}
-                  className="rounded-2xl bg-black text-white hover:bg-primary px-6 py-1 max-w-max min-w-max mx-auto md:mr-auto"
+                  className="rounded-2xl bg-black !text-white hover:bg-primary px-6 py-1 max-w-max min-w-max mx-auto md:mr-auto"
                 >
                   View Course Details
                 </Link>
@@ -121,7 +121,7 @@ export default function page() {
       </Section>
       <SectionDark className="mb-16">
         <div className="flex flex-row p-2 lg:py-6 relative">
-          <div className="col-span-3 p-6 text-white">
+          <div className="col-span-3 p-6 !text-white">
             <H2>Looking for a personal batch for yourself?</H2>
             <P className="my-6">
               Master the essentials of UI/UX design with our comprehensive
