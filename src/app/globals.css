@@ -2,16 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Serif+Text&family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
   background: #f2fafb;
 }
 
-h1, h2, h3, h4, h5, h6, .dm-sans{
-  font-family: 'DM Serif Display', serif;
+h1, h2, h3, h4, h5, h6, .dm-sans {
+  font-family: 'DM Serif Display', serif !important;
   font-weight: 700;
 }
 
-.inter{
+p, .inter{
   font-family: 'Inter' !important;
 }
