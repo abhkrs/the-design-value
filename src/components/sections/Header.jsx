@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import P from "../typography/P";
+import Image from "next/image";
 
 const menu = [
   {
@@ -49,12 +50,12 @@ function Header() {
       >
         <button
         onClick = {()=>setTopbar(false)}
-        className="bg-white text-primary rounded-full px-2 absolute top-5 right-5"
+        className="absolute top-5 right-5"
         >
-          X
+          <Image alt="" src="/images/close.svg" height="18" width="18" />
         </button>
-        <P className="capitalize cursor-default mr-10"> Admissions open for batches starting from May!</P>
-        <P className="mt-3 mb-5 text-[#E0E0E0] capitalize">All courses at a discount of <span className="font-bold !text-white uppercase">Flat 50%</span></P>
+        <P className="capitalize cursor-default mr-10 !text-white"> Admissions open for batches starting from May!</P>
+        <P className="mt-3 mb-5 !text-[#E0E0E0] capitalize">All courses at a discount of <span className="font-bold !text-white uppercase">Flat 50%</span></P>
         <Link
         href="/courses"
         className="underline font-bold"
@@ -63,7 +64,7 @@ function Header() {
         </Link>
       </div>
       <nav className="md:py-4">
-        <div className="mx-auto 2xl:container px-6 lg:px-10 container-fluid flex items-center justify-center md:justify-between">
+        <div className="2xl:container px-6 md:px-12 lg:px-28 mx-auto container-fluid flex items-center justify-center md:justify-between">
           <Link href="/" className="text-3xl font-bold mt-3 md:mt-0 dm-sans" onClick={() => setActive(null)}>
             The<span className="text-primary">Design</span>Value
           </Link>
@@ -127,16 +128,16 @@ function Header() {
       <div 
       className={`${topbar ? "hidden md:flex" : "hidden"} bg-black !text-white p-3 justify-center`}
       >
-        <P className="capitalize cursor-default mr-2"> Admissions open for batches starting from May – </P>
+        <P className="capitalize cursor-default mr-2 !text-white"> Admissions open for batches starting from May – </P>
         <Link
         href="/courses">
         Enroll Now!
         </Link>
         <button
         onClick = {()=>setTopbar(false)}
-        className="bg-accent rounded-full px-2 ml-4 text-primary"
+        className="ml-4"
         >
-          X
+          <Image alt="" src="/images/close.svg" height="18" width="18" />
         </button>
       </div>
     </header>

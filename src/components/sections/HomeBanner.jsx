@@ -16,7 +16,7 @@ export default function HomeBanner() {
             <span className="text-secondary">UI/UX design school</span> with
             Paid internships
           </H1>
-          <P className="text-center md:text-start">
+          <P className="text-center md:text-start !text-xl xl:pr-8">
             Be a part of the future design community and embark on a journey of
             creativity and innovation with our UI/UX course, designed
             specifically for working professionals and ambitious students.

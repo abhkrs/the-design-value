@@ -23,11 +23,11 @@ const MentorsForm = () => {
   };
 
   return (
-    <Section>
+    <Section bg="bg-white">
       <div
         className="bg-white flex flex-col md:flex-row px-6 py-6 md:py-10 gap-6 md:gap-0 text-center md:text-start"
       >
-        <div className="relative min-w-[300px] min-h-[300px] md:min-h-[200px]">
+        <div className="relative min-w-[300px] lg:min-w-[400px] min-h-[300px] md:min-h-[300px]">
           <Image
             src="/images/mentor.png"
             alt="Mentor"
@@ -35,11 +35,11 @@ const MentorsForm = () => {
             className="object-contain"
           />
         </div>
-        <div className="md:px-6 lg:px-8">
+        <div className="md:px-6 lg:px-8 flex flex-col justify-center">
           <H2 className="capitalize">
             Become a design <span className="text-secondary">instructor</span>
           </H2>
-          <P className=" my-6">
+          <P className=" my-6 !text-xl lg:w-4/5">
             Unleash your teaching prowess and become a UI/UX instructor with us.
             Inspire the next generation of designers and shape the future of
             user experience.
@@ -48,9 +48,9 @@ const MentorsForm = () => {
           {!isOpen && (
             <button
               onClick={toggleForm}
-              className="bg-black !text-white py-2 px-10 rounded-full"
+              className="bg-black !text-white !text-2xl font-semibold py-3 px-10 rounded-full max-w-max mx-auto md:ms-0"
             >
-              Apply Now
+              Apply as Mentor
             </button>
           )}
         </div>

@@ -10,11 +10,11 @@ import P from "../typography/P";
 export default function DesignProcess() {
   return (
     <Section bg="bg-white py-12">
-      <H2 className="capitalize text-center lg:text-start">
+      <H2 className="capitalize text-center lg:text-start mb-10">
         <span className="text-primary">Design process</span> that our students
         follow!
       </H2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 px-10 md:px-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 md:px-auto">
         <div className="mt-10">
           <div className="flex h-20 mb-4 justify-center">
             <div className="relative w-1/4">

@@ -6,6 +6,7 @@ import HomeBanner from "@/components/sections/HomeBanner";
 import LearningExp from "@/components/sections/LearningExp";
 import MentorForm from "@/components/sections/MentorForm";
 import Mentors from "@/components/sections/Mentors";
+import StudentsWorking from "@/components/sections/StudentsWorking";
 import Testimonials from "@/components/sections/Testimonials";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <Counts/>
       <DesignProcess/>
       <LearningExp/>
+      <StudentsWorking />
       <MentorForm />
       <Testimonials />
     </main>
