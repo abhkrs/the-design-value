@@ -34,9 +34,15 @@ export default function page() {
           <div className="bg-white p-6 md:p-10 grid lg:grid-cols-3 gap-6">
             <div className="col-span-2">
               <H2 className="!text-4xl ">Welcome, {studentDetails.name}!</H2>
-              <H3 className="text-secondary !text-2xl">Student ID - {studentDetails.studentID}</H3>
-              <P className="mt-2 !text-base">EMAIL ID - {studentDetails.email}</P>
-              <P className="mt-2 !text-base">Mobile No - {studentDetails.phoneNumber}</P>
+              <H3 className="text-secondary !text-2xl">
+                Student ID - {studentDetails.studentID}
+              </H3>
+              <P className="mt-2 !text-base">
+                EMAIL ID - {studentDetails.email}
+              </P>
+              <P className="mt-2 !text-base">
+                Mobile No - {studentDetails.phoneNumber}
+              </P>
             </div>
             <div className="flex flex-col align-end justify-center gap-6">
               <a className="text-secondary text-xl font-semibold text-end cursor-pointer">
@@ -99,7 +105,12 @@ export default function page() {
 
           <div className="bg-[#EA9B7A21] p-10">
             <P className="font-semibold mb-2">Note:</P>
-            <P>Our admin will add you to your respective class WhatsApp group in next 24 hours. For further classes, mentor will be sharing zoom links for class in that same group. We wish you good luck for your classes ☺️</P>
+            <P>
+              Our admin will add you to your respective class WhatsApp group in
+              next 24 hours. For further classes, mentor will be sharing zoom
+              links for class in that same group. We wish you good luck for your
+              classes ☺️
+            </P>
           </div>
         </div>
 

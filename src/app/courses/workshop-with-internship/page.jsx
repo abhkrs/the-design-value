@@ -580,8 +580,8 @@ export default function Page() {
                     designs.
                   </li>
                   <li>
-                    Using Figma's libraries and components for consistent design
-                    elements.
+                    Using Figma&apos;s libraries and components for consistent
+                    design elements.
                   </li>
                 </ul>
                 <li>Creating Interactive Prototypes</li>
@@ -606,8 +606,8 @@ export default function Page() {
                 <li>Collaborating and Version Control</li>
                 <ul className="ml-4 list-disc">
                   <li>
-                    Collaborating with team members in real-time using Figma's
-                    collaboration features.
+                    Collaborating with team members in real-time using
+                    Figma&apos;s collaboration features.
                   </li>
                   <li>
                     Utilizing comments and annotations to provide feedback and
@@ -655,8 +655,8 @@ export default function Page() {
                 <li>Designing for Collaboration and Handoff</li>
                 <ul className="ml-4 list-disc">
                   <li>
-                    Preparing your designs for development handoff using Figma's
-                    features.
+                    Preparing your designs for development handoff using
+                    Figma&apos;s features.
                   </li>
                   <li>Generating design specs and assets for developers.</li>
                   <li>Streamlining the design-to-development workflow.</li>

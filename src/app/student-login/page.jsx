@@ -1,24 +1,24 @@
 "use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import H2 from '@/components/typography/H2';
-import Image from 'next/image';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import H2 from "@/components/typography/H2";
+import Image from "next/image";
 
 export default function Page() {
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = () => {
-    const dummyUsername = 'admin';
-    const dummyPassword = 'password';
+    const dummyUsername = "admin";
+    const dummyPassword = "password";
 
     if (username === dummyUsername && password === dummyPassword) {
-      router.push('/profile');
+      router.push("/profile");
     } else {
-      setError('Invalid username or password');
+      setError("Invalid username or password");
     }
   };
 
