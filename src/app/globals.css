@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6, .dm-sans {
   background: #397367 !important;
 }
 
-.__active{
+.alice-carousel__dots .__active{
   background: #397367 !important;
   width: 40px !important;
   border-radius: 10px !important;
