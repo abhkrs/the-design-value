@@ -17,7 +17,7 @@ export default function AccordionTab({heading, children}) {
                 Course Details <Image alt="" src="/images/downarrow.svg" height="10" width="16" className='ms-2'/>
             </div>
         </div>
-        <div className={`${isOpen ? "block" : "hidden"} p-4`}>
+        <div className={`${isOpen ? "block" : "hidden"} p-4 !text-[#828282] !text-base !leading-7`}>
         {children}
         </div>
     </div>
