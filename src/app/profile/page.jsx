@@ -45,7 +45,7 @@ export default function page() {
               </P>
             </div>
             <div className="flex flex-col align-end justify-center gap-6">
-              <a className="text-secondary text-xl font-semibold text-end cursor-pointer">
+              <a className="text-secondary text-xl text-end cursor-pointer">
                 Reset Your Password?
               </a>
               <Link

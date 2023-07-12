@@ -63,7 +63,7 @@ export default function Page() {
             >
               Login
             </button>
-            <a className="text-secondary text-xl font-semibold text-center cursor-pointer">
+            <a className="text-secondary text-xl text-center cursor-pointer">
               Forgot Password?
             </a>
           </div>
