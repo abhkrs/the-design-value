@@ -35,14 +35,14 @@ export default function Page() {
             />
           </div>
         </div>
-        <div className="flex justify-between flex-col gap-8 h-screen p-8 lg:col-span-2">
-          <div className="flex justify-between flex-col gap-8">
-            <H2 className="text-center text-4xl font-bold">Add Your Details</H2>
+        <div className="flex justify-between flex-col gap-8 h-screen p-8 lg:col-span-2 md:mx-auto">
+          <div className="flex justify-between align-middle flex-col gap-8 md:w-[400px]">
+            <H2 className="text-center !text-3xl font-semibold inter">Add Your Details</H2>
             <input
               type="text"
               name="username"
               id="username"
-              className="p-3 placeholder-secondary text-xl"
+              className="p-3 placeholder-secondary text-xl border-gray-200 rounded border"
               placeholder="Your Student ID (as shared on Email)"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -50,7 +50,7 @@ export default function Page() {
             <input
               type="password"
               name="password"
-              className="p-3 placeholder-secondary text-xl"
+              className="p-3 placeholder-secondary text-xl border-gray-200 rounded border"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -67,12 +67,12 @@ export default function Page() {
               Forgot Password?
             </a>
           </div>
-          <div className="relative top-0 left-0 w-2/3 mx-auto h-20 mb-20">
+          <div className="relative top-0 left-0 w-2/3 mx-auto h-8 mb-20">
             <Image
               src="/images/bytdv.png"
               fill={true}
               alt="login page image"
-              className="object-contain w-full mx-auto h-20"
+              className="object-contain w-full mx-auto h-6"
             />
           </div>
         </div>

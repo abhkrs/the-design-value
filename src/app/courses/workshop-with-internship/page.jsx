@@ -9,7 +9,7 @@ import Section from "@/components/uielements/Section";
 import SectionDark from "@/components/uielements/SectionDark";
 import Image from "next/image";
 import Link from "next/link";
-import { FaCheck, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import AccordionTab from "@/components/uielements/AccordionTab";
 
 export default function Page() {
@@ -19,9 +19,6 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
-  const [uxCertificate, setUXCertificate] = useState(false);
-  const [internship, setInternship] = useState(false);
-  const [payableAmount, setPayableAmount] = useState(2000);
   const handleSubmit = (e) => {
     e.preventDefault();
     // submit function
@@ -141,7 +138,7 @@ export default function Page() {
               onClick={() => {
                 setCallBackForm(true);
               }}
-              className="font-bold px-8 py-3 rounded-full border w-full hover:bg-secondary"
+              className="px-8 py-3 rounded-full !text-lg border w-full hover:bg-secondary"
             >
               ☎️ Get a Call Back
             </button>
@@ -149,7 +146,7 @@ export default function Page() {
               onClick={() => {
                 setRegisterCourseForm(true);
               }}
-              className="font-bold px-8 py-3 rounded-full bg-black hover:bg-primary !text-white shadow-md w-full my-3"
+              className="px-8 py-3 rounded-full bg-black hover:bg-primary !text-white !text-lg w-full my-3"
             >
               Register for Internship & Course
             </button>
@@ -181,7 +178,7 @@ export default function Page() {
                  value={name}
                  onChange={(e) => setName(e.target.value)}
                  placeholder="Your Full Name*"
-                 className="border border-gray-300 px-3  py-1 w-full rounded "
+                 className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
                />
              </div>
              <div className="mb-4">
@@ -191,14 +188,14 @@ export default function Page() {
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}
                  placeholder="Your Email ID*"
-                 className="border border-gray-300 px-3  py-1 w-full rounded "
+                 className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
                />
              </div>
              <div className="mb-4 flex">
-               <div className="border border-gray-300 pl-3 pr-2  py-1 rounded-l border-r-0 !text-gray-600 font-semibold">
+               <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
                  +91
                </div>
-               <span className="text-gray-400 border-t border-b py-1 border-gray-300">
+               <span className="text-gray-400 border-t border-b py-2 border-gray-300">
                  |
                </span>
                <input
@@ -207,7 +204,7 @@ export default function Page() {
                  value={phone}
                  onChange={(e) => setPhone(e.target.value)}
                  placeholder="Your Mobile Number*"
-                 className="border border-gray-300 pl-2 pr-3  py-1 w-full rounded-r border-l-0 "
+                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary  border-l-0 "
                />
              </div>
              <div className="mb-4">
@@ -215,7 +212,7 @@ export default function Page() {
                  id="timeSlot"
                  value={timeSlot}
                  onChange={(e) => setTimeSlot(e.target.value)}
-                 className="border border-gray-300 px-3  py-1 w-full rounded "
+                 className="border border-gray-300 px-3 py-2 placeholder-secondary "
                >
                  <option value="" disabled selected>
                    Select a time slot
@@ -239,7 +236,8 @@ export default function Page() {
              </div>
              <button
                type="submit"
-               className="bg-black !text-white py-2 px-8 rounded !text-xl rounded-full hover:bg-primary"
+               onClick={()=>setCallBackForm(false)}
+               className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
              >
                Submit
              </button>
@@ -265,32 +263,32 @@ export default function Page() {
              Your Batch will start from July
            </P>
 
-           <form onSubmit={handleSubmit} className="relative mt-4">
-             <div className="mb-4">
+           <form onSubmit={handleSubmit} className="relative mt-8">
+             <div className="mb-6">
                <input
                  type="text"
                  id="name"
                  value={name}
                  onChange={(e) => setName(e.target.value)}
                  placeholder="Your Full Name*"
-                 className="border border-gray-300 px-3  py-1 w-1/2 rounded "
+                 className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
                />
              </div>
-             <div className="mb-4">
+             <div className="mb-6">
                <input
                  type="email"
                  id="email"
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}
                  placeholder="Your Email ID*"
-                 className="border border-gray-300 px-3  py-1 w-1/2 rounded "
+                 className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
                />
              </div>
              <div className="mb-4">
                <P className="capitalize text-black font-semibold">
                  Select from Our available batches
                </P>
-               <div className="gap-4 flex flex-wrap my-2">
+               <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
                    Mon (7PM - 8:30PM)
                  </button>
@@ -311,55 +309,16 @@ export default function Page() {
                  </button>
                </div>
              </div>
-             <div className="mb-3 mt-6">
-               <input
-                 type="radio"
-                 id="ux-certificate"
-                 checked={uxCertificate}
-                 onChange={() => {
-                   setInternship(false);
-                   setUXCertificate(!uxCertificate);
-                   setPayableAmount(3000);
-                 }}
-                 className="mr-2"
-               />
-               <label
-                 htmlFor="ux-certificate"
-                 className={uxCertificate ? "font-semibold" : ""}
-               >
-                 UI/UX Certification @ INR 1,000 per month only
-               </label>
-             </div>
-             <div className="mb-6">
-               <input
-                 type="radio"
-                 id="internship"
-                 checked={internship}
-                 onChange={() => {
-                   setUXCertificate(false);
-                   setInternship(!internship);
-                   setPayableAmount(4200);
-                 }}
-                 className="mr-2"
-               />
-               <label
-                 htmlFor="internship"
-                 className={internship ? "font-semibold" : ""}
-               >
-                 UI/UX Certification with Paid Internship @ INR 2,200 per month
-                 only
-               </label>
-             </div>
-
-             <P className="italic ms-2 mb-2">
+             <P className="italic ms-2 mb-2 mt-10">
                Currently you are paying fee for 1st month of your course
              </P>
 
              <button
                type="submit"
-               className="bg-black w-2/3 !text-white pb-2 pt-1 px-8 rounded !text-xl rounded-full hover:bg-primary"
+               onClick={()=>setRegisterCourseForm(false)}
+               className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
              >
-               Proceed to pay {payableAmount}
+               Proceed to pay INR 2000
              </button>
            </form>
          </div>

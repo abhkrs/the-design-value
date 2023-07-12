@@ -14,7 +14,7 @@ export default function HomeBanner() {
           <H1 className="!text-3xl capitalize text-center md:text-start lg:!text-[56px] !leading-[110%] font-[700] mb-6">
             India’s first{" "}
             <span className="text-secondary">UI/UX design school</span> with
-            Paid internships
+            <span className="block">Paid internships</span>
           </H1>
           <P className="text-center md:text-start !text-xl xl:pr-8">
             Be a part of the future design community and embark on a journey of

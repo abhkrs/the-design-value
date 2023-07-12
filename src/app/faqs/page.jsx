@@ -1,6 +1,7 @@
 "use client";
 
 import Section from "@/components/uielements/Section";
+import Image from "next/image";
 import React from "react";
 
 import { useState } from "react";
@@ -60,20 +61,24 @@ const Accordion = () => {
                   className={`flex ${index === activeIndex ? "active" : ""}`}
                   onClick={() => toggleAccordion(index)}
                 >
-                  <span className="!text-4xl text-secondary font-bold mr-2">
-                    0{index + 1}.
+                  <span className="!text-4xl text-secondary font-bold mr-4 dm-sans">
+                    0{index + 1}
                   </span>
                   <span className="text-2xl font-semibold">{item.title}</span>
                   <button
-                    className={`${
-                      index === activeIndex ? "bg-black" : "bg-secondary text-xl font-bold"
-                    }  rounded-full !text-white ml-auto min-h-[28px] max-h-[28px] min-w-[28px] text-center`}
+                    className="ml-auto"
                   >
-                    <span className="-mt-2">{index === activeIndex ? "x" : "+"}</span>
+                    {/* <span className="-mt-2">{index === activeIndex ? "x" : "+"}</span> */}
+                    <Image
+                    src={index === activeIndex ? "/images/xmark.png" : "/images/plus.png"}
+                    alt=""
+                    height="35"
+                    width="35"
+                    />
                   </button>
                 </div>
                 {index === activeIndex && (
-                  <div className="ml-12 p-3 pb-0 mt-2 text-lg">
+                  <div className="ml-10 p-3 pb-0 mt-2 text-lg">
                     {item.content}
                   </div>
                 )}

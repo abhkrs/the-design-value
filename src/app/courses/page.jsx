@@ -98,7 +98,7 @@ export default function page() {
               </div>
               <div className="md:px-6 lg:px-8">
                 <H3 className="!text-2xl">{program.name}</H3>
-                <P className={`!bg-[#${program.tagColor}] !bg-opacity-25 !text-[#${program.tagColor}] max-w-max py-1 !font-semibold px-6 my-4 rounded mx-auto md:ml-0`}>
+                <P className={`!bg-[#AC3E20] !bg-opacity-25 !text-[#AC3E20] max-w-max py-1 !font-semibold px-6 my-4 rounded mx-auto md:ml-0`}>
                   {program.tag}
                 </P>
                 <P className="!text-lg lg:w-4/5">{program.details}</P>
@@ -117,10 +117,11 @@ export default function page() {
                 </P>
                 <Link
                   href={program.url}
-                  className="rounded-3xl bg-black !text-white hover:bg-primary px-6 py-1 max-w-max min-w-max mx-auto md:mr-auto !text-lg !font-semibold"
+                  className="rounded-full bg-black !text-white !text-lg hover:bg-primary px-6 py-2 max-w-max min-w-max mx-auto md:mr-auto"
                 >
                   View Course Details
                 </Link>
+
               </div>
             </div>
           ))}

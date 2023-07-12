@@ -43,6 +43,10 @@ function Header() {
 
   const [topbar, setTopbar] = useState(true)
 
+  // const LoginPage = {
+  //   (pathName === "student-login") ? setTopbar(false) : setTopbar(true)
+  // };
+
   return (
     <header className="sticky !top-0 left-0 right-0 bg-light md:bg-white z-50 w-full">
       <div 
@@ -82,7 +86,7 @@ function Header() {
               </Link>
             ))}
           </div>
-          <Link href="/student-login" className="bg-primary text-center rounded-[40px] w-40 !text-white p-2 hidden md:inline-block">
+          <Link href="/student-login" className="bg-primary text-center rounded-[40px] w-40 !text-lg !text-white py-2 px-4 hidden md:inline-block">
             Student Log In
           </Link>
         </div>
@@ -105,7 +109,7 @@ function Header() {
                 X
               </div>
             </button>
-            <Link href="/student-login" className="bg-white text-center !text-black hover:bg-secondary hover:!text-white rounded-[30px] w-40 p-1">
+            <Link href="/student-login" className="bg-white text-center !text-lg !text-black hover:bg-secondary hover:!text-white rounded-[30px] w-40 px-4 py-[6px]">
               Student Log In
             </Link>
           </div>

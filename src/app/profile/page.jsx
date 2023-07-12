@@ -95,7 +95,7 @@ export default function page() {
                 </P>
                 <Link
                   href={program.payment}
-                  className="rounded-2xl bg-black !text-white hover:bg-primary px-6 py-1 max-w-max min-w-max mx-auto md:mr-auto"
+                  className="rounded-full bg-black !text-white !text-lg hover:bg-primary px-6 py-2 max-w-max min-w-max mx-auto md:mr-auto"
                 >
                   Pay Fee for the next month
                 </Link>
@@ -114,7 +114,7 @@ export default function page() {
           </div>
         </div>
 
-        <div className="mt-36 mb-28 text-center">
+        {/* <div className="mt-36 mb-28 text-center">
           <H3 className="!text-2xl text-secondary my-6">
             For any queries or doubts
           </H3>
@@ -124,7 +124,7 @@ export default function page() {
           >
             CONTACT US
           </Link>
-        </div>
+        </div> */}
       </Section>
     </main>
   );

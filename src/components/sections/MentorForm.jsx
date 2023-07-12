@@ -3,6 +3,7 @@ import Section from "../uielements/Section";
 import Image from "next/image";
 import H2 from "../typography/H2";
 import P from "../typography/P";
+import Link from "next/link";
 
 const MentorsForm = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,12 +47,13 @@ const MentorsForm = () => {
           </P>
 
           {!isOpen && (
-            <button
+            <Link
+            href=""
               onClick={toggleForm}
-              className="bg-black !text-white !text-2xl font-semibold py-3 px-10 rounded-full max-w-max mx-auto md:ms-0"
+              className="bg-black !text-white py-3 px-10 rounded-full max-w-max mx-auto md:ms-0"
             >
               Apply as Mentor
-            </button>
+            </Link>
           )}
         </div>
       </div>
