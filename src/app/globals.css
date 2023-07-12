@@ -11,3 +11,20 @@ h1, h2, h3, h4, h5, h6, .dm-sans {
   font-family: 'DM Serif Display', serif !important;
   font-weight: 700;
 }
+
+.alice-carousel__dots-item{
+  width: 16px !important;
+  height: 16PX !important;
+  border-radius: 10px !important;
+}
+
+.alice-carousel__dots-item:hover{
+  background: #397367 !important;
+}
+
+.alice-carousel__dots-item .__active{
+  background: #397367 !important;
+  width: 40px !important;
+  height: 16px !important;
+  border-radius: 10px !important;
+}
