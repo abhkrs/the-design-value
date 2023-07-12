@@ -8,12 +8,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .dm-sans {
-  font-family: 'DM Serif Display', serif ;
+  font-family: 'DM Serif Display', serif !important;
   font-weight: 700;
-}
-
-.inter{
-  font-family: 'Inter', serif !important;
 }
 
 .alice-carousel__dots-item{
