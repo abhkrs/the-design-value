@@ -21,9 +21,20 @@ export default function Page() {
   const [timeSlot, setTimeSlot] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    // submit function
+  
+    const formData = {
+      fullName: name,
+      contactNo: phone,
+      emailId: email,
+      courseName: "UI/UX with Internship",
+      courseStart: "Mon 31 Aug",
+      courseDuration: "3 Months",
+      slotId: timeSlot,
+    };
+    console.log(formData);
+    setCallBackForm(false);
   };
-
+  
   const sideTileRef = useRef(null);
   const testimonialSectionRef = useRef(null);
 
@@ -204,7 +215,7 @@ export default function Page() {
                  value={phone}
                  onChange={(e) => setPhone(e.target.value)}
                  placeholder="Your Mobile Number*"
-                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary  border-l-0 "
+                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
                />
              </div>
              <div className="mb-4">
@@ -236,7 +247,7 @@ export default function Page() {
              </div>
              <button
                type="submit"
-               onClick={()=>setCallBackForm(false)}
+               onClick={handleSubmit}
                className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
              >
                Submit

@@ -22,6 +22,7 @@ export default function DesignProcess() {
                 src="/images/feature1.png"
                 fill={true}
                 className="object-contain"
+                alt=""
               />
             </div>
             <div className="relative left-2 w-3/4 hidden lg:flex">
@@ -29,6 +30,7 @@ export default function DesignProcess() {
                 src="/images/indicatorup.png"
                 fill={true}
                 className="object-contain"
+                alt=""
               />
             </div>
           </div>
@@ -47,6 +49,7 @@ export default function DesignProcess() {
                 src="/images/feature2.png"
                 fill={true}
                 className="object-contain"
+                alt=""
               />
             </div>
             <div className="relative left-2 w-3/4 hidden lg:flex">
@@ -54,6 +57,7 @@ export default function DesignProcess() {
                 src="/images/indicatordown.png"
                 fill={true}
                 className="object-contain"
+                alt=""
               />
             </div>
           </div>
@@ -72,6 +76,7 @@ export default function DesignProcess() {
                 src="/images/feature3.png"
                 fill={true}
                 className="object-contain"
+                alt=""
               />
             </div>
             <div className="relative left-2 w-3/4 hidden lg:flex">
@@ -79,6 +84,7 @@ export default function DesignProcess() {
                 src="/images/indicatorup.png"
                 fill={true}
                 className="object-contain"
+                alt=""
               />
             </div>
           </div>
@@ -97,6 +103,7 @@ export default function DesignProcess() {
                 src="/images/feature4.png"
                 fill={true}
                 className="object-contain"
+                alt=""
               />
             </div>
           </div>

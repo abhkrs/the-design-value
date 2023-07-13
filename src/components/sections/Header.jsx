@@ -40,17 +40,13 @@ function Header() {
     }
   };
   const [active, setActive] = useState(activeindex);
-
   const [topbar, setTopbar] = useState(true)
-
-  // const LoginPage = {
-  //   (pathName === "student-login") ? setTopbar(false) : setTopbar(true)
-  // };
+const isStudentLogin =  pathName === "/student-login";
 
   return (
     <header className="sticky !top-0 left-0 right-0 bg-light md:bg-white z-50 w-full">
       <div 
-      className={`${topbar ? "md:hidden" : "hidden"} bg-primary !text-white p-6`}
+      className={`${(topbar && !isStudentLogin) ? "md:hidden" : "hidden"} bg-primary !text-white p-6`}
       >
         <button
         onClick = {()=>setTopbar(false)}
@@ -130,7 +126,7 @@ function Header() {
         </div>
       </nav>
       <div 
-      className={`${topbar ? "hidden md:flex" : "hidden"} bg-black !text-white p-3 justify-center`}
+      className={`${(topbar && !isStudentLogin) ? "hidden md:flex" : "hidden"} bg-black !text-white p-3 justify-center`}
       >
         <P className="capitalize cursor-default mr-2 !text-white"> Admissions open for batches starting from May – </P>
         <Link

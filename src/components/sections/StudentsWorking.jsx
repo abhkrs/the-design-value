@@ -17,6 +17,7 @@ export default function StudentsWorking() {
                 src="/images/brands.svg"
                 fill={true}
                 className="object-contain"
+                alt=''
               />
             </div>
         </div>

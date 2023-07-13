@@ -33,6 +33,7 @@ export default function HomeBanner() {
             src="/images/objects.png"
             fill={true}
             className="object-contain"
+            alt=""
           />
         </div>
       </div>

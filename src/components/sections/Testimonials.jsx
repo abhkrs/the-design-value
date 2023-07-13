@@ -78,7 +78,7 @@ function Testimonials() {
       <div className="h-32 relative flex flex-col justify-end">
         <div className="absolute top-0 left-0">
           <div className="relative h-24 w-28">
-            <Image src="/images/quote.png" fill={true} className={""} />
+            <Image src="/images/quote.png" fill={true} className={""} alt="" />
           </div>
         </div>
         <div className="px-6">

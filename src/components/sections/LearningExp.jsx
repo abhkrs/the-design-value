@@ -13,6 +13,7 @@ export default function LearningExp() {
           src="/images/learning-experience.png"
           fill={true}
           className="object-contain"
+          alt=""
         />
       </div>
       <div className="order-1 md:order-2">
@@ -26,6 +27,7 @@ export default function LearningExp() {
               src="/images/live.png"
               fill={true}
               className="object-contain"
+              alt=""
             />
           </div>
          </div>
@@ -41,6 +43,7 @@ export default function LearningExp() {
               src="/images/practice.png"
               fill={true}
               className="object-contain"
+              alt=""
             />
           </div>
           </div>
@@ -56,6 +59,7 @@ export default function LearningExp() {
               src="/images/anytime.png"
               fill={true}
               className="object-contain"
+              alt=""
             />
           </div>
           </div>
