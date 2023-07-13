@@ -36,7 +36,7 @@ export default function page() {
       for: "Beginner to Masterclass",
       type: "Paid Internship & Job",
       perMonth: "7,000",
-      url: "/courses/",
+      url: "/courses/ui-ux-workshop-with-jop-placement",
     },
     {
       name: "UI/UX Certification",
@@ -50,7 +50,7 @@ export default function page() {
       for: "Beginner to Masterclass",
       type: "",
       perMonth: "1,000",
-      url: "/courses/",
+      url: "/courses/ui-ux-workshop",
     },
     {
       name: "1 Month Workshop in UI/UX Design",
