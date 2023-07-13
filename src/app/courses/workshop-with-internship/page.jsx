@@ -275,7 +275,7 @@ export default function Page() {
            </P>
 
            <form onSubmit={handleSubmit} className="relative mt-8">
-             <div className="mb-6">
+             <div className="mb-4">
                <input
                  type="text"
                  id="name"
@@ -285,7 +285,7 @@ export default function Page() {
                  className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
                />
              </div>
-             <div className="mb-6">
+             <div className="mb-4">
                <input
                  type="email"
                  id="email"
@@ -293,6 +293,22 @@ export default function Page() {
                  onChange={(e) => setEmail(e.target.value)}
                  placeholder="Your Email ID*"
                  className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
+               />
+             </div>
+             <div className="mb-4 flex">
+               <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
+                 +91
+               </div>
+               <span className="text-gray-400 border-t border-b py-2 border-gray-300">
+                 |
+               </span>
+               <input
+                 type="tel"
+                 id="phone"
+                 value={phone}
+                 onChange={(e) => setPhone(e.target.value)}
+                 placeholder="Your Mobile Number*"
+                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
                />
              </div>
              <div className="mb-4">
