@@ -19,9 +19,8 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
-  const handleSubmit = (e) => {
+  const handleCallbackSubmit = (e) => {
     e.preventDefault();
-  
     const formData = {
       fullName: name,
       contactNo: phone,
@@ -181,7 +180,7 @@ export default function Page() {
            >
              <Image alt="" src="/images/close.svg" height="18" width="18" />
            </button>
-           <form onSubmit={handleSubmit} className="relative mt-4 max-w-max">
+           <form onSubmit={handleCallbackSubmit} className="relative mt-4 max-w-max">
              <div className="mb-4">
                <input
                  type="text"
@@ -247,7 +246,7 @@ export default function Page() {
              </div>
              <button
                type="submit"
-               onClick={handleSubmit}
+              //  onClick={handleCallSubmit}
                className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
              >
                Submit
