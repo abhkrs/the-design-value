@@ -16,7 +16,7 @@ export default function Page() {
     const dummyPassword = "pass";
 
     if (username === dummyUsername && password === dummyPassword) {
-      router.push("/admin/callback-requests");
+      router.push("/admin/dashboard");
     } else {
       setError("Invalid username or password");
     }
