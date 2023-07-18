@@ -116,12 +116,11 @@ export default function Page() {
               </span>{" "}
               registered Certification
             </div>
-            <div className="border-b py-2">🧑🏻‍💻 Hands-on Learning</div>
+            <div className="border-b py-2">🧑🏻‍💻 Hands-on-learning via GoogleMeet</div>
             <div className="border-b py-2">
               📆{" "}
               <span className="ml-1">
-                Batches on Mon, Tue, Wed, Thu ( 7pm - 9 pm) and Sat, Sun ( 2pm -
-                4 pm)
+                Batches on Mon, Tue, Wed, Fri, Sat, Sun
               </span>
             </div>
             <div className="py-2">✅ 100% Guaranteed Internship</div>
@@ -131,9 +130,9 @@ export default function Page() {
               whole course and will be eligible for the certificate.
             </P>
             <div className="mt-6 mb-3">
-              <span className="p-2 bg-[#CE4863] mr-2">😲 Flat 58% Off</span>
+              <span className="p-2 bg-[#CE4863] mr-2 text-white">😲 Flat 58% Off</span>
               <span className="my-auto font-semibold">
-                Hurry! Offer Valid till 20th May
+                 Hurry! Offer Valid till 20th May
               </span>
             </div>
             <div className="mb-3 py-2">
@@ -181,7 +180,7 @@ export default function Page() {
             </span>{" "}
             registered Certification
           </div>
-          <div className="border-b py-2">🧑🏻‍💻 Hands-on Learning</div>
+          <div className="border-b py-2">🧑🏻‍💻 Hands-on-learning via GoogleMeet</div>
           <div className="border-b py-2">
             📆{" "}
             <span className="ml-1">
@@ -251,12 +250,15 @@ export default function Page() {
                   className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
                 />
               </div>
+              <div className="relative">
+                <div className="absolute right-1 z-50 !h-3 !w-4 p-2 mt-3 bg-white"><Image fill={true} src="/images/dropdown.png" className="object-contain !h-2 !w-3 mt-1" /></div>
+                </div>
               <div className="mb-4">
                 <select
                   id="timeSlot"
                   value={timeSlot}
                   onChange={(e) => setTimeSlot(e.target.value)}
-                  className="border border-gray-300 px-3 py-2 placeholder-secondary "
+                  className="border border-gray-300 px-3 py-2 pr-8 placeholder-secondary"
                 >
                   <option value="" disabled selected>
                     Select a time slot
@@ -277,6 +279,23 @@ export default function Page() {
                     Tomorrow, 10th May, 2 PM - 4 PM
                   </option>
                 </select>
+                
+
+
+                {/* <div className="flex px-3 justify-between rounded-md border py-2">
+                  <span>Select a time slot</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
+                </div>
+                <div className="absolute bg-white z-40 p-4 gap-4 flex flex-col">
+                <div className="flex justify-between rounded-md border py-2">
+                  <span>Today, 10th May, 2 PM - 3 PM</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
+                </div>
+                <div className="flex justify-between py-2">
+                  <span>Today, 10th May, 2 PM - 3 PM</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
+                </div>
+                <div className="flex justify-between rounded-md border py-2">
+                  <span>Today, 10th May, 2 PM - 3 PM</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
+                </div>
+                </div>   */}
               </div>
               <button
                 type="submit"
@@ -709,9 +728,9 @@ export default function Page() {
 
       <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full">
             <div className="mx-auto text-center">
-              <span className="p-2 bg-[#CE4863] mr-2 !text-sm">😲 Flat 58% Off</span>
+              <span className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">😲 Flat 58% Off</span>
               <span className="my-auto !text-sm">
-                Hurry! Offer Valid till 20th May
+                 Hurry! Offer Valid till 20th May
               </span>
             </div>
             <div className="mb-1 py-2 !text-md mx-auto text-center">

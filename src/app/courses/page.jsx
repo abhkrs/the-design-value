@@ -53,7 +53,7 @@ export default function page() {
       url: "/courses/ui-ux-workshop",
     },
     {
-      name: "1 Month Workshop in UI/UX Design",
+      name: "Graphic & UI/UX Design (Dual Certification)",
       tag: "🧑🏽‍🎓 For Beginners to Explore UI/UX",
       tagColor: "8A006C",
       img: "/images/designer-metier.png",
