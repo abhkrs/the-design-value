@@ -19,14 +19,13 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
-  const handleSubmit = (e) => {
+  const handleCallbackSubmit = (e) => {
     e.preventDefault();
-  
     const formData = {
       fullName: name,
       contactNo: phone,
       emailId: email,
-      courseName: "UI/UX with Certification with Jop Placement",
+      courseName: "UI/UX with Internship",
       courseStart: "Mon 31 Aug",
       courseDuration: "3 Months",
       slotId: timeSlot,
@@ -34,7 +33,7 @@ export default function Page() {
     console.log(formData);
     setCallBackForm(false);
   };
-  
+
   const sideTileRef = useRef(null);
   const testimonialSectionRef = useRef(null);
 
@@ -64,10 +63,10 @@ export default function Page() {
 
   return (
     <main>
-      <SectionDark className="flex pt-12 pb-8 justify-between relative max-h-min">
-        <div className="w-2/3">
-        <H2 className="!text-white !text-4xl inter !font-inter">
-        UI/UX with Certification with Jop Placement
+      <SectionDark className="flex flex-col lg:flex-row pt-12 pb-8 justify-between relative max-h-min">
+        <div className="lg:w-2/3">
+          <H2 className="!text-white !text-4xl inter !font-inter">
+            UI/UX Design with 100% Paid Internship
           </H2>
           <P className="my-6 !text-white !text-lg">
             Master the essentials of UI/UX design with our comprehensive course
@@ -99,8 +98,8 @@ export default function Page() {
             <span className="font-bold">1,277 </span> people already enrolled
           </P>
         </div>
-        <div className="w-1/3 z-40 relative -top-10 z-50">
-        <div className="bg-white shadow-md p-6 fixed mr-10" ref={sideTileRef}>
+        <div className="lg:w-1/3 z-40 relative lg:-top-10 z-50 hidden lg:block">
+          <div className="bg-white shadow-md p-6 lg:fixed lg:mr-10" ref={sideTileRef}>
             <H3 className="!font-semibold !text-xl">
               Live Mentorship Guidance
             </H3>
@@ -164,196 +163,230 @@ export default function Page() {
           </div>
         </div>
       </SectionDark>
+      <div className="lg:hidden">
+        <div className=" p-6">
+          <H3 className="!font-semibold !text-xl">
+            Live Mentorship Guidance
+          </H3>
+          <P className="!text-lg my-2 !text-white !bg-[#E59819] max-w-max px-2 py-1">
+            Batch starting from July
+          </P>
+          <div className="border-b border-t py-2">
+            ⏰ 5 Months | 1 Class Per Week
+          </div>
+          <div className="border-b py-2">
+            🏆{" "}
+            <span className="font-bold">
+              The<span className="text-secondary">Design</span>Value
+            </span>{" "}
+            registered Certification
+          </div>
+          <div className="border-b py-2">🧑🏻‍💻 Hands-on Learning</div>
+          <div className="border-b py-2">
+            📆{" "}
+            <span className="ml-1">
+              Batches on Mon, Tue, Wed, Thu ( 7pm - 9 pm) and Sat, Sun ( 2pm -
+              4 pm)
+            </span>
+          </div>
+          <div className="py-2">✅ 100% Guaranteed Internship</div>
+          <P className="!text-sm text-gray-600 !italic pl-1">
+            <span className="font-bold">Note:</span> We will be providing
+            Internship to those students specifically, who will complete the
+            whole course and will be eligible for the certificate.
+          </P>
+        </div>
+      </div>
 
       {callBackForm && (
-         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
-         <div className="bg-white p-8 rounded lg:px-16 shadow-lg w-2/3 relative">
-           <H3 className="!text-2xl">
-             😇 Thank You For Your Callback Request!{" "}
-           </H3>
-           <P className="my-3 !text-xl">Please help us with a few details</P>
-           <hr />
-           <button
-             onClick={() => {
-               setCallBackForm(false);
-             }}
-             className="absolute top-4 right-4 text-red-500"
-           >
-             <Image alt="" src="/images/close.svg" height="18" width="18" />
-           </button>
-           <form onSubmit={handleSubmit} className="relative mt-4 max-w-max">
-             <div className="mb-4">
-               <input
-                 type="text"
-                 id="name"
-                 value={name}
-                 onChange={(e) => setName(e.target.value)}
-                 placeholder="Your Full Name*"
-                 className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
-               />
-             </div>
-             <div className="mb-4">
-               <input
-                 type="email"
-                 id="email"
-                 value={email}
-                 onChange={(e) => setEmail(e.target.value)}
-                 placeholder="Your Email ID*"
-                 className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
-               />
-             </div>
-             <div className="mb-4 flex">
-               <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
-                 +91
-               </div>
-               <span className="text-gray-400 border-t border-b py-2 border-gray-300">
-                 |
-               </span>
-               <input
-                 type="tel"
-                 id="phone"
-                 value={phone}
-                 onChange={(e) => setPhone(e.target.value)}
-                 placeholder="Your Mobile Number*"
-                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
-               />
-             </div>
-             <div className="mb-4">
-               <select
-                 id="timeSlot"
-                 value={timeSlot}
-                 onChange={(e) => setTimeSlot(e.target.value)}
-                 className="border border-gray-300 px-3 py-2 placeholder-secondary "
-               >
-                 <option value="" disabled selected>
-                   Select a time slot
-                 </option>
-                 <option value="Today, 10th May, 2 PM - 3 PM">
-                   Today, 10th May, 2 PM - 3 PM
-                 </option>
-                 <option value="Today, 10th May, 2 PM - 3 PM">
-                   Today, 10th May, 2 PM - 3 PM
-                 </option>
-                 <option value="Tomorrow, 10th May, 10 AM - 12 PM">
-                   Tomorrow, 10th May, 10 AM - 12 PM
-                 </option>
-                 <option value="Tomorrow, 10th May, 12 PM - 2 PM">
-                   Tomorrow, 10th May, 12 PM - 2 PM
-                 </option>
-                 <option value="Tomorrow, 10th May, 2 PM - 4 PM">
-                   Tomorrow, 10th May, 2 PM - 4 PM
-                 </option>
-               </select>
-             </div>
-             <button
-               type="submit"
-               onClick={handleSubmit}
-               className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
-             >
-               Submit
-             </button>
-           </form>
-         </div>
-       </div>
+        <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded lg:px-16 shadow-lg lg:w-2/3 relative">
+            <H3 className="!text-2xl">
+              😇 Thank You For Your Callback Request!{" "}
+            </H3>
+            <P className="my-3 !text-xl">Please help us with a few details</P>
+            <hr />
+            <button
+              onClick={() => {
+                setCallBackForm(false);
+              }}
+              className="absolute top-4 right-4 text-red-500"
+            >
+              <Image alt="" src="/images/close.svg" height="18" width="18" />
+            </button>
+            <form onSubmit={handleCallbackSubmit} className="relative mt-4 max-w-max">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your Full Name*"
+                  className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your Email ID*"
+                  className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
+                />
+              </div>
+              <div className="mb-4 flex">
+                <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
+                  +91
+                </div>
+                <span className="text-gray-400 border-t border-b py-2 border-gray-300">
+                  |
+                </span>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Your Mobile Number*"
+                  className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
+                />
+              </div>
+              <div className="mb-4">
+                <select
+                  id="timeSlot"
+                  value={timeSlot}
+                  onChange={(e) => setTimeSlot(e.target.value)}
+                  className="border border-gray-300 px-3 py-2 placeholder-secondary "
+                >
+                  <option value="" disabled selected>
+                    Select a time slot
+                  </option>
+                  <option value="Today, 10th May, 2 PM - 3 PM">
+                    Today, 10th May, 2 PM - 3 PM
+                  </option>
+                  <option value="Today, 10th May, 2 PM - 3 PM">
+                    Today, 10th May, 2 PM - 3 PM
+                  </option>
+                  <option value="Tomorrow, 10th May, 10 AM - 12 PM">
+                    Tomorrow, 10th May, 10 AM - 12 PM
+                  </option>
+                  <option value="Tomorrow, 10th May, 12 PM - 2 PM">
+                    Tomorrow, 10th May, 12 PM - 2 PM
+                  </option>
+                  <option value="Tomorrow, 10th May, 2 PM - 4 PM">
+                    Tomorrow, 10th May, 2 PM - 4 PM
+                  </option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                //  onClick={handleCallSubmit}
+                className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       )}
 
       {registerCourseForm && (
-         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
-         <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
-           <H3 className="!text-2xl mb-4">🧑🏽‍🎓 Register for Course</H3>
-           <button
-             onClick={() => {
-               setRegisterCourseForm(false);
-             }}
-             className="absolute top-4 right-4 text-red-500"
-           >
-             <Image alt="" src="/images/close.svg" height="18" width="18" />
-           </button>
-           <hr />
-           <P className="mt-4 bg-gold px-2 py-1 !text-white max-w-max">
-             Your Batch will start from July
-           </P>
+        <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
+            <H3 className="!text-2xl mb-4">🧑🏽‍🎓 Register for Course</H3>
+            <button
+              onClick={() => {
+                setRegisterCourseForm(false);
+              }}
+              className="absolute top-4 right-4 text-red-500"
+            >
+              <Image alt="" src="/images/close.svg" height="18" width="18" />
+            </button>
+            <hr />
+            <P className="mt-4 bg-gold px-2 py-1 !text-white max-w-max">
+              Your Batch will start from July
+            </P>
 
-           <form onSubmit={handleSubmit} className="relative mt-8">
-             <div className="mb-4">
-               <input
-                 type="text"
-                 id="name"
-                 value={name}
-                 onChange={(e) => setName(e.target.value)}
-                 placeholder="Your Full Name*"
-                 className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
-               />
-             </div>
-             <div className="mb-4">
-               <input
-                 type="email"
-                 id="email"
-                 value={email}
-                 onChange={(e) => setEmail(e.target.value)}
-                 placeholder="Your Email ID*"
-                 className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
-               />
-             </div>
-             <div className="mb-4 flex">
-               <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
-                 +91
-               </div>
-               <span className="text-gray-400 border-t border-b py-2 border-gray-300">
-                 |
-               </span>
-               <input
-                 type="tel"
-                 id="phone"
-                 value={phone}
-                 onChange={(e) => setPhone(e.target.value)}
-                 placeholder="Your Mobile Number*"
-                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
-               />
-             </div>
-             <div className="mb-4">
-               <P className="capitalize text-black font-semibold">
-                 Select from Our available batches
-               </P>
-               <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
-                 <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                   Mon (7PM - 8:30PM)
-                 </button>
-                 <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                   Mon (7PM - 8:30PM)
-                 </button>
-                 <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                   Mon (7PM - 8:30PM)
-                 </button>
-                 <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                   Mon (7PM - 8:30PM)
-                 </button>
-                 <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                   Mon (7PM - 8:30PM)
-                 </button>
-                 <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                   Mon (7PM - 8:30PM)
-                 </button>
-               </div>
-             </div>
-             <P className="italic ms-2 mb-2 mt-10">
-               Currently you are paying fee for 1st month of your course
-             </P>
+            <form onSubmit={handleSubmit} className="relative mt-8">
+              <div className="mb-4">
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your Full Name*"
+                  className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your Email ID*"
+                  className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
+                />
+              </div>
+              <div className="mb-4 flex">
+                <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
+                  +91
+                </div>
+                <span className="text-gray-400 border-t border-b py-2 border-gray-300">
+                  |
+                </span>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Your Mobile Number*"
+                  className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
+                />
+              </div>
+              <div className="mb-4">
+                <P className="capitalize text-black font-semibold">
+                  Select from Our available batches
+                </P>
+                <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
+                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+                    Mon (7PM - 8:30PM)
+                  </button>
+                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+                    Mon (7PM - 8:30PM)
+                  </button>
+                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+                    Mon (7PM - 8:30PM)
+                  </button>
+                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+                    Mon (7PM - 8:30PM)
+                  </button>
+                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+                    Mon (7PM - 8:30PM)
+                  </button>
+                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+                    Mon (7PM - 8:30PM)
+                  </button>
+                </div>
+              </div>
+              <P className="italic ms-2 mb-2 mt-10">
+                Currently you are paying fee for 1st month of your course
+              </P>
 
-             <button
-               type="submit"
-               onClick={()=>setRegisterCourseForm(false)}
-               className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
-             >
-               Proceed to pay INR 2000
-             </button>
-           </form>
-         </div>
-       </div>
+              <button
+                type="submit"
+                onClick={() => setRegisterCourseForm(false)}
+                className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
+              >
+                Proceed to pay INR 2000
+              </button>
+            </form>
+          </div>
+        </div>
       )}
 
       <Section className="my-6 relative">
-      <div className="w-2/3 grid gap-8 pr-8">
+        <div className="lg:w-2/3 grid gap-8 lg:pr-8">
           <div className="bg-white px-12 py-10 rounded shadow ">
             <H3 className="!text-2xl">About The Course </H3>
             <P className="text-gray-600 mt-4 !text-base">
@@ -655,7 +688,7 @@ export default function Page() {
       </Section>
 
       <SectionDark>
-      <div className="w-2/3 !text-white py-6">
+        <div className="lg:w-2/3 !text-white py-6">
           <H2 className="!text-4xl !font-normal">
             Earn a certificate in UI/UX design along with Internship
           </H2>
@@ -673,6 +706,39 @@ export default function Page() {
       </SectionDark>
 
       <Testimonials ref={testimonialSectionRef} />
+
+      <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full">
+            <div className="mx-auto text-center">
+              <span className="p-2 bg-[#CE4863] mr-2 !text-sm">😲 Flat 58% Off</span>
+              <span className="my-auto !text-sm">
+                Hurry! Offer Valid till 20th May
+              </span>
+            </div>
+            <div className="mb-1 py-2 !text-md mx-auto text-center">
+              <span className=" text-primary mr-2 font-bold">
+                INR 2,500 per monthś
+              </span>
+              <span className="line-through text-gray-600">
+                INR 6,000 per month
+              </span>
+            </div>
+            <button
+              onClick={() => {
+                setCallBackForm(true);
+              }}
+              className="px-4 py-2 mb-1 rounded-full !text-sm border w-full hover:bg-secondary"
+            >
+              ☎️ Get a Call Back
+            </button>
+            <button
+              onClick={() => {
+                setRegisterCourseForm(true);
+              }}
+              className="px-4 py-2 my-2 rounded-full bg-black hover:bg-primary !text-white !text-sm w-full"
+            >
+              Register for Internship & Course
+            </button>
+          </div>
     </main>
   );
 }
