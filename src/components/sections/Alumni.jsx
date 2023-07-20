@@ -21,7 +21,7 @@ export default function Alumni() {
             </div>
             {allStudents &&
                 <div>
-                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
                         <div>
                             <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
                             <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>
@@ -46,7 +46,7 @@ export default function Alumni() {
                         </div>
                     </div>
 
-                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
                         <div>
                             <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
                             <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>
@@ -71,7 +71,7 @@ export default function Alumni() {
                         </div>
                     </div>
 
-                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
                         <div>
                             <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
                             <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>
@@ -100,7 +100,7 @@ export default function Alumni() {
 
             {alumni &&
                 <div>
-                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
                         <div>
                             <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
                             <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>
@@ -125,7 +125,7 @@ export default function Alumni() {
                         </div>
                     </div>
 
-                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
                         <div>
                             <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
                             <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>
@@ -150,7 +150,7 @@ export default function Alumni() {
                         </div>
                     </div>
 
-                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
                         <div>
                             <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
                             <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>

@@ -12,29 +12,29 @@ export default function Batches() {
                 + Add New Course
             </button>
             <div className="bg-light rounded-xl px-8 py-6 my-2">
-                <div className="flex justify-between">
-                    <H2>UX UI Certification</H2>
-                    <button className='max-w-max' onClick={() => { (showSlot !== 1) ? setShowSlot(1) : setShowSlot(0) }}>{showSlot === 1 ? 'Hide Slots' : "View Slots"}</button>
+                <div className="flex justify-between px-4">
+                    <H2 className="!text-4xl">UX UI Certification</H2>
+                    <button className='max-w-max text-primary underline' onClick={() => { (showSlot !== 1) ? setShowSlot(1) : setShowSlot(0) }}>{showSlot === 1 ? 'Hide Slots' : "View Slots"}</button>
                 </div>
                 {showSlot === 1 &&
                     <div>
-                        <div className="flex justify-between my-3 py-3">
-                            <H3 className="text-primary">Current Batch Slot</H3>
+                        <div className="flex justify-between my-3 px-4">
+                            <H3 className="text-primary !text-3xl">Current Batch Slot</H3>
                             <button className='max-w-max text-primary underline'>+ Add New Slots</button>
                         </div>
-                        <div className="flex justify-between my-2 border-b py-2">
+                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
                                 <P>on</P>
                             </div>
                         </div>
-                        <div className="flex justify-between my-2 border-b py-2">
+                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
                                 <P>on</P>
                             </div>
                         </div>
-                        <div className="flex justify-between my-2 border-b py-2">
+                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
                                 <P>on</P>
@@ -44,29 +44,29 @@ export default function Batches() {
                 }
             </div>
             <div className="bg-light rounded-xl px-8 py-6 my-2">
-                <div className="flex justify-between">
-                    <H2>UX UI Certification</H2>
-                    <button className='max-w-max' onClick={() => { (showSlot !== 2) ? setShowSlot(2) : setShowSlot(0) }}>{showSlot === 2 ? 'Hide Slots' : "View Slots"}</button>
+                <div className="flex justify-between px-4">
+                    <H2 className="!text-4xl">UX UI Certification</H2>
+                    <button className='max-w-max text-primary underline' onClick={() => { (showSlot !== 2) ? setShowSlot(2) : setShowSlot(0) }}>{showSlot === 2 ? 'Hide Slots' : "View Slots"}</button>
                 </div>
                 {showSlot === 2 &&
                     <div>
-                        <div className="flex justify-between my-3 py-3">
-                            <H3 className="text-primary">Current Batch Slot</H3>
+                        <div className="flex justify-between my-3  px-4">
+                            <H3 className="text-primary !text-3xl">Current Batch Slot</H3>
                             <button className='max-w-max text-primary underline'>+ Add New Slots</button>
                         </div>
-                        <div className="flex justify-between my-2 border-b py-2">
+                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
                                 <P>on</P>
                             </div>
                         </div>
-                        <div className="flex justify-between my-2 border-b py-2">
+                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
                                 <P>on</P>
                             </div>
                         </div>
-                        <div className="flex justify-between my-2 border-b py-2">
+                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
                                 <P>on</P>
