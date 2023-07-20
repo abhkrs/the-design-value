@@ -1,5 +1,6 @@
 'use client';
 import Alumni from '@/components/sections/Alumni';
+import Batches from '@/components/sections/Batches';
 import CallBackPanel from '@/components/sections/CallBackPanel';
 import Section from '@/components/uielements/Section'
 import React, { useState } from 'react'
@@ -36,6 +37,7 @@ export default function Page() {
             </div>
             {callBack && <CallBackPanel />}
             {allStudents && <Alumni />}
+            {batches && <Batches />}
           </div>
            
         </Section>
