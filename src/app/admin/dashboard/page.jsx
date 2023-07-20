@@ -1,4 +1,5 @@
 'use client';
+import Alumni from '@/components/sections/Alumni';
 import CallBackPanel from '@/components/sections/CallBackPanel';
 import Section from '@/components/uielements/Section'
 import React, { useState } from 'react'
@@ -34,6 +35,7 @@ export default function Page() {
               </div>
             </div>
             {callBack && <CallBackPanel />}
+            {allStudents && <Alumni />}
           </div>
            
         </Section>
