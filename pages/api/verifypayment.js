@@ -1,12 +1,13 @@
 import crypto from "crypto";
 
 const verifypayment = async (req, res) => {
+  console.log('req', req);
   const access = req.query.access;
   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
     req.body;
   let body = razorpay_order_id + "|" + razorpay_payment_id;
 
-  var expectedSignature = crypto
+  const expectedSignature = crypto
     .createHmac("sha256", process.env.NEXT_PUBLIC_RAZORPAY_SECRET)
     .update(body.toString())
     .digest("hex");

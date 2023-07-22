@@ -12,9 +12,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import AccordionTab from "@/components/uielements/AccordionTab";
-import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const router = useRouter();
   const [callBackForm, setCallBackForm] = useState(false);
   const [registerCourseForm, setRegisterCourseForm] = useState(false);
   const [name, setName] = useState("");
@@ -71,7 +72,7 @@ export default function Page() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: 500 }),
+      body: JSON.stringify({ amount: 1 }),
     });
     const res = await subscribe.json();
     console.log(res.order.id);
@@ -79,16 +80,22 @@ export default function Page() {
       key: process.env.NEXT_PUBLIC_RAZORPAY_ID,
       amount: res.order.amount,
       currency: "INR",
-      name: "Nirmal Ambasana",
-      description: "Test Transaction",
+      name: "Design Value",
+      description: "UI/UX Design with 100% Paid Internship",
       order_id: res.order.id,
-      callback_url: `${
-        process.env.NEXT_PUBLIC_URL
-      }/api/verifypayment?access=${localStorage.getItem("access")}`,
+      // callback_url: `payment-success`,
+      // redirect: true,
       theme: {
         color: "#0b0b0b",
       },
       overlay: false,
+      handler: function (response) {
+        // Validate payment at server - using webhooks is a better idea.
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+        router.push("/payment-success");
+      },
     };
 
     const rpay = new window.Razorpay(options);
