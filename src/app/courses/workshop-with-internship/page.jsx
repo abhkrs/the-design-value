@@ -34,6 +34,21 @@ export default function Page() {
     setCallBackForm(false);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      fullName: name,
+      contactNo: phone,
+      emailId: email,
+      courseName: "UI/UX with Internship",
+      courseStart: "Mon 31 Aug",
+      courseDuration: "3 Months",
+      slotId: timeSlot,
+    };
+    console.log(formData);
+    setCallBackForm(false);
+  };
+
   const sideTileRef = useRef(null);
   const testimonialSectionRef = useRef(null);
 
@@ -360,7 +375,7 @@ export default function Page() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Your Mobile Number*"
-                  className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
+                  className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-[43.8%] rounded-r  border-l-0 "
                 />
               </div>
               <div className="mb-4">
