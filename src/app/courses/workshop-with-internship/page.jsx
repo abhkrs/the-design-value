@@ -11,8 +11,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import AccordionTab from "@/components/uielements/AccordionTab";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const router = useRouter();
   const [callBackForm, setCallBackForm] = useState(false);
   const [registerCourseForm, setRegisterCourseForm] = useState(false);
   const [name, setName] = useState("");
@@ -20,21 +22,6 @@ export default function Page() {
   const [phone, setPhone] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
   const handleCallbackSubmit = (e) => {
-    e.preventDefault();
-    const formData = {
-      fullName: name,
-      contactNo: phone,
-      emailId: email,
-      courseName: "UI/UX with Internship",
-      courseStart: "Mon 31 Aug",
-      courseDuration: "3 Months",
-      slotId: timeSlot,
-    };
-    console.log(formData);
-    setCallBackForm(false);
-  };
-
-  const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
       fullName: name,
@@ -59,7 +46,8 @@ export default function Page() {
 
       if (sideTile && testimonialSection) {
         const sideTileRect = sideTile.getBoundingClientRect();
-        const testimonialSectionRect = testimonialSection.getBoundingClientRect();
+        const testimonialSectionRect =
+          testimonialSection.getBoundingClientRect();
 
         if (sideTileRect.top <= 0 && testimonialSectionRect.top > 0) {
           sideTile.style.position = "fixed";
@@ -75,6 +63,61 @@ export default function Page() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  async function handleSubscribe() {
+    await initializeRazorpay();
+    const subscribe = await fetch("/api/createorder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ amount: 2000 }),
+    });
+    const res = await subscribe.json();
+    console.log(res.order.id);
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_ID,
+      amount: res.order.amount,
+      currency: "INR",
+      name: "Design Value",
+      description: "UI/UX Design with 100% Paid Internship",
+      order_id: res.order.id,
+      // callback_url: `payment-success`,
+      // redirect: true,
+      theme: {
+        color: "#0b0b0b",
+      },
+      overlay: false,
+      handler: function (response) {
+        // Validate payment at server - using webhooks is a better idea.
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+        router.push("/payment-success");
+      },
+    };
+
+    const rpay = new window.Razorpay(options);
+    rpay.open();
+  }
+
+  const initializeRazorpay = async () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      // document.body.appendChild(script);
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+    });
+  };
+
 
   return (
     <main>
@@ -341,7 +384,7 @@ export default function Page() {
               Your Batch will start from July
             </P>
 
-            <form onSubmit={handleSubmit} className="relative mt-8">
+            <form onSubmit={handleSubscribe} className="relative mt-8">
               <div className="mb-4">
                 <input
                   type="text"
@@ -409,7 +452,6 @@ export default function Page() {
 
               <button
                 type="submit"
-                onClick={() => setRegisterCourseForm(false)}
                 className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
               >
                 Proceed to pay INR 2000
