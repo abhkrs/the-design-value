@@ -67,8 +67,8 @@ export default function Alumni() {
                         >
                             <div className=" bg-light grid grid-cols-3 rounded-xl px-8 py-6">
                                 <div>
-                                    <h3 className="!text-3xl">{student.name}</h3>
-                                    <h3 className="text-secondary my-2">Student ID - {student.id}</h3>
+                                    <H3 className="!text-3xl">{student.name}</H3>
+                                    <H3 className="text-secondary my-2">Student ID - {student.id}</H3>
                                     {student.feePaid ? (
                                         <p className="max-w-max">✅ Student Added to WhatsApp Group</p>
                                     ) : (
@@ -76,28 +76,28 @@ export default function Alumni() {
                                     )}
                                 </div>
                                 <div className="px-8 flex flex-col justify-center gap-2">
-                                    <p>
+                                    <P>
                                         <span className="!font-semibold">NAME - </span>
                                         {student.name}
-                                    </p>
-                                    <p>
+                                    </P>
+                                    <P>
                                         <span className="!font-semibold">EMAIL ID - </span>
                                         {student.email}
-                                    </p>
-                                    <p>
+                                    </P>
+                                    <P>
                                         <span className="!font-semibold">MOBILE NUMBER - </span>
                                         {student.mobile}
-                                    </p>
-                                    <p>
+                                    </P>
+                                    <P>
                                         <span className="!font-semibold">COURSE - </span>
                                         {student.course}
-                                    </p>
+                                    </P>
                                 </div>
                                 <div className="px-6 flex flex-col justify-center items-end">
                                     {student.feePaid ? (
-                                        <p className="max-w-max">✅ Fee Paid for this Month</p>
+                                        <P className="max-w-max">✅ Fee Paid for this Month</P>
                                     ) : (
-                                        <p className="max-w-max">❌ Fee Not Paid for this Month</p>
+                                        <P className="max-w-max">❌ Fee Not Paid for this Month</P>
                                     )}
                                     <button onClick={() => { setAddCert(true) }} className="rounded-full max-w-max my-2 py-2 px-10 inline-flex items-center justify-center bg-black text-white">
                                         🏆 Add Certificate
