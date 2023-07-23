@@ -4,15 +4,19 @@ import Image from "next/image";
 import H2 from "../typography/H2";
 import P from "../typography/P";
 import Link from "next/link";
+import H3 from "../typography/H3";
 
 const MentorsForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [dob, setDob] = useState("");
-  const [resume, setResume] = useState(null);
-  const [experience, setExperience] = useState("1");
+  const [experience, setExperience] = useState("");
+  const [company, setCompany] = useState("");
+  const [teachDays, setTeachDays] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [city, setCity] = useState("");
+  const [salary, setSalary] = useState("");
 
   const toggleForm = () => {
     setIsOpen(!isOpen);
@@ -48,7 +52,7 @@ const MentorsForm = () => {
 
           {!isOpen && (
             <Link
-            href=""
+              href=""
               onClick={toggleForm}
               className="bg-black !text-white py-3 px-10 rounded-full max-w-max mx-auto md:ms-0"
             >
@@ -59,82 +63,140 @@ const MentorsForm = () => {
       </div>
       <div className="relative">
         {isOpen && (
-          <div className="fixed top-0 left-0 right-0 bottom-0 bg-white bg-opacity-75 z-50 flex items-center justify-center">
-            <div className="bg-white p-8 rounded shadow-lg">
-              <form onSubmit={handleSubmit} className="relative">
-                <button
-                  onClick={toggleForm}
-                  className="absolute -top-2 right-0 text-red-500"
-                >
-                  Close
-                </button>
-                <div className="mb-4">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="border border-gray-300 p-1 rounded ml-6"
-                  />
+          <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+            <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
+              <H3 className="!text-2xl mb-4">😇 We are eager to know you!</H3>
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+                className="absolute top-4 right-4 text-red-500"
+              >
+                <Image alt="" src="/images/close.svg" height="18" width="18" />
+              </button>
+              <P className="my-4">
+                Please help us with a few details before we can shortlist your application for Round 2!
+              </P>
+              <hr />
+
+              <form onSubmit={handleSubmit} className="relative mt-8">
+              <div className="mb-4">
+                      <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Your Full Name*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                <div className="grid grid-cols-2 gap-4">
+                  {/* First Column */}
+                  <div>
+                    
+                    <div className="mb-4">
+                      <div className="flex">
+                        <div className="border border-gray-300 pl-3 pr-2 py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
+                          +91
+                        </div>
+                        <span className="text-gray-400 border-t border-b py-2 border-gray-300">
+                          |
+                        </span>
+                        <input
+                          type="tel"
+                          id="phone"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="Your Mobile Number*"
+                          className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        id="company"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                        placeholder="Current Company*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <input
+                        type="number"
+                        id="experience"
+                        value={experience}
+                        onChange={(e) => setExperience(e.target.value)}
+                        placeholder="Total Years of Experience*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <input
+                        type="number"
+                        id="teachDays"
+                        value={teachDays}
+                        onChange={(e) => setTeachDays(e.target.value)}
+                        placeholder="Days You Would Like to Teach*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                  </div>
+                  {/* Second Column */}
+                  <div>
+                    <div className="mb-4">
+                      <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Your Email ID*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        id="linkedin"
+                        value={linkedin}
+                        onChange={(e) => setLinkedin(e.target.value)}
+                        placeholder="LinkedIn Profile*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        id="city"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="City*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <input
+                        type="number"
+                        id="salary"
+                        value={salary}
+                        onChange={(e) => setSalary(e.target.value)}
+                        placeholder="Expected Salary per Month*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="border border-gray-300 p-1 rounded ml-6"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="phone">Phone</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="border border-gray-300 p-1 rounded ml-6"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="dob">Date of Birth</label>
-                  <input
-                    type="date"
-                    id="dob"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
-                    className="border border-gray-300 p-1 rounded ml-6"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="resume">Resume</label>
-                  <input
-                    type="file"
-                    id="resume"
-                    accept=".pdf,.doc,.docx"
-                    onChange={(e) => setResume(e.target.files[0])}
-                    className="border border-gray-300 p-1 rounded ml-6"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="experience">Years of Experience</label>
-                  <input
-                    type="number"
-                    id="experience"
-                    value={experience}
-                    onChange={(e) => setExperience(e.target.value)}
-                    className="border border-gray-300 p-1 rounded ml-6"
-                  />
-                </div>
+
                 <button
                   type="submit"
-                  className="bg-blue-500 !text-white py-1 px-4 rounded"
+                  onClick={() => setIsOpen(false)}
+                  className="bg-black col-span-2 max-w-max !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
                 >
                   Submit
                 </button>
               </form>
+
             </div>
           </div>
         )}
