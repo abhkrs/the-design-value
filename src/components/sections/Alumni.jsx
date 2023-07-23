@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import P from '../typography/P';
 import H3 from '../typography/H3';
+import Image from 'next/image';
 
 export default function Alumni() {
 
@@ -16,8 +17,8 @@ export default function Alumni() {
             certificate: null,
         },
         {
-            id: 'TDVM73001FE',
-            name: 'Abhiroop Banerjee',
+            id: 'TDVM73023FE',
+            name: 'Abhishek Sinha',
             email: 'mailid@domain.com',
             mobile: '+91 91919 91919',
             course: 'UI/UX with Internship',
@@ -27,8 +28,8 @@ export default function Alumni() {
         },
 
         {
-            id: 'TDVM73001FE',
-            name: 'Abhiroop Banerjee',
+            id: 'TDVM73022FE',
+            name: 'Vivek Sinha',
             email: 'mailid@domain.com',
             mobile: '+91 91919 91919',
             course: 'UI/UX with Internship',
@@ -41,6 +42,8 @@ export default function Alumni() {
 
     const [allStudents, setAllStudents] = useState(true)
     const [alumni, setAlumni] = useState(false)
+    const [addCert, setAddCert] = useState(false)
+    const [del, setDel] = useState(false)
     return (
         <main>
             <div className="flex gap-6 my-6">
@@ -59,53 +62,98 @@ export default function Alumni() {
                 <div>
                     {studentData.map((student) => (
                         <div
-                            className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3"
+                            className="my-3"
                             key={student.id}
                         >
-                            <div>
-                                <h3 className="!text-3xl">{student.name}</h3>
-                                <h3 className="text-secondary my-2">Student ID - {student.id}</h3>
-                                {student.feePaid ? (
-                                    <p className="max-w-max">✅ Student Added to WhatsApp Group</p>
-                                ) : (
-                                    <p className="max-w-max">❌ Student not Added to WhatsApp Group</p>
-                                )}
+                            <div className=" bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                                <div>
+                                    <h3 className="!text-3xl">{student.name}</h3>
+                                    <h3 className="text-secondary my-2">Student ID - {student.id}</h3>
+                                    {student.feePaid ? (
+                                        <p className="max-w-max">✅ Student Added to WhatsApp Group</p>
+                                    ) : (
+                                        <p className="max-w-max">❌ Student not Added to WhatsApp Group</p>
+                                    )}
+                                </div>
+                                <div className="px-8 flex flex-col justify-center gap-2">
+                                    <p>
+                                        <span className="!font-semibold">NAME - </span>
+                                        {student.name}
+                                    </p>
+                                    <p>
+                                        <span className="!font-semibold">EMAIL ID - </span>
+                                        {student.email}
+                                    </p>
+                                    <p>
+                                        <span className="!font-semibold">MOBILE NUMBER - </span>
+                                        {student.mobile}
+                                    </p>
+                                    <p>
+                                        <span className="!font-semibold">COURSE - </span>
+                                        {student.course}
+                                    </p>
+                                </div>
+                                <div className="px-6 flex flex-col justify-center items-end">
+                                    {student.feePaid ? (
+                                        <p className="max-w-max">✅ Fee Paid for this Month</p>
+                                    ) : (
+                                        <p className="max-w-max">❌ Fee Not Paid for this Month</p>
+                                    )}
+                                    <button onClick={() => { setAddCert(true) }} className="rounded-full max-w-max my-2 py-2 px-10 inline-flex items-center justify-center bg-black text-white">
+                                        🏆 Add Certificate
+                                    </button>
+                                    <button onClick={() => { setDel(true) }} className="rounded-full max-w-max border py-2 px-10 inline-flex items-center justify-center bg-white">
+                                        🚫 Delete Student
+                                    </button>
+                                </div>
                             </div>
-                            <div className="px-8 flex flex-col justify-center gap-2">
-                                <p>
-                                    <span className="!font-semibold">NAME - </span>
-                                    {student.name}
-                                </p>
-                                <p>
-                                    <span className="!font-semibold">EMAIL ID - </span>
-                                    {student.email}
-                                </p>
-                                <p>
-                                    <span className="!font-semibold">MOBILE NUMBER - </span>
-                                    {student.mobile}
-                                </p>
-                                <p>
-                                    <span className="!font-semibold">COURSE - </span>
-                                    {student.course}
-                                </p>
+
+                            {del && <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+                                <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
+                                    <P className="my-4 !text-xl">{`Are you sure you want to delete ${student.name}'s profile?`}</P>
+                                    <div className="my-4">
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            placeholder={`Enter ${student.name}'s Email to delete his/her profile`}
+                                            className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                                        />
+                                    </div>
+                                    <button className="rounded-full max-w-max my-2 py-2 px-4 inline-flex items-center justify-center bg-black text-white">
+                                        🚫 Delete Student
+                                    </button>
+                                    <button onClick={() => { setDel(false) }} className="rounded-full ms-4 max-w-max border py-2 px-10 inline-flex items-center justify-center bg-white">
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
-                            <div className="px-6 flex flex-col justify-center items-end">
-                                {student.feePaid ? (
-                                    <p className="max-w-max">✅ Fee Paid for this Month</p>
-                                ) : (
-                                    <p className="max-w-max">❌ Fee Not Paid for this Month</p>
-                                )}
-                                <button className="rounded-full max-w-max my-2 py-2 px-10 inline-flex items-center justify-center bg-black text-white">
-                                    🏆 Add Certificate
-                                </button>
-                                <button className="rounded-full max-w-max border py-2 px-10 inline-flex items-center justify-center bg-white">
-                                    🚫 Delete Student
-                                </button>
+                            }
+
+                            {addCert && <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+                                <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
+                                    <P className="my-4 !text-xl">{`Upload certificate for ${student.name}`}</P>
+                                    <div className="my-4">
+                                        <input
+                                            type="file"
+                                            id="name"
+                                            placeholder="Upload Cetrificate"
+                                            className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                                        />
+                                    </div>
+                                    <button className="rounded-full max-w-max my-2 py-2 px-4 inline-flex items-center justify-center bg-black text-white">
+                                        Upldate Certificate
+                                    </button>
+                                    <button onClick={() => { setAddCert(false) }} className="rounded-full ms-4 max-w-max border py-2 px-10 inline-flex items-center justify-center bg-white">
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
+                            }
                         </div>
                     ))}
                 </div>
             )}
+
 
 
             {alumni &&
