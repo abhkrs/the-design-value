@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Testimonials from "@/components/sections/Testimonials";
 import H2 from "@/components/typography/H2";
 import H3 from "@/components/typography/H3";
@@ -11,8 +11,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import AccordionTab from "@/components/uielements/AccordionTab";
+import { RegistrationContext } from "@/context/RegistrationContext";
+import Modal from "@/components/ui/Modal";
 
 export default function Page() {
+  const { openRegistrationModal, courseModal } = useContext(RegistrationContext);
   const [callBackForm, setCallBackForm] = useState(false);
   const [registerCourseForm, setRegisterCourseForm] = useState(false);
   const [name, setName] = useState("");
@@ -59,7 +62,8 @@ export default function Page() {
 
       if (sideTile && testimonialSection) {
         const sideTileRect = sideTile.getBoundingClientRect();
-        const testimonialSectionRect = testimonialSection.getBoundingClientRect();
+        const testimonialSectionRect =
+          testimonialSection.getBoundingClientRect();
 
         if (sideTileRect.top <= 0 && testimonialSectionRect.top > 0) {
           sideTile.style.position = "fixed";
@@ -76,8 +80,33 @@ export default function Page() {
     };
   }, []);
 
+  /*************************** Modal ********************************************/
+  // const cardModalBody = ({
+  //   selectedCard: _selectedCard,
+  //   selectedVehicle: _selectedVehicle,
+  //   userCurrency: _userCurrency,
+  //   showNewCard: _showNewCard,
+  //   showNewRef: _showNewRef,
+  //   showSuccessMsg: _showSuccess,
+  // }) => (
+  //   <CourseRegistration
+  //     selectedCard={_selectedCard}
+  //     selectedVehicle={_selectedVehicle}
+  //     setSelectedCard={setSelectedCard}
+  //     userCurrency={_userCurrency}
+  //     onConfirm={onUpdateRide}
+  //     allTripDetails={allTripDetails}
+  //     tariff={prevTarrif}
+  //     showNewCard={_showNewCard}
+  //     setShowNewCard={setShowNewCard}
+  //     showNewRef={_showNewRef}
+  //     showSuccessMsg={_showSuccess}
+  //   />
+  // );
+  /*************************** Modal ********************************************/
   return (
     <main>
+      <Modal {...courseModal} />
       <SectionDark className="flex flex-col lg:flex-row pt-12 pb-8 justify-between relative max-h-min">
         <div className="lg:w-2/3">
           <H2 className="!text-white !text-4xl inter !font-inter">
@@ -114,7 +143,10 @@ export default function Page() {
           </P>
         </div>
         <div className="lg:w-1/3 z-40 relative lg:-top-10 z-50 hidden lg:block">
-          <div className="bg-white shadow-md p-6 lg:fixed lg:mr-10" ref={sideTileRef}>
+          <div
+            className="bg-white shadow-md p-6 lg:fixed lg:mr-10"
+            ref={sideTileRef}
+          >
             <H3 className="!font-semibold !text-xl">
               Live Mentorship Guidance
             </H3>
@@ -131,7 +163,9 @@ export default function Page() {
               </span>{" "}
               registered Certification
             </div>
-            <div className="border-b py-2">🧑🏻‍💻 Hands-on-learning via GoogleMeet</div>
+            <div className="border-b py-2">
+              🧑🏻‍💻 Hands-on-learning via GoogleMeet
+            </div>
             <div className="border-b py-2">
               📆{" "}
               <span className="ml-1">
@@ -145,9 +179,11 @@ export default function Page() {
               whole course and will be eligible for the certificate.
             </P>
             <div className="mt-6 mb-3">
-              <span className="p-2 bg-[#CE4863] mr-2 text-white">😲 Flat 58% Off</span>
+              <span className="p-2 bg-[#CE4863] mr-2 text-white">
+                😲 Flat 58% Off
+              </span>
               <span className="my-auto font-semibold">
-                 Hurry! Offer Valid till 20th May
+                Hurry! Offer Valid till 20th May
               </span>
             </div>
             <div className="mb-3 py-2">
@@ -167,9 +203,7 @@ export default function Page() {
               ☎️ Get a Call Back
             </button>
             <button
-              onClick={() => {
-                setRegisterCourseForm(true);
-              }}
+              onClick={openRegistrationModal}
               className="px-8 py-3 rounded-full bg-black hover:bg-primary !text-white !text-lg w-full my-3"
             >
               Register for Internship & Course
@@ -179,9 +213,7 @@ export default function Page() {
       </SectionDark>
       <div className="lg:hidden">
         <div className=" p-6">
-          <H3 className="!font-semibold !text-xl">
-            Live Mentorship Guidance
-          </H3>
+          <H3 className="!font-semibold !text-xl">Live Mentorship Guidance</H3>
           <P className="!text-lg my-2 !text-white !bg-[#E59819] max-w-max px-2 py-1">
             Batch starting from July
           </P>
@@ -195,12 +227,14 @@ export default function Page() {
             </span>{" "}
             registered Certification
           </div>
-          <div className="border-b py-2">🧑🏻‍💻 Hands-on-learning via GoogleMeet</div>
+          <div className="border-b py-2">
+            🧑🏻‍💻 Hands-on-learning via GoogleMeet
+          </div>
           <div className="border-b py-2">
             📆{" "}
             <span className="ml-1">
-              Batches on Mon, Tue, Wed, Thu ( 7pm - 9 pm) and Sat, Sun ( 2pm -
-              4 pm)
+              Batches on Mon, Tue, Wed, Thu ( 7pm - 9 pm) and Sat, Sun ( 2pm - 4
+              pm)
             </span>
           </div>
           <div className="py-2">✅ 100% Guaranteed Internship</div>
@@ -228,7 +262,10 @@ export default function Page() {
             >
               <Image alt="" src="/images/close.svg" height="18" width="18" />
             </button>
-            <form onSubmit={handleCallbackSubmit} className="relative mt-4 max-w-max">
+            <form
+              onSubmit={handleCallbackSubmit}
+              className="relative mt-4 max-w-max"
+            >
               <div className="mb-4">
                 <input
                   type="text"
@@ -266,8 +303,14 @@ export default function Page() {
                 />
               </div>
               <div className="relative">
-                <div className="absolute right-1 z-50 !h-3 !w-4 p-2 mt-3 bg-white"><Image fill={true} src="/images/dropdown.png" className="object-contain !h-2 !w-3 mt-1" /></div>
+                <div className="absolute right-1 z-50 !h-3 !w-4 p-2 mt-3 bg-white">
+                  <Image
+                    fill={true}
+                    src="/images/dropdown.png"
+                    className="object-contain !h-2 !w-3 mt-1"
+                  />
                 </div>
+              </div>
               <div className="mb-4">
                 <select
                   id="timeSlot"
@@ -294,8 +337,6 @@ export default function Page() {
                     Tomorrow, 10th May, 2 PM - 4 PM
                   </option>
                 </select>
-                
-
 
                 {/* <div className="flex px-3 justify-between rounded-md border py-2">
                   <span>Select a time slot</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
@@ -341,7 +382,7 @@ export default function Page() {
               Your Batch will start from July
             </P>
 
-            <form onSubmit={handleSubmit} className="relative mt-8">
+            <form className="relative mt-8">
               <div className="mb-4">
                 <input
                   type="text"
@@ -742,37 +783,39 @@ export default function Page() {
       <Testimonials ref={testimonialSectionRef} />
 
       <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full">
-            <div className="mx-auto text-center">
-              <span className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">😲 Flat 58% Off</span>
-              <span className="my-auto !text-sm">
-                 Hurry! Offer Valid till 20th May
-              </span>
-            </div>
-            <div className="mb-1 py-2 !text-md mx-auto text-center">
-              <span className=" text-primary mr-2 font-bold">
-                INR 2,500 per monthś
-              </span>
-              <span className="line-through text-gray-600">
-                INR 6,000 per month
-              </span>
-            </div>
-            <button
-              onClick={() => {
-                setCallBackForm(true);
-              }}
-              className="px-4 py-2 mb-1 rounded-full !text-sm border w-full hover:bg-secondary"
-            >
-              ☎️ Get a Call Back
-            </button>
-            <button
-              onClick={() => {
-                setRegisterCourseForm(true);
-              }}
-              className="px-4 py-2 my-2 rounded-full bg-black hover:bg-primary !text-white !text-sm w-full"
-            >
-              Register for Internship & Course
-            </button>
-          </div>
+        <div className="mx-auto text-center">
+          <span className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">
+            😲 Flat 58% Off
+          </span>
+          <span className="my-auto !text-sm">
+            Hurry! Offer Valid till 20th May
+          </span>
+        </div>
+        <div className="mb-1 py-2 !text-md mx-auto text-center">
+          <span className=" text-primary mr-2 font-bold">
+            INR 2,500 per monthś
+          </span>
+          <span className="line-through text-gray-600">
+            INR 6,000 per month
+          </span>
+        </div>
+        <button
+          onClick={() => {
+            setCallBackForm(true);
+          }}
+          className="px-4 py-2 mb-1 rounded-full !text-sm border w-full hover:bg-secondary"
+        >
+          ☎️ Get a Call Back
+        </button>
+        <button
+          onClick={() => {
+            setRegisterCourseForm(true);
+          }}
+          className="px-4 py-2 my-2 rounded-full bg-black hover:bg-primary !text-white !text-sm w-full"
+        >
+          Register for Internship & Course
+        </button>
+      </div>
     </main>
   );
 }

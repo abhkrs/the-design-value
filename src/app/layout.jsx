@@ -4,6 +4,7 @@ import "./globals.css";
 import { Inter, DM_Sans } from "next/font/google";
 import Footer from "@/components/sections/Footer";
 import Head from "next/head";
+import { RegistrationProvider } from "@/context/RegistrationContext";
 
 const inter = Inter({
   weight: ["400", "700"],
@@ -25,12 +26,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">      
-      <body className={`${inter.className} ${dmsans.variable}`}>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <RegistrationProvider>
+      <html lang="en">
+        <body className={`${inter.className} ${dmsans.variable}`}>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </RegistrationProvider>
   );
 }
