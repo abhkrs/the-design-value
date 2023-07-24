@@ -37,21 +37,6 @@ export default function Page() {
     setCallBackForm(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = {
-      fullName: name,
-      contactNo: phone,
-      emailId: email,
-      courseName: "UI/UX with Internship",
-      courseStart: "Mon 31 Aug",
-      courseDuration: "3 Months",
-      slotId: timeSlot,
-    };
-    console.log(formData);
-    setCallBackForm(false);
-  };
-
   const sideTileRef = useRef(null);
   const testimonialSectionRef = useRef(null);
 
@@ -135,6 +120,7 @@ export default function Page() {
                 src="/images/logo.svg"
                 fill={true}
                 className="object-contain"
+                alt="logo"
               />
             </div>
           </div>
@@ -142,7 +128,7 @@ export default function Page() {
             <span className="font-bold">1,277 </span> people already enrolled
           </P>
         </div>
-        <div className="lg:w-1/3 z-40 relative lg:-top-10 z-50 hidden lg:block">
+        <div className="lg:w-1/3 relative lg:-top-10 z-50 hidden lg:block">
           <div
             className="bg-white shadow-md p-6 lg:fixed lg:mr-10"
             ref={sideTileRef}
@@ -308,6 +294,7 @@ export default function Page() {
                     fill={true}
                     src="/images/dropdown.png"
                     className="object-contain !h-2 !w-3 mt-1"
+                    alt="dropdown"
                   />
                 </div>
               </div>
@@ -356,7 +343,7 @@ export default function Page() {
               <button
                 type="submit"
                 //  onClick={handleCallSubmit}
-                className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
+                className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
               >
                 Submit
               </button>
@@ -450,8 +437,7 @@ export default function Page() {
 
               <button
                 type="submit"
-                onClick={() => setRegisterCourseForm(false)}
-                className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
+                className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
               >
                 Proceed to pay INR 2000
               </button>
