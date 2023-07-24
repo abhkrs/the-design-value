@@ -4,17 +4,12 @@ import H1 from "@/components/typography/H1";
 import H2 from "@/components/typography/H2";
 import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
-import Modal from "@/components/ui/Modal";
 import Section from "@/components/uielements/Section";
-import { RegistrationContext } from "@/context/RegistrationContext";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext } from "react";
 import { FaCircle, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 export default function FullPage() {
-    const { openRegistrationModal, courseModal } = useContext(RegistrationContext);
-
   let coureseData = [
     {
       name: "UI/UX Design Certification with 100% Paid Internship",
@@ -76,7 +71,6 @@ export default function FullPage() {
   });
   return (
     <main>
-      <Modal {...courseModal} />
       <Section>
         <H1 className="my-4">
           Introducing our <span className="text-secondary">Famous Four!</span>

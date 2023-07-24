@@ -2,22 +2,60 @@
 
 import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
+import { PaymentContext } from "@/context/PaymentContext";
+import { RegistrationContext } from "@/context/RegistrationContext";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import api from "../../../utils/api";
+import { usePathname } from "next/navigation";
 
 function CourseRegistrationModalBody() {
+  const pageName = usePathname();
+  const {
+    closeRegistrationModal,
+    setUserDetails,
+    setSelectedCourse,
+    getCourseName,
+  } = useContext(RegistrationContext);
+
+  const { handleSubscribe } = useContext(PaymentContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
+
+  const submitForm = async () => {
+    console.log("submitForm");
+    setUserDetails((prev) => ({
+      ...prev,
+      studentName: name,
+      email,
+      selectedBatch: timeSlot,
+      phone,
+    }));
+    setSelectedCourse((prev) => ({
+      ...prev,
+      coursTimeSlot: timeSlot,
+    }));
+    // const response = await api.post("/register/regUsr", {
+    //   fName: name?.split(" ")[0],
+    //   lName: name?.split(" ")[1],
+    //   emailId: email,
+    //   mobile: phone,
+    //   courseId: getCourseName(pageName),
+    //   batchId: timeSlot,
+    // });
+    // console.log(response);
+    handleSubscribe();
+  };
   return (
-    <div className="">
-      <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
+    <>
+      <div className="bg-white p-8 rounded shadow-lg w-full relative lg:px-16">
         <H3 className="!text-2xl mb-4">🧑🏽‍🎓 Register for Course</H3>
         <button
-          onClick={() => {
-            setRegisterCourseForm(false);
-          }}
+          type="button"
+          onClick={closeRegistrationModal}
           className="absolute top-4 right-4 text-red-500"
         >
           <Image alt="" src="/images/close.svg" height="18" width="18" />
@@ -69,22 +107,58 @@ function CourseRegistrationModalBody() {
               Select from Our available batches
             </P>
             <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
-              <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+              <button
+                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                onClick={() => {
+                  setTimeSlot("7PM - 8:30PM");
+                }}
+                type="button"
+              >
                 Mon (7PM - 8:30PM)
               </button>
-              <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+              <button
+                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                onClick={() => {
+                  setTimeSlot("7PM - 8:30PM");
+                }}
+                type="button"
+              >
                 Mon (7PM - 8:30PM)
               </button>
-              <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+              <button
+                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                onClick={() => {
+                  setTimeSlot("7PM - 8:30PM");
+                }}
+                type="button"
+              >
                 Mon (7PM - 8:30PM)
               </button>
-              <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+              <button
+                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                onClick={() => {
+                  setTimeSlot("7PM - 8:30PM");
+                }}
+                type="button"
+              >
                 Mon (7PM - 8:30PM)
               </button>
-              <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+              <button
+                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                onClick={() => {
+                  setTimeSlot("7PM - 8:30PM");
+                }}
+                type="button"
+              >
                 Mon (7PM - 8:30PM)
               </button>
-              <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
+              <button
+                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                onClick={() => {
+                  setTimeSlot("7PM - 8:30PM");
+                }}
+                type="button"
+              >
                 Mon (7PM - 8:30PM)
               </button>
             </div>
@@ -94,15 +168,15 @@ function CourseRegistrationModalBody() {
           </P>
 
           <button
-            type="submit"
-            onClick={() => setRegisterCourseForm(false)}
-            className="bg-black w-2/3 !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
+            type="button"
+            onClick={submitForm}
+            className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
           >
             Proceed to pay INR 2000
           </button>
         </form>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -13,11 +13,18 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import AccordionTab from "@/components/uielements/AccordionTab";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Modal from "@/components/ui/Modal";
+import { usePathname } from "next/navigation";
 
 export default function Page() {
-  const { openRegistrationModal, courseModal } = useContext(RegistrationContext);
+  const {
+    openRegistrationModal,
+    courseModal,
+    setSelectedCourse,
+    getCourseName,
+  } = useContext(RegistrationContext);
+  const pageName = usePathname();
+  console.log(pageName);
   const [callBackForm, setCallBackForm] = useState(false);
-  const [registerCourseForm, setRegisterCourseForm] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -64,31 +71,6 @@ export default function Page() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  /*************************** Modal ********************************************/
-  // const cardModalBody = ({
-  //   selectedCard: _selectedCard,
-  //   selectedVehicle: _selectedVehicle,
-  //   userCurrency: _userCurrency,
-  //   showNewCard: _showNewCard,
-  //   showNewRef: _showNewRef,
-  //   showSuccessMsg: _showSuccess,
-  // }) => (
-  //   <CourseRegistration
-  //     selectedCard={_selectedCard}
-  //     selectedVehicle={_selectedVehicle}
-  //     setSelectedCard={setSelectedCard}
-  //     userCurrency={_userCurrency}
-  //     onConfirm={onUpdateRide}
-  //     allTripDetails={allTripDetails}
-  //     tariff={prevTarrif}
-  //     showNewCard={_showNewCard}
-  //     setShowNewCard={setShowNewCard}
-  //     showNewRef={_showNewRef}
-  //     showSuccessMsg={_showSuccess}
-  //   />
-  // );
-  /*************************** Modal ********************************************/
   return (
     <main>
       <Modal {...courseModal} />
@@ -189,7 +171,15 @@ export default function Page() {
               ☎️ Get a Call Back
             </button>
             <button
-              onClick={openRegistrationModal}
+              type="button"
+              onClick={() => {
+                openRegistrationModal();
+                setSelectedCourse((prev) => ({
+                  ...prev,
+                  courseId: 1,
+                  courseName: getCourseName(pageName),
+                }));
+              }}
               className="px-8 py-3 rounded-full bg-black hover:bg-primary !text-white !text-lg w-full my-3"
             >
               Register for Internship & Course
@@ -346,100 +336,6 @@ export default function Page() {
                 className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
               >
                 Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {registerCourseForm && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
-          <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
-            <H3 className="!text-2xl mb-4">🧑🏽‍🎓 Register for Course</H3>
-            <button
-              onClick={() => {
-                setRegisterCourseForm(false);
-              }}
-              className="absolute top-4 right-4 text-red-500"
-            >
-              <Image alt="" src="/images/close.svg" height="18" width="18" />
-            </button>
-            <hr />
-            <P className="mt-4 bg-gold px-2 py-1 !text-white max-w-max">
-              Your Batch will start from July
-            </P>
-
-            <form className="relative mt-8">
-              <div className="mb-4">
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Full Name*"
-                  className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your Email ID*"
-                  className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
-                />
-              </div>
-              <div className="mb-4 flex">
-                <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
-                  +91
-                </div>
-                <span className="text-gray-400 border-t border-b py-2 border-gray-300">
-                  |
-                </span>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Your Mobile Number*"
-                  className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-[43.8%] rounded-r  border-l-0 "
-                />
-              </div>
-              <div className="mb-4">
-                <P className="capitalize text-black font-semibold">
-                  Select from Our available batches
-                </P>
-                <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
-                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                    Mon (7PM - 8:30PM)
-                  </button>
-                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                    Mon (7PM - 8:30PM)
-                  </button>
-                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                    Mon (7PM - 8:30PM)
-                  </button>
-                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                    Mon (7PM - 8:30PM)
-                  </button>
-                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                    Mon (7PM - 8:30PM)
-                  </button>
-                  <button className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max">
-                    Mon (7PM - 8:30PM)
-                  </button>
-                </div>
-              </div>
-              <P className="italic ms-2 mb-2 mt-10">
-                Currently you are paying fee for 1st month of your course
-              </P>
-
-              <button
-                type="submit"
-                className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
-              >
-                Proceed to pay INR 2000
               </button>
             </form>
           </div>
@@ -794,8 +690,14 @@ export default function Page() {
           ☎️ Get a Call Back
         </button>
         <button
+          type="button"
           onClick={() => {
-            setRegisterCourseForm(true);
+            openRegistrationModal(),
+              setSelectedCourse((prev) => ({
+                ...prev,
+                courseId: 1,
+                courseName: getCourseName(pageName),
+              }));
           }}
           className="px-4 py-2 my-2 rounded-full bg-black hover:bg-primary !text-white !text-sm w-full"
         >

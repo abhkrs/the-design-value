@@ -7,7 +7,11 @@ export const RegistrationContext = createContext();
 
 export function RegistrationProvider({ children }) {
   const [courseModal, setCourseModal] = useState();
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState({
+    courseName: "",
+    courseId: "",
+    coursTimeSlot: "",
+  });
   const [userDetails, setUserDetails] = useState(null);
 
   const onRegistrationConfirm = (_selectedCourse, _userDetails) => {
@@ -29,11 +33,23 @@ export function RegistrationProvider({ children }) {
   );
 
   const openRegistrationModal = () => {
-    console.log(courseModalBody);
     setCourseModal(() => ({
       enabled: true,
       body: courseModalBody,
     }));
+  };
+
+  const closeRegistrationModal = () => {
+    setCourseModal(() => ({
+      enabled: false,
+      body: courseModalBody,
+    }));
+  };
+
+  const getCourseName = (str = "") => {
+    const pageString = str.split("/");
+    const pageName = pageString.pop();
+    return pageName;
   };
 
   return (
@@ -45,6 +61,8 @@ export function RegistrationProvider({ children }) {
         setUserDetails,
         selectedCourse,
         userDetails,
+        closeRegistrationModal,
+        getCourseName,
       }}
     >
       {children}

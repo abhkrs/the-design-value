@@ -14,20 +14,20 @@ export default function Modal({
 }) {
   const outSideClickRef = useRef();
   useOnClickOutside(outSideClickRef, () => {
+    console.log('outside');
     if (!noOutSideClose && enabled) {
       setModal((prev) => ({ ...prev, enabled: false }));
     }
   });
+  
+  console.log(enabled);
 
   return (
-    <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-
-      <input
-        type="checkbox"
-        className="modal-toggle"
-        checked={enabled}
-        onChange={() => {}}
-      />
+    <div
+      id="defaultModal"
+      aria-hidden="true"
+      className={`fixed top-0 left-0 right-0 bottom-0 h-screen z-[999] w-full p-4 overflow-x-hidden md:inset-0  max-h-full bg-black bg-opacity-80 ${!enabled && 'hidden' } flex justify-center items-center `}
+    >
       <div className="modal">
         <div className="p-0 modal-box" ref={outSideClickRef}>
           <div
