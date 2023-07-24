@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import P from '../typography/P';
+import Image from 'next/image';
+import H3 from '../typography/H3';
 
 export default function CallBackPanel() {
     const [allStudents, setAllStudents] = useState(true)
     const [compleated, setCompleated] = useState(false)
+    const [notes, setNotes] = useState(false)
     return (
         <main>
             <div className="flex gap-6 my-6">
@@ -34,7 +37,7 @@ export default function CallBackPanel() {
                             <div className="grid grid-cols-2 gap-4  mb-4">
                                 <button
                                     className='rounded-full py-2 px-10 inline-flex items-center justify-center bg-secondary'>
-                                   ✅ Done
+                                    ✅ Done
                                 </button>
                                 <button
                                     className='rounded-full py-2 px-10 inline-flex items-center justify-cen ter bg-black text-white'>
@@ -42,11 +45,38 @@ export default function CallBackPanel() {
                                 </button>
                             </div>
                             <button
+                                onClick={() => { setNotes(true) }}
                                 className='rounded-full py-2 px-10 inline-flex items-center justify-center w-full bg-white'>
                                 📝 Add note if any
                             </button>
                         </div>
                     </div>
+                    {notes &&
+                        <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+                        <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
+                          <H3 className="!text-2xl mb-4">📝 Add Note</H3>
+                          <button
+                            onClick={() => {
+                              setNotes(false);
+                            }}
+                            className="absolute top-4 right-4 text-red-500"
+                          >
+                            <Image alt="" src="/images/close.svg" height="18" width="18" />
+                          </button>
+                          <hr />              
+                          <form className="relative mt-4 flex flex-col">
+                            <textarea name="studentnotes" id="studentnote"  rows="2" className='w-2/3 bg-white border-2 rounded-md p-4 my-4'></textarea>
+                            <button
+                              type="submit"
+                              onClick={() => setNotes(false)}
+                              className="bg-black max-w-max !text-white py-2 mt-4 px-8 rounded !text-lg rounded-full hover:bg-primary"
+                            >
+                              Save
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    }
 
                     <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-4">
                         <div>
@@ -70,6 +100,7 @@ export default function CallBackPanel() {
                                 </button>
                             </div>
                             <button
+                              onClick={() => { setNotes(true) }}
                                 className='rounded-full py-2 px-10 inline-flex items-center justify-center w-full bg-white'>
                                 📝 Add note if any
                             </button>
@@ -98,6 +129,7 @@ export default function CallBackPanel() {
                                 </button>
                             </div>
                             <button
+                              onClick={() => { setNotes(true) }}
                                 className='rounded-full py-2 px-10 inline-flex items-center justify-center w-full bg-white'>
                                 📝 Add note if any
                             </button>
@@ -120,6 +152,7 @@ export default function CallBackPanel() {
                         </div>
                         <div className='px-6'>
                             <button
+                              onClick={() => { setNotes(true) }}
                                 className='rounded-full py-2 px-10 my-auto inline-flex items-center justify-center w-full bg-white'>
                                 📝 Add note if any
                             </button>
@@ -152,7 +185,7 @@ export default function CallBackPanel() {
                             <P className="text-center"><span className='!font-semibold'>REQ. TIME - </span>Today, 6-9 pm</P>
                         </div>
                         <div className='ps-6'>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem quos est dolorum.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem quos est dolorum.
                         </div>
                     </div>
                 </div>
