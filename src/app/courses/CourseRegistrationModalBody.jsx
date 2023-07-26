@@ -73,7 +73,7 @@ function CourseRegistrationModalBody() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your Full Name*"
-              className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
+              className="border border-gray-300 px-3  py-2 md:md:w-1/2 w-full  rounded placeholder-secondary"
             />
           </div>
           <div className="mb-4">
@@ -83,7 +83,7 @@ function CourseRegistrationModalBody() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your Email ID*"
-              className="border border-gray-300 px-3  py-2 w-1/2 rounded placeholder-secondary"
+              className="border border-gray-300 px-3  py-2 md:w-1/2 w-full  rounded placeholder-secondary"
             />
           </div>
           <div className="mb-4 flex">
@@ -99,7 +99,7 @@ function CourseRegistrationModalBody() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="Your Mobile Number*"
-              className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-[43.8%] rounded-r  border-l-0 "
+              className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary md:w-[43.8%] rounded-r  border-l-0 "
             />
           </div>
           <div className="mb-4">
@@ -170,7 +170,7 @@ function CourseRegistrationModalBody() {
           <button
             type="button"
             onClick={submitForm}
-            className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
+            className="bg-black md:w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
           >
             Proceed to pay INR 2000
           </button>

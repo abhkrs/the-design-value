@@ -263,7 +263,7 @@ export default function Page() {
                   id="timeSlot"
                   value={timeSlot}
                   onChange={(e) => setTimeSlot(e.target.value)}
-                  className="border border-gray-300 px-3 py-2 pr-8 placeholder-secondary"
+                  className="!border !border-gray-300 !px-3 !py-2 !pr-8 placeholder-secondary !bg-white"
                 >
                   <option value="" disabled selected>
                     Select a time slot
