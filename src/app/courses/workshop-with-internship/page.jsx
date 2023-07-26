@@ -382,7 +382,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="bg-white md:px-12 md:py-10 rounded md:shadow">
+          <div className="bg-white md:px-12 md:py-10 rounded md:shadow border p-3 -m-3 md:border-0 md:m-0">
             <H3 className="!text-2xl mb-4">Course Details</H3>
             <AccordionTab heading="Foundations of UI/UX Design">
               <ul className="!list-disc ml-4">
@@ -637,7 +637,7 @@ export default function Page() {
         <hr />
       </div>
 
-      <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full shadow-2xl drop-shadow-2xl">
+      <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full shadow-top">
       <P className="!text-lg mb-2 !text-white !bg-[#E59819] text-center px-2 py-1">
             Batch starting from July
           </P>
