@@ -56,7 +56,7 @@ function CourseRegistrationModalBody() {
         <button
           type="button"
           onClick={closeRegistrationModal}
-          className="absolute top-4 right-4 text-red-500"
+          className="absolute top-4 right-8 md:right-4 text-red-500"
         >
           <Image alt="" src="/images/close.svg" height="18" width="18" />
         </button>
