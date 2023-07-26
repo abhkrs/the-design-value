@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import P from '../typography/P';
 import H3 from '../typography/H3';
 import Image from 'next/image';
+import WhatsApp from '../uielements/WhatsApp';
 
 export default function Alumni() {
 
@@ -69,11 +70,8 @@ export default function Alumni() {
                                 <div>
                                     <H3 className="!text-3xl">{student.name}</H3>
                                     <H3 className="text-secondary my-2">Student ID - {student.id}</H3>
-                                    {student.feePaid ? (
-                                        <p className="max-w-max">✅ Student Added to WhatsApp Group</p>
-                                    ) : (
-                                        <p className="max-w-max">❌ Student not Added to WhatsApp Group</p>
-                                    )}
+                                    <WhatsApp whatsapp={student.whatsapp} />
+
                                 </div>
                                 <div className="px-8 flex flex-col justify-center gap-2">
                                     <P>

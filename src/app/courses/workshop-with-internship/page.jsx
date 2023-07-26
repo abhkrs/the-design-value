@@ -334,48 +334,48 @@ export default function Page() {
             <div className="grid md:grid-cols-2 md:gap-6 mt-4 text-gray-600">
               <div>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>User Persona
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>User Persona
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>Information
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Information
                   Architecture
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>Wireframe
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Wireframe
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>Low-Fidelity
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Low-Fidelity
                   Screens
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>High-Fidelity
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>High-Fidelity
                   Screens
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>Empathy
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Empathy
                   Mapping
                 </P>
               </div>
               <div>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>User Journey
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>User Journey
                   Mapping
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>User Flow
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>User Flow
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>UI Brand Kit
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>UI Brand Kit
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>Responsive
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Responsive
                   Design
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>Prototyping
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Prototyping
                 </P>
                 <P>
-                  <span className="mr-2 font-bold">&#x2713; </span>Usability
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Usability
                   Testing
                 </P>
               </div>
