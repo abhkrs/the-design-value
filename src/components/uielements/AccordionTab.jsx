@@ -9,12 +9,12 @@ export default function AccordionTab({heading, children}) {
     }
   return (
     <div className='bg-gray-100 p-3 my-3'>
-        <div className="grid grid-cols-3 gap-4" onClick={toggleOpen}>
-            <div className="col-span-2 ps-4 !text-black font-semibold !text-lg">
+        <div className="grid grid-cols-8 md:grid-cols-3 gap-4" onClick={toggleOpen}>
+            <div className="col-span-7 md:col-span-2 md:ps-4 ps-2 !text-black font-semibold !text-lg">
                 {heading}
             </div>
             <div className='ms-auto max-w-max text-md text-secondary flex cursor-pointer underline'> 
-                Course Details <Image alt="" src="/images/downarrow.svg" height="10" width="16" className='ms-2'/>
+                <span className="hidden md:inline-block">Course Details</span> <Image alt="" src="/images/downarrow.svg" height="10" width="16" className='ms-2'/>
             </div>
         </div>
         <div className={`${isOpen ? "block" : "hidden"} p-4 !text-[#828282] !text-base !leading-7`}>

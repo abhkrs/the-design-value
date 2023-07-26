@@ -44,42 +44,15 @@ export default function Page() {
     setCallBackForm(false);
   };
 
-  const sideTileRef = useRef(null);
-  const testimonialSectionRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sideTile = sideTileRef.current;
-      const testimonialSection = testimonialSectionRef.current;
-
-      if (sideTile && testimonialSection) {
-        const sideTileRect = sideTile.getBoundingClientRect();
-        const testimonialSectionRect =
-          testimonialSection.getBoundingClientRect();
-
-        if (sideTileRect.top <= 0 && testimonialSectionRect.top > 0) {
-          sideTile.style.position = "fixed";
-          sideTile.style.top = "8px";
-        } else {
-          sideTile.style.position = "absolute";
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   return (
     <main>
       <Modal {...courseModal} />
       <SectionDark className="flex flex-col lg:flex-row pt-12 pb-8 justify-between relative max-h-min">
         <div className="lg:w-2/3">
-          <H2 className="!text-white !text-4xl inter !font-inter">
+          <H2 className="!text-white md:!text-4xl inter !font-inter">
             UI/UX Design with 100% Paid Internship
           </H2>
-          <P className="my-6 !text-white !text-lg">
+          <P className="my-6 !text-base md:!text-lg">
             Master the essentials of UI/UX design with our comprehensive course
             covering topics such as user research, wireframing, prototyping, and
             interaction design.{" "}
@@ -92,9 +65,9 @@ export default function Page() {
             <FaStar className="mx-1 mt-1" />
             <FaStarHalfAlt className="mx-1 mt-1" />
           </div>
-          <H3 className="bg-secondary px-2 py-1 !text-white max-w-max font-normal">
+          <P className="bg-secondary !text-base px-2 py-1 !text-white max-w-max font-normal">
             86% Placement Rate after internship
-          </H3>
+          </P>
           <div className="text-gray-400 mt-6 flex justify-start">
             A verified course by{" "}
             <div className="relative h-7 w-32 ms-2">
@@ -113,7 +86,6 @@ export default function Page() {
         <div className="lg:w-1/3 relative lg:-top-10 z-50 hidden lg:block">
           <div
             className="bg-white shadow-md p-6 lg:fixed lg:mr-10"
-            ref={sideTileRef}
           >
             <H3 className="!font-semibold !text-xl">
               Live Mentorship Guidance
@@ -190,10 +162,8 @@ export default function Page() {
       <div className="lg:hidden">
         <div className=" p-6">
           <H3 className="!font-semibold !text-xl">Live Mentorship Guidance</H3>
-          <P className="!text-lg my-2 !text-white !bg-[#E59819] max-w-max px-2 py-1">
-            Batch starting from July
-          </P>
-          <div className="border-b border-t py-2">
+          <P>Learn, practice, and apply job/internship ready skills with expert guidance</P>
+          <div className="border-b border-t py-2 mt-3">
             ⏰ 5 Months | 1 Class Per Week
           </div>
           <div className="border-b py-2">
@@ -342,9 +312,9 @@ export default function Page() {
         </div>
       )}
 
-      <Section className="my-6 relative">
+      <Section className="my-6 relative bg-white md:bg-accent">
         <div className="lg:w-2/3 grid gap-8 lg:pr-8">
-          <div className="bg-white px-12 py-10 rounded shadow ">
+          <div className="bg-white md:px-12 py-10 rounded md:shadow ">
             <H3 className="!text-2xl">About The Course </H3>
             <P className="text-gray-600 mt-4 !text-base">
               This is a complete UI/UX design course where you will be learning
@@ -359,9 +329,9 @@ export default function Page() {
             </P>
           </div>
 
-          <div className="bg-white px-12 py-10 rounded shadow">
+          <div className="bg-white md:px-12 md:py-10 rounded md:shadow">
             <H3 className="!text-2xl">What you&apos;ll learn</H3>
-            <div className="grid grid-cols-2 gap-6 mt-4 text-gray-600">
+            <div className="grid md:grid-cols-2 md:gap-6 mt-4 text-gray-600">
               <div>
                 <P>
                   <span className="mr-2 font-bold">&#x2713; </span>User Persona
@@ -412,7 +382,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="bg-white px-12 py-10 rounded shadow">
+          <div className="bg-white md:px-12 md:py-10 rounded md:shadow">
             <H3 className="!text-2xl mb-4">Course Details</H3>
             <AccordionTab heading="Foundations of UI/UX Design">
               <ul className="!list-disc ml-4">
@@ -662,30 +632,39 @@ export default function Page() {
         </div>
       </SectionDark>
 
-      <Testimonials ref={testimonialSectionRef} />
+      <Testimonials/>
+      <div className="mb-28 md:hidden">
+        <hr />
+      </div>
 
-      <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full">
-        <div className="mx-auto text-center">
-          <span className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">
+      <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full shadow-2xl drop-shadow-2xl">
+      <P className="!text-lg mb-2 !text-white !bg-[#E59819] text-center px-2 py-1">
+            Batch starting from July
+          </P>
+        <div className=" flex mb-3">
+        <div className="mx-auto text-center w-[40%]">
+          <div className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">
             😲 Flat 58% Off
-          </span>
-          <span className="my-auto !text-sm">
+          </div>
+          <div className="my-auto !text-sm block mt-2 font-semibold">
             Hurry! Offer Valid till 20th May
-          </span>
+          </div>
         </div>
-        <div className="mb-1 py-2 !text-md mx-auto text-center">
-          <span className=" text-primary mr-2 font-bold">
-            INR 2,500 per monthś
-          </span>
-          <span className="line-through text-gray-600">
+        <div className="mb-1 py-2 !text-md mx-auto text-center w-[60%]">
+          <div className="line-through text-gray-600">
             INR 6,000 per month
-          </span>
+          </div>
+          <div className=" text-primary mr-2 font-bold">
+            INR 2,500 per months
+          </div>
+          
+        </div>
         </div>
         <button
           onClick={() => {
             setCallBackForm(true);
           }}
-          className="px-4 py-2 mb-1 rounded-full !text-sm border w-full hover:bg-secondary"
+          className="px-4 py-2 mb-1 rounded-full !text-sm border border-black w-full hover:bg-secondary font-semibold"
         >
           ☎️ Get a Call Back
         </button>

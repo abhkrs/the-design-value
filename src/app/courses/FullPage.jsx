@@ -2,12 +2,11 @@
 
 import H1 from "@/components/typography/H1";
 import H2 from "@/components/typography/H2";
-import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
+import CoursePanel from "@/components/uielements/CoursePanel";
 import Section from "@/components/uielements/Section";
 import Image from "next/image";
 import Link from "next/link";
-import { FaCircle, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 export default function FullPage() {
   let coureseData = [
@@ -71,11 +70,11 @@ export default function FullPage() {
   });
   return (
     <main>
-      <Section>
-        <H1 className="my-4">
-          Introducing our <span className="text-secondary">Famous Four!</span>
+      <Section className="py-20">
+        <H1 className="my-4 text-center md:text-start text-4xl">
+          Introducing our <span className="text-secondary block md:inline">Famous Four!</span>
         </H1>
-        <P>
+        <P className="hidden md:block">
           Ours is an eclectic team of, graphic designers, product designers,
           content creators, project managers, artwork professionals,
           researchers, and artists. We are a creative bunch that collaborates,
@@ -83,64 +82,40 @@ export default function FullPage() {
           productivity matter most to us, peppered with healthy doses of
           ingenious insanity and ideation.
         </P>
+        <P className="md:hidden text-center">Select Course as per your needs. <br />
+(All courses are open for all Age groups)</P>
       </Section>
-      <Section>
-        <div className="grid gap-10 mt-6">
-          {coureseData.map((program) => (
-            <div
-              key={program.name}
-              className="bg-white flex flex-col md:flex-row px-6 py-6 md:py-10 gap-6 md:gap-0 text-center md:text-start"
-            >
-              <div className="relative min-w-[300px] min-h-[300px] md:min-h-0">
-                <Image
-                  src={program.img}
-                  alt={program.name}
-                  fill={true}
-                  className="object-cover"
-                />
-              </div>
-              <div className="md:px-6 lg:px-8">
-                <H3 className="!text-2xl">{program.name}</H3>
-                <P
-                  className={`!bg-[#AC3E20] !bg-opacity-25 !text-[#AC3E20] max-w-max py-1 !font-semibold px-6 my-4 rounded mx-auto md:ml-0`}
-                >
-                  {program.tag}
-                </P>
-                <P className="!text-lg lg:w-4/5">{program.details}</P>
-                <P className="text-secondary font-semibold min-h-[12px] mt-3 !text-lg">
-                  {program.liveClass}
-                </P>
-                <span className="flex justify-center md:justify-start text-gold font-semibold my-2">
-                  <span className="mr-2 -mt-1">4.8</span> <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStarHalfAlt />
-                </span>
-                <span className="text-gray-500 !text-lg font-semibold">
-                  {program.duration}
-                  <FaCircle className="inline mx-2 w-2 h-2 mb-1" />
-                  {program.for}
-                  <FaCircle className="inline mx-2 w-2 h-2 mb-1" />
-                  {program.type}
-                </span>
-              </div>
-              <div className="flex flex-col justify-end">
-                <P className="font-bold !text-black mb-2 ms-2 !text-lg">
-                  INR&nbsp;{program.perMonth}&nbsp;per month
-                </P>
-                <Link
-                  href={program.url}
-                  className="rounded-full bg-black !text-white !text-lg hover:bg-primary px-6 py-2 max-w-max min-w-max mx-auto md:mr-auto"
-                >
-                  View Course Details
-                </Link>
-              </div>
-            </div>
-          ))}
+      <div className="2xl:container md:p-4 md:px-12 lg:px-28 mx-auto">
+        <div className="grid gap-10 md:mt-6">
+          <CoursePanel
+          courseName="UI/UX Design Certification with 100% Paid Internship"
+          img="/images/course1.png"
+          tag="🔥 Bestseller"
+          tagbg=""
+          details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
+          liveClass="Live class with mentor"
+          duration="5 Months"
+          courseFor="Beginner to Masterclass"
+          type="Paid Internship"
+          perMonth="2200"
+          url="/courses/workshop-with-internship"
+          />
+          <CoursePanel
+          courseName="UI/UX Design with Job Placement"
+          img="/images/ui-ux.png"
+          tag="🤕 Sold Out"
+          tagbg="!bg-[#084FC725] !text-[#084FC7]"
+          details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
+          liveClass=""
+          duration="12 Months"
+          courseFor="Beginner to Masterclass"
+          type="Paid Internship & Job"
+          perMonth="7000"
+          url="/courses/ui-ux-workshop-with-jop-placement"
+          />
         </div>
-      </Section>
-      <Section className="mb-16">
+      </div>
+      <Section className="mb-16 !p-0">
         <div
           className="flex flex-col md:flex-row p-2 lg:py-6 lg:px-10 relative bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url('/images/bglgr.png')` }}

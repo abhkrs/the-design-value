@@ -81,7 +81,7 @@ function Testimonials() {
             <Image src="/images/quote.png" fill={true} className={""} alt="" />
           </div>
         </div>
-        <div className="px-6">
+        <div className="px-6 text-center md:text-start">
         <H2>Real <span className="text-primary">Stories</span> from Our <span className="text-primary">Students</span></H2>
         <P className="mt-2">Get inspired by these stories.</P>
         </div>
