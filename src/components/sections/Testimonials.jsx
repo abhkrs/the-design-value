@@ -76,17 +76,17 @@ function Testimonials() {
   return (
     <Section className="mt-4">
       <div className="h-32 relative flex flex-col justify-end">
-        <div className="absolute top-0 left-0">
-          <div className="relative h-24 w-28">
+        <div className="absolute top-0 md:!left-0 left-[50%] translate-x-[-50%]">
+          <div className="relative h-16 w-16 md:h-24 md:w-28">
             <Image src="/images/quote.png" fill={true} className={""} alt="" />
           </div>
         </div>
-        <div className="px-6 text-center md:text-start">
+        <div className="px-6 text-center md:text-start relative top-10 md:top-0">
         <H2>Real <span className="text-primary">Stories</span> from Our <span className="text-primary">Students</span></H2>
-        <P className="mt-2">Get inspired by these stories.</P>
+        <P className="mt-2 !text-xl">Get inspired by these stories.</P>
         </div>
       </div>
-      <div className="mt-10 mb-6">
+      <div className="mt-16 md:mt-10 mb-6">
         <Slider slides={testiSlides} noControl noDots={false} />
       </div>
     </Section>

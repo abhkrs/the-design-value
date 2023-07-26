@@ -50,12 +50,12 @@ export default function Page() {
       <SectionDark className="flex flex-col lg:flex-row pt-12 pb-8 justify-between relative max-h-min">
         <div className="lg:w-2/3">
           <H2 className="!text-white md:!text-4xl inter !font-inter">
-            UI/UX Design with 100% Paid Internship
+            UI/UX Design with <span className="block md:inline">100% Paid Internship</span>
           </H2>
-          <P className="my-6 !text-base md:!text-lg">
+          <P className="my-6 !text-base md:!text-lg !text-[#d4d4d4]">
             Master the essentials of UI/UX design with our comprehensive course
             covering topics such as user research, wireframing, prototyping, and
-            interaction design.{" "}
+            interaction design.
           </P>
           <div className="text-gold text-lg font-semibold flex my-4">
             4.8
@@ -334,55 +334,55 @@ export default function Page() {
             <div className="grid md:grid-cols-2 md:gap-6 mt-4 text-gray-600">
               <div>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>User Persona
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>User Persona
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Information
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>Information
                   Architecture
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Wireframe
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>Wireframe
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Low-Fidelity
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>Low-Fidelity
                   Screens
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>High-Fidelity
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>High-Fidelity
                   Screens
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Empathy
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>Empathy
                   Mapping
                 </P>
               </div>
               <div>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>User Journey
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>User Journey
                   Mapping
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>User Flow
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>User Flow
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>UI Brand Kit
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>UI Brand Kit
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Responsive
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>Responsive
                   Design
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Prototyping
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>Prototyping
                 </P>
                 <P>
-                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline"/> </span>Usability
+                  <span className="mr-2 font-bold"><Image src="/images/tick.png" height="15" width="15" className="inline" /> </span>Usability
                   Testing
                 </P>
               </div>
             </div>
           </div>
 
-          <div className="bg-white md:px-12 md:py-10 rounded md:shadow border p-3 -m-3 md:border-0 md:m-0">
+          <div className="bg-white md:px-12 md:py-10 rounded md:shadow py-8">
             <H3 className="!text-2xl mb-4">Course Details</H3>
             <AccordionTab heading="Foundations of UI/UX Design">
               <ul className="!list-disc ml-4">
@@ -614,12 +614,12 @@ export default function Page() {
         </div>
       </Section>
 
-      <SectionDark>
-        <div className="lg:w-2/3 !text-white py-6">
-          <H2 className="!text-4xl !font-normal">
+      <SectionDark className="!-mt-5 md:mt-0">
+        <div className="lg:w-2/3 !text-white md:py-6 pb-5">
+          <H2 className="!text-[26px] md:!text-4xl !font-normal">
             Earn a certificate in UI/UX design along with Internship
           </H2>
-          <P className="my-4 !text-lg !text-white">
+          <P className="my-4 mb-6 !text-base md:!text-lg !text-[#d4d4d4]">
             Add this credential to your LinkedIn profile, resume, or CV Share it
             on social media and in your performance review
           </P>
@@ -632,39 +632,39 @@ export default function Page() {
         </div>
       </SectionDark>
 
-      <Testimonials/>
+      <Testimonials />
       <div className="mb-28 md:hidden">
         <hr />
       </div>
 
       <div className="fixed bottom-0 bg-white rounded-t-xl p-4 lg:hidden w-full shadow-top">
-      <P className="!text-lg mb-2 !text-white !bg-[#E59819] text-center px-2 py-1">
-            Batch starting from July
-          </P>
+        <P className="!text-lg mb-2 !text-white !bg-[#E59819] text-center px-2 py-1 -mt-1">
+          Batch starting from July
+        </P>
         <div className=" flex mb-3">
-        <div className="mx-auto text-center w-[40%]">
-          <div className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">
-            😲 Flat 58% Off
+          <div className="mx-auto text-center w-[40%] mt-1">
+            <div className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">
+              😲 Flat 58% Off
+            </div>
+            {/* <div className="my-auto !text-sm block mt-2 font-semibold">
+              Hurry! Offer Valid till 20th May
+            </div> */}
           </div>
-          <div className="my-auto !text-sm block mt-2 font-semibold">
-            Hurry! Offer Valid till 20th May
+          <div className="!text-md mx-auto text-center w-[60%]">
+            <div className="line-through text-gray-600">
+              INR 6,000 per month
+            </div>
+            <div className=" text-primary mr-2 font-bold">
+              INR 2,500 per month
+            </div>
           </div>
         </div>
-        <div className="mb-1 py-2 !text-md mx-auto text-center w-[60%]">
-          <div className="line-through text-gray-600">
-            INR 6,000 per month
-          </div>
-          <div className=" text-primary mr-2 font-bold">
-            INR 2,500 per months
-          </div>
-          
-        </div>
-        </div>
+        <div className="grid grid-cols-2 gap-4">
         <button
           onClick={() => {
             setCallBackForm(true);
           }}
-          className="px-4 py-2 mb-1 rounded-full !text-sm border border-black w-full hover:bg-secondary font-semibold"
+          className="px-4 py-2 rounded-full !text-sm border border-black w-full hover:bg-secondary font-semibold"
         >
           ☎️ Get a Call Back
         </button>
@@ -678,10 +678,11 @@ export default function Page() {
                 courseName: getCourseName(pageName),
               }));
           }}
-          className="px-4 py-2 my-2 rounded-full bg-black hover:bg-primary !text-white !text-sm w-full"
+          className="px-4 py-2 rounded-full bg-black hover:bg-primary !text-white !text-sm w-full"
         >
-          Register for Internship & Course
+          Register Now
         </button>
+        </div>
       </div>
     </main>
   );

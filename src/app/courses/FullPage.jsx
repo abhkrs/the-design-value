@@ -83,39 +83,41 @@ export default function FullPage() {
           ingenious insanity and ideation.
         </P>
         <P className="md:hidden text-center">Select Course as per your needs. <br />
-(All courses are open for all Age groups)</P>
+          (All courses are open for all Age groups)</P>
       </Section>
       <div className="2xl:container md:p-4 md:px-12 lg:px-28 mx-auto">
         <div className="grid gap-10 md:mt-6">
           <CoursePanel
-          courseName="UI/UX Design Certification with 100% Paid Internship"
-          img="/images/course1.png"
-          tag="🔥 Bestseller"
-          tagbg=""
-          details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-          liveClass="Live class with mentor"
-          duration="5 Months"
-          courseFor="Beginner to Masterclass"
-          type="Paid Internship"
-          perMonth="2200"
-          url="/courses/workshop-with-internship"
+            courseName="UI/UX Design Certification with 100% Paid Internship"
+            img="/images/course1.png"
+            tag="🔥 Bestseller"
+            tagbg=""
+            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
+            liveClass="Live class with mentor"
+            duration="5 Months"
+            courseFor="Beginner to Masterclass"
+            type="Paid Internship"
+            perMonth="2200"
+            url="/courses/workshop-with-internship"
           />
+
+          
           <CoursePanel
-          courseName="UI/UX Design with Job Placement"
-          img="/images/ui-ux.png"
-          tag="🤕 Sold Out"
-          tagbg="!bg-[#084FC725] !text-[#084FC7]"
-          details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-          liveClass=""
-          duration="12 Months"
-          courseFor="Beginner to Masterclass"
-          type="Paid Internship & Job"
-          perMonth="7000"
-          url="/courses/ui-ux-workshop-with-jop-placement"
+            courseName="UI/UX Design with Job Placement"
+            img="/images/ui-ux.png"
+            tag="🤕 Sold Out"
+            tagbg="!bg-[#084FC725] !text-[#084FC7]"
+            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
+            liveClass=""
+            duration="12 Months"
+            courseFor="Beginner to Masterclass"
+            type="Paid Internship & Job"
+            perMonth="7000"
+            url="/courses/ui-ux-workshop-with-jop-placement"
           />
         </div>
       </div>
-      <Section className="mb-16 !p-0">
+      {/* <Section className="mb-16 !p-0">
         <div
           className="flex flex-col md:flex-row p-2 lg:py-6 lg:px-10 relative bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url('/images/bglgr.png')` }}
@@ -150,7 +152,7 @@ export default function FullPage() {
             />
           </div>
         </div>
-      </Section>
+      </Section> */}
     </main>
   );
 }
