@@ -73,9 +73,8 @@ export default function CallBackPanel() {
       </div>
       {allStudents &&
         <div>
-          {/* Render active callbacks */}
           {activeCallbacks.map((callback, index) => (
-            <div key={index} className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+            <div key={index} className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
               <div>
                 <P><span className='!font-semibold'>NAME - </span>{callback.FullName}</P>
                 <P><span className='!font-semibold'>EMAIL ID - </span>{callback.Email}</P>
