@@ -31,18 +31,39 @@ export default function Page() {
   const [timeSlot, setTimeSlot] = useState("");
   const handleCallbackSubmit = (e) => {
     e.preventDefault();
+    
     const formData = {
-      fullName: name,
+      FullName: name,
       contactNo: phone,
       emailId: email,
-      courseName: "UI/UX with Internship",
-      courseStart: "Mon 31 Aug",
-      courseDuration: "3 Months",
+      courseId: "UI/UX Design with Job Placement",
+      startOn: "Wed 16 Aug 2023",
+      totalTime: "12 Months",
       slotId: timeSlot,
     };
+  
     console.log(formData);
-    setCallBackForm(false);
+
+    fetch('https://ajinkya2709.pythonanywhere.com/Callback/requestCB', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Form data submitted successfully!');
+      } else {
+        console.error('Error submitting form data.');
+      }
+    })
+    .catch(error => {
+      console.error('Error during the fetch request:', error);
+    });
+    // setCallBackForm(false);
   };
+  
 
   return (
     <main>
@@ -268,8 +289,8 @@ export default function Page() {
                   <option value="" disabled selected>
                     Select a time slot
                   </option>
-                  <option value="Today, 10th May, 2 PM - 3 PM">
-                    Today, 10th May, 2 PM - 3 PM
+                  <option value="01 Aug, 01 Aug, 12 PM - 02 PM">
+                  Select This
                   </option>
                   <option value="Today, 10th May, 2 PM - 3 PM">
                     Today, 10th May, 2 PM - 3 PM
