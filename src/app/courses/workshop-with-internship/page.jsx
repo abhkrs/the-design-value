@@ -10,10 +10,10 @@ import SectionDark from "@/components/uielements/SectionDark";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import AccordionTab from "@/components/uielements/AccordionTab";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Modal from "@/components/ui/Modal";
 import { usePathname } from "next/navigation";
+import CourseDetails from "@/components/sections/CourseDetails";
 
 export default function Page() {
   const {
@@ -29,9 +29,12 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submissionResult, setSubmissionResult] = useState(null);
+
   const handleCallbackSubmit = (e) => {
     e.preventDefault();
-    
+
     const formData = {
       FullName: name,
       contactNo: phone,
@@ -41,8 +44,9 @@ export default function Page() {
       totalTime: "12 Months",
       slotId: timeSlot,
     };
-  
+
     console.log(formData);
+    setSubmitting(true);
 
     fetch('https://ajinkya2709.pythonanywhere.com/Callback/requestCB', {
       method: 'POST',
@@ -53,15 +57,28 @@ export default function Page() {
     })
     .then(response => {
       if (response.ok) {
-        console.log('Form data submitted successfully!');
+        setSubmissionResult('success');
       } else {
-        console.error('Error submitting form data.');
+        setSubmissionResult('error');
       }
     })
     .catch(error => {
       console.error('Error during the fetch request:', error);
+      setSubmissionResult('error');
+    })
+    .finally(() => {
+      setSubmitting(false);
+      if (submissionResult === 'success') {
+        setTimeout(() => {
+          setSubmissionResult(null);
+          setCallBackForm(false);
+        }, 3000); // Show success message for 3 seconds and then set callbackForm to false
+      } else {
+        setTimeout(() => {
+          setSubmissionResult(null);
+        }, 2000); // Show failure message for 2 seconds and keep callbackForm true
+      }
     });
-    // setCallBackForm(false);
   };
   
 
@@ -217,118 +234,107 @@ export default function Page() {
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
           <div className="bg-white p-8 rounded lg:px-16 shadow-lg lg:w-2/3 relative">
             <H3 className="!text-2xl">
-              😇 Thank You For Your Callback Request!{" "}
+              😇 Thank You For Your Callback Request!
             </H3>
-            <P className="my-3 !text-xl">Please help us with a few details</P>
+            {submissionResult === 'success' ? (
+              <P className="my-3 !text-xl">Your callback request has been placed successfully. We will reach you soon.</P>
+            ) : submissionResult === 'error' ? (
+              <P className="my-3 !text-xl">Please check your details and try again.</P>
+            ) : (
+              <P className="my-3 !text-xl">Please help us with a few details</P>
+            )}
             <hr />
-            <button
-              onClick={() => {
-                setCallBackForm(false);
-              }}
-              className="absolute top-4 right-8 md:right-4 text-red-500"
-            >
-              <Image alt="" src="/images/close.svg" height="18" width="18" />
-            </button>
-            <form
-              onSubmit={handleCallbackSubmit}
-              className="relative mt-4 max-w-max"
-            >
-              <div className="mb-4">
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Full Name*"
-                  className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your Email ID*"
-                  className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
-                />
-              </div>
-              <div className="mb-4 flex">
-                <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
-                  +91
-                </div>
-                <span className="text-gray-400 border-t border-b py-2 border-gray-300">
-                  |
-                </span>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Your Mobile Number*"
-                  className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
-                />
-              </div>
-              <div className="relative">
-                <div className="absolute right-1 z-50 !h-3 !w-4 p-2 mt-3 bg-white">
-                  <Image
-                    fill={true}
-                    src="/images/dropdown.png"
-                    className="object-contain !h-2 !w-3 mt-1"
-                    alt="dropdown"
+                <button
+                  onClick={() => {
+                    setCallBackForm(false);
+                  }}
+                  className="absolute top-4 right-8 md:right-4 text-red-500"
+                >
+                  <Image alt="" src="/images/close.svg" height="18" width="18" />
+                </button>
+            {!submissionResult && (
+              <form onSubmit={handleCallbackSubmit} className="relative mt-4 max-w-max">
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your Full Name*"
+                    className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
                   />
                 </div>
-              </div>
-              <div className="mb-4">
-                <select
-                  id="timeSlot"
-                  value={timeSlot}
-                  onChange={(e) => setTimeSlot(e.target.value)}
-                  className="!border !border-gray-300 !px-3 !py-2 !pr-8 placeholder-secondary !bg-white"
+                <div className="mb-4">
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your Email ID*"
+                    className="border border-gray-300 px-3 py-2 placeholder-secondary w-full"
+                  />
+                </div>
+                <div className="mb-4 flex">
+                  <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
+                    +91
+                  </div>
+                  <span className="text-gray-400 border-t border-b py-2 border-gray-300">
+                    |
+                  </span>
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Your Mobile Number*"
+                    className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
+                  />
+                </div>
+                <div className="relative">
+                  <div className="absolute right-1 z-50 !h-3 !w-4 p-2 mt-3 bg-white">
+                    <Image
+                      fill={true}
+                      src="/images/dropdown.png"
+                      className="object-contain !h-2 !w-3 mt-1"
+                      alt="dropdown"
+                    />
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <select
+                    id="timeSlot"
+                    value={timeSlot}
+                    onChange={(e) => setTimeSlot(e.target.value)}
+                    className="!border !border-gray-300 !px-3 !py-2 !pr-8 placeholder-secondary !bg-white"
+                  >
+                    <option value="" disabled selected>
+                      Select a time slot
+                    </option>
+                    <option value="01 Aug, 01 Aug, 12 PM - 02 PM">
+                      Select This
+                    </option>
+                    <option value="Today, 10th May, 2 PM - 3 PM">
+                      Today, 10th May, 2 PM - 3 PM
+                    </option>
+                    <option value="Tomorrow, 10th May, 10 AM - 12 PM">
+                      Tomorrow, 10th May, 10 AM - 12 PM
+                    </option>
+                    <option value="Tomorrow, 10th May, 12 PM - 2 PM">
+                      Tomorrow, 10th May, 12 PM - 2 PM
+                    </option>
+                    <option value="Tomorrow, 10th May, 2 PM - 4 PM">
+                      Tomorrow, 10th May, 2 PM - 4 PM
+                    </option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                  className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
                 >
-                  <option value="" disabled selected>
-                    Select a time slot
-                  </option>
-                  <option value="01 Aug, 01 Aug, 12 PM - 02 PM">
-                  Select This
-                  </option>
-                  <option value="Today, 10th May, 2 PM - 3 PM">
-                    Today, 10th May, 2 PM - 3 PM
-                  </option>
-                  <option value="Tomorrow, 10th May, 10 AM - 12 PM">
-                    Tomorrow, 10th May, 10 AM - 12 PM
-                  </option>
-                  <option value="Tomorrow, 10th May, 12 PM - 2 PM">
-                    Tomorrow, 10th May, 12 PM - 2 PM
-                  </option>
-                  <option value="Tomorrow, 10th May, 2 PM - 4 PM">
-                    Tomorrow, 10th May, 2 PM - 4 PM
-                  </option>
-                </select>
-
-                {/* <div className="flex px-3 justify-between rounded-md border py-2">
-                  <span>Select a time slot</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
-                </div>
-                <div className="absolute bg-white z-40 p-4 gap-4 flex flex-col">
-                <div className="flex justify-between rounded-md border py-2">
-                  <span>Today, 10th May, 2 PM - 3 PM</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
-                </div>
-                <div className="flex justify-between py-2">
-                  <span>Today, 10th May, 2 PM - 3 PM</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
-                </div>
-                <div className="flex justify-between rounded-md border py-2">
-                  <span>Today, 10th May, 2 PM - 3 PM</span><span className="relative h-3 w-4 mt-2"><Image fill={true} src="/images/dropdown.png" className="object-contain" /></span>
-                </div>
-                </div>   */}
-              </div>
-              <button
-                type="submit"
-                //  onClick={handleCallSubmit}
-                className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
-              >
-                Submit
-              </button>
-            </form>
+                  Submit
+                </button>
+              </form>
+            )}
           </div>
         </div>
       )}
@@ -403,235 +409,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="bg-white md:px-12 md:py-10 rounded md:shadow py-8">
-            <H3 className="!text-2xl mb-4">Course Details</H3>
-            <AccordionTab heading="Foundations of UI/UX Design">
-              <ul className="!list-disc ml-4">
-                <li>
-                  Understanding the fundamentals of UI and UX design and their
-                  roles in creating successful digital products.
-                </li>
-                <li>
-                  Exploring the relationship between design and user experience,
-                  and how they impact user satisfaction and engagement.
-                </li>
-                <li>
-                  Familiarizing yourself with the design process and the various
-                  stages involved in creating user-centered designs.
-                </li>
-              </ul>
-            </AccordionTab>
-            <AccordionTab heading="User Research and Analysis">
-              <ul className="ml-4 list-disc">
-                <li>
-                  Learning how to conduct user research using techniques such as
-                  interviews, surveys, and observation.
-                </li>
-                <li>
-                  Understanding how to gather and analyze data to identify user
-                  needs, preferences, and pain points.
-                </li>
-                <li>
-                  Creating user personas to represent target users and using
-                  them to inform design decisions.
-                </li>
-                <li>
-                  Developing scenarios and user flows to map out the user
-                  journey and identify areas for improvement.
-                </li>
-              </ul>
-            </AccordionTab>
-            <AccordionTab heading="Interaction Design">
-              <ul className="ml-4 list-disc">
-                <li>
-                  Learning how to design interactions that are intuitive and
-                  user-friendly.
-                </li>
-                <li>
-                  Exploring various navigation patterns, such as menus, tabs,
-                  and gestures, and understanding when to use each.
-                </li>
-                <li>
-                  Incorporating micro-interactions, such as button animations
-                  and loading indicators, to enhance the user experience.
-                </li>
-                <li>
-                  Adapting designs for different devices and platforms,
-                  considering factors like screen size and touch interactions.
-                </li>
-              </ul>
-            </AccordionTab>
-            <AccordionTab heading="Usability Testing and Evaluation">
-              <ul className="ml-4 list-disc">
-                <li>
-                  Learning how to plan and conduct usability tests to evaluate
-                  the effectiveness of your designs.
-                </li>
-                <li>
-                  Analyzing and interpreting user feedback and test results to
-                  identify areas of improvement.
-                </li>
-                <li>
-                  Iteratively refining and iterating designs based on user
-                  feedback and testing insights.
-                </li>
-                <li>
-                  Understanding usability heuristics and best practices to
-                  create designs that are intuitive and user-friendly.
-                </li>
-              </ul>
-            </AccordionTab>
-            <AccordionTab heading="User Interface Design">
-              <ul className="ml-4 list-disc">
-                <li>
-                  Exploring the principles of effective UI design, including
-                  visual hierarchy, layout, and typography.
-                </li>
-                <li>
-                  Understanding color theory and how to choose appropriate color
-                  schemes for different purposes.
-                </li>
-                <li>
-                  Creating wireframes, which are basic skeletal representations
-                  of a user interface, to plan and structure your designs.
-                </li>
-                <li>
-                  Translating wireframes into high-fidelity mockups using design
-                  software like Adobe XD, Sketch, or Figma.
-                </li>
-              </ul>
-            </AccordionTab>
-            <AccordionTab heading="Visual Design and Branding">
-              <ul className="ml-4 list-disc">
-                <li>
-                  Understanding the role of visual design in creating appealing
-                  and cohesive user interfaces.
-                </li>
-                <li>
-                  Learning how to create a visual identity and style guide for a
-                  digital product.
-                </li>
-                <li>
-                  Exploring techniques for choosing and using typography
-                  effectively in UI design.
-                </li>
-                <li>
-                  Incorporating graphics, icons, and imagery to enhance the
-                  aesthetic appeal and communication of designs.
-                </li>
-              </ul>
-            </AccordionTab>
-            <AccordionTab heading="Tools and Software">
-              <ol className="ml-4 list-decimal">
-                <li>Introduction to Figma</li>
-                <ul className="ml-4 list-disc">
-                  <li>
-                    Overview of Figma as a powerful design and prototyping tool.
-                  </li>
-                  <li>
-                    Understanding the Figma interface, tools, and features.
-                  </li>
-                  <li>Setting up your workspace and project organization.</li>
-                </ul>
-                <li>Designing with Figma</li>
-                <ul className="ml-4 list-disc">
-                  <li>
-                    Design principles and best practices for creating visually
-                    appealing interfaces.
-                  </li>
-                  <li>
-                    Using shapes, vectors, and text tools to create design
-                    elements.
-                  </li>
-                  <li>
-                    Applying colors, gradients, and typography to enhance your
-                    designs.
-                  </li>
-                  <li>
-                    Using Figma&apos;s libraries and components for consistent
-                    design elements.
-                  </li>
-                </ul>
-                <li>Creating Interactive Prototypes</li>
-                <ul className="ml-4 list-disc">
-                  <li>
-                    Understanding the importance of prototyping in the design
-                    process.
-                  </li>
-                  <li>
-                    Creating interactive hotspots and links to simulate user
-                    interactions.
-                  </li>
-                  <li>
-                    Defining transitions and animations to bring your designs to
-                    life.
-                  </li>
-                  <li>
-                    Previewing and sharing prototypes with stakeholders for
-                    feedback.
-                  </li>
-                </ul>
-                <li>Collaborating and Version Control</li>
-                <ul className="ml-4 list-disc">
-                  <li>
-                    Collaborating with team members in real-time using
-                    Figma&apos;s collaboration features.
-                  </li>
-                  <li>
-                    Utilizing comments and annotations to provide feedback and
-                    make design iterations.
-                  </li>
-                  <li>
-                    Managing version control to track design changes and revert
-                    if necessary.
-                  </li>
-                </ul>
-                <li>Design Systems and Components</li>
-                <ul className="ml-4 list-disc">
-                  <li>Building and managing design systems within Figma.</li>
-                  <li>
-                    Creating reusable components for consistent and efficient
-                    design workflow.
-                  </li>
-                  <li>
-                    Using constraints and auto-layout to create responsive and
-                    scalable designs.
-                  </li>
-                  <li>
-                    Applying design tokens to ensure consistency across
-                    projects.
-                  </li>
-                </ul>
-                <li>Advanced Figma Features</li>
-                <ul className="ml-4 list-disc">
-                  <li>
-                    Utilizing plugins and integrations to extend the
-                    functionality of Figma.
-                  </li>
-                  <li>
-                    Exploring advanced techniques like vector editing, masking,
-                    and advanced prototyping.
-                  </li>
-                  <li>
-                    Optimizing workflow with keyboard shortcuts and productivity
-                    hacks.
-                  </li>
-                  <li>
-                    Exploring design handoff and export options for developers.
-                  </li>
-                </ul>
-                <li>Designing for Collaboration and Handoff</li>
-                <ul className="ml-4 list-disc">
-                  <li>
-                    Preparing your designs for development handoff using
-                    Figma&apos;s features.
-                  </li>
-                  <li>Generating design specs and assets for developers.</li>
-                  <li>Streamlining the design-to-development workflow.</li>
-                </ul>
-              </ol>
-            </AccordionTab>
-          </div>
+          <CourseDetails />
         </div>
       </Section>
 
