@@ -5,6 +5,8 @@ import P from '../typography/P'
 
 export default function Batches() {
     const [showSlot, setShowSlot] = useState(1)
+    const [slotid, setSlotid] = useState(true)
+    const toggleSlotid = ()=>{slotid ? setSlotid(false) : setSlotid(true)}
     return (
         <main>
             <button
@@ -25,19 +27,19 @@ export default function Batches() {
                         <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
-                                <P>on</P>
+                                <burron onClick={toggleSlotid}>{slotid ? 'On' : "Off"}</burron>
                             </div>
                         </div>
                         <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
-                                <P>on</P>
+                                <burron onClick={toggleSlotid}>{slotid ? 'On' : "Off"}</burron>
                             </div>
                         </div>
                         <div className="flex justify-between my-2 border-b-2 py-2 px-4">
                             <P>Monday (1:00 PM - 2:30 PM)</P>
                             <div>
-                                <P>on</P>
+                                <burron onClick={toggleSlotid}>{slotid ? 'On' : "Off"}</burron>
                             </div>
                         </div>
                     </div>
@@ -49,30 +51,30 @@ export default function Batches() {
                     <button className='max-w-max text-primary underline' onClick={() => { (showSlot !== 2) ? setShowSlot(2) : setShowSlot(0) }}>{showSlot === 2 ? 'Hide Slots' : "View Slots"}</button>
                 </div>
                 {showSlot === 2 &&
-                    <div>
-                        <div className="flex justify-between my-3  px-4">
-                            <H3 className="text-primary !text-3xl">Current Batch Slot</H3>
-                            <button className='max-w-max text-primary underline'>+ Add New Slots</button>
-                        </div>
-                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
-                            <P>Monday (1:00 PM - 2:30 PM)</P>
-                            <div>
-                                <P>on</P>
-                            </div>
-                        </div>
-                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
-                            <P>Monday (1:00 PM - 2:30 PM)</P>
-                            <div>
-                                <P>on</P>
-                            </div>
-                        </div>
-                        <div className="flex justify-between my-2 border-b-2 py-2 px-4">
-                            <P>Monday (1:00 PM - 2:30 PM)</P>
-                            <div>
-                                <P>on</P>
-                            </div>
-                        </div>
-                    </div>
+                   <div>
+                   <div className="flex justify-between my-3 px-4">
+                       <H3 className="text-primary !text-3xl">Current Batch Slot</H3>
+                       <button className='max-w-max text-primary underline'>+ Add New Slots</button>
+                   </div>
+                   <div className="flex justify-between my-2 border-b-2 py-2 px-4">
+                       <P>Monday (1:00 PM - 2:30 PM)</P>
+                       <div>
+                           <burron>on</burron>
+                       </div>
+                   </div>
+                   <div className="flex justify-between my-2 border-b-2 py-2 px-4">
+                       <P>Monday (1:00 PM - 2:30 PM)</P>
+                       <div>
+                           <burron onClick={toggleSlotid}>{slotid ? 'On' : "Off"}</burron>
+                       </div>
+                   </div>
+                   <div className="flex justify-between my-2 border-b-2 py-2 px-4">
+                       <P>Monday (1:00 PM - 2:30 PM)</P>
+                       <div>
+                           <burron onClick={toggleSlotid}>{slotid ? 'On' : "Off"}</burron>
+                       </div>
+                   </div>
+               </div>
                 }
             </div>
         </main>

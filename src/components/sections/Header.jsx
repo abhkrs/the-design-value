@@ -40,7 +40,7 @@ function Header() {
     }
   };
   const [active, setActive] = useState(activeindex);
-  const [topbar, setTopbar] = useState(true)
+  const [topbar, setTopbar] = useState(false)
 
   const allowedPaths = ['/admin', '/admin/dashboard', '/student-login', '/courses/workshop-with-internship', '/courses/ui-ux-workshop-with-jop-placement','/courses/ui-ux-workshop'];
   const nonPromoted = allowedPaths.includes(pathName)

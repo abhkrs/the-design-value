@@ -32,6 +32,10 @@ export default function Page() {
   const [submitting, setSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState(null);
 
+  const closeCallbakForm = () => {
+    setCallBackForm(false);
+  }
+
   const handleCallbackSubmit = (e) => {
     e.preventDefault();
 
@@ -70,8 +74,8 @@ export default function Page() {
       setSubmitting(false);
       if (submissionResult === 'success') {
         setTimeout(() => {
+          closeCallbakForm;
           setSubmissionResult(null);
-          setCallBackForm(false);
         }, 3000); // Show success message for 3 seconds and then set callbackForm to false
       } else {
         setTimeout(() => {
@@ -245,9 +249,7 @@ export default function Page() {
             )}
             <hr />
                 <button
-                  onClick={() => {
-                    setCallBackForm(false);
-                  }}
+                  onClick={closeCallbakForm}
                   className="absolute top-4 right-8 md:right-4 text-red-500"
                 >
                   <Image alt="" src="/images/close.svg" height="18" width="18" />

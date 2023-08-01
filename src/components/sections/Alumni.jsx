@@ -73,10 +73,6 @@ export default function Alumni() {
                 </div>
                 <div className="px-8 flex flex-col justify-center gap-2">
                   <P>
-                    <span className="!font-semibold">NAME - </span>
-                    {student.name}
-                  </P>
-                  <P>
                     <span className="!font-semibold">EMAIL ID - </span>
                     {student.email}
                   </P>
