@@ -96,14 +96,14 @@ export default function CallBackPanel() {
               </div>
               <div className='px-6'>
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <button className='rounded-full py-2 px-10 inline-flex items-center justify-center bg-secondary'>
+                  <button className='rounded-full p-2 h-9 inline-flex items-center justify-center bg-secondary'>
                     ✅ Done
                   </button>
-                  <button className='rounded-full py-2 px-10 inline-flex items-center justify-cen ter bg-black text-white'>
+                  <button className='rounded-full p-2 h-9 inline-flex items-center justify-center bg-black text-white'>
                     🗑️ Delete
                   </button>
                 </div>
-                <button onClick={() => { setNotes(true) }} className='rounded-full py-2 px-10 inline-flex items-center justify-center w-full bg-white'>
+                <button onClick={() => { setNotes(true) }} className='rounded-full p-2 inline-flex items-center justify-center w-full bg-white'>
                   📝 Add note if any
                 </button>
               </div>
@@ -114,6 +114,7 @@ export default function CallBackPanel() {
             totalPages={totalPagesActive}
             onNext={() => setCurrentPage(currentPage + 1)}
             onPrev={() => setCurrentPage(currentPage - 1)}
+            className="mt-8 -mb-3"
           />
         </div>
       }
@@ -122,7 +123,7 @@ export default function CallBackPanel() {
           {completedCallbacks
             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((callback, index) => (
-              <div key={index} className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+              <div key={index} className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-2">
               <div>
                 <P><span className='!font-semibold'>NAME - </span>{callback.FullName}</P>
                 <P><span className='!font-semibold'>EMAIL ID - </span>{callback.Email}</P>
@@ -134,6 +135,9 @@ export default function CallBackPanel() {
               </div>
               <div className='ps-6 flex justify-center align-center'>
                 {callback.Note}
+                <button onClick={() => { setNotes(true) }} className='rounded-full p-2 h-10 inline-flex items-center justify-center w-full bg-white'>
+                  📝 Add note if any
+                </button>
               </div>
             </div>
             ))}
@@ -142,6 +146,7 @@ export default function CallBackPanel() {
             totalPages={totalPagesCompleted}
             onNext={() => setCurrentPage(currentPage + 1)}
             onPrev={() => setCurrentPage(currentPage - 1)}
+            className="mt-8 -mb-3"
           />
         </div>
       }

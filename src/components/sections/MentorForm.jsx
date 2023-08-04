@@ -124,7 +124,7 @@ const MentorsForm = () => {
                     </div>
                     <div className="mb-4">
                       <input
-                        type="number"
+                        type="text"
                         id="experience"
                         value={experience}
                         onChange={(e) => setExperience(e.target.value)}
@@ -134,7 +134,7 @@ const MentorsForm = () => {
                     </div>
                     <div className="mb-4">
                       <input
-                        type="number"
+                        type="text"
                         id="teachDays"
                         value={teachDays}
                         onChange={(e) => setTeachDays(e.target.value)}
@@ -177,7 +177,7 @@ const MentorsForm = () => {
                     </div>
                     <div className="mb-4">
                       <input
-                        type="number"
+                        type="text"
                         id="salary"
                         value={salary}
                         onChange={(e) => setSalary(e.target.value)}

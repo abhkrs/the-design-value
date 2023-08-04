@@ -75,7 +75,7 @@ function Header() {
               <Link
                 key={index}
                 href={data.url}
-                className={` ${active === index && "!text-primary"
+                className={` ${active === index && "font-semibold"
                   } '!text-black capitalize hover:text-primary text-lg px-4 py-2 bg-transparent rounded-md relative z-10`}
                 onClick={() => setActive(index)}
               >

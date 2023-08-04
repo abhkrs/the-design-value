@@ -112,10 +112,10 @@ const TimeSlotForm = () => {
             </label>
 
             <div className='mx-2 flex gap-4 mt-8'>
-            <button type="submit" className="bg-primary text-white py-2 px-4 rounded block w-1/2">
+            <button type="submit" className="bg-black hover:bg-primary text-white text-lg py-2 px-6 rounded-md block min-w-max max-w-max">
               Generate Slots
             </button>
-            <P className="!text-black !leading-tight">{status}</P>
+            <P className="!text-primary !leading-tight">{status}</P>
             </div>
           </div>
           <div>
