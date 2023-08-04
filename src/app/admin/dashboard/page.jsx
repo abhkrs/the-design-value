@@ -2,51 +2,63 @@
 import Alumni from '@/components/sections/Alumni';
 import Batches from '@/components/sections/Batches';
 import CallBackPanel from '@/components/sections/CallBackPanel';
-import Section from '@/components/uielements/Section'
-import React, { useState } from 'react'
+import TimeSlotForm from '@/components/sections/TimeSlotForm';
+import Section from '@/components/uielements/Section';
+import React, { useState } from 'react';
+
+const sections = [
+  { id: 'allStudents', label: 'All Students', icon: '/images/servicereq.png', component: Alumni },
+  { id: 'callBack', label: 'CallBack Requests', icon: '/images/callreq.png', component: CallBackPanel },
+  { id: 'batches', label: 'Batches', icon: '/images/batches.png', component: Batches },
+  { id: 'timeSlot', label: 'Time Slot', icon: '/images/timeslots.png', component: TimeSlotForm },
+];
 
 export default function Page() {
-  const [callBack, setCallBack] = useState(false);
-  const [allStudents, setAllStudents] = useState(true);
-  const [batches, setBatches] = useState(false);
+  const [activeSection, setActiveSection] = useState('allStudents');
+
+  const handleClick = (sectionId) => {
+    setActiveSection(sectionId);
+  };
+
+  const renderComponent = (Component) => {
+    return <Component />;
+  };
+
   return (
     <main>
       <Section>
         <div className="bg-white rounded-lg px-8 py-12">
           <div className="flex justify-between">
             <div className="flex items-center">
-              <input type="search" name="searchbox" id="" className="border rounded-md shadow px-3 py-2 w-full" />
-              {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                  fillRule="evenodd"
-                  d="M13.293 13.293a1 1 0 0 1-1.414 1.414l-3.5-3.5a1 1 0 0 1 1.414-1.414l3.5 3.5a1 1 0 0 1 0 1.414zM9 14a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"
-                />
-              </svg> */}
+              <input
+                type="search"
+                name="searchbox"
+                id=""
+                className="border rounded-md shadow px-3 py-2 w-full"
+              />
             </div>
             <div className="flex justify-around gap-4">
-              <button
-                onClick={() => { setAllStudents(true); setCallBack(false); setBatches(false); }}
-                className={`rounded-md bg-gray-200 py-2 px-4 inline-flex items-center justify-center border-b-4 ${allStudents && ' border-primary'}`}>
-                <img src="/images/servicereq.png" alt="" className='w-6 h-6 -ms-1 mr-2' /><span>All Students</span>
-              </button>
-              <button
-                onClick={() => { setCallBack(true); setAllStudents(false); setBatches(false); }}
-                className={`rounded-md bg-gray-200 py-2 px-4 inline-flex items-center justify-center border-b-4 ${callBack && ' border-primary'}`}>
-                <img src="/images/callreq.png" alt="" className='w-6 h-6 -ms-1 mr-2' /><span className='leading-none'>CallBack <br />Requests</span>
-              </button>
-              <button
-                onClick={() => { setBatches(true); setAllStudents(false); setCallBack(false); }}
-                className={`rounded-md bg-gray-200 py-2 px-4 inline-flex items-center justify-center border-b-4 ${batches && ' border-primary'}`}>
-                <img src="/images/callreq.png" alt="" className='w-6 h-6 -ms-1 mr-2' /><span className='leading-none'>Batches</span>
-              </button>
+              {sections.map(({ id, label, icon }) => (
+                <button
+                  key={id}
+                  onClick={() => handleClick(id)}
+                  className={`rounded-md bg-gray-200 py-2 px-4 inline-flex items-center justify-center max-w-[160px] border-b-4 ${
+                    activeSection === id ? 'border-primary' : ''
+                  }`}
+                >
+                  <img src={icon} alt="" className="w-6 h-6 -ms-1 mr-2" />
+                  <span className='leading-none'>{label}</span>
+                </button>
+              ))}
             </div>
           </div>
-          {callBack && <CallBackPanel />}
-          {allStudents && <Alumni />}
-          {batches && <Batches />}
+          {sections.map(({ id, component }) => (
+            <React.Fragment key={id}>
+              {activeSection === id && renderComponent(component)}
+            </React.Fragment>
+          ))}
         </div>
-
       </Section>
     </main>
-  )
+  );
 }

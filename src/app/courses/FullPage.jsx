@@ -115,6 +115,7 @@ export default function FullPage() {
             perMonth="7000"
             url="/courses/ui-ux-workshop-with-jop-placement"
           />
+          
         </div>
       </div>
       {/* <Section className="mb-16 !p-0">

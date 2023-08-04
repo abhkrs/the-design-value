@@ -61,27 +61,27 @@ export default function Page() {
     })
     .then(response => {
       if (response.ok) {
-        setSubmissionResult('success');
+        setSubmissionResult(true);
       } else {
-        setSubmissionResult('error');
+        setSubmissionResult(false);
       }
     })
     .catch(error => {
       console.error('Error during the fetch request:', error);
-      setSubmissionResult('error');
+      setSubmissionResult(false);
     })
     .finally(() => {
       setSubmitting(false);
-      if (submissionResult === 'success') {
+      if (submissionResult === true) {
         setTimeout(() => {
           closeCallbakForm;
-          setSubmissionResult(null);
-        }, 3000); // Show success message for 3 seconds and then set callbackForm to false
-      } else {
-        setTimeout(() => {
-          setSubmissionResult(null);
-        }, 2000); // Show failure message for 2 seconds and keep callbackForm true
-      }
+        }, 3000); 
+      } 
+      // else {
+      //   setTimeout(() => {
+      //     setSubmissionResult(null);
+      //   }, 3000);
+      // }
     });
   };
   
@@ -238,15 +238,13 @@ export default function Page() {
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
           <div className="bg-white p-8 rounded lg:px-16 shadow-lg lg:w-2/3 relative">
             <H3 className="!text-2xl">
-              😇 Thank You For Your Callback Request!
+              {submissionResult ? '😇 Thank You For Your Callback Request!' : 'Place your Callback Request!'}
             </H3>
-            {submissionResult === 'success' ? (
-              <P className="my-3 !text-xl">Your callback request has been placed successfully. We will reach you soon.</P>
-            ) : submissionResult === 'error' ? (
-              <P className="my-3 !text-xl">Please check your details and try again.</P>
-            ) : (
-              <P className="my-3 !text-xl">Please help us with a few details</P>
-            )}
+            <P className="my-3 !text-xl">
+              {submissionResult && "Your callback request has been submitted sucessfuly."}
+              {submissionResult === null && "Please help us with a few details"}
+              {submissionResult === false && "Please check your email and try again."}
+              </P>
             <hr />
                 <button
                   onClick={closeCallbakForm}
@@ -333,7 +331,7 @@ export default function Page() {
                   type="submit"
                   className="bg-black w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary"
                 >
-                  Submit
+                  {submitting ? "Submitting.." : "Submit"}
                 </button>
               </form>
             )}

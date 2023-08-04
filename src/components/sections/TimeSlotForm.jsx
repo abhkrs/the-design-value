@@ -1,0 +1,130 @@
+import React, { useState } from 'react';
+import H2 from '../typography/H2';
+import P from '../typography/P';
+
+const TimeSlotForm = () => {
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [interval, setInterval] = useState(1);
+  const [startHour, setStartHour] = useState('10:00');
+  const [endHour, setEndHour] = useState('20:00');
+  const [status, setStatus] = useState()
+
+  const formatDate = (date) => {
+    const formattedDate = new Date(date).toISOString().split('T')[0];
+    return formattedDate;
+  };
+
+  const formatHour = (hour) => {
+    const formattedHour = hour.split(':')[0];
+    return formattedHour;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      FromDate: formatDate(fromDate),
+      ToDate: formatDate(toDate),
+      Interval: interval,
+      StartHr: formatHour(startHour),
+      EndHr: formatHour(endHour),
+    };
+
+    console.log(data);
+
+    const response = await fetch('https://ajinkya2709.pythonanywhere.com/Callback/genTimeSlots', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      setStatus(result.message)
+    } else {
+      setStatus(result.message)
+    }
+    console.log(result);
+  };
+
+  return (
+    <div className="container">
+      <H2 className="py-5 mt-6 !text-4xl px-2">Generate Time Slots</H2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div>
+            <label className='block p-2 '>
+              From Date:
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+                className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+              />
+            </label>
+
+            <label className='block p-2 '>
+              Start Hour:
+              <input
+                type="time"
+                value={startHour}
+                onChange={(e) => setStartHour(e.target.value)}
+                className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                max="23:59"
+                min="00:00"
+              />
+            </label>
+
+            <label className='block p-2 '>
+              Interval:
+              <input
+                type="number"
+                value={interval}
+                onChange={(e) => setInterval(e.target.value)}
+                className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+              />
+            </label>
+          </div>
+          <div>
+            <label className='block p-2 '>
+              To Date:
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+                className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+              />
+            </label>
+
+            <label className='block p-2 '>
+              End Hour:
+              <input
+                type="time"
+                value={endHour}
+                onChange={(e) => setEndHour(e.target.value)}
+                className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                max="23:59"
+                min="00:00"
+              />
+            </label>
+
+            <div className='mx-2 flex gap-4 mt-8'>
+            <button type="submit" className="bg-primary text-white py-2 px-4 rounded block w-1/2">
+              Generate Slots
+            </button>
+            <P className="!text-black !leading-tight">{status}</P>
+            </div>
+          </div>
+          <div>
+            
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default TimeSlotForm;
