@@ -22,13 +22,10 @@ export default function Page() {
     selectedCourse,
   } = useContext(RegistrationContext);
   const [callBackForm, setCallBackForm] = useState(false);
-
-  // useEffect hook to open the modal after the state update
   useEffect(() => {
     if (selectedCourse.courseName) {
       openRegistrationModal();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCourse]);
 
   const handleCourseClick = () => {

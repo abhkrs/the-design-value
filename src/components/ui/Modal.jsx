@@ -36,7 +36,7 @@ export default function Modal({
             } px-6 py-3 sticky top-0 w-full z-10 flex gap-4 justify-between items-center`}
           >
             <h3 className="text-xl font-bold text-gray-700">{header}</h3>
-            {!noOutSideClose && (
+            {/* {!noOutSideClose && (
               <svg
                 fill="none"
                 stroke="currentColor"
@@ -55,7 +55,7 @@ export default function Modal({
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
-            )}
+            )} */}
           </div>
           <div className="sm:px-6 px-2 py-4 overflow-y-auto">{body(rest)}</div>
           {footer && (
