@@ -2,9 +2,12 @@
 
 import { createContext } from "react";
 import api from "../../utils/api";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 export const PaymentContext = createContext();
 
 export function PaymentProvider({ children }) {
+  const router = useRouter();
   const handleSubscribe = async (data) => {
     await initializeRazorpay();
     const subscribe = await fetch("/api/createorder", {
@@ -31,9 +34,9 @@ export function PaymentProvider({ children }) {
       overlay: false,
       handler: async (response) => {
         // Validate payment at server - using webhooks is a better idea.
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
 
         const payload = {
           uuid: data?.uuid,
@@ -41,14 +44,18 @@ export function PaymentProvider({ children }) {
           batchId: data?.batchId,
           paymentId: response.razorpay_payment_id,
           AmountPaid: data?.coursePrice,
-          paymentStatus: true,
-          reason: `Paid for course id ${data?.courseUid}`,
+          paymentStatus: 1,
+          reason: `NA`,
         };
 
         const paymentResponse = await api.post("/Register/regUsr", payload);
 
         console.log(paymentResponse);
         if (paymentResponse.status === "Success") {
+          toast.success(response?.message, {
+            autoClose: 3000,
+            theme: "colored",
+          });
         } else {
           toast.error(response?.message, {
             autoClose: 3000,
