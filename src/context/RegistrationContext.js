@@ -1,7 +1,10 @@
 "use client";
 
 import CourseRegistrationModalBody from "@/app/courses/CourseRegistrationModalBody";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import api from "../../utils/api";
+import { PaymentContext } from "@/context/PaymentContext";
+import { toast } from "react-toastify";
 
 export const RegistrationContext = createContext();
 
@@ -11,8 +14,11 @@ export function RegistrationProvider({ children }) {
     courseName: "",
     courseId: "",
     coursTimeSlot: "",
+    coursePrice: 0,
   });
   const [userDetails, setUserDetails] = useState(null);
+
+  const { handleSubscribe } = useContext(PaymentContext);
 
   const onRegistrationConfirm = (_selectedCourse, _userDetails) => {
     console.log(_selectedCourse);
@@ -27,6 +33,7 @@ export function RegistrationProvider({ children }) {
   }) => (
     <CourseRegistrationModalBody
       setSelectedCourse={setSelectedCourse}
+      selectedCourse={selectedCourse}
       onConfirm={onRegistrationConfirm}
       setUserDetails={setUserDetails}
     />
@@ -52,6 +59,32 @@ export function RegistrationProvider({ children }) {
     return pageName;
   };
 
+  useEffect(() => {
+    if (userDetails && userDetails?.uuid) {
+      handleSubscribe(userDetails);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userDetails]);
+
+  const submitUserDetails = async (payload) => {
+    const response = await api.post("/Register/createUsr", payload);
+
+    if (response.status === "Success") {
+      setUserDetails((prev) => ({
+        ...prev,
+        uuid: response?.uuid,
+        courseUid: response?.courseUid,
+        batchId: response?.batchId,
+        coursePrice: selectedCourse.coursePrice,
+      }));
+    } else {
+      toast.error(response?.message, {
+        autoClose: 3000,
+        theme: "colored",
+      });
+    }
+  };
+
   return (
     <RegistrationContext.Provider
       value={{
@@ -63,6 +96,7 @@ export function RegistrationProvider({ children }) {
         userDetails,
         closeRegistrationModal,
         getCourseName,
+        submitUserDetails,
       }}
     >
       {children}

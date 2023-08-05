@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Testimonials from "@/components/sections/Testimonials";
 import H2 from "@/components/typography/H2";
 import H3 from "@/components/typography/H3";
@@ -10,7 +10,6 @@ import Image from "next/image";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Modal from "@/components/ui/Modal";
-import { usePathname } from "next/navigation";
 import AboutCourse from "@/components/sections/AboutCourse";
 import ViewCertificate from "@/components/sections/ViewCertificate";
 import CallbackForm from "@/components/sections/CallbackForm";
@@ -20,24 +19,38 @@ export default function Page() {
     openRegistrationModal,
     courseModal,
     setSelectedCourse,
-    getCourseName,
+    selectedCourse,
   } = useContext(RegistrationContext);
-  const pageName = usePathname();
   const [callBackForm, setCallBackForm] = useState(false);
+
+  // useEffect hook to open the modal after the state update
+  useEffect(() => {
+    if (selectedCourse.courseName) {
+      openRegistrationModal();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCourse]);
+
+  const handleCourseClick = () => {
+    setSelectedCourse((prev) => ({
+      ...prev,
+      courseId: 1,
+      courseName: "UI/UX Design with Job Placement",
+      coursePrice: 2500,
+    }));
+  };
 
   return (
     <main>
       <Modal {...courseModal} />
       {callBackForm && (
-        <CallbackForm
-          onClose={() => setCallBackForm(false)}
-          courseNumber={0}
-        />
+        <CallbackForm onClose={() => setCallBackForm(false)} courseNumber={0} />
       )}
       <SectionDark className="flex flex-col lg:flex-row pt-12 pb-8 justify-between relative max-h-min">
         <div className="lg:w-2/3">
           <H2 className="!text-white md:!text-4xl inter !font-inter">
-            UI/UX Design with <span className="block md:inline">100% Paid Internship</span>
+            UI/UX Design with{" "}
+            <span className="block md:inline">100% Paid Internship</span>
           </H2>
           <P className="my-6 !text-base md:!text-lg !text-[#d4d4d4]">
             Master the essentials of UI/UX design with our comprehensive course
@@ -71,9 +84,7 @@ export default function Page() {
           </P>
         </div>
         <div className="lg:w-1/3 relative lg:-top-10 z-30 hidden lg:block">
-          <div
-            className="bg-white shadow-md p-6 lg:fixed lg:mr-10"
-          >
+          <div className="bg-white shadow-md p-6 lg:fixed lg:mr-10">
             <H3 className="!font-semibold !text-xl">
               Live Mentorship Guidance
             </H3>
@@ -131,14 +142,7 @@ export default function Page() {
             </button>
             <button
               type="button"
-              onClick={() => {
-                openRegistrationModal();
-                setSelectedCourse((prev) => ({
-                  ...prev,
-                  courseId: 1,
-                  courseName: getCourseName(pageName),
-                }));
-              }}
+              onClick={handleCourseClick}
               className="px-8 py-3 rounded-full bg-black hover:bg-primary !text-white !text-lg w-full my-3"
             >
               Register for Internship & Course
@@ -178,14 +182,7 @@ export default function Page() {
             </button>
             <button
               type="button"
-              onClick={() => {
-                openRegistrationModal(),
-                  setSelectedCourse((prev) => ({
-                    ...prev,
-                    courseId: 1,
-                    courseName: getCourseName(pageName),
-                  }));
-              }}
+              onClick={handleCourseClick}
               className="px-4 py-2 rounded-full bg-black hover:bg-primary !text-white !text-sm w-full"
             >
               Register Now
@@ -196,7 +193,10 @@ export default function Page() {
       <div className="lg:hidden">
         <div className=" p-6">
           <H3 className="!font-semibold !text-xl">Live Mentorship Guidance</H3>
-          <P>Learn, practice, and apply job/internship ready skills with expert guidance</P>
+          <P>
+            Learn, practice, and apply job/internship ready skills with expert
+            guidance
+          </P>
           <div className="border-b border-t py-2 mt-3">
             ⏰ 5 Months | 1 Class Per Week
           </div>

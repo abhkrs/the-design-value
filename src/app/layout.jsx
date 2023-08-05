@@ -27,8 +27,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <RegistrationProvider>
-      <PaymentProvider>
+    <PaymentProvider>
+      <RegistrationProvider>
         <html lang="en">
           <body className={`${inter.className} ${dmsans.variable}`}>
             <Header />
@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </body>
         </html>
-      </PaymentProvider>
-    </RegistrationProvider>
+      </RegistrationProvider>
+    </PaymentProvider>
   );
 }

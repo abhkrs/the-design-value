@@ -2,57 +2,72 @@
 
 import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
-import { PaymentContext } from "@/context/PaymentContext";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
-import api from "../../../utils/api";
-import { usePathname } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function CourseRegistrationModalBody() {
-  const pageName = usePathname();
-  const {
-    closeRegistrationModal,
-    setUserDetails,
-    setSelectedCourse,
-    getCourseName,
-  } = useContext(RegistrationContext);
-
-  const { handleSubscribe } = useContext(PaymentContext);
+function CourseRegistrationModalBody({ selectedCourse }) {
+  const { closeRegistrationModal, setSelectedCourse, submitUserDetails } =
+    useContext(RegistrationContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const submitForm = async () => {
-    console.log("submitForm");
-    setUserDetails((prev) => ({
-      ...prev,
-      studentName: name,
-      email,
-      selectedBatch: timeSlot,
-      phone,
-    }));
+    setIsSubmitted(true);
     setSelectedCourse((prev) => ({
       ...prev,
       coursTimeSlot: timeSlot,
+      selectedCourse: 1,
     }));
-    // const response = await api.post("/register/regUsr", {
-    //   fName: name?.split(" ")[0],
-    //   lName: name?.split(" ")[1],
+
+    // const payload = {
+    //   fullName: name,
     //   emailId: email,
     //   mobile: phone,
-    //   courseId: getCourseName(pageName),
+    //   courseId: 'UI/UX Design Certification with 100% Paid Internship',
     //   batchId: timeSlot,
-    // });
-    // console.log(response);
-    handleSubscribe();
+    // };
+
+    if (name && email && phone && timeSlot) {
+      const payload = {
+        fullName: name,
+        emailId: email,
+        mobile: phone,
+        courseId: selectedCourse.courseName,
+        batchId: timeSlot,
+      };
+      await submitUserDetails(payload);
+    } else {
+      toast.error("All fill up all required fields", {
+        autoClose: 3000,
+        theme: "colored",
+      });
+    }
   };
   return (
     <>
+      <ToastContainer
+        limit={1}
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="bg-white p-8 rounded shadow-lg w-full relative lg:px-16">
-        <H3 className="!text-2xl mb-4">🧑🏽‍🎓 Register for Course</H3>
+        <H3 className="!text-2xl mb-4">
+          🧑🏽‍🎓 Register for {selectedCourse.courseName}{" "}
+        </H3>
         <button
           type="button"
           onClick={closeRegistrationModal}
@@ -75,6 +90,11 @@ function CourseRegistrationModalBody() {
               placeholder="Your Full Name*"
               className="border border-gray-300 px-3  py-2 md:md:w-1/2 w-full  rounded placeholder-secondary"
             />
+            {isSubmitted && !name && (
+              <p className="text-[red] text-xs font-bold py-1">
+                * Name is reauired
+              </p>
+            )}
           </div>
           <div className="mb-4">
             <input
@@ -85,22 +105,34 @@ function CourseRegistrationModalBody() {
               placeholder="Your Email ID*"
               className="border border-gray-300 px-3  py-2 md:w-1/2 w-full  rounded placeholder-secondary"
             />
+            {isSubmitted && !name && (
+              <p className="text-[red] text-xs font-bold py-1">
+                * Email is reauired
+              </p>
+            )}
           </div>
-          <div className="mb-4 flex">
-            <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
-              +91
+          <div className="mb-4">
+            <div className="flex">
+              <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
+                +91
+              </div>
+              <span className="text-gray-400 border-t border-b py-2 border-gray-300">
+                |
+              </span>
+              <input
+                type="tel"
+                id="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Your Mobile Number*"
+                className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary md:w-[43.8%] rounded-r  border-l-0 "
+              />
             </div>
-            <span className="text-gray-400 border-t border-b py-2 border-gray-300">
-              |
-            </span>
-            <input
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Your Mobile Number*"
-              className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary md:w-[43.8%] rounded-r  border-l-0 "
-            />
+            {isSubmitted && !phone && (
+              <p className="text-[red] text-xs font-bold py-1">
+                * Phone is reauired
+              </p>
+            )}
           </div>
           <div className="mb-4">
             <P className="capitalize text-black font-semibold">
@@ -108,60 +140,64 @@ function CourseRegistrationModalBody() {
             </P>
             <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
               <button
-                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                className={`py-1 px-3   border rounded min-w-max ${
+                  timeSlot === "Sun ( 10:00 AM to 11:45 AM )"
+                    ? "border-[red] bg-gray-200 "
+                    : "border-secondary bg-gray-100"
+                }`}
                 onClick={() => {
-                  setTimeSlot("7PM - 8:30PM");
+                  setTimeSlot("Sun ( 10:00 AM to 11:45 AM )");
+                }}
+                type="button"
+              >
+                Sun (7PM - 8:30PM)
+              </button>
+              <button
+                className={`py-1 px-3   border rounded min-w-max ${
+                  timeSlot === "Mon ( 10:00 AM to 11:45 AM )"
+                    ? "border-[red] bg-gray-200 "
+                    : "border-secondary bg-gray-100"
+                }`}
+                onClick={() => {
+                  setTimeSlot("Mon ( 10:00 AM to 11:45 AM )");
                 }}
                 type="button"
               >
                 Mon (7PM - 8:30PM)
               </button>
               <button
-                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                className={`py-1 px-3   border rounded min-w-max ${
+                  timeSlot === "Tue ( 10:00 AM to 11:45 AM )"
+                    ? "border-[red] bg-gray-200 "
+                    : "border-secondary bg-gray-100"
+                }`}
                 onClick={() => {
-                  setTimeSlot("7PM - 8:30PM");
+                  setTimeSlot("Tue ( 10:00 AM to 11:45 AM )");
                 }}
                 type="button"
               >
-                Mon (7PM - 8:30PM)
+                Tue (7PM - 8:30PM)
               </button>
               <button
-                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
+                className={`py-1 px-3   border rounded min-w-max ${
+                  timeSlot === "Wed ( 10:00 AM to 11:45 AM )"
+                    ? "border-[red] bg-gray-200 "
+                    : "border-secondary bg-gray-100"
+                }`}
                 onClick={() => {
-                  setTimeSlot("7PM - 8:30PM");
+                  setTimeSlot("Wed ( 10:00 AM to 11:45 AM )");
                 }}
                 type="button"
               >
-                Mon (7PM - 8:30PM)
-              </button>
-              <button
-                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
-                onClick={() => {
-                  setTimeSlot("7PM - 8:30PM");
-                }}
-                type="button"
-              >
-                Mon (7PM - 8:30PM)
-              </button>
-              <button
-                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
-                onClick={() => {
-                  setTimeSlot("7PM - 8:30PM");
-                }}
-                type="button"
-              >
-                Mon (7PM - 8:30PM)
-              </button>
-              <button
-                className="py-1 px-3 bg-gray-100 border-secondary border rounded min-w-max"
-                onClick={() => {
-                  setTimeSlot("7PM - 8:30PM");
-                }}
-                type="button"
-              >
-                Mon (7PM - 8:30PM)
+                Wed (7PM - 8:30PM)
               </button>
             </div>
+
+            {isSubmitted && !timeSlot && (
+              <p className="text-[red] text-xs font-bold py-1">
+                * Batch is reauired
+              </p>
+            )}
           </div>
           <P className="italic ms-2 mb-2 mt-10">
             Currently you are paying fee for 1st month of your course

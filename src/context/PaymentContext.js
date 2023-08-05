@@ -1,19 +1,18 @@
 "use client";
 
 import { createContext } from "react";
+import api from "../../utils/api";
 export const PaymentContext = createContext();
 
 export function PaymentProvider({ children }) {
-
-
-  const handleSubscribe = async () => {
+  const handleSubscribe = async (data) => {
     await initializeRazorpay();
     const subscribe = await fetch("/api/createorder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: 1 }),
+      body: JSON.stringify({ amount: data.coursePrice }),
     });
     const res = await subscribe.json();
     console.log(res.order.id);
@@ -30,11 +29,33 @@ export function PaymentProvider({ children }) {
         color: "#0b0b0b",
       },
       overlay: false,
-      handler: function (response) {
+      handler: async (response) => {
         // Validate payment at server - using webhooks is a better idea.
         alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);
         alert(response.razorpay_signature);
+
+        const payload = {
+          uuid: data?.uuid,
+          courseUid: data?.courseUid,
+          batchId: data?.batchId,
+          paymentId: response.razorpay_payment_id,
+          AmountPaid: data?.coursePrice,
+          paymentStatus: true,
+          reason: `Paid for course id ${data?.courseUid}`,
+        };
+
+        const paymentResponse = await api.post("/Register/regUsr", payload);
+
+        console.log(paymentResponse);
+        if (paymentResponse.status === "Success") {
+        } else {
+          toast.error(response?.message, {
+            autoClose: 3000,
+            theme: "colored",
+          });
+        }
+
         router.push("/payment-success");
       },
     };
@@ -62,7 +83,7 @@ export function PaymentProvider({ children }) {
   return (
     <PaymentContext.Provider
       value={{
-        handleSubscribe
+        handleSubscribe,
       }}
     >
       {children}

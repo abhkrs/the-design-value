@@ -14,19 +14,19 @@ export default function Modal({
 }) {
   const outSideClickRef = useRef();
   useOnClickOutside(outSideClickRef, () => {
-    console.log('outside');
+    console.log("outside");
     if (!noOutSideClose && enabled) {
       setModal((prev) => ({ ...prev, enabled: false }));
     }
   });
-  
-  console.log(enabled);
 
   return (
     <div
       id="defaultModal"
       aria-hidden="true"
-      className={`fixed top-0 left-0 right-0 bottom-0 h-screen z-[999] w-full p-4 overflow-x-hidden md:inset-0  max-h-full bg-black bg-opacity-80 ${!enabled && 'hidden' } flex justify-center items-center `}
+      className={`fixed top-0 left-0 right-0 bottom-0 h-screen z-[999] w-full p-4 overflow-x-hidden md:inset-0  max-h-full bg-black bg-opacity-80 ${
+        !enabled && "hidden"
+      } flex justify-center items-center `}
     >
       <div className="modal">
         <div className="p-0 modal-box" ref={outSideClickRef}>
