@@ -19,7 +19,7 @@ const CallbackForm = ({ onClose, courseNumber }) => {
     });
 
     useEffect(() => {
-        fetch("https://ajinkya2709.pythonanywhere.com/Callback/requestCB")
+        fetch("https://aj2709.pythonanywhere.com/Callback/requestCB")
             .then((response) => response.json())
             .then((data) => {
                 setCourseData({
@@ -56,7 +56,7 @@ const CallbackForm = ({ onClose, courseNumber }) => {
         setSubmitting(true);
         try {
             const response = await fetch(
-                "https://ajinkya2709.pythonanywhere.com/Callback/requestCB",
+                "https://aj2709.pythonanywhere.com/Callback/requestCB",
                 {
                     method: "POST",
                     headers: {

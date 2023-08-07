@@ -11,7 +11,7 @@ export default function Alumni() {
   const [studentData, setStudentData] = useState([]);
 
   useEffect(() => {
-    fetch('https://ajinkya2709.pythonanywhere.com/Register/Students')
+    fetch('https://aj2709.pythonanywhere.com/Register/Students')
       .then((response) => response.json())
       .then((data) => {
         const registrationData = data.RegistrationData;

@@ -33,7 +33,7 @@ const TimeSlotForm = () => {
 
     console.log(data);
 
-    const response = await fetch('https://ajinkya2709.pythonanywhere.com/Callback/genTimeSlots', {
+    const response = await fetch('https://aj2709.pythonanywhere.com/Callback/genTimeSlots', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

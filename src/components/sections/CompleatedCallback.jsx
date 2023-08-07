@@ -11,7 +11,7 @@ export default function CompletedCallback() {
   const fetchCompletedCallbacks = async () => {
     try {
       const response = await fetch(
-        `https://ajinkya2709.pythonanywhere.com/Callback/doneCallback?page=${currentPage}&limit=${itemsPerPage}`
+        `https://aj2709.pythonanywhere.com/Callback/doneCallback?page=${currentPage}&limit=${itemsPerPage}`
       );
       const data = await response.json();
       if (data.status === 'Success') {
