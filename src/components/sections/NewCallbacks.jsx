@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Pagination from './Pagination';
 import P from '../typography/P';
+import NotePopup from './NotePopup';
+import DeleteStudent from './DeleteStudent';
+import CallBackDone from './CallBackDone';
 
 export default function NewCallbacks() {
     const [activeCallbacks, setActiveCallbacks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [notes, setNotes] = useState(false);
+    const [currentCallbackUid, setCurrentCallbackUid] = useState(null);
+    const [currentCallbackNote, setCurrentCallbackNote] = useState('');
     const itemsPerPage = 5;
 
-    // Fetch active callbacks from the API
     const fetchActiveCallbacks = async () => {
         try {
             const response = await fetch(
@@ -29,6 +34,15 @@ export default function NewCallbacks() {
 
     const totalPagesActive = Math.ceil(activeCallbacks.length / itemsPerPage);
 
+    const handleEditNote = (cbUid) => {
+        const callback = activeCallbacks.find((callback) => callback.cbUid === cbUid);
+        if (callback) {
+            setCurrentCallbackUid(cbUid);
+            setCurrentCallbackNote(callback.Note || '');
+            setNotes(true);
+        }
+    };
+
     return (
         <div>
             {activeCallbacks
@@ -46,19 +60,36 @@ export default function NewCallbacks() {
                         </div>
                         <div className='px-6'>
                             <div className="grid grid-cols-2 gap-4 mb-4">
-                                <button className='rounded-full p-2 h-9 inline-flex items-center justify-center bg-secondary'>
-                                    ✅ Done
-                                </button>
-                                <button className='rounded-full p-2 h-9 inline-flex items-center justify-center bg-black text-white'>
-                                    🗑️ Delete
-                                </button>
+                                <CallBackDone cbUid={callback.cbUid} />
+                                <DeleteStudent cbUid={callback.cbUid} />
                             </div>
-                            <button onClick={() => { setNotes(true) }} className='rounded-full p-2 inline-flex items-center justify-center w-full bg-white'>
-                                📝 Add note if any
-                            </button>
+                            {callback.Note ? (
+                                <div className='flex justify-between items-center gap-4'>
+                                    <P>{callback.Note}</P>
+                                    <button
+                                        onClick={() => handleEditNote(callback.cbUid)}
+                                    >
+                                        📝
+                                    </button>
+                                </div>
+                            ) : (
+                                <button
+                                    onClick={() => handleEditNote(callback.cbUid)}
+                                    className='rounded-full p-2 inline-flex items-center justify-center w-full bg-white'
+                                >
+                                    📝 Add note if any
+                                </button>
+                            )}
                         </div>
                     </div>
                 ))}
+            {notes && (
+                <NotePopup
+                    cbUid={currentCallbackUid}
+                    currentNote={currentCallbackNote}
+                    onClose={() => setNotes(false)}
+                />
+            )}
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPagesActive}
