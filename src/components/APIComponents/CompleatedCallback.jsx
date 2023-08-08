@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Pagination from './Pagination';
 import P from '../typography/P';
-import NotePopup from './NotePopup';
 import DeleteStudent from './DeleteStudent';
+import NotePopup from './NotePopup';
+import Pagination from '../sections/Pagination';
 
 export default function CompletedCallback() {
     const [completedCallbacks, setCompletedCallbacks] = useState([]);
@@ -77,7 +77,7 @@ export default function CompletedCallback() {
                                         onClick={() => handleEditNote(callback.cbUid)}
                                         className='rounded-full p-2 inline-flex items-center justify-center w-full bg-secondary hover:bg-primary text-white h-9'
                                     >
-                                        📝 Add note if any
+                                        📝 Add note
                                     </button>
                                     <DeleteStudent cbUid={callback.cbUid} className="w-full" />
                                 </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import P from '../typography/P';
 import H3 from '../typography/H3';
-import WhatsApp from '../uielements/WhatsApp';
+import WhatsApp from './WhatsApp';
 
 export default function Alumni() {
   const [allStudents, setAllStudents] = useState(true);
@@ -25,6 +25,7 @@ export default function Alumni() {
             (payment) => payment.PaymentStatus === true
           ),
           whatsapp: registrationData[key].WhatsApp,
+          regUid: registrationData[key].regUid,
           certificate: null, //certificate data is not provided in the API
         }));
         setStudentData(fetchedData);
@@ -69,7 +70,7 @@ export default function Alumni() {
                 <div>
                   <H3 className="!text-3xl">{student.name}</H3>
                   <H3 className="text-secondary my-2">Student ID - {student.id}</H3>
-                  <WhatsApp whatsapp={student.whatsapp} />
+                  <WhatsApp whatsapp={student.whatsapp} regUid={student.regUid} />
                 </div>
                 <div className="px-8 flex flex-col justify-center gap-2">
                   <P>
@@ -221,8 +222,6 @@ export default function Alumni() {
                     </div>
                 </div>
             }
-
-
     </main>
   );
 }

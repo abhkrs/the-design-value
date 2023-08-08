@@ -12,7 +12,8 @@ import { RegistrationContext } from "@/context/RegistrationContext";
 import Modal from "@/components/ui/Modal";
 import AboutCourse from "@/components/sections/AboutCourse";
 import ViewCertificate from "@/components/sections/ViewCertificate";
-import CallbackForm from "@/components/sections/CallbackForm";
+import CallbackForm from "@/components/APIComponents/CallbackForm";
+
 
 export default function Page() {
   const {
@@ -32,7 +33,7 @@ export default function Page() {
     setSelectedCourse((prev) => ({
       ...prev,
       courseId: 1,
-      courseName: "UI/UX Design with Job Placement",
+      courseName: "UI/UX Design with 100% Paid Internship",
       coursePrice: 2500,
     }));
   };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import NewCallbacks from './NewCallbacks';
-import CompletedCallback from './CompleatedCallback';
+import CompletedCallback from '../APIComponents/CompleatedCallback';
+import NewCallbacks from '../APIComponents/NewCallbacks';
 
 export default function CallBackPanel() {
   const [allStudents, setAllStudents] = useState(true);

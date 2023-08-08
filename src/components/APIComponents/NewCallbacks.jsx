@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Pagination from './Pagination';
 import P from '../typography/P';
-import NotePopup from './NotePopup';
+import CallBackDone from '../APIComponents/CallBackDone';
 import DeleteStudent from './DeleteStudent';
-import CallBackDone from './CallBackDone';
+import NotePopup from './NotePopup';
+import Pagination from '../sections/Pagination';
 
 export default function NewCallbacks() {
     const [activeCallbacks, setActiveCallbacks] = useState([]);

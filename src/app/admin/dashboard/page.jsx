@@ -1,8 +1,8 @@
 'use client';
-import Alumni from '@/components/sections/Alumni';
-import Batches from '@/components/sections/Batches';
+import Alumni from '@/components/APIComponents/Alumni';
+import Batches from '@/components/APIComponents/Batches';
+import TimeSlotForm from '@/components/APIComponents/TimeSlotForm';
 import CallBackPanel from '@/components/sections/CallBackPanel';
-import TimeSlotForm from '@/components/sections/TimeSlotForm';
 import Section from '@/components/uielements/Section';
 import React, { useState } from 'react';
 
