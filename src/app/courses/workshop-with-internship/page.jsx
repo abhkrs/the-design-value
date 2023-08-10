@@ -33,7 +33,7 @@ export default function Page() {
     setSelectedCourse((prev) => ({
       ...prev,
       courseId: 1,
-      courseName: "UI/UX Design with 100% Paid Internship",
+      courseName: "UI/UX Design Certification with 100% Paid Internship",
       coursePrice: 2500,
     }));
   };
