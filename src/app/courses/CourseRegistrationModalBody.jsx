@@ -4,7 +4,7 @@ import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,6 +18,26 @@ function CourseRegistrationModalBody({ selectedCourse }) {
   const [timeSlot, setTimeSlot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [batchDetails, setBatchDetails] = useState([]);
+
+  useEffect(() => {
+    async function fetchBatchDetails() {
+      try {
+        const response = await fetch("https://aj2709.pythonanywhere.com/Courses/allCourses");
+        const data = await response.json();
+        const courseData = data.CourseData[1];
+        if (courseData) {
+          setBatchDetails(courseData.BatchDetails);
+          console.log(courseData.BatchDetails);
+        }
+      } catch (error) {
+        console.error("Error fetching batch details:", error);
+      }
+    }
+
+    fetchBatchDetails();
+  }, [1]);
+
   const submitForm = async () => {
     setIsSubmitted(true);
     setSelectedCourse((prev) => ({
@@ -25,6 +45,8 @@ function CourseRegistrationModalBody({ selectedCourse }) {
       coursTimeSlot: timeSlot,
       selectedCourse: 1,
     }));
+
+    
 
     // const payload = {
     //   fullName: name,
@@ -139,10 +161,33 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               Select from Our available batches
             </P>
             <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
+        {batchDetails.map(([batchId, batchTimeSlot, isSelectable]) => (
+          <button
+            key={batchId}
+            className={`py-1 px-3 border rounded min-w-max ${
+              timeSlot === batchTimeSlot
+                ? " bg-secondary text-white shadow border-gray-300"
+                : isSelectable
+                ? " bg-white border-gray-300 shadow"
+                : " bg-gray-200 cursor-not-allowed"
+            }`}
+            onClick={() => {
+              if (isSelectable) {
+                setTimeSlot(batchTimeSlot);
+              }
+            }}
+            type="button"
+            disabled={!isSelectable}
+          >
+            {batchTimeSlot}
+          </button>
+        ))}
+      </div>
+            {/* <div className="gap-4 flex flex-wrap my-2 max-w-[600px]">
               <button
                 className={`py-1 px-3   border rounded min-w-max ${
                   timeSlot === "Sun ( 10:00 AM to 11:45 AM )"
-                    ? "border-[red] bg-gray-200 "
+                    ? "border-[red] bg-secondary "
                     : "border-secondary bg-gray-100"
                 }`}
                 onClick={() => {
@@ -155,7 +200,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               <button
                 className={`py-1 px-3   border rounded min-w-max ${
                   timeSlot === "Mon ( 10:00 AM to 11:45 AM )"
-                    ? "border-[red] bg-gray-200 "
+                    ? "border-[red] bg-secondary"
                     : "border-secondary bg-gray-100"
                 }`}
                 onClick={() => {
@@ -168,7 +213,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               <button
                 className={`py-1 px-3   border rounded min-w-max ${
                   timeSlot === "Tue ( 10:00 AM to 11:45 AM )"
-                    ? "border-[red] bg-gray-200 "
+                    ? "border-[red] bg-secondary "
                     : "border-secondary bg-gray-100"
                 }`}
                 onClick={() => {
@@ -181,7 +226,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               <button
                 className={`py-1 px-3   border rounded min-w-max ${
                   timeSlot === "Wed ( 10:00 AM to 11:45 AM )"
-                    ? "border-[red] bg-gray-200 "
+                    ? "border-[red] bg-secondary "
                     : "border-secondary bg-gray-100"
                 }`}
                 onClick={() => {
@@ -191,7 +236,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               >
                 Wed (7PM - 8:30PM)
               </button>
-            </div>
+            </div> */}
 
             {isSubmitted && !timeSlot && (
               <p className="text-[red] text-xs font-bold py-1">

@@ -137,7 +137,7 @@ const CallbackForm = ({ onClose, courseNumber }) => {
                                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
                             />
                         </div>
-                        <div className="relative">
+                        <div className="relative hidden lg:block">
                             <div className="absolute right-1 z-50 !h-3 !w-4 p-2 mt-3 bg-white">
                                 <Image
                                     fill={true}
