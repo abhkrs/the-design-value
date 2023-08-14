@@ -1,7 +1,6 @@
 'use client';
 import Alumni from '@/components/APIComponents/Alumni';
 import Batches from '@/components/APIComponents/Batches';
-import TimeSlotForm from '@/components/APIComponents/TimeSlotForm';
 import CallBackPanel from '@/components/sections/CallBackPanel';
 import Section from '@/components/uielements/Section';
 import React, { useState } from 'react';
@@ -10,7 +9,6 @@ const sections = [
   { id: 'allStudents', label: 'All Students', icon: '/images/servicereq.png', component: Alumni },
   { id: 'callBack', label: 'CallBack Requests', icon: '/images/callreq.png', component: CallBackPanel },
   { id: 'batches', label: 'Batches', icon: '/images/batches.png', component: Batches },
-  { id: 'timeSlot', label: 'Time Slot', icon: '/images/timeslots.png', component: TimeSlotForm },
 ];
 
 export default function Page() {

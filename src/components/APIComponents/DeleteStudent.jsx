@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeleteStudent = ({ cbUid, className }) => {
+const DeleteStudent = ({ cbUid, className, statusDel }) => {
     const handleDelete = async () => {
         try {
             const response = await fetch('https://aj2709.pythonanywhere.com/Callback/delCB', {
@@ -15,8 +15,11 @@ const DeleteStudent = ({ cbUid, className }) => {
 
             const data = await response.json();
             console.log(data);
+            if (response.ok) {
+                statusDel(cbUid);
+            }
         } catch (error) {
-            console.error('Error deleting callback:', error);
+            console.error('Error marking callback as done:', error);
         }
     };
 

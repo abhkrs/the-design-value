@@ -11,17 +11,36 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
-    const dummyUsername = "admin";
-    const dummyPassword = "password";
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("https://aj2709.pythonanywhere.com/Register/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
 
-    if (username === dummyUsername && password === dummyPassword) {
-      router.push("/profile");
-    } else {
-      setError("Invalid username or password");
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.is_superuser) {
+          router.push("/dashboard");
+        } else {
+          router.push("/profile");
+        }
+      } else {
+        setError("Invalid credentials");
+      }
+    } catch (error) {
+      setError("An error occurred");
     }
   };
 
+  
   return (
     <main>
       <div className="grid lg:grid-cols-5 md:grid-cols-2">

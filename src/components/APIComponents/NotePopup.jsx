@@ -25,9 +25,9 @@ export default function NotePopup({ cbUid, onClose, currentNote }) {
 
             const data = await response.json();
             console.log(data);
-            // Handle the API response as needed
             if (data.status === 'Success') {
                 setApiStatus('success');
+                
             } else {
                 setApiStatus('error');
             }

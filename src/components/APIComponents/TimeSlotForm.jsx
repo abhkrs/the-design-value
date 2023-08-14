@@ -3,12 +3,16 @@ import H2 from '../typography/H2';
 import P from '../typography/P';
 
 const TimeSlotForm = () => {
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
-  const [interval, setInterval] = useState(1);
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  const [fromDate, setFromDate] = useState(today.toISOString().split('T')[0]);
+  const [toDate, setToDate] = useState(tomorrow.toISOString().split('T')[0]);
+  const [interval, setInterval] = useState(2);
   const [startHour, setStartHour] = useState('10:00');
   const [endHour, setEndHour] = useState('20:00');
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState();
 
   const formatDate = (date) => {
     const formattedDate = new Date(date).toISOString().split('T')[0];
@@ -79,7 +83,7 @@ const TimeSlotForm = () => {
             </label>
 
             <label className='block p-2 '>
-              Interval:
+              Interval Hours:
               <input
                 type="number"
                 value={interval}
