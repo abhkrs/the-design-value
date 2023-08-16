@@ -1,46 +1,46 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import H2 from "@/components/typography/H2";
 import Image from "next/image";
+import H2 from "@/components/typography/H2";
 
 export default function Page() {
-  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
       const response = await fetch("https://aj2709.pythonanywhere.com/Register/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
       });
 
       const data = await response.json();
 
       if (response.ok) {
         if (data.is_superuser) {
-          router.push("/dashboard");
+          localStorage.setItem('authData', JSON.stringify({ isLoggedIn: true, isSuperuser: true }));
+          router.push('/dashboard');
         } else {
-          router.push("/profile");
+          localStorage.setItem('authData', JSON.stringify({ isLoggedIn: true, isSuperuser: false, studentDetails: data.StudentData }));
+          router.push('/profile');
         }
       } else {
         setError("Invalid credentials");
       }
-    } catch (error) {
-      setError("An error occurred");
+
+    } catch (err) {
+      setError("Error logging in");
     }
   };
 
-  
+
   return (
     <main>
       <div className="grid lg:grid-cols-5 md:grid-cols-2">

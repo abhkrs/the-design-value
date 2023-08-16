@@ -230,7 +230,7 @@ const MentorsForm = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`bg-black col-span-2 max-w-max !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary ${
+                  className={`bg-black col-span-2 max-w-max !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary ${
                     isSubmitting ? "cursor-not-allowed" : ""
                   }`}
                 >

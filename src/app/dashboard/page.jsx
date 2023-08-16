@@ -1,20 +1,35 @@
 'use client';
+
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+// Component imports
 import Alumni from '@/components/APIComponents/Alumni';
-import Batches from '@/components/APIComponents/Batches';
+import Batches from '@/components/APIComponents/Batches'; 
 import MentorAdmin from '@/components/APIComponents/MentorAdmin';
 import CallBackPanel from '@/components/sections/CallBackPanel';
 import Section from '@/components/uielements/Section';
-import React, { useState } from 'react';
 
 const sections = [
   { id: 'allStudents', label: 'All Students', icon: '/images/servicereq.png', component: Alumni },
   { id: 'callBack', label: 'CallBack Requests', icon: '/images/callreq.png', component: CallBackPanel },
   { id: 'batches', label: 'Batches', icon: '/images/batches.png', component: Batches },
-  {id: 'mentor', label: 'Mentor Form', icon: '/images/batches.png', component: MentorAdmin },
+  { id: 'mentor', label: 'Mentor Form', icon: '/images/batches.png', component: MentorAdmin },
 ];
 
 export default function Page() {
+
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState('allStudents');
+
+  useEffect(() => {
+    const authData = JSON.parse(localStorage.getItem('authData'));
+
+    if (!authData || !authData.isLoggedIn || !authData.isSuperuser) {
+      router.push('/login');
+    }
+
+  }, [router]);
 
   const handleClick = (sectionId) => {
     setActiveSection(sectionId);
@@ -27,7 +42,10 @@ export default function Page() {
   return (
     <main>
       <Section>
-        <div className="bg-white rounded-lg px-8 py-12">
+      <div className="lg:hidden h-96 flex justify-center items-center">
+            This page is not availabe for Mobile or tablets. Please login on Laptop/Desktop. Don&apos;t forget to logout here.
+          </div>
+        <div className="bg-white rounded-lg px-8 py-12 hidden lg:block">
           <div className="flex justify-between">
             <div></div>
             <div className="flex justify-around gap-4">
@@ -47,7 +65,7 @@ export default function Page() {
           </div>
           {sections.map(({ id, component }) => (
             <React.Fragment key={id}>
-              {activeSection === id && renderComponent(component)}
+              {activeSection === id && renderComponent(component)} 
             </React.Fragment>
           ))}
         </div>

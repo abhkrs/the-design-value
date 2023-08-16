@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import P from "../typography/P";
 import Image from "next/image";
@@ -42,7 +42,22 @@ function Header() {
   const [active, setActive] = useState(activeindex);
   const [topbar, setTopbar] = useState(false)
 
-  const allowedPaths = ['/admin', '/admin/dashboard', '/student-login', '/courses/workshop-with-internship', '/courses/ui-ux-workshop-with-jop-placement','/courses/ui-ux-workshop'];
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('authData'));
+
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('authData');
+    setUser(null);
+  }
+
+  const allowedPaths = ['/admin', '/admin/dashboard', '/login', '/courses/workshop-with-internship', '/courses/ui-ux-workshop-with-jop-placement', '/courses/ui-ux-workshop'];
   const nonPromoted = allowedPaths.includes(pathName)
 
   return (
@@ -83,9 +98,26 @@ function Header() {
               </Link>
             ))}
           </div>
-          <Link href="/student-login" className="bg-primary text-center rounded-[40px] w-40 !text-lg !text-white py-2 px-4 hidden md:inline-block">
-            Student Log In
-          </Link>
+          <div className="gap-4 justify-end hidden md:flex">
+            {user ? (
+              <>
+                {user.isSuperuser ? (
+                  <Link href="/dashboard" className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link href="/profile" className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
+                    Profile
+                  </Link>
+                )}
+                <button onClick={handleLogout} className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">Logout</button>
+              </>
+            ) : (
+              <Link href="/login" className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
+                Log In
+              </Link>
+            )}
+            </div>
         </div>
         <div className="bg-black block md:hidden container-fluid !text-white mt-3 px-3 py-3">
           <div className="flex justify-between">
@@ -105,9 +137,26 @@ function Header() {
                 X
               </div>
             </button>
-            <Link href="/student-login" className="bg-white text-center !text-lg !text-black hover:bg-secondary hover:!text-white rounded-[30px] w-40 px-4 py-[6px]">
-              Student Log In
-            </Link>
+            <div className="flex gap-2 justify-end">
+            {user ? (
+              <>
+                {user.isSuperuser ? (
+                  <Link href="/dashboard" className=" hover:bg-white text-center !text-lg  hover:!text-black !bg-secondary !text-white rounded-[30px] px-4 py-[6px]">
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link href="/profile" className=" hover:bg-white text-center !text-lg  hover:!text-black !bg-secondary !text-white rounded-[30px] px-4 py-[6px]">
+                    Profile
+                  </Link>
+                )}
+                <button onClick={handleLogout} className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] px-4 py-[6px]">Logout</button>
+              </>
+            ) : (
+              <Link href="/login" className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
+                Log In
+              </Link>
+            )}
+            </div>
           </div>
           <div className={`${showToggledNav ? "flex" : "hidden"} flex-col`}>
             {menu.map((data, index) => (
