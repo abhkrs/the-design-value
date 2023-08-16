@@ -11,6 +11,8 @@ export default function CompletedCallback() {
     const [currentCallbackUid, setCurrentCallbackUid] = useState(null);
     const [currentCallbackNote, setCurrentCallbackNote] = useState('');
     const [deleteStatus, setDeleteStatus] = useState();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
     const itemsPerPage = 3;
     const [isLoading, setIsLoading] = useState(false);
 
@@ -22,8 +24,19 @@ export default function CompletedCallback() {
             );
             const data = await response.json();
             if (data.status === 'Success') {
-                setCompletedCallbacks(Object.values(data.CallbackData).reverse());
-                console.log(data.CallbackData);
+                const allCallbacks = Object.values(data.CallbackData).reverse();
+                if (searchQuery) {
+                    const filteredCallbacks = allCallbacks.filter(callback => 
+                        callback.FullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        callback.Email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        callback.MobNo.includes(searchQuery) ||
+                        callback.Course.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        callback.Note.toLowerCase().includes(searchQuery.toLowerCase())
+                    );
+                    setSearchResults(filteredCallbacks);
+                } else {
+                    setSearchResults(allCallbacks);
+                }
             }
         } catch (error) {
             console.error('Error fetching completed callbacks:', error);
@@ -35,12 +48,12 @@ export default function CompletedCallback() {
 
     useEffect(() => {
         fetchCompletedCallbacks();
-    }, [currentPage, deleteStatus]);
+    }, [currentPage, deleteStatus, searchQuery]);
 
-    const totalPagesCompleted = Math.max(1, Math.ceil(completedCallbacks.length / itemsPerPage));
+    const totalPagesCompleted = Math.max(1, Math.ceil(searchResults.length / itemsPerPage));
 
     const handleEditNote = (cbUid) => {
-        const callback = completedCallbacks.find((callback) => callback.cbUid === cbUid);
+        const callback = searchResults.find((callback) => callback.cbUid === cbUid);
         if (callback) {
             setCurrentCallbackUid(cbUid);
             setCurrentCallbackNote(callback.Note || '');
@@ -55,54 +68,75 @@ export default function CompletedCallback() {
         fetchCompletedCallbacks();
     };
 
+    const highlightText = (text, query) => {
+        if (!query) return text;
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.split(regex).map((part, index) =>
+            regex.test(part) ? <mark key={index}>{part}</mark> : part
+        );
+    };
+
     return (
-        <div>
-            {isLoading ? (
+        <div className='relative'>
+            <div className="block w-1/3 absolute -top-[134px] z-40">
+                <input
+                    type="search"
+                    name="searchbox"
+                    placeholder='Search here'
+                    id=""
+                    className="border rounded-md shadow px-3 py-2 w-full h-10"
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                />
+            </div>
+            {(isLoading || (searchQuery && searchResults.length === 0)) ? (
                 <div className='h-80 flex items-center justify-center'>
-                    <p>Loading...</p>
+                    <p>{isLoading ? 'Loading...' : 'No match found...!'}</p>
                 </div>
-            ) : (completedCallbacks
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                .map((callback, index) => (
-                    <div key={index} className={`bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-2 ${callback.slideLeft && 'animate-slide-left'}`}
-                         onAnimationEnd={() => handleSlideComplete(callback.cbUid)}>
-                        <div>
-                            <P><span className='!font-semibold'>NAME - </span>{callback.FullName}</P>
-                            <P><span className='!font-semibold'>EMAIL ID - </span>{callback.Email}</P>
-                            <P><span className='!font-semibold'>MOBILE NUMBER - </span>{callback.MobNo}</P>
-                        </div>
-                        <div className='border-l-2 border-r-2 px-8 flex-col justify-center items-center'>
-                            <P className="text-center"><span className='!font-semibold'>COURSE - </span>{callback.Course}</P>
-                            <P className="text-center"><span className='!font-semibold'>REQ. TIME - </span>{callback.Slot}</P>
-                        </div>
-                        <div className='px-6'>
-                            {callback.Note ? (
-                                <div className='flex flex-col gap-4 justify-end'>
-                                    <P>{callback.Note}</P>
-                                    <div className='flex justify-between items-center gap-4'>
+            ) : (
+                searchResults
+                    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                    .map((callback, index) => (
+                        <div key={index} className={`bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-2 ${callback.slideLeft && 'animate-slide-left'}`}
+                             onAnimationEnd={() => handleSlideComplete(callback.cbUid)}>
+                            <div>
+                                <P><span className='!font-semibold'>NAME - </span>{highlightText(callback.FullName, searchQuery)}</P>
+                                <P><span className='!font-semibold'>EMAIL ID - </span>{highlightText(callback.Email, searchQuery)}</P>
+                                <P><span className='!font-semibold'>MOBILE NUMBER - </span>{highlightText(callback.MobNo, searchQuery)}</P>
+                            </div>
+                            <div className='border-l-2 border-r-2 px-8 flex-col justify-center items-center'>
+                                <P className="text-center"><span className='!font-semibold'>COURSE - </span>{highlightText(callback.Course, searchQuery)}</P>
+                                <P className="text-center"><span className='!font-semibold'>REQ. TIME - </span>{highlightText(callback.Slot, searchQuery)}</P>
+                            </div>
+                            <div className='px-6'>
+                                {callback.Note ? (
+                                    <div className='flex flex-col gap-4 justify-end'>
+                                        <P>{highlightText(callback.Note, searchQuery)}</P>
+                                        <div className='flex justify-between items-center gap-4'>
+                                            <button
+                                                onClick={() => handleEditNote(callback.cbUid)}
+                                                className='rounded-full p-2 inline-flex items-center justify-center w-full bg-white hover:bg-primary hover:text-white h-9'
+                                            >
+                                                📝 Edit
+                                            </button>
+                                            <DeleteStudent cbUid={callback.cbUid} className="w-full" statusDel={setDeleteStatus} />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className='flex gap-4 justify-between'>
                                         <button
                                             onClick={() => handleEditNote(callback.cbUid)}
-                                            className='rounded-full p-2 inline-flex items-center justify-center w-full bg-white hover:bg-primary hover:text-white h-9'
+                                            className='rounded-full p-2 inline-flex items-center justify-center w-full bg-secondary hover:bg-primary text-white h-9'
                                         >
-                                            📝 Edit
+                                            📝 Add
                                         </button>
                                         <DeleteStudent cbUid={callback.cbUid} className="w-full" statusDel={setDeleteStatus} />
                                     </div>
-                                </div>
-                            ) : (
-                                <div className='flex gap-4 justify-between'>
-                                    <button
-                                        onClick={() => handleEditNote(callback.cbUid)}
-                                        className='rounded-full p-2 inline-flex items-center justify-center w-full bg-secondary hover:bg-primary text-white h-9'
-                                    >
-                                        📝 Add
-                                    </button>
-                                    <DeleteStudent cbUid={callback.cbUid} className="w-full" statusDel={setDeleteStatus} />
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
-                    </div>
-                )))}
+                    ))
+            )}
             {notes && (
                 <NotePopup
                     cbUid={currentCallbackUid}

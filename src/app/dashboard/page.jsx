@@ -1,6 +1,7 @@
 'use client';
 import Alumni from '@/components/APIComponents/Alumni';
 import Batches from '@/components/APIComponents/Batches';
+import MentorAdmin from '@/components/APIComponents/MentorAdmin';
 import CallBackPanel from '@/components/sections/CallBackPanel';
 import Section from '@/components/uielements/Section';
 import React, { useState } from 'react';
@@ -9,6 +10,7 @@ const sections = [
   { id: 'allStudents', label: 'All Students', icon: '/images/servicereq.png', component: Alumni },
   { id: 'callBack', label: 'CallBack Requests', icon: '/images/callreq.png', component: CallBackPanel },
   { id: 'batches', label: 'Batches', icon: '/images/batches.png', component: Batches },
+  {id: 'mentor', label: 'Mentor Form', icon: '/images/batches.png', component: MentorAdmin },
 ];
 
 export default function Page() {
@@ -27,14 +29,7 @@ export default function Page() {
       <Section>
         <div className="bg-white rounded-lg px-8 py-12">
           <div className="flex justify-between">
-            <div className="flex items-center">
-              <input
-                type="search"
-                name="searchbox"
-                id=""
-                className="border rounded-md shadow px-3 py-2 w-full"
-              />
-            </div>
+            <div></div>
             <div className="flex justify-around gap-4">
               {sections.map(({ id, label, icon }) => (
                 <button

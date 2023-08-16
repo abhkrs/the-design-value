@@ -16,6 +16,7 @@ export default function Alumni() {
       const response = await fetch('https://aj2709.pythonanywhere.com/Register/Students');
       const data = await response.json();
       const registrationData = data.RegistrationData;
+      console.log(registrationData)
       const fetchedData = Object.keys(registrationData).map((key) => ({
         id: key,
         name: registrationData[key].FullName,
@@ -52,8 +53,15 @@ export default function Alumni() {
   };
 
   return (
-    <main>
-      
+    <main className='relative'>
+      <div className="block w-1/3 absolute -top-[70px] z-40">
+                <input
+                    type="search"
+                    name="searchbox"
+                    id=""
+                    className="border rounded-md shadow px-3 py-2 w-full h-10"
+                />
+            </div>
       <div className="flex gap-6 my-6">
         <button
           onClick={() => {

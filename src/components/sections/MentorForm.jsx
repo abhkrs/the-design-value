@@ -17,16 +17,62 @@ const MentorsForm = () => {
   const [linkedin, setLinkedin] = useState("");
   const [city, setCity] = useState("");
   const [salary, setSalary] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [errorResponse, setErrorResponse] = useState(null);
 
   const toggleForm = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    setIsSubmitting(true);
+  
+    const formData = {
+      FullName: name,
+      ContactNo: phone,
+      EmailId: email,
+      CurrentCompany: company,
+      City: city,
+      TotalYearsExp: experience,
+      LinkedIn: linkedin,
+      DaysInterested: teachDays,
+      ExpectedCTC: salary,
+    };
+  
+    try {
+      const response = await fetch(
+        "https://aj2709.pythonanywhere.com/Callback/mentor",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+  
+      if (response.ok) {
+        setSubmitStatus("success");
+        setTimeout(() => {
+          setIsOpen(false);
+          setSubmitStatus(null);
+          setErrorResponse(null);
+        }, 3000); // Close the form after 3 seconds
+      } else {
+        const data = await response.json();
+        setErrorResponse(data.error);
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      setErrorResponse("Server error");
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
+  
   return (
     <Section bg="bg-white">
       <div
@@ -69,6 +115,8 @@ const MentorsForm = () => {
               <button
                 onClick={() => {
                   setIsOpen(false);
+                  setSubmitStatus(null);
+                  setErrorResponse(null);
                 }}
                 className="absolute top-4 right-4 text-red-500"
               >
@@ -80,7 +128,10 @@ const MentorsForm = () => {
               <hr />
 
               <form onSubmit={handleSubmit} className="relative mt-8">
-              <div className="mb-4">
+                <div className="grid grid-cols-2 gap-4">
+                  {/* First Column */}
+                  <div>
+                    <div className="mb-4">
                       <input
                         type="text"
                         id="name"
@@ -90,27 +141,15 @@ const MentorsForm = () => {
                         className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
                       />
                     </div>
-                <div className="grid grid-cols-2 gap-4">
-                  {/* First Column */}
-                  <div>
-                    
                     <div className="mb-4">
-                      <div className="flex">
-                        <div className="border border-gray-300 pl-3 pr-2 py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
-                          +91
-                        </div>
-                        <span className="text-gray-400 border-t border-b py-2 border-gray-300">
-                          |
-                        </span>
-                        <input
-                          type="tel"
-                          id="phone"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="Your Mobile Number*"
-                          className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
-                        />
-                      </div>
+                      <input
+                        type="tel"
+                        id="phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="Your Mobile Number*"
+                        className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full"
+                      />
                     </div>
                     <div className="mb-4">
                       <input
@@ -190,13 +229,24 @@ const MentorsForm = () => {
 
                 <button
                   type="submit"
-                  onClick={() => setIsOpen(false)}
-                  className="bg-black col-span-2 max-w-max !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary"
+                  disabled={isSubmitting}
+                  className={`bg-black col-span-2 max-w-max !text-white py-2 px-8 rounded !text-lg rounded-full hover:bg-primary ${
+                    isSubmitting ? "cursor-not-allowed" : ""
+                  }`}
                 >
-                  Submit
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
-              </form>
 
+                {submitStatus === "success" && (
+                  <p className="text-green-500 mt-4">Submitted successfully!</p>
+                )}
+
+                {submitStatus === "error" && (
+                  <p className="text-red-500 mt-4">
+                    {errorResponse || "An error occurred. Please try again later."}
+                  </p>
+                )}
+              </form>
             </div>
           </div>
         )}

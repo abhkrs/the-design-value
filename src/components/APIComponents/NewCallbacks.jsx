@@ -14,6 +14,8 @@ export default function NewCallbacks() {
     const [doneStatus, setDoneStatus] = useState();
     const [deleteStatus, setDeleteStatus] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
     const itemsPerPage = 3;
     const prevPageRef = useRef(1);
 
@@ -25,8 +27,19 @@ export default function NewCallbacks() {
             );
             const data = await response.json();
             if (data.status === 'Success') {
-                setActiveCallbacks(Object.values(data.CallbackData).reverse());
-                console.log(data.CallbackData);
+                const allCallbacks = Object.values(data.CallbackData).reverse();
+                if (searchQuery) {
+                    const filteredCallbacks = allCallbacks.filter(callback =>
+                        callback.FullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        callback.Email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        callback.MobNo.includes(searchQuery) ||
+                        callback.Course.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        callback.Note.toLowerCase().includes(searchQuery.toLowerCase())
+                    );
+                    setSearchResults(filteredCallbacks);
+                } else {
+                    setSearchResults(allCallbacks);
+                }
             }
         } catch (error) {
             console.error('Error fetching active callbacks:', error);
@@ -38,28 +51,31 @@ export default function NewCallbacks() {
     useEffect(() => {
         prevPageRef.current = currentPage;
         fetchActiveCallbacks();
-    }, [doneStatus, deleteStatus, currentPage]);
+    }, [doneStatus, deleteStatus, searchQuery]);
 
     useEffect(() => {
         if (doneStatus || deleteStatus) {
-            setTimeout(() => {
-                fetchActiveCallbacks();
-            }, 300);
             setDoneStatus(null);
             setDeleteStatus(null);
         }
     }, [doneStatus, deleteStatus]);
 
     useEffect(() => {
-        if (activeCallbacks.length === 0 && currentPage > 1) {
-            setCurrentPage(prevPageRef.current - 1);
+        if (searchQuery === '') {
+            setCurrentPage(1);
+            setSearchResults([]);
+            fetchActiveCallbacks();
         }
-    }, [activeCallbacks, currentPage]);
+    }, [searchQuery]);
 
-    const totalPagesActive = Math.max(1, Math.ceil(activeCallbacks.length / itemsPerPage));
+    useEffect(() => {
+        fetchActiveCallbacks();
+    }, [currentPage, deleteStatus, searchQuery]);
+
+    const totalPagesCompleted = Math.max(1, Math.ceil(searchResults.length / itemsPerPage));
 
     const handleEditNote = (cbUid) => {
-        const callback = activeCallbacks.find((callback) => callback.cbUid === cbUid);
+        const callback = searchResults.find((callback) => callback.cbUid === cbUid);
         if (callback) {
             setCurrentCallbackUid(cbUid);
             setCurrentCallbackNote(callback.Note || '');
@@ -74,25 +90,63 @@ export default function NewCallbacks() {
         fetchActiveCallbacks();
     };
 
+    const highlightText = (text, query) => {
+        if (!query) return text;
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.split(regex).map((part, index) =>
+            regex.test(part) ? <mark key={index}>{part}</mark> : part
+        );
+    };
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+    };
+
     return (
-        <div>
-            {isLoading ? (
+        <div className='relative'>
+            <div className="block w-1/3 absolute -top-[134px] z-40">
+                <input
+                    type="search"
+                    name="searchbox"
+                    placeholder='Search here'
+                    id=""
+                    className="border rounded-md shadow px-3 py-2 w-full h-10"
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                />
+            </div>
+            {(isLoading || (searchQuery && searchResults.length === 0)) ? (
                 <div className='h-80 flex items-center justify-center'>
-                    <p>Loading...</p>
+                    <p>{isLoading ? 'Loading...' : 'No match found...!'}</p>
                 </div>
             ) : (
-                activeCallbacks
+                searchResults
                     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                     .map((callback, index) => (
                         <div key={index} className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
                             <div>
-                                <P><span className='!font-semibold'>NAME - </span>{callback.FullName}</P>
-                                <P><span className='!font-semibold'>EMAIL ID - </span>{callback.Email}</P>
-                                <P><span className='!font-semibold'>MOBILE NUMBER - </span>{callback.MobNo}</P>
+                                <P>
+                                    <span className='!font-semibold'>NAME - </span>
+                                    {highlightText(callback.FullName, searchQuery)}
+                                </P>
+                                <P>
+                                    <span className='!font-semibold'>EMAIL ID - </span>
+                                    {highlightText(callback.Email, searchQuery)}
+                                </P>
+                                <P>
+                                    <span className='!font-semibold'>MOBILE NUMBER - </span>
+                                    {highlightText(callback.MobNo, searchQuery)}
+                                </P>
                             </div>
                             <div className='border-l-2 border-r-2 px-8 flex-col justify-center items-center'>
-                                <P className="text-center"><span className='!font-semibold'>COURSE - </span>{callback.Course}</P>
-                                <P className="text-center"><span className='!font-semibold'>REQ. TIME - </span>{callback.Slot}</P>
+                                <P className="text-center">
+                                    <span className='!font-semibold'>COURSE - </span>
+                                    {highlightText(callback.Course, searchQuery)}
+                                </P>
+                                <P className="text-center">
+                                    <span className='!font-semibold'>REQ. TIME - </span>
+                                    {highlightText(callback.Slot, searchQuery)}
+                                </P>
                             </div>
                             <div className='px-6'>
                                 <div className="grid grid-cols-2 gap-4 mb-4">
@@ -101,7 +155,9 @@ export default function NewCallbacks() {
                                 </div>
                                 {callback.Note ? (
                                     <div className='flex justify-between items-center gap-4'>
-                                        <P>{callback.Note}</P>
+                                        <P>
+                                            {highlightText(callback.Note, searchQuery)}
+                                        </P>
                                         <button
                                             onClick={() => handleEditNote(callback.cbUid)}
                                         >
@@ -129,9 +185,9 @@ export default function NewCallbacks() {
             )}
             <Pagination
                 currentPage={currentPage}
-                totalPages={totalPagesActive}
-                onNext={() => setCurrentPage(currentPage + 1)}
-                onPrev={() => setCurrentPage(currentPage - 1)}
+                totalPages={totalPagesCompleted}
+                onNext={() => handlePageChange(currentPage + 1)}
+                onPrev={() => handlePageChange(currentPage - 1)}
                 className="mt-8 -mb-3"
             />
         </div>
