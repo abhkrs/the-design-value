@@ -3,7 +3,7 @@ import P from '../typography/P';
 
 export default function AddCertificate(stdData, onSuccess) {
     const [addCert, setAddCert] = useState(false);
-    console.log(stdData)
+    // console.log(stdData)
     return (
         <><button
             onClick={() => {

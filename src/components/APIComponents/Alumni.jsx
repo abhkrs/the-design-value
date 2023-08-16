@@ -4,20 +4,28 @@ import H3 from '../typography/H3';
 import WhatsApp from './WhatsApp';
 import DeleteRegStudent from './DeleteRegStudent';
 import AddCertificate from './AddCertificate';
+import Dummy from '../sections/Dummy';
+import Pagination from '../sections/Pagination';
 
 export default function Alumni() {
   const [loading, setLoading] = useState(true);
   const [allStudents, setAllStudents] = useState(true);
   const [alumni, setAlumni] = useState(false);
   const [studentData, setStudentData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [debounceTimeout, setDebounceTimeout] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch('https://aj2709.pythonanywhere.com/Register/Students');
       const data = await response.json();
       const registrationData = data.RegistrationData;
-      console.log(registrationData)
-      const fetchedData = Object.keys(registrationData).map((key) => ({
+      const fetchedData = Object.keys(registrationData).reverse().map((key) => ({
         id: key,
         name: registrationData[key].FullName,
         email: registrationData[key].Email,
@@ -30,17 +38,63 @@ export default function Alumni() {
         regUid: registrationData[key].regUid,
         certificate: null,
       }));
-      setStudentData(fetchedData.reverse());
+      setStudentData(fetchedData);
+      setSearchResults(fetchedData);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
-      setLoading(false);
     }
+    finally {
+      setIsLoading(false);
+    }
+  };
+
+  const debounce = (func, delay) => {
+    clearTimeout(debounceTimeout);
+    const timeout = setTimeout(func, delay);
+    setDebounceTimeout(timeout);
+  };
+
+  const handleSearchQueryChange = (query) => {
+    setSearchQuery(query);
+    debounce(() => performSearch(query), 500);
+  };
+
+  const performSearch = (query) => {
+    if (query === '') {
+      setSearchResults(studentData);
+    } else {
+      const filteredResults = studentData.filter((student) =>
+        student.name.toLowerCase().includes(query.toLowerCase()) ||
+        student.email.toLowerCase().includes(query.toLowerCase()) ||
+        (student.mobile && student.mobile.includes(query))
+      );
+      setSearchResults(filteredResults);
+    }
+    setCurrentPage(1);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (searchQuery === '') {
+      setSearchResults(studentData);
+    } else {
+      performSearch(searchQuery);
+    }
+  }, [searchQuery]);
+
+  const totalPages = Math.max(1, Math.ceil(searchResults.length / itemsPerPage));
+
+  const highlightText = (text, query) => {
+    if (!text || !query) return text;
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.split(regex).map((part, index) =>
+      regex.test(part) ? <mark key={index}>{part}</mark> : part
+    );
+  };
 
   const handleAddCertificateSuccess = async () => {
     setLoading(true);
@@ -55,13 +109,15 @@ export default function Alumni() {
   return (
     <main className='relative'>
       <div className="block w-1/3 absolute -top-[70px] z-40">
-                <input
-                    type="search"
-                    name="searchbox"
-                    id=""
-                    className="border rounded-md shadow px-3 py-2 w-full h-10"
-                />
-            </div>
+        <input
+          type="search"
+          name="searchbox"
+          id=""
+          className="border rounded-md shadow px-3 py-2 w-full h-10"
+          value={searchQuery}
+          onChange={(e) => handleSearchQueryChange(e.target.value)}
+        />
+      </div>
       <div className="flex gap-6 my-6">
         <button
           onClick={() => {
@@ -84,103 +140,68 @@ export default function Alumni() {
           Completed
         </button>
       </div>
-      
-      {loading ? (
-        <div className="flex items-center justify-center h-80">
-          <p>Loading...</p>
+
+      {(isLoading || (searchQuery && searchResults.length === 0)) ? (
+        <div className='h-80 flex items-center justify-center'>
+          <p>{isLoading ? 'Loading...' : 'No match found...!'}</p>
         </div>
-      ) : (allStudents && (
+      ) : (
         <div>
-          {studentData.map((student) => (
-            <div className="my-3" key={student.id}>
-              <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
-                <div>
-                  <H3 className="!text-3xl">{student.name}</H3>
-                  <H3 className="text-secondary my-2">Student ID - {student.id}</H3>
-                  <WhatsApp whatsapp={student.whatsapp} regUid={student.regUid} />
-                </div>
-                <div className="px-8 flex flex-col justify-center gap-2">
-                  <P>
-                    <span className="!font-semibold">EMAIL ID - </span>
-                    {student.email}
-                  </P>
-                  <P>
-                    <span className="!font-semibold">MOBILE NUMBER - </span>
-                    {student.mobile}
-                  </P>
-                  <P>
-                    <span className="!font-semibold">COURSE - </span>
-                    {student.course}
-                  </P>
-                </div>
-                <div className="px-6 flex flex-col justify-center items-end">
-                  {student.feePaid ? (
-                    <P className="max-w-max">✅ Fee Paid for this Month</P>
-                  ) : (
-                    <P className="max-w-max">❌ Fee Not Paid for this Month</P>
-                  )}
-                  <AddCertificate stdData={student} onSuccess={handleAddCertificateSuccess} />
-                  <DeleteRegStudent stdData={student} onSuccess={handleDeleteSuccess} />
-                </div>
-              </div>
+          {loading ? (
+            <div className="flex items-center justify-center h-80">
+              <p>Loading...</p>
             </div>
-          ))}
-        </div>)
+          ) : allStudents && (
+            <div>
+              {searchResults
+                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                .map((student) => (
+                  <div className="my-3" key={student.id}>
+                    <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
+                      <div>
+                        <H3 className="!text-3xl">{highlightText(student.name, searchQuery)}</H3>
+                        <H3 className="text-secondary my-2">Student ID - {student.id}</H3>
+                        <WhatsApp whatsapp={student.whatsapp} regUid={student.regUid} />
+                      </div>
+                      <div className="px-8 flex flex-col justify-center gap-2">
+                        <P>
+                          <span className="!font-semibold">EMAIL ID - </span>
+                          {highlightText(student.email, searchQuery)}
+                        </P>
+                        <P>
+                          <span className="!font-semibold">MOBILE NUMBER - </span>
+                          {highlightText(student.mobile, searchQuery)}
+                        </P>
+                        <P>
+                          <span className="!font-semibold">COURSE - </span>
+                          {highlightText(student.course, searchQuery)}
+                        </P>
+                      </div>
+                      <div className="px-6 flex flex-col justify-center items-end">
+                        {student.feePaid ? (
+                          <P className="max-w-max">✅ Fee Paid for this Month</P>
+                        ) : (
+                          <P className="max-w-max">❌ Fee Not Paid for this Month</P>
+                        )}
+                        <AddCertificate stdData={student} onSuccess={handleAddCertificateSuccess} />
+                        <DeleteRegStudent stdData={student} onSuccess={handleDeleteSuccess} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onNext={() => setCurrentPage(currentPage + 1)}
+                onPrev={() => setCurrentPage(currentPage - 1)}
+                className="mt-8 -mb-3"
+              />
+            </div>
+          )}
+
+          {alumni && <Dummy />}
+        </div>
       )}
-
-      {alumni &&
-        <div>
-          <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
-            <div>
-              <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
-              <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>
-              <P>✅ Student added to WhatsApp Group</P>
-            </div>
-            <div className='px-8 flex flex-col justify-center gap-2'>
-              <P><span className='!font-semibold'>NAME - </span>Abhiroop Banerjee</P>
-              <P><span className='!font-semibold'>EMAIL ID - </span>mailid@domain.com</P>
-              <P><span className='!font-semibold'>MOBILE NUMBER - </span>+91 91919 91919</P>
-              <P><span className='!font-semibold'>COURSE - </span>UI/UX with Internship</P>
-            </div>
-            <div className='px-6 flex flex-col justify-center items-end'>
-              <P className="max-w-max">✅ Fee Paid for this Month</P>
-              <button
-                className='rounded-full max-w-max my-2 py-2 px-10 inline-flex items-center justify-center bg-black text-white'>
-                🏆 Add Certificate
-              </button>
-              <button
-                className='rounded-full max-w-max border py-2 px-10 inline-flex items-center justify-center bg-white'>
-                🚫 Delete Student
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6 my-3">
-            <div>
-              <H3 className="!text-3xl">Abhiroop Bannerjee</H3>
-              <H3 className="text-secondary my-2">Student ID - TDVM73001FE</H3>
-              <P>✅ Student added to WhatsApp Group</P>
-            </div>
-            <div className='px-8 flex flex-col justify-center gap-2'>
-              <P><span className='!font-semibold'>NAME - </span>Abhiroop Banerjee</P>
-              <P><span className='!font-semibold'>EMAIL ID - </span>mailid@domain.com</P>
-              <P><span className='!font-semibold'>MOBILE NUMBER - </span>+91 91919 91919</P>
-              <P><span className='!font-semibold'>COURSE - </span>UI/UX with Internship</P>
-            </div>
-            <div className='px-6 flex flex-col justify-center items-end'>
-              <P className="max-w-max">✅ Fee Paid for this Month</P>
-              <button
-                className='rounded-full max-w-max my-2 py-2 px-10 inline-flex items-center justify-center bg-black text-white'>
-                🏆 Add Certificate
-              </button>
-              <button
-                className='rounded-full max-w-max border py-2 px-10 inline-flex items-center justify-center bg-white'>
-                🚫 Delete Student
-              </button>
-            </div>
-          </div>
-        </div>
-      }
     </main>
   );
 }
