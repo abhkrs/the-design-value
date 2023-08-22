@@ -28,7 +28,7 @@ const router = useRouter();
           isSuperuser: data.is_superuser,
           studentDetails: data.StudentData
         };
-        localStorage.setItem('authData', JSON.stringify(authData));
+        // localStorage.setItem('authData', JSON.stringify(authData));
         
         if (data.is_superuser) {
           router.push('/dashboard');

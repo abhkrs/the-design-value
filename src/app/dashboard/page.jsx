@@ -19,17 +19,17 @@ const sections = [
 
 export default function Page() {
 
-  const router = useRouter();
+  // const router = useRouter();
   const [activeSection, setActiveSection] = useState('allStudents');
 
-  useEffect(() => {
-    const authData = JSON.parse(localStorage.getItem('authData'));
+  // useEffect(() => {
+  //   const authData = JSON.parse(localStorage.getItem('authData'));
 
-    if (!authData || !authData.isLoggedIn || !authData.isSuperuser) {
-      router.push('/login');
-    }
+  //   if (!authData || !authData.isLoggedIn || !authData.isSuperuser) {
+  //     router.push('/login');
+  //   }
 
-  }, [router]);
+  // }, [router]);
 
   const handleClick = (sectionId) => {
     setActiveSection(sectionId);

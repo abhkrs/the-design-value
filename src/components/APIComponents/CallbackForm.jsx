@@ -152,7 +152,7 @@ const CallbackForm = ({ onClose, courseNumber }) => {
                                 id="timeSlot"
                                 value={timeSlot}
                                 onChange={(e) => setTimeSlot(e.target.value)}
-                                className="!border !border-gray-300 !px-3 !py-2 !pr-8 placeholder-secondary !bg-white"
+                                className="!border w-full !border-gray-300 !px-3 !py-2 !pr-8 placeholder-secondary !bg-white"
                             >
                                 <option value="" disabled>Select a time slot</option>
                                 {courseData.slotId.map((slot, index) => (

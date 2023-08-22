@@ -40,7 +40,7 @@ const MentorsForm = () => {
       DaysInterested: teachDays,
       ExpectedCTC: salary,
     };
-  
+
     try {
       const response = await fetch(
         "https://aj2709.pythonanywhere.com/Callback/mentor",
@@ -52,17 +52,26 @@ const MentorsForm = () => {
           body: JSON.stringify(formData),
         }
       );
-  
+    
+      const responseData = await response.json();
+    
       if (response.ok) {
-        setSubmitStatus("success");
-        setTimeout(() => {
-          setIsOpen(false);
-          setSubmitStatus(null);
-          setErrorResponse(null);
-        }, 3000); // Close the form after 3 seconds
+
+        if (responseData.status === "Success") {
+          setSubmitStatus("success");
+          setTimeout(() => {
+            setIsOpen(false);
+          }, 3000);
+
+        } else if (responseData.status === "Failed") {
+          setErrorResponse(responseData.message);
+          setSubmitStatus("error");
+        } else {
+          setErrorResponse("Unknown response status");
+          setSubmitStatus("error");
+        }
       } else {
-        const data = await response.json();
-        setErrorResponse(data.error);
+        setErrorResponse(responseData.error || "Server error");
         setSubmitStatus("error");
       }
     } catch (error) {
@@ -70,8 +79,39 @@ const MentorsForm = () => {
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
-    }
-  };
+    }}
+  
+  //   try {
+  //     const response = await fetch(
+  //       "https://aj2709.pythonanywhere.com/Callback/mentor",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(formData),
+  //       }
+  //     );
+  
+  //     if (response.ok) {
+  //       setSubmitStatus("success");
+  //       setTimeout(() => {
+  //         setIsOpen(false);
+  //         setSubmitStatus(null);
+  //         setErrorResponse(null);
+  //       }, 3000); // Close the form after 3 seconds
+  //     } else {
+  //       const data = await response.json();
+  //       setErrorResponse(data.error);
+  //       setSubmitStatus("error");
+  //     }
+  //   } catch (error) {
+  //     setErrorResponse("Server error");
+  //     setSubmitStatus("error");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
   
   return (
     <Section bg="bg-white">

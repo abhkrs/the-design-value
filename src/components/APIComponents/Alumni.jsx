@@ -36,6 +36,7 @@ export default function Alumni() {
         ),
         whatsapp: registrationData[key].WhatsApp,
         regUid: registrationData[key].regUid,
+        studentID: registrationData[key].StudentId,
         certificate: null,
       }));
       setStudentData(fetchedData);
@@ -67,7 +68,8 @@ export default function Alumni() {
       const filteredResults = studentData.filter((student) =>
         student.name.toLowerCase().includes(query.toLowerCase()) ||
         student.email.toLowerCase().includes(query.toLowerCase()) ||
-        (student.mobile && student.mobile.includes(query))
+        (student.mobile && student.mobile.includes(query)) ||
+        student.studentID.toLowerCase().includes(query.toLowerCase()) 
       );
       setSearchResults(filteredResults);
     }
@@ -160,7 +162,7 @@ export default function Alumni() {
                     <div className="bg-light grid grid-cols-3 rounded-xl px-8 py-6">
                       <div>
                         <H3 className="!text-3xl">{highlightText(student.name, searchQuery)}</H3>
-                        <H3 className="text-secondary my-2">Student ID - {student.id}</H3>
+                        <H3 className="text-secondary my-2">Student ID - {highlightText(student.studentID, searchQuery)}</H3>
                         <WhatsApp whatsapp={student.whatsapp} regUid={student.regUid} />
                       </div>
                       <div className="px-8 flex flex-col justify-center gap-2">
