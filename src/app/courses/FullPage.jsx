@@ -7,6 +7,8 @@ import CoursePanel from "@/components/uielements/CoursePanel";
 import Section from "@/components/uielements/Section";
 import { useEffect, useState } from "react";
 import api from "../../../utils/api";
+import Image from "next/image";
+import Link from "next/link";
 export default function FullPage() {
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
@@ -18,7 +20,6 @@ export default function FullPage() {
 
     getAllCourse();
   }, []);
-  console.log(allCourses);
   return (
     <main>
       <Section className="py-20 md:pt-10 md:pb-0">
@@ -59,62 +60,8 @@ export default function FullPage() {
             </div>
           ))}
       </div>
-      {/* <CoursePanel
-            courseName="UI/UX Design Certification with 100% Paid Internship"
-            img="/images/course1.png"
-            tag="🔥 Bestseller"
-            tagbg=""
-            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-            liveClass="Live class with mentor"
-            duration="5 Months"
-            courseFor="Beginner to Masterclass"
-            type="Paid Internship"
-            perMonth="2200"
-            url="/courses/workshop-with-internship"
-          />
 
-          <CoursePanel
-            courseName="UI/UX Design with Job Placement"
-            img="/images/ui_design.png"
-            tag="🏅 Recommended for Learners"
-            tagbg="!bg-[#8A006C25] !text-[#8A006C]"
-            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-            liveClass="Live class with mentor"
-            duration="5 Months"
-            courseFor="Beginner to Masterclass"
-            perMonth="1000"
-            url=""
-          />
-
-          <CoursePanel
-            courseName="UI/UX Design with Job Placement"
-            img="/images/ui-ux.png"
-            tag="🤕 Almost Sold Out"
-            tagbg="!bg-[#084FC725] !text-[#084FC7]"
-            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-            liveClass="Live class with mentor"
-            duration="12 Months"
-            courseFor="Beginner to Masterclass"
-            type="Paid Internship & Job"
-            perMonth="7000"
-            url=""
-          />
-
-          <CoursePanel
-            courseName="Personal Batch"
-            img="/images/designer-metier.png"
-            tag="🧑🏽‍🎓 For Beginners to Masterclass"
-            tagbg="!bg-[#008A0E26] !text-[#8A006C]"
-            details="In this workshop you will unlock the power of user-centered design and elevate your UI/UX skills in our immersive workshop, where creativity meets functionality to create seamless user experiences"
-            liveClass="Live class with mentor"
-            duration="5 Months"
-            courseFor="Beginner to Masterclass"
-            perMonth="3000"
-            url=""
-          /> 
-        </div>
-      </div>*/}
-      {/* <Section className="mb-16 !p-0">
+      <Section className="mb-16 !p-0">
         <div
           className="flex flex-col md:flex-row p-2 lg:py-6 lg:px-10 relative bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url('/images/bglgr.png')` }}
@@ -149,7 +96,7 @@ export default function FullPage() {
             />
           </div>
         </div>
-      </Section> */}
+      </Section>
     </main>
   );
 }
