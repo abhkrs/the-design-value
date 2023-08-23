@@ -1,6 +1,6 @@
 "use client";
 
-import CourseRegistrationModalBody from "@/app/courses/CourseRegistrationModalBody";
+import CourseRegistrationModalBody from "../app/courses/CourseRegistrationModalBody";
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../utils/api";
 import { PaymentContext } from "@/context/PaymentContext";

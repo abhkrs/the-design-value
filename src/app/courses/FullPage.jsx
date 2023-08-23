@@ -5,74 +5,27 @@ import H2 from "@/components/typography/H2";
 import P from "@/components/typography/P";
 import CoursePanel from "@/components/uielements/CoursePanel";
 import Section from "@/components/uielements/Section";
+import { useEffect, useState } from "react";
+import api from "../../../utils/api";
 import Image from "next/image";
 import Link from "next/link";
-
 export default function FullPage() {
-  // let coureseData = [
-  //   {
-  //     name: "UI/UX Design Certification with 100% Paid Internship",
-  //     tag: "🔥 Bestseller",
-  //     tagColor: "AC3E20",
-  //     img: "/images/course1.png",
-  //     details:
-  //       "Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass.",
-  //     liveClass: "Live class with mentor",
-  //     duration: "5 Months",
-  //     for: "Beginner to Masterclass",
-  //     type: "Paid Internship",
-  //     perMonth: "2,200",
-  //     url: "/courses/workshop-with-internship",
-  //   },
-  //   {
-  //     name: "UI/UX Design with Job Placement",
-  //     tag: "🤕 Sold Out",
-  //     tagColor: "084FC7",
-  //     img: "/images/ui-ux.png",
-  //     details:
-  //       "Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass.",
-  //     duration: "12 Months",
-  //     for: "Beginner to Masterclass",
-  //     type: "Paid Internship & Job",
-  //     perMonth: "7,000",
-  //     url: "/courses/ui-ux-workshop-with-jop-placement",
-  //   },
-  //   {
-  //     name: "UI/UX Certification",
-  //     tag: "🏅 Recommended for Learners",
-  //     tagColor: "#008A0E",
-  //     img: "/images/ui_design.png",
-  //     details:
-  //       "Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass.",
-  //     liveClass: "Live class with mentor",
-  //     duration: "5 Months",
-  //     for: "Beginner to Masterclass",
-  //     type: "",
-  //     perMonth: "1,000",
-  //     url: "/courses/ui-ux-workshop",
-  //   },
-  //   {
-  //     name: "Graphic & UI/UX Design (Dual Certification)",
-  //     tag: "🧑🏽‍🎓 For Beginners to Explore UI/UX",
-  //     tagColor: "8A006C",
-  //     img: "/images/designer-metier.png",
-  //     details:
-  //       "In this workshop you will unlock the power of user-centered design and elevate your UI/UX skills in our immersive workshop, where creativity meets functionality to create seamless user experiences",
-  //     duration: "4 Classes",
-  //     for: "Beginner to Intermediate",
-  //     type: "Paid Internship",
-  //     perMonth: "2,800",
-  //     url: "/courses/",
-  //   },
-  // ];
-  // coureseData = coureseData.map((rest, index) => {
-  //   return { ...rest, id: index };
-  // });
+  const [allCourses, setAllCourses] = useState([]);
+  useEffect(() => {
+    const getAllCourse = async () => {
+      const response = await api.get("/Courses/allCourses");
+      console.log(response.CourseData);
+      setAllCourses(response.CourseData);
+    };
+
+    getAllCourse();
+  }, []);
   return (
     <main>
       <Section className="py-20 md:pt-10 md:pb-0">
         <H1 className="my-4 text-center md:text-start text-4xl">
-          Introducing our <span className="text-secondary block md:inline">Famous Four!</span>
+          Introducing our{" "}
+          <span className="text-secondary block md:inline">Famous Four!</span>
         </H1>
         <P className="hidden md:block">
           Ours is an eclectic team of, graphic designers, product designers,
@@ -82,68 +35,33 @@ export default function FullPage() {
           productivity matter most to us, peppered with healthy doses of
           ingenious insanity and ideation.
         </P>
-        <P className="md:hidden text-center">Select Course as per your needs. <br />
-          (All courses are open for all Age groups)</P>
+        <P className="md:hidden text-center">
+          Select Course as per your needs. <br />
+          (All courses are open for all Age groups)
+        </P>
       </Section>
       <div className="2xl:container md:p-4 md:px-12 lg:px-28 mx-auto">
-        <div className="grid gap-10 md:my-6">
-          <CoursePanel
-            courseName="UI/UX Design Certification with 100% Paid Internship"
-            img="/images/course1.png"
-            tag="🔥 Bestseller"
-            tagbg=""
-            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-            liveClass="Live class with mentor"
-            duration="5 Months"
-            courseFor="Beginner to Masterclass"
-            type="Paid Internship"
-            perMonth="2200"
-            url="/courses/workshop-with-internship"
-          />
-
-          <CoursePanel
-            courseName="UI/UX Design with Job Placement"
-            img="/images/ui_design.png"
-            tag="🏅 Recommended for Learners"
-            tagbg="!bg-[#8A006C25] !text-[#8A006C]"
-            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-            liveClass="Live class with mentor"
-            duration="5 Months"
-            courseFor="Beginner to Masterclass"
-            perMonth="1000"
-            url=""
-          />
-          
-          <CoursePanel
-            courseName="UI/UX Design with Job Placement"
-            img="/images/ui-ux.png"
-            tag="🤕 Almost Sold Out"
-            tagbg="!bg-[#084FC725] !text-[#084FC7]"
-            details="Master the essentials of UI/UX design with our comprehensive course covering topics from beginner to masterclass."
-            liveClass="Live class with mentor"
-            duration="12 Months"
-            courseFor="Beginner to Masterclass"
-            type="Paid Internship & Job"
-            perMonth="7000"
-            url=""
-          />
-
-          <CoursePanel
-            courseName="Personal Batch"
-            img="/images/designer-metier.png"
-            tag="🧑🏽‍🎓 For Beginners to Masterclass"
-            tagbg="!bg-[#008A0E26] !text-[#8A006C]"
-            details="In this workshop you will unlock the power of user-centered design and elevate your UI/UX skills in our immersive workshop, where creativity meets functionality to create seamless user experiences"
-            liveClass="Live class with mentor"
-            duration="5 Months"
-            courseFor="Beginner to Masterclass"
-            perMonth="3000"
-            url=""
-          />
-          
-        </div>
+        {allCourses &&
+          allCourses.map((courseDetails, index) => (
+            <div className="grid gap-10 md:my-6" key={courseDetails.UId}>
+              <CoursePanel
+                courseName={courseDetails.CourseName}
+                img={`/images/course${index + 1}.png`}
+                tag={courseDetails.Tag}
+                tagbg={courseDetails.TagColor}
+                details={courseDetails.Details}
+                liveClass={courseDetails.LiveClass}
+                duration={courseDetails.CourseDuration}
+                courseFor={courseDetails.For}
+                type={courseDetails.Type}
+                perMonth={courseDetails.PerMonth}
+                url={`/courses/${courseDetails.slug}`}
+              />
+            </div>
+          ))}
       </div>
-      {/* <Section className="mb-16 !p-0">
+
+      <Section className="mb-16 !p-0">
         <div
           className="flex flex-col md:flex-row p-2 lg:py-6 lg:px-10 relative bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url('/images/bglgr.png')` }}
@@ -178,7 +96,7 @@ export default function FullPage() {
             />
           </div>
         </div>
-      </Section> */}
+      </Section>
     </main>
   );
 }
