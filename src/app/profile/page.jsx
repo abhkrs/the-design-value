@@ -25,15 +25,15 @@ export default function Page() {
         <div className="grid gap-10 mt-6">
           <div className="bg-white p-6 md:p-10 grid lg:grid-cols-3 gap-6">
             <div className="col-span-2">
-              <H2 className="!text-4xl ">Welcome, {authData.studentDetails.FullName}!</H2>
+              <H2 className="!text-4xl ">Welcome, { "NA"}!</H2>
               <H3 className="text-secondary !text-2xl">
-                Student ID - {authData.studentDetails.userId}
+                Student ID - {"NA"}
               </H3>
               <P className="mt-2 !text-base">
-                EMAIL ID - {authData.studentDetails.Email}
+                EMAIL ID - {"NA"}
               </P>
               <P className="mt-2 !text-base">
-                Mobile No - {authData.studentDetails.MobNo}
+                Mobile No - {"NA"}
               </P>
             </div>
             <div className="flex flex-col align-end justify-center gap-6">
@@ -48,7 +48,7 @@ export default function Page() {
               </Link>
             </div>
           </div>
-          {authData.studentDetails.coursePurchased.map((program) => (
+          {/* {authData.studentDetails.coursePurchased.map((program) => (
             <div
               key={program.name}
               className="bg-white flex flex-col md:flex-row px-6 py-6 md:py-10 gap-6 md:gap-0 text-center md:text-start justify-between"
@@ -93,7 +93,7 @@ export default function Page() {
                 </Link>
               </div>
             </div>
-          ))}
+          ))} */}
 
           <div className="bg-[#EA9B7A21] p-10">
             <P className="font-semibold mb-2">Note:</P>
