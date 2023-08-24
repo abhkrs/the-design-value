@@ -19,7 +19,7 @@ const MentorsForm = () => {
   const [salary, setSalary] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [errorResponse, setErrorResponse] = useState([]);
+  const [errorResponse, setErrorResponse] = useState(null);
 
   const toggleForm = () => {
     setIsOpen(!isOpen);
@@ -28,7 +28,7 @@ const MentorsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     const formData = {
       FullName: name,
       ContactNo: phone,
@@ -52,11 +52,10 @@ const MentorsForm = () => {
           body: JSON.stringify(formData),
         }
       );
-    
-      const responseData = await response.json();
-    
-      if (response.ok) {
 
+      const responseData = await response.json();
+
+      if (response.ok) {
         if (responseData.status === "Success") {
           setSubmitStatus("success");
           setTimeout(() => {
@@ -64,52 +63,22 @@ const MentorsForm = () => {
           }, 3000);
 
         } else if (responseData.status === "Failed") {
-          setErrorResponse(responseData.message);
+          setErrorResponse("Please fill All the required feilds.");
           setSubmitStatus("error");
         } else {
-          setErrorResponse("Unknown response status");
+          setErrorResponse("Unknown response from the server");
           setSubmitStatus("errorUnknown");
         }
       } else {
-        setErrorResponse(responseData.error || "Server error");
+        setErrorResponse("Server error, Plese try again.");
         setSubmitStatus("errorServer");
       }
     } finally {
       setIsSubmitting(false);
-    }}
-  
-  //   try {
-  //     const response = await fetch(
-  //       "https://aj2709.pythonanywhere.com/Callback/mentor",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(formData),
-  //       }
-  //     );
-  
-  //     if (response.ok) {
-  //       setSubmitStatus("success");
-  //       setTimeout(() => {
-  //         setIsOpen(false);
-  //         setSubmitStatus(null);
-  //         setErrorResponse(null);
-  //       }, 3000); // Close the form after 3 seconds
-  //     } else {
-  //       const data = await response.json();
-  //       setErrorResponse(data.error);
-  //       setSubmitStatus("error");
-  //     }
-  //   } catch (error) {
-  //     setErrorResponse("Server error");
-  //     setSubmitStatus("error");
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-  
+    }
+  }
+
+
   return (
     <Section bg="bg-white">
       <div
@@ -267,9 +236,8 @@ const MentorsForm = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`bg-black col-span-2 max-w-max !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary ${
-                    isSubmitting ? "cursor-not-allowed" : ""
-                  }`}
+                  className={`bg-black col-span-2 max-w-max !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary ${isSubmitting ? "cursor-not-allowed" : ""
+                    }`}
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
@@ -278,13 +246,11 @@ const MentorsForm = () => {
                   <p className="text-green-500 mt-4">Submitted successfully!</p>
                 )}
 
-                {submitStatus === "error" ? (
+                {submitStatus === "error" && (
                   <p className="text-red-500 mt-4">
-                Please fill All the required feilds.
+                    {errorResponse}
                   </p>
-                ):( <p className="text-red-500 mt-4">
-                Server Error. Please Try Again.
-                  </p>)}
+                )}
               </form>
             </div>
           </div>
