@@ -44,13 +44,13 @@ function Header() {
 
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('authData'));
+  // useEffect(() => {
+  //   const storedUser = JSON.parse(localStorage.getItem('authData'));
 
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
+  //   if (storedUser) {
+  //     setUser(storedUser);
+  //   }
+  // }, []);
 
   // const handleLogout = () => {
   //   localStorage.removeItem('authData');

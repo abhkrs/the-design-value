@@ -80,7 +80,7 @@ export default function Page() {
             <button
               type="button"
               className="p-3 bg-black text-white rounded-full text-xl"
-              onClick={handleLogin}
+              // onClick={handleLogin}
             >
               Login
             </button>
