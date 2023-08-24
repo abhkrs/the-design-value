@@ -42,7 +42,7 @@ export default function Page() {
     <main>
       <Modal {...courseModal} />
       {callBackForm && (
-        <CallbackForm onClose={() => setCallBackForm(false)} courseNumber={0} />
+        <CallbackForm onClose={() => setCallBackForm(false)} courseNumber={1} />
       )}
       <SectionDark className="flex flex-col lg:flex-row pt-12 pb-8 justify-between relative max-h-min">
         <div className="lg:w-2/3">

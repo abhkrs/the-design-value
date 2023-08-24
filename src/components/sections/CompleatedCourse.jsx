@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import P from '../typography/P';
 import H3 from '../typography/H3';
-import WhatsApp from './WhatsApp';
-import DeleteRegStudent from './DeleteRegStudent';
-import AddCertificate from './AddCertificate';
-import Dummy from '../sections/CompleatedCourse';
-import Pagination from '../sections/Pagination';
-import CompleatedCourse from '../sections/CompleatedCourse';
+import WhatsApp from '../APIComponents/WhatsApp';
+import AddCertificate from '../APIComponents/AddCertificate';
+import DeleteRegStudent from '../APIComponents/DeleteRegStudent';
+import Pagination from './Pagination';
 
-export default function Alumni() {
+export default function CompleatedCourse() {
   const [loading, setLoading] = useState(true);
-  const [allStudents, setAllStudents] = useState(true);
-  const [alumni, setAlumni] = useState(false);
   const [studentData, setStudentData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -23,7 +19,7 @@ export default function Alumni() {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('https://aj2709.pythonanywhere.com/Register/Students');
+      const response = await fetch('https://aj2709.pythonanywhere.com/Register/courseCompleted');
       const data = await response.json();
       const registrationData = data.RegistrationData;
       const fetchedData = Object.keys(registrationData).reverse().map((key) => ({
@@ -111,8 +107,7 @@ export default function Alumni() {
 
   return (
     <main className='relative'>
-      {allStudents&&(
-        <div className="block w-1/3 absolute -top-[70px] z-40">
+      <div className="block w-1/3 absolute -top-[134px] z-40">
         <input
           type="search"
           name="searchbox"
@@ -123,30 +118,6 @@ export default function Alumni() {
           onChange={(e) => handleSearchQueryChange(e.target.value)}
         />
       </div>
-      )}
-      <div className="flex gap-6 my-6">
-        <button
-          onClick={() => {
-            setAllStudents(true);
-            setAlumni(false);
-          }}
-          className={`rounded-full py-2 px-10 inline-flex items-center justify-center ${allStudents ? 'bg-primary text-white' : 'bg-gray-200'
-            }`}
-        >
-          All
-        </button>
-        <button
-          onClick={() => {
-            setAllStudents(false);
-            setAlumni(true);
-          }}
-          className={`rounded-full py-2 px-4 inline-flex items-center justify-center ${alumni ? 'bg-primary text-white' : 'bg-gray-200'
-            }`}
-        >
-          Completed
-        </button>
-      </div>
-
       {(isLoading || (searchQuery && searchResults.length === 0)) ? (
         <div className='h-80 flex items-center justify-center'>
           <p>{isLoading ? 'Loading...' : 'No match found...!'}</p>
@@ -157,7 +128,7 @@ export default function Alumni() {
             <div className="flex items-center justify-center h-80">
               <p>Loading...</p>
             </div>
-          ) : allStudents && (
+          ) : (
             <div>
               {searchResults
                 .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
@@ -204,8 +175,6 @@ export default function Alumni() {
               />
             </div>
           )}
-
-          {alumni && <CompleatedCourse />}
         </div>
       )}
     </main>

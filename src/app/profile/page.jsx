@@ -11,13 +11,13 @@ import { FaCheckSquare, FaCircle } from "react-icons/fa";
 
 export default function Page() {
 
-  const router = useRouter();
-  const authData = JSON.parse(localStorage.getItem('authData'));
+  // const router = useRouter();
+  // const authData = JSON.parse(localStorage.getItem('authData'));
 
-  if (!authData || !authData.isLoggedIn || authData.isSuperuser) {
-    router.push('/login');
-    return null;
-  }
+  // if (!authData || !authData.isLoggedIn || authData.isSuperuser) {
+  //   router.push('/login');
+  //   return null;
+  // }
 
   return (
     <main>

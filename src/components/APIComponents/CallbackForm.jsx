@@ -38,6 +38,8 @@ const CallbackForm = ({ onClose, courseNumber }) => {
                     slotId: [],
                 });
             });
+
+            console.log(courseData)
     }, [courseNumber]);
 
     const handleFormSubmit = async (e) => {
@@ -48,7 +50,7 @@ const CallbackForm = ({ onClose, courseNumber }) => {
             contactNo: phone,
             emailId: email,
             courseId: courseData.courseName,
-            startOn: courseData.courseStart,
+            StartMonth: courseData.courseStart,
             totalTime: courseData.courseDuration,
             slotId: timeSlot,
         };

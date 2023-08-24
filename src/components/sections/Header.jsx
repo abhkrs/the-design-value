@@ -52,10 +52,10 @@ function Header() {
     }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('authData');
-    setUser(null);
-  }
+  // const handleLogout = () => {
+  //   localStorage.removeItem('authData');
+  //   setUser(null);
+  // }
 
   const allowedPaths = ['/admin', '/admin/dashboard', '/login', '/courses/workshop-with-internship', '/courses/ui-ux-workshop-with-jop-placement', '/courses/ui-ux-workshop'];
   const nonPromoted = allowedPaths.includes(pathName)
@@ -110,7 +110,7 @@ function Header() {
                     Profile
                   </Link>
                 )}
-                <button onClick={handleLogout} className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">Logout</button>
+                {/* <button onClick={handleLogout} className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">Logout</button> */}
               </>
             ) : (
               <Link href="/login" className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
@@ -149,7 +149,7 @@ function Header() {
                     Profile
                   </Link>
                 )}
-                <button onClick={handleLogout} className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] px-4 py-[6px]">Logout</button>
+                {/* <button onClick={handleLogout} className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] px-4 py-[6px]">Logout</button> */}
               </>
             ) : (
               <Link href="/login" className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">

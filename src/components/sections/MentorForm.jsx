@@ -19,7 +19,7 @@ const MentorsForm = () => {
   const [salary, setSalary] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [errorResponse, setErrorResponse] = useState(null);
+  const [errorResponse, setErrorResponse] = useState([]);
 
   const toggleForm = () => {
     setIsOpen(!isOpen);
@@ -68,15 +68,12 @@ const MentorsForm = () => {
           setSubmitStatus("error");
         } else {
           setErrorResponse("Unknown response status");
-          setSubmitStatus("error");
+          setSubmitStatus("errorUnknown");
         }
       } else {
         setErrorResponse(responseData.error || "Server error");
-        setSubmitStatus("error");
+        setSubmitStatus("errorServer");
       }
-    } catch (error) {
-      setErrorResponse("Server error");
-      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }}
@@ -281,11 +278,13 @@ const MentorsForm = () => {
                   <p className="text-green-500 mt-4">Submitted successfully!</p>
                 )}
 
-                {submitStatus === "error" && (
+                {submitStatus === "error" ? (
                   <p className="text-red-500 mt-4">
-                    {errorResponse || "An error occurred. Please try again later."}
+                Please fill All the required feilds.
                   </p>
-                )}
+                ):( <p className="text-red-500 mt-4">
+                Server Error. Please Try Again.
+                  </p>)}
               </form>
             </div>
           </div>

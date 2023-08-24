@@ -11,37 +11,37 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-const router = useRouter();
-  const handleLogin = async () => {
-    try {
-      const response = await fetch("https://aj2709.pythonanywhere.com/Register/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      });
+// const router = useRouter();
+  // const handleLogin = async () => {
+  //   try {
+  //     const response = await fetch("https://aj2709.pythonanywhere.com/Register/login", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ username, password })
+  //     });
   
-      const data = await response.json();
+  //     const data = await response.json();
   
-      if (response.ok) {
-        const authData = {
-          isLoggedIn: true,
-          isSuperuser: data.is_superuser,
-          studentDetails: data.StudentData
-        };
-        // localStorage.setItem('authData', JSON.stringify(authData));
+  //     if (response.ok) {
+  //       const authData = {
+  //         isLoggedIn: true,
+  //         isSuperuser: data.is_superuser,
+  //         studentDetails: data.StudentData
+  //       };
+  //       // localStorage.setItem('authData', JSON.stringify(authData));
         
-        if (data.is_superuser) {
-          router.push('/dashboard');
-        } else {
-          router.push('/profile');
-        }
-      } else {
-        setError("Invalid credentials");
-      }
-    } catch (err) {
-      setError("Error logging in");
-    }
-  };
+  //       if (data.is_superuser) {
+  //         router.push('/dashboard');
+  //       } else {
+  //         router.push('/profile');
+  //       }
+  //     } else {
+  //       setError("Invalid credentials");
+  //     }
+  //   } catch (err) {
+  //     setError("Error logging in");
+  //   }
+  // };
 
   return (
     <main>
