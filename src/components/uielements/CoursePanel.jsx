@@ -18,6 +18,7 @@ export default function CoursePanel({
   perMonth,
   url,
 }) {
+  tagbg = tagbg.toString();
   return (
     <div className="bg-white flex flex-col md:flex-row px-6 py-6 md:py-10 gap-6 md:gap-0">
       <div className="relative xl:min-w-[350px] min-h-[300px]">
@@ -30,13 +31,12 @@ export default function CoursePanel({
       </div>
       <div className="md:px-6 xl:px-8">
         <H3 className="!text-2xl">{courseName}</H3>
-        <P
-          className={`bg-[#${
-            tagbg || "AC3E20"
-          }] bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
+        <div
+          className={`bg-[#${tagbg}] bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
+        
         >
           {tag}
-        </P>
+        </div>
         <P className="!text-lg xl:w-4/5">{details}</P>
         <P className="text-secondary font-semibold min-h-[12px] mt-3 !text-lg">
           {liveClass}

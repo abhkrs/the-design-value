@@ -11,10 +11,11 @@ import Image from "next/image";
 import Link from "next/link";
 export default function FullPage() {
   const [allCourses, setAllCourses] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     const getAllCourse = async () => {
       const response = await api.get("/Courses/allCourses");
-      console.log(response.CourseData);
+      setIsLoaded(true);
       setAllCourses(response.CourseData);
     };
 
@@ -41,14 +42,15 @@ export default function FullPage() {
         </P>
       </Section>
       <div className="2xl:container md:p-4 md:px-12 lg:px-28 mx-auto">
-        {allCourses &&
+        {isLoaded &&
+          allCourses &&
           allCourses.map((courseDetails, index) => (
             <div className="grid gap-10 md:my-6" key={courseDetails.UId}>
               <CoursePanel
                 courseName={courseDetails.CourseName}
                 img={`/images/course${index + 1}.png`}
                 tag={courseDetails.Tag}
-                tagbg={courseDetails.TagColor}
+                tagbg={`${courseDetails.TagColor}`}
                 details={courseDetails.Details}
                 liveClass={courseDetails.LiveClass}
                 duration={courseDetails.CourseDuration}

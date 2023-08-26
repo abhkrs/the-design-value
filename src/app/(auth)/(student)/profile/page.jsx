@@ -6,36 +6,41 @@ import P from "@/components/typography/P";
 import Section from "@/components/uielements/Section";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FaCheckSquare, FaCircle } from "react-icons/fa";
 import AuthWrap from "../AuthWrap";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { decryptData } from "../../../../../utils/encryption";
 
 export default function Page() {
+  const [userDetails, setUserDetails] = useState({});
+  const [courseList, setCourseList] = useState([]);
   useEffect(() => {
     const userDetails = sessionStorage.getItem("userDetails");
     const registrationData = sessionStorage.getItem("registrationData");
     const decryptedUserDetails = JSON.parse(decryptData(userDetails));
     const decryptedRegistrationData = JSON.parse(decryptData(registrationData));
-    console.log(decryptedUserDetails, decryptedRegistrationData);
+    setUserDetails(decryptedUserDetails);
+    setCourseList(decryptedRegistrationData);
+    
   }, []);
+  console.log(courseList);
+  console.log(userDetails);
   return (
     <AuthWrap>
       <main>
-        {/* <Section>
+        <Section>
         <div className="grid gap-10 mt-6">
           <div className="bg-white p-6 md:p-10 grid lg:grid-cols-3 gap-6">
             <div className="col-span-2">
-              <H2 className="!text-4xl ">Welcome, {authData.studentDetails.FullName}!</H2>
+              <H2 className="!text-4xl ">Welcome, {userDetails.FullName}!</H2>
               <H3 className="text-secondary !text-2xl">
-                Student ID - {authData.studentDetails.userId}
+                Student ID - {userDetails.userId}
               </H3>
               <P className="mt-2 !text-base">
-                EMAIL ID - {authData.studentDetails.Email}
+                EMAIL ID - {userDetails.Email}
               </P>
               <P className="mt-2 !text-base">
-                Mobile No - {authData.studentDetails.MobNo}
+                Mobile No - {userDetails.MobNo}
               </P>
             </div>
             <div className="flex flex-col align-end justify-center gap-6">
@@ -50,45 +55,45 @@ export default function Page() {
               </Link>
             </div>
           </div>
-          {authData.studentDetails.coursePurchased.map((program) => (
+          {courseList.map((program) => (
             <div
-              key={program.name}
+              key={program.regUid}
               className="bg-white flex flex-col md:flex-row px-6 py-6 md:py-10 gap-6 md:gap-0 text-center md:text-start justify-between"
             >
               <div className="relative min-w-[300px] min-h-[300px] md:min-h-0">
                 <Image
-                  src={program.img}
-                  alt={program.name}
+                  src={program.img || '/images/course1.png'}
+                  alt={program.Course}
                   fill={true}
                   className="object-cover"
                 />
               </div>
               <div className="md:px-6 lg:px-10 py-6 mr-auto">
-                <H3 className="!text-2xl">{program.name}</H3>
+                <H3 className="!text-2xl">{program.Course}</H3>
                 <P className="text-gray-600 mt-6 !text-lg">
                   Currently enrolled for{" "}
                   <span className="font-semibold">
-                    {program.enrolledFor} Batch
+                    {program.Batch} Batch
                   </span>
                 </P>
                 <P className="text-secondary font-semibold min-h-[18px] mt-4 mb-3">
-                  Course will end in&nbsp;{program.endingOn}
+                  Course will end in&nbsp;{program.endingOn || "Jan"}
                 </P>
                 <P className="text-gray-600">
-                  {program.duration}
+                  {program.Duration}
                   <FaCircle className="inline mx-2 w-2 h-2 mb-1" />
-                  {program.for}
+                  {program.For}
                   <FaCircle className="inline mx-2 w-2 h-2 mb-1" />
-                  {program.type}
+                  {program.Type}
                 </P>
               </div>
               <div className="flex flex-col justify-end">
                 <P className="font-bold !text-black mb-3 ms-1">
                   <FaCheckSquare className="text-[#00D100] inline mr-2 w-6 h-6" />
-                  {program.status}
+                  {program.CourseStatus}
                 </P>
                 <Link
-                  href={program.payment}
+                  href="/"
                   className="rounded-full bg-black !text-white !text-lg hover:bg-primary px-6 py-2 max-w-max min-w-max mx-auto md:mr-auto"
                 >
                   Pay Fee for the next month
@@ -107,7 +112,7 @@ export default function Page() {
             </P>
           </div>
         </div>
-      </Section> */}
+      </Section>
       </main>
     </AuthWrap>
   );
