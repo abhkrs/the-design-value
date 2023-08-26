@@ -1,10 +1,10 @@
 "use client";
 
-import CourseRegistrationModalBody from "../app/courses/CourseRegistrationModalBody";
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../utils/api";
 import { PaymentContext } from "@/context/PaymentContext";
 import { toast } from "react-toastify";
+import CourseRegistrationModalBody from "@/app/(main)/courses/CourseRegistrationModalBody";
 
 export const RegistrationContext = createContext();
 

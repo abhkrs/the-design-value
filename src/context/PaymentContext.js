@@ -26,18 +26,11 @@ export function PaymentProvider({ children }) {
       name: "Design Value",
       description: "UI/UX Design with 100% Paid Internship",
       order_id: res.order.id,
-      // callback_url: `payment-success`,
-      // redirect: true,
       theme: {
         color: "#5da399",
       },
       overlay: false,
       handler: async (response) => {
-        // Validate payment at server - using webhooks is a better idea.
-        // alert(response.razorpay_payment_id);
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature);
-
         const payload = {
           uuid: data?.uuid,
           courseUid: data?.courseUid,

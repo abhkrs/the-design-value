@@ -170,6 +170,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
 
           <button
             type="button"
+            disabled={showLoader}
             onClick={submitForm}
             className="bg-black md:w-2/3 !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary flex justify-center items-center"
           >
@@ -177,7 +178,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               <div role="status">
                 <svg
                   aria-hidden="true"
-                  class="w-6 h-6 mr-2 text-gray-200 animate-spin fill-secondary"
+                  className="w-6 h-6 mr-2 text-gray-200 animate-spin fill-secondary"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +192,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
                     fill="currentFill"
                   />
                 </svg>
-                <span class="sr-only">Loading...</span>
+                <span className="sr-only">Loading...</span>
               </div>
             )}
             {showLoader && <>Please wait</>}

@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import P from "../typography/P";
 import Image from "next/image";
+import { LoginContext } from "@/context/LoginContext";
+import { decryptData } from "../../../utils/encryption";
 
 const menu = [
   {
@@ -35,35 +37,36 @@ function Header() {
       if (menu[i].url === pathName) {
         return i;
       } else {
-        return null
+        return null;
       }
     }
   };
   const [active, setActive] = useState(activeindex);
-  const [topbar, setTopbar] = useState(false)
-
-  const [user, setUser] = useState(null);
+  const [topbar, setTopbar] = useState(false);
+  const [userRole, setUserRole] = useState(false);
+  const { isUserLoggedIn, handleLogout } = useContext(LoginContext);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('authData'));
+    const userRole = sessionStorage.getItem("userRole");
+    setUserRole(userRole);
+  }, [isUserLoggedIn]);
 
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('authData');
-    setUser(null);
-  }
-
-  const allowedPaths = ['/admin', '/admin/dashboard', '/login', '/courses/workshop-with-internship', '/courses/ui-ux-workshop-with-jop-placement', '/courses/ui-ux-workshop'];
-  const nonPromoted = allowedPaths.includes(pathName)
+  const allowedPaths = [
+    "/admin",
+    "/admin/dashboard",
+    "/login",
+    "/courses/workshop-with-internship",
+    "/courses/ui-ux-workshop-with-jop-placement",
+    "/courses/ui-ux-workshop",
+  ];
+  const nonPromoted = allowedPaths.includes(pathName);
 
   return (
     <header className="sticky !top-0 left-0 right-0 bg-light md:bg-white z-50 w-full">
       <div
-        className={`${(topbar && !nonPromoted) ? "md:hidden" : "hidden"} bg-primary !text-white p-6`}
+        className={`${
+          topbar && !nonPromoted ? "md:hidden" : "hidden"
+        } bg-primary !text-white p-6`}
       >
         <button
           onClick={() => setTopbar(false)}
@@ -71,18 +74,25 @@ function Header() {
         >
           <Image alt="" src="/images/close.svg" height="18" width="18" />
         </button>
-        <P className="capitalize cursor-default mr-10 !text-white"> Admissions open for batches starting from May!</P>
-        <P className="mt-3 mb-5 !text-[#E0E0E0] capitalize">All courses at a discount of <span className="font-bold !text-white uppercase">Flat 50%</span></P>
-        <Link
-          href="/courses"
-          className="underline font-bold"
-        >
+        <P className="capitalize cursor-default mr-10 !text-white">
+          {" "}
+          Admissions open for batches starting from May!
+        </P>
+        <P className="mt-3 mb-5 !text-[#E0E0E0] capitalize">
+          All courses at a discount of{" "}
+          <span className="font-bold !text-white uppercase">Flat 50%</span>
+        </P>
+        <Link href="/courses" className="underline font-bold">
           Check Now
         </Link>
       </div>
       <nav className="md:py-4">
         <div className="2xl:container px-6 md:px-12 lg:px-28 mx-auto container-fluid flex items-center justify-center md:justify-between">
-          <Link href="/" className="text-3xl font-bold mt-3 md:mt-0 dm-sans" onClick={() => setActive(null)}>
+          <Link
+            href="/"
+            className="text-3xl font-bold mt-3 md:mt-0 dm-sans"
+            onClick={() => setActive(null)}
+          >
             The<span className="text-primary">Design</span>Value
           </Link>
           <div className="md:flex hidden">
@@ -90,8 +100,9 @@ function Header() {
               <Link
                 key={index}
                 href={data.url}
-                className={` ${active === index && "font-semibold"
-                  } '!text-black capitalize hover:text-primary text-lg px-4 py-2 bg-transparent rounded-md relative z-10`}
+                className={` ${
+                  active === index && "font-semibold"
+                } '!text-black capitalize hover:text-primary text-lg px-4 py-2 bg-transparent rounded-md relative z-10`}
                 onClick={() => setActive(index)}
               >
                 {data.name}
@@ -99,25 +110,39 @@ function Header() {
             ))}
           </div>
           <div className="gap-4 justify-end hidden md:flex">
-            {user ? (
+            {isUserLoggedIn ? (
               <>
-                {user.isSuperuser ? (
-                  <Link href="/dashboard" className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
+                {decryptData(decryptData(userRole) === "TDV-admin") ? (
+                  <Link
+                    href="/dashboard"
+                    className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
+                  >
                     Dashboard
                   </Link>
                 ) : (
-                  <Link href="/profile" className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
+                  <Link
+                    href="/profile"
+                    className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
+                  >
                     Profile
                   </Link>
                 )}
-                <button onClick={handleLogout} className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">Logout</button>
+                <button
+                  onClick={handleLogout}
+                  className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
+                >
+                  Logout
+                </button>
               </>
             ) : (
-              <Link href="/login" className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
+              <Link
+                href="/login"
+                className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
+              >
                 Log In
               </Link>
             )}
-            </div>
+          </div>
         </div>
         <div className="bg-black block md:hidden container-fluid !text-white mt-3 px-3 py-3">
           <div className="flex justify-between">
@@ -131,31 +156,46 @@ function Header() {
                 className={`${!showToggledNav ? "text-base" : "hidden"}`}
               />
               <div
-                className={`${showToggledNav ? "text-lg -mt-1 -ml-4" : "hidden"
-                  } `}
+                className={`${
+                  showToggledNav ? "text-lg -mt-1 -ml-4" : "hidden"
+                } `}
               >
                 X
               </div>
             </button>
             <div className="flex gap-2 justify-end">
-            {user ? (
-              <>
-                {user.isSuperuser ? (
-                  <Link href="/dashboard" className=" hover:bg-white text-center !text-lg  hover:!text-black !bg-secondary !text-white rounded-[30px] px-4 py-[6px]">
-                    Dashboard
-                  </Link>
-                ) : (
-                  <Link href="/profile" className=" hover:bg-white text-center !text-lg  hover:!text-black !bg-secondary !text-white rounded-[30px] px-4 py-[6px]">
-                    Profile
-                  </Link>
-                )}
-                <button onClick={handleLogout} className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] px-4 py-[6px]">Logout</button>
-              </>
-            ) : (
-              <Link href="/login" className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]">
-                Log In
-              </Link>
-            )}
+              {isUserLoggedIn ? (
+                <>
+                  {decryptData(decryptData(userRole) === "TDV-admin") ? (
+                    <Link
+                      href="/dashboard"
+                      className=" hover:bg-white text-center !text-lg  hover:!text-black !bg-secondary !text-white rounded-[30px] px-4 py-[6px]"
+                    >
+                      Dashboard
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/profile"
+                      className=" hover:bg-white text-center !text-lg  hover:!text-black !bg-secondary !text-white rounded-[30px] px-4 py-[6px]"
+                    >
+                      Profile
+                    </Link>
+                  )}
+                  <button
+                    onClick={handleLogout}
+                    className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] px-4 py-[6px]"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
+                >
+                  Log In
+                </Link>
+              )}
             </div>
           </div>
           <div className={`${showToggledNav ? "flex" : "hidden"} flex-col`}>
@@ -163,8 +203,9 @@ function Header() {
               <Link
                 key={index}
                 href={data.url}
-                className={` ${active === index && "!text-secondary"
-                  } '!text-black capitalize hover:text-secondary text-md px-3 py-1 rounded-md`}
+                className={` ${
+                  active === index && "!text-secondary"
+                } '!text-black capitalize hover:text-secondary text-md px-3 py-1 rounded-md`}
                 onClick={() => setActive(index) & setShowToggledNav(false)}
               >
                 {data.name}
@@ -174,17 +215,16 @@ function Header() {
         </div>
       </nav>
       <div
-        className={`${(topbar && !nonPromoted) ? "hidden md:flex" : "hidden"} bg-black !text-white p-3 justify-center`}
+        className={`${
+          topbar && !nonPromoted ? "hidden md:flex" : "hidden"
+        } bg-black !text-white p-3 justify-center`}
       >
-        <P className="capitalize cursor-default mr-2 !text-white"> Admissions open for batches starting from May – </P>
-        <Link
-          href="/courses">
-          Enroll Now!
-        </Link>
-        <button
-          onClick={() => setTopbar(false)}
-          className="ml-4"
-        >
+        <P className="capitalize cursor-default mr-2 !text-white">
+          {" "}
+          Admissions open for batches starting from May –{" "}
+        </P>
+        <Link href="/courses">Enroll Now!</Link>
+        <button onClick={() => setTopbar(false)} className="ml-4">
           <Image alt="" src="/images/close.svg" height="18" width="18" />
         </button>
       </div>

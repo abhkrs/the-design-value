@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
-import api from "../../../../utils/api";
+import api from "../../../../../utils/api";
 
 import Testimonials from "@/components/sections/Testimonials";
 import H2 from "@/components/typography/H2";

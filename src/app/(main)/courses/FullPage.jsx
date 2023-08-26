@@ -6,7 +6,7 @@ import P from "@/components/typography/P";
 import CoursePanel from "@/components/uielements/CoursePanel";
 import Section from "@/components/uielements/Section";
 import { useEffect, useState } from "react";
-import api from "../../../utils/api";
+import api from "../../../../utils/api";
 import Image from "next/image";
 import Link from "next/link";
 export default function FullPage() {

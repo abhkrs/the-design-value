@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import H2 from "@/components/typography/H2";
 import H3 from "@/components/typography/H3";
@@ -8,20 +8,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaCheckSquare, FaCircle } from "react-icons/fa";
+import AuthWrap from "../AuthWrap";
 
 export default function Page() {
-
-  const router = useRouter();
-  const authData = JSON.parse(localStorage.getItem('authData'));
-
-  if (!authData || !authData.isLoggedIn || authData.isSuperuser) {
-    router.push('/login');
-    return null;
-  }
-
   return (
     <main>
-      <Section>
+      <AuthWrap>
+        {/* <Section>
         <div className="grid gap-10 mt-6">
           <div className="bg-white p-6 md:p-10 grid lg:grid-cols-3 gap-6">
             <div className="col-span-2">
@@ -105,7 +98,8 @@ export default function Page() {
             </P>
           </div>
         </div>
-      </Section>
+      </Section> */}
+      </AuthWrap>
     </main>
   );
 }
