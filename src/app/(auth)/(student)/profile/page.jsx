@@ -12,8 +12,8 @@ import AuthWrap from "../AuthWrap";
 
 export default function Page() {
   return (
-    <main>
-      <AuthWrap>
+    <AuthWrap>
+      <main>
         {/* <Section>
         <div className="grid gap-10 mt-6">
           <div className="bg-white p-6 md:p-10 grid lg:grid-cols-3 gap-6">
@@ -99,7 +99,7 @@ export default function Page() {
           </div>
         </div>
       </Section> */}
-      </AuthWrap>
-    </main>
+      </main>
+    </AuthWrap>
   );
 }

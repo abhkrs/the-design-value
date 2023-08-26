@@ -1,18 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { decryptData } from "../../../../utils/encryption";
 import { useRouter } from "next/navigation";
+import { LoginContext } from "@/context/LoginContext";
 
 function AuthWrap({ children }) {
   const router = useRouter();
+  const { setIsUserLoggedIn } = useContext(LoginContext);
+
   useEffect(() => {
     let userRole = sessionStorage.getItem("userRole");
-    const decryptedUserRole = JSON.parse(decryptData(userRole));
-    if (!userRole || decryptedUserRole.role !== "TDV-student") {
+    console.log(userRole);
+    if (userRole) {
+      const decryptedUserRole = JSON.parse(decryptData(userRole));
+      if (!userRole || decryptedUserRole.role !== "TDV-student") {
+        router.push("/login");
+      } else {
+        setIsUserLoggedIn(true);
+      }
+    } else {
       router.push("/login");
     }
-  }, [router]);
+  }, [router, setIsUserLoggedIn]);
 
   return <>{children}</>;
 }

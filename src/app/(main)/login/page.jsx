@@ -1,13 +1,13 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import H2 from "@/components/typography/H2";
 import api from "../../../../utils/api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { encryptData } from "../../../../utils/encryption";
+import { decryptData, encryptData } from "../../../../utils/encryption";
 import { LoginContext } from "@/context/LoginContext";
 
 export default function Page() {
@@ -17,6 +17,22 @@ export default function Page() {
   const router = useRouter();
 
   const { setIsUserLoggedIn } = useContext(LoginContext);
+
+  useEffect(() => {
+    let userRole = sessionStorage.getItem("userRole");
+    console.log(userRole);
+    if (userRole) {
+      const decryptedUserRole = userRole
+        ? JSON.parse(decryptData(userRole))
+        : null;
+      if (userRole && decryptedUserRole.role === "TDV-student") {
+        router.push("/profile");
+      } else if (userRole && decryptedUserRole.role === "TDV-admin") {
+        router.push("/dashboard");
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogin = async () => {
     setshowLoader(true);
@@ -38,6 +54,7 @@ export default function Page() {
       userRole = encryptData(userRole);
       sessionStorage.setItem("userDetails", encryptedData);
       sessionStorage.setItem("userRole", userRole);
+      router.push("/dashboard");
     } else {
       setIsUserLoggedIn(true);
       sessionStorage.clear();

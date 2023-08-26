@@ -47,8 +47,11 @@ function Header() {
   const { isUserLoggedIn, handleLogout } = useContext(LoginContext);
 
   useEffect(() => {
-    const userRole = sessionStorage.getItem("userRole");
-    setUserRole(userRole);
+    let userRole = sessionStorage.getItem("userRole");
+    if (userRole) {
+      const decryptedUserRole = JSON.parse(decryptData(userRole));
+      setUserRole(decryptedUserRole);
+    }
   }, [isUserLoggedIn]);
 
   const allowedPaths = [
@@ -112,7 +115,7 @@ function Header() {
           <div className="gap-4 justify-end hidden md:flex">
             {isUserLoggedIn ? (
               <>
-                {decryptData(decryptData(userRole) === "TDV-admin") ? (
+                {userRole.role === "TDV-admin" ? (
                   <Link
                     href="/dashboard"
                     className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
@@ -166,7 +169,7 @@ function Header() {
             <div className="flex gap-2 justify-end">
               {isUserLoggedIn ? (
                 <>
-                  {decryptData(decryptData(userRole) === "TDV-admin") ? (
+                  {userRole.role === "TDV-admin" ? (
                     <Link
                       href="/dashboard"
                       className=" hover:bg-white text-center !text-lg  hover:!text-black !bg-secondary !text-white rounded-[30px] px-4 py-[6px]"
