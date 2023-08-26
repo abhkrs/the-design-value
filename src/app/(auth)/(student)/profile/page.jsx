@@ -9,8 +9,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaCheckSquare, FaCircle } from "react-icons/fa";
 import AuthWrap from "../AuthWrap";
+import { useEffect } from "react";
+import { decryptData } from "../../../../../utils/encryption";
 
 export default function Page() {
+  useEffect(() => {
+    const userDetails = sessionStorage.getItem("userDetails");
+    const registrationData = sessionStorage.getItem("registrationData");
+    const decryptedUserDetails = JSON.parse(decryptData(userDetails));
+    const decryptedRegistrationData = JSON.parse(decryptData(registrationData));
+    console.log(decryptedUserDetails, decryptedRegistrationData);
+  }, []);
   return (
     <AuthWrap>
       <main>
