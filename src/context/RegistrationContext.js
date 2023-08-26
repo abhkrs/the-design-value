@@ -69,7 +69,7 @@ export function RegistrationProvider({ children }) {
   const submitUserDetails = async (payload) => {
     const response = await api.post("/Register/createUsr", payload);
 
-    if (response.status === "Success") {
+    if (response && response.status === "Success") {
       setUserDetails((prev) => ({
         ...prev,
         uuid: response?.uuid,

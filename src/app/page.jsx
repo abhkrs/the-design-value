@@ -8,18 +8,19 @@ import MentorForm from "@/components/sections/MentorForm";
 import Mentors from "@/components/sections/Mentors";
 import StudentsWorking from "@/components/sections/StudentsWorking";
 import Testimonials from "@/components/sections/Testimonials";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   return (
     <main>
       <HomeBanner />
-      <Mentors/>
-      <Counts/>
-      <DesignProcess/>
-      <LearningExp/>
+      <Mentors />
+      <Counts />
+      <DesignProcess />
+      <LearningExp />
       <StudentsWorking />
       <MentorForm />
       <Testimonials />
     </main>
-  )
+  );
 }

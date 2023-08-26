@@ -29,7 +29,7 @@ export function PaymentProvider({ children }) {
       // callback_url: `payment-success`,
       // redirect: true,
       theme: {
-        color: "#0b0b0b",
+        color: "#5da399",
       },
       overlay: false,
       handler: async (response) => {

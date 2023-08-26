@@ -30,7 +30,6 @@ function FullPage() {
 
     getCourseDetails();
   }, [slug]);
-  console.log(courseDetails);
 
   const {
     openRegistrationModal,
@@ -43,7 +42,7 @@ function FullPage() {
     if (selectedCourse.courseName) {
       openRegistrationModal();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCourse]);
 
   const handleCourseClick = () => {
@@ -52,7 +51,7 @@ function FullPage() {
       courseId: courseDetails.UId,
       courseName: courseDetails.CourseName,
       coursePrice: courseDetails.PerMonth,
-      courseDetails
+      courseDetails,
     }));
   };
 
@@ -60,7 +59,11 @@ function FullPage() {
     <main>
       <Modal {...courseModal} />
       {callBackForm && (
-        <CallbackForm onClose={() => setCallBackForm(false)} courseNumber={0} />
+        <CallbackForm
+          onClose={() => setCallBackForm(false)}
+          courseDetails={courseDetails}
+          courseNumber={0}
+        />
       )}
       <SectionDark className="flex flex-col lg:flex-row pt-12 pb-8 justify-between relative max-h-min">
         <div className="lg:w-2/3">

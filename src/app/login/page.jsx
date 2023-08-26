@@ -1,50 +1,80 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import H2 from "@/components/typography/H2";
+import api from "../../../utils/api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Page() {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
-const router = useRouter();
   const handleLogin = async () => {
-    try {
-      const response = await fetch("https://aj2709.pythonanywhere.com/Register/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
+    const response = await api.post("/Register/login", { username, password });
+    console.log(response);
+    if (response.status === "Failed") {
+      setError("Invalid credentials");
+      toast.error(response.message, {
+        autoClose: 3000,
+        theme: "colored",
       });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        const authData = {
-          isLoggedIn: true,
-          isSuperuser: data.is_superuser,
-          studentDetails: data.StudentData
-        };
-        localStorage.setItem('authData', JSON.stringify(authData));
-        
-        if (data.is_superuser) {
-          router.push('/dashboard');
-        } else {
-          router.push('/profile');
-        }
-      } else {
-        setError("Invalid credentials");
-      }
-    } catch (err) {
-      setError("Error logging in");
+    } else {
+      const authData = {
+        isLoggedIn: true,
+        isSuperuser: response.is_superuser,
+        studentDetails: response.StudentData,
+      };
+      localStorage.setItem("authData", JSON.stringify(authData));
     }
+    // try {
+    //   const response = await fetch("https://aj2709.pythonanywhere.com/Register/login", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ username, password })
+    //   });
+
+    //   const data = await response.json();
+
+    //   if (response.ok) {
+    //     const authData = {
+    //       isLoggedIn: true,
+    //       isSuperuser: data.is_superuser,
+    //       studentDetails: data.StudentData
+    //     };
+    //     localStorage.setItem('authData', JSON.stringify(authData));
+
+    //     if (data.is_superuser) {
+    //       router.push('/dashboard');
+    //     } else {
+    //       router.push('/profile');
+    //     }
+    //   } else {
+    //     setError("Invalid credentials");
+    //   }
+    // } catch (err) {
+    //   setError("Error logging in");
+    // }
   };
 
   return (
     <main>
+      <ToastContainer
+        limit={1}
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="grid lg:grid-cols-5 md:grid-cols-2">
         <div className="lg:col-span-3">
           <div className="relative top-0 left-0 w-full md:h-screen">
@@ -58,7 +88,9 @@ const router = useRouter();
         </div>
         <div className="flex justify-between flex-col gap-8 h-screen p-8 lg:col-span-2 md:mx-auto">
           <div className="flex justify-between align-middle flex-col gap-8 md:w-[400px]">
-            <H2 className="text-center !text-3xl font-semibold inter">Add Your Details</H2>
+            <H2 className="text-center !text-3xl font-semibold inter">
+              Add Your Details
+            </H2>
             <input
               type="text"
               name="username"
