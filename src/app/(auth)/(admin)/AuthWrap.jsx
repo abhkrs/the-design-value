@@ -9,7 +9,6 @@ function AuthWrap({ children }) {
   const router = useRouter();
   const pathName = usePathname();
   const { setIsUserLoggedIn } = useContext(LoginContext);
-  console.log(pathName);
 
   useEffect(() => {
     let userRole = sessionStorage.getItem("userRole");
