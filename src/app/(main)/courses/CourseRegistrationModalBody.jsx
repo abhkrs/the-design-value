@@ -4,7 +4,7 @@ import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,7 +20,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
   const [showLoader, setShowLoader] = useState(false);
 
   const submitForm = async () => {
-    setIsSubmitted(true);    
+    setIsSubmitted(true);
     setSelectedCourse((prev) => ({
       ...prev,
       coursTimeSlot: timeSlot,
@@ -59,7 +59,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
         draggable
         pauseOnHover
       />
-      <div className="bg-white p-8 rounded shadow-lg w-full relative lg:px-16">
+      <div className="bg-white p-8 rounded w-full relative lg:px-16">
         <H3 className="!text-2xl mb-4">
           🧑🏽‍🎓 Register for {selectedCourse.courseName}{" "}
         </H3>

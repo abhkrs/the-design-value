@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { decryptData, encryptData } from "../../../../utils/encryption";
 import { LoginContext } from "@/context/LoginContext";
+import Modal from "@/components/ui/Modal";
 
 export default function Page() {
   const [username, setUsername] = useState("");
@@ -16,7 +17,8 @@ export default function Page() {
   const [showLoader, setshowLoader] = useState(false);
   const router = useRouter();
 
-  const { setIsUserLoggedIn } = useContext(LoginContext);
+  const { setIsUserLoggedIn, forgotPasswordModal, openForgotPasswordModal } =
+    useContext(LoginContext);
 
   useEffect(() => {
     let userRole = sessionStorage.getItem("userRole");
@@ -31,7 +33,7 @@ export default function Page() {
         router.push("/dashboard");
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogin = async () => {
@@ -73,6 +75,7 @@ export default function Page() {
 
   return (
     <main>
+      <Modal {...forgotPasswordModal} />
       <ToastContainer
         limit={1}
         position="top-right"
@@ -147,9 +150,14 @@ export default function Page() {
               )}
               Login
             </button>
-            <a className="text-secondary text-xl text-center cursor-pointer">
+            <button
+              className="text-secondary text-xl text-center cursor-pointer"
+              onClick={() => {
+                openForgotPasswordModal();
+              }}
+            >
               Forgot Password?
-            </a>
+            </button>
           </div>
           <div className="relative top-0 left-0 w-2/3 mx-auto h-8 mb-20">
             <Image

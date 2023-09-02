@@ -10,6 +10,7 @@ export const RegistrationContext = createContext();
 
 export function RegistrationProvider({ children }) {
   const [courseModal, setCourseModal] = useState();
+  
   const [selectedCourse, setSelectedCourse] = useState({
     courseName: "",
     courseId: "",
@@ -38,6 +39,8 @@ export function RegistrationProvider({ children }) {
       setUserDetails={setUserDetails}
     />
   );
+
+  
 
   const openRegistrationModal = () => {
     setCourseModal(() => ({
@@ -97,6 +100,7 @@ export function RegistrationProvider({ children }) {
         closeRegistrationModal,
         getCourseName,
         submitUserDetails,
+        
       }}
     >
       {children}
