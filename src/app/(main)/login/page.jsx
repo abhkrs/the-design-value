@@ -52,7 +52,9 @@ export default function Page() {
       const encryptedData = encryptData(response.AdminData);
       let userRole = {
         role: "TDV-admin",
+        isSuperAdmin: response.AdminData.superAdm,
       };
+      console.log(userRole);
       userRole = encryptData(userRole);
       sessionStorage.setItem("userDetails", encryptedData);
       sessionStorage.setItem("userRole", userRole);

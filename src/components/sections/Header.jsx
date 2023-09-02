@@ -44,6 +44,7 @@ function Header() {
   const [active, setActive] = useState(activeindex);
   const [topbar, setTopbar] = useState(false);
   const [userRole, setUserRole] = useState(false);
+  const [adminItemAdded, setAdminItemAdded] = useState(false);
   const { isUserLoggedIn, handleLogout } = useContext(LoginContext);
 
   useEffect(() => {
@@ -51,8 +52,18 @@ function Header() {
     if (userRole) {
       const decryptedUserRole = JSON.parse(decryptData(userRole));
       setUserRole(decryptedUserRole);
+      console.log(decryptedUserRole);
+      if (decryptedUserRole.isSuperAdmin && !adminItemAdded) {
+        const newItem = {
+          name: "Admin",
+          url: "/admin-list",
+        };
+
+        menu.push(newItem);
+        setAdminItemAdded(true);
+      }
     }
-  }, [isUserLoggedIn]);
+  }, [isUserLoggedIn, adminItemAdded]);
 
   const allowedPaths = [
     "/admin",

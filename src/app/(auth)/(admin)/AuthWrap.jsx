@@ -2,12 +2,14 @@
 
 import { useContext, useEffect } from "react";
 import { decryptData } from "../../../../utils/encryption";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { LoginContext } from "@/context/LoginContext";
 
 function AuthWrap({ children }) {
   const router = useRouter();
+  const pathName = usePathname();
   const { setIsUserLoggedIn } = useContext(LoginContext);
+  console.log(pathName);
 
   useEffect(() => {
     let userRole = sessionStorage.getItem("userRole");
@@ -15,13 +17,18 @@ function AuthWrap({ children }) {
       const decryptedUserRole = JSON.parse(decryptData(userRole));
       if (!userRole || decryptedUserRole.role !== "TDV-admin") {
         router.push("/login");
+      } else if (
+        pathName === "/admin-list" &&
+        !decryptedUserRole.isSuperAdmin
+      ) {
+        router.push("/dashboard");
       } else {
         setIsUserLoggedIn(true);
       }
     } else {
       router.push("/login");
     }
-  }, [router, setIsUserLoggedIn]);
+  }, [pathName, router, setIsUserLoggedIn]);
 
   return <>{children}</>;
 }
