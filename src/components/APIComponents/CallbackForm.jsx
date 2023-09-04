@@ -148,7 +148,7 @@ const CallbackForm = ({ onClose, courseNumber, courseDetails }) => {
                 className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full  border-l-0 "
               />
             </div>
-            <div className="relative hidden lg:block">
+            {/* <div className="relative hidden lg:block">
               <div className="absolute right-1 z-50 !h-3 !w-4 p-2 mt-3 bg-white">
                 <Image
                   fill={true}
@@ -157,13 +157,13 @@ const CallbackForm = ({ onClose, courseNumber, courseDetails }) => {
                   alt="dropdown"
                 />
               </div>
-            </div>
+            </div> */}
             <div className="mb-4">
               <select
                 id="timeSlot"
                 value={timeSlot}
                 onChange={(e) => setTimeSlot(e.target.value)}
-                className="!border !border-gray-300 !px-3 !py-2 !pr-8 placeholder-secondary !bg-white"
+                className="!border w-full !border-gray-300 !px-3 !py-2 !pr-8 placeholder-secondary !bg-white"
               >
                 <option value="" disabled>
                   Select a time slot

@@ -153,7 +153,7 @@ function Header() {
                 href="/login"
                 className=" hover:bg-black text-center !text-lg bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
               >
-                Log In
+                Student Log In
               </Link>
             )}
           </div>
@@ -207,7 +207,7 @@ function Header() {
                   href="/login"
                   className=" hover:bg-white text-center !text-lg  hover:!text-black bg-secondary !text-white rounded-[30px] w-40 px-4 py-[6px]"
                 >
-                  Log In
+                  Student Log In
                 </Link>
               )}
             </div>

@@ -63,7 +63,7 @@ export default function FullPage() {
           ))}
       </div>
 
-      <Section className="mb-16 !p-0">
+      {/* <Section className="mb-16 !p-0">
         <div
           className="flex flex-col md:flex-row p-2 lg:py-6 lg:px-10 relative bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url('/images/bglgr.png')` }}
@@ -98,7 +98,7 @@ export default function FullPage() {
             />
           </div>
         </div>
-      </Section>
+      </Section> */}
     </main>
   );
 }

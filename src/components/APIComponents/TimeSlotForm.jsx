@@ -1,28 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import H2 from '../typography/H2';
 import P from '../typography/P';
+import H3 from '../typography/H3';
 
 const TimeSlotForm = () => {
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
-
   const [fromDate, setFromDate] = useState(today.toISOString().split('T')[0]);
   const [toDate, setToDate] = useState(tomorrow.toISOString().split('T')[0]);
   const [interval, setInterval] = useState(2);
   const [startHour, setStartHour] = useState('10:00');
   const [endHour, setEndHour] = useState('20:00');
   const [status, setStatus] = useState();
-
+  const [availableTimeSlots, setAvailableTimeSlots] = useState(["Please wait", "Loading......", "Available timeslots"]);
   const formatDate = (date) => {
     const formattedDate = new Date(date).toISOString().split('T')[0];
     return formattedDate;
   };
-
   const formatHour = (hour) => {
     const formattedHour = hour.split(':')[0];
     return formattedHour;
   };
+  useEffect(() => {
+    fetchAvailableTimeSlots();
+  }, []);
+
+  async function fetchAvailableTimeSlots() {
+    try {
+      const response = await fetch('https://aj2709.pythonanywhere.com/Callback/requestCB');
+      const data = await response.json();
+      if (response.ok) {
+        setAvailableTimeSlots(data.slotId);
+        // console.log(availableTimeSlots)
+      } else {
+        console.error("Error fetching time slots:", data);
+      }
+    } catch (error) {
+      console.error("Error during API fetch:", error);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,23 +52,26 @@ const TimeSlotForm = () => {
       EndHr: formatHour(endHour),
     };
 
-    console.log(data);
+    try {
+      const response = await fetch('https://aj2709.pythonanywhere.com/Callback/genTimeSlots', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    const response = await fetch('https://aj2709.pythonanywhere.com/Callback/genTimeSlots', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      setStatus(result.message)
-    } else {
-      setStatus(result.message)
+      const result = await response.json();
+      if (response.ok) {
+        setStatus(result.message);
+        fetchAvailableTimeSlots();
+      } else {
+        setStatus(result.message);
+      }
+      console.log(result);
+    } catch (error) {
+      console.error("Error during form submission:", error);
     }
-    console.log(result);
   };
 
   return (
@@ -116,19 +136,32 @@ const TimeSlotForm = () => {
             </label>
 
             <div className='mx-2 flex gap-4 mt-8'>
-            <button type="submit" className="bg-black hover:bg-primary text-white text-lg py-2 px-6 rounded-md block min-w-max max-w-max">
-              Generate Slots
-            </button>
-            <P className="!text-primary !leading-tight">{status}</P>
+              <button type="submit" className="bg-black hover:bg-primary text-white text-lg py-2 px-6 rounded-md block min-w-max max-w-max">
+                Generate Slots
+              </button>
+              <P className="!text-primary !leading-tight">{status}</P>
             </div>
           </div>
           <div>
-            
+            <div>
+              <H3 className="!text-3xl xl:-mt-14">Available Timeslots</H3>
+             
+                {availableTimeSlots.length === 0 ? (
+                  <P className='mt-6'>No Slot Available! Please Generate new timeslots</P>
+                  
+                ) : (
+                  <ul>
+                    {availableTimeSlots.map((slot, index) => (
+                    <li key={index}>{slot}</li>
+                  ))}
+                  </ul>
+                )}
+          
+            </div>
           </div>
         </div>
       </form>
     </div>
   );
 };
-
 export default TimeSlotForm;

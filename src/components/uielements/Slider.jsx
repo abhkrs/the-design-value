@@ -35,7 +35,7 @@ function Slider({
   if (isCarouselReady) {
     return (
       <AliceCarousel
-      dotsClass="carousel-dots"
+        dotsClass="carousel-dots"
         disableButtonsControls={noControl}
         disableDotsControls={noDots}
         infinite

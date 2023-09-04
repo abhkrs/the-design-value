@@ -28,7 +28,7 @@ const MentorsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     const formData = {
       FullName: name,
       ContactNo: phone,
@@ -40,7 +40,7 @@ const MentorsForm = () => {
       DaysInterested: teachDays,
       ExpectedCTC: salary,
     };
-  
+
     try {
       const response = await fetch(
         "https://aj2709.pythonanywhere.com/Callback/mentor",
@@ -52,27 +52,33 @@ const MentorsForm = () => {
           body: JSON.stringify(formData),
         }
       );
-  
+
+      const responseData = await response.json();
+
       if (response.ok) {
-        setSubmitStatus("success");
-        setTimeout(() => {
-          setIsOpen(false);
-          setSubmitStatus(null);
-          setErrorResponse(null);
-        }, 3000); // Close the form after 3 seconds
+        if (responseData.status === "Success") {
+          setSubmitStatus("success");
+          setTimeout(() => {
+            setIsOpen(false);
+          }, 3000);
+
+        } else if (responseData.status === "Failed") {
+          setErrorResponse("Please fill All the required feilds.");
+          setSubmitStatus("error");
+        } else {
+          setErrorResponse("Unknown response from the server");
+          setSubmitStatus("errorUnknown");
+        }
       } else {
-        const data = await response.json();
-        setErrorResponse(data.error);
-        setSubmitStatus("error");
+        setErrorResponse("Server error, Plese try again.");
+        setSubmitStatus("errorServer");
       }
-    } catch (error) {
-      setErrorResponse("Server error");
-      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
-  };
-  
+  }
+
+
   return (
     <Section bg="bg-white">
       <div
@@ -200,7 +206,7 @@ const MentorsForm = () => {
                         id="linkedin"
                         value={linkedin}
                         onChange={(e) => setLinkedin(e.target.value)}
-                        placeholder="LinkedIn Profile*"
+                        placeholder="LinkedIn Profile"
                         className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
                       />
                     </div>
@@ -230,9 +236,8 @@ const MentorsForm = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`bg-black col-span-2 max-w-max !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary ${
-                    isSubmitting ? "cursor-not-allowed" : ""
-                  }`}
+                  className={`bg-black col-span-2 max-w-max !text-white py-2 px-8 !text-lg rounded-full hover:bg-primary ${isSubmitting ? "cursor-not-allowed" : ""
+                    }`}
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
@@ -243,7 +248,7 @@ const MentorsForm = () => {
 
                 {submitStatus === "error" && (
                   <p className="text-red-500 mt-4">
-                    {errorResponse || "An error occurred. Please try again later."}
+                    {errorResponse}
                   </p>
                 )}
               </form>
