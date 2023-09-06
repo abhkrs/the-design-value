@@ -8,68 +8,91 @@ import H2 from "../typography/H2";
 const testimonialData = [
   {
     id: 1,
-    authorImg: "/images/author.png",
-    authorName: "Finlay Kirk",
-    authorJob: "Web Developper",
-    authorMsg:
-      "“Unleash your teaching prowess and become a UI/UX instructor with us. Inspire the next generation of designers and shape the future of user experience.",
+    authorMsg: "Coming from a commerce background, these classes gave me a fresh perspective on technology and design. They've been instrumental in broadening my career horizons.",
+    authorName: "Priya Srinivasan",
+    authorJob: "Commerce Graduate, Christ University, Bangalore",
   },
   {
     id: 2,
-    authorImg: "/images/author.png",
-    authorName: "Finlay Kirk",
-    authorJob: "Web Developper",
-    authorMsg:
-      "“Unleash your teaching prowess and become a UI/UX instructor with us. Inspire the next generation of designers and shape the future of user experience.",
+    authorMsg: "I'm thrilled with the knowledge I've gained in these classes. They've made me a better UI developer with a deep understanding of user-centered design.",
+    authorName: "Sneha Deshmukh",
+    authorJob: "UI Developer, Pixel Prodigy, Pune",
   },
   {
     id: 3,
-    authorImg: "/images/author.png",
-    authorName: "Finlay Kirk",
-    authorJob: "Web Developper",
-    authorMsg:
-      "“Unleash your teaching prowess and become a UI/UX instructor with us. Inspire the next generation of designers and shape the future of user experience.",
+    authorMsg: "Attending these classes has transformed my product management approach. The UX insights and design principles I learned are invaluable.",
+    authorName: "Rajat Sharma",
+    authorJob: "Product Manager, Digital Dynamics India, Delhi",
   },
   {
     id: 4,
-    authorImg: "/images/author.png",
-    authorName: "Finlay Kirk",
-    authorJob: "Web Developper",
-    authorMsg:
-      "“Unleash your teaching prowess and become a UI/UX instructor with us. Inspire the next generation of designers and shape the future of user experience.",
+    authorMsg: "These classes helped me bridge the gap between design and user experience. My designs are not just visually appealing but also highly functional.",
+    authorName: "Vikram Menon",
+    authorJob: "UI/UX Design Intern, WebWiz Solutions, Hyderabad",
   },
   {
     id: 5,
-    authorImg: "/images/author.png",
-    authorName: "Finlay Kirk",
-    authorJob: "Web Developper",
-    authorMsg:
-      "“Unleash your teaching prowess and become a UI/UX instructor with us. Inspire the next generation of designers and shape the future of user experience.",
+    authorMsg: "The practical projects in these classes were eye-opening. They helped me develop a portfolio that showcases my design expertise.",
+    authorName: "Swati Mehta",
+    authorJob: "Content, ExperienceFirst Pvt. Ltd., Bangalore",
   },
+  {
+    id: 6,
+    authorMsg: "These classes have transformed my approach to UX research. I now conduct insightful studies that drive product improvements.",
+    authorName: "Mehak Patel",
+    authorJob: "Developer, DigitalCraft Innovations, Mumbai",
+  },
+  {
+    id: 7,
+    authorMsg: "Being an MBA student, I understand the importance of user-centric design in business. These classes have provided me with the knowledge to leverage UX for success.",
+    authorName: "Vaidehi Srivastava",
+    authorJob: "MBA Student, Xavier Institute of Management, Bhubaneswar",
+  },
+  {
+    id: 8,
+    authorMsg: "These classes have expanded my perspective as an architecture student. They've taught me how to design spaces that are not just beautiful but also user-friendly.",
+    authorName: "Naveen Singh",
+    authorJob: "Architecture Student, SPA Delhi",
+  },
+  {
+    id: 9,
+    authorMsg: "These classes have complemented my computer science studies perfectly. They've broadened my skill set and made me a more versatile professional.",
+    authorName: "Finlay Kirk",
+    authorJob: "MCA Student, PES University, Bengaluru",
+  },
+  {
+    id: 10,
+    authorMsg: "Even as an economics student, these classes have provided me with a unique skill set that's highly applicable in today's digital age.",
+    authorName: "Sapna Das",
+    authorJob: "Economics Student, Presidency University, Kolkata",
+  },
+  {
+    id: 11,
+    authorMsg: "These classes opened up a world of possibilities beyond my commerce degree. They've made me more versatile in my career options and given me a competitive edge.",
+    authorName: "Sanjay Iyer",
+    authorJob: "B.Com Graduate, Loyola College, Chennai",
+  },
+  {
+    id: 12,
+    authorMsg: "As a computer science student, these classes helped me refine my design skills, making me a more well-rounded engineer with a keen eye for user-centric design.",
+    authorName: "Sneha Reddy",
+    authorJob: "B.Tech in Computer Science, VIT Vellore",
+  },
+  // {
+  //   id: 13,
+  //   authorMsg: "",
+  //   authorName: "",
+  //   authorJob: "",
+  // },
 ];
 
 function Testimonials() {
   const testiSlides = testimonialData.map((card) => (
     <div className="card bg-white mx-2" key={card.id}>
       <div className="p-6">
-        <P className="mb-6 ml-2 !leading-relaxed text-lg">{card.authorMsg}</P>
-
-        <div className="flex gap-6">
-          <div className="relative w-16 h-16">
-            <Image
-              src={card.authorImg}
-              alt={card.authorName}
-              fill={true}
-              className="object-contain"
-            />
-          </div>
-          <div>
-            <P className="!text-black mt-2 font-semibold capitalize text-start">
-              {card.authorName}
-            </P>
-            <P className="mt-2 capitalize">{card.authorJob}</P>
-          </div>
-        </div>
+        <P className="mb-6 !leading-relaxed text-lg">{card.authorMsg}</P>
+        <P className="!text-black font-semibold capitalize text-start">{card.authorName}</P>
+        <P className="mt-1 capitalize">{card.authorJob}</P>
       </div>
     </div>
   ));
@@ -82,8 +105,8 @@ function Testimonials() {
           </div>
         </div>
         <div className="px-6 text-center md:text-start relative top-10 md:top-0">
-        <H2>Real <span className="text-primary">Stories</span> from Our <span className="text-primary">Students</span></H2>
-        <P className="mt-2 !text-xl">Get inspired by these stories.</P>
+          <H2>Real <span className="text-primary">Stories</span> from Our <span className="text-primary">Students</span></H2>
+          <P className="mt-2 !text-xl">Get inspired by these stories.</P>
         </div>
       </div>
       <div className="mt-16 md:mt-10 mb-6">
