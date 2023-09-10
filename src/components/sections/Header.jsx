@@ -14,10 +14,10 @@ const menu = [
     name: "Courses",
     url: "/courses",
   },
-  {
-    name: "Articles",
-    url: "/",
-  },
+  // {
+  //   name: "Articles",
+  //   url: "/",
+  // },
   {
     name: "FAQs",
     url: "/faqs",
