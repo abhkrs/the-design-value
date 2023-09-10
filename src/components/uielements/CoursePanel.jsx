@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaCircle, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import P from "../typography/P";
 import H3 from "../typography/H3";
@@ -20,7 +20,12 @@ export default function CoursePanel({
   url,
   rating,
 }) {
-  tagbg = tagbg.toString();
+  // tagbg = tagbg.toString();
+  // const backgroundColor = (color) => {
+  //   return `'bg-[#${color}]'`;
+  // };
+  console.log(tagbg);
+
   return (
     <div className="bg-white flex flex-col items-center md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0">
       <div className="relative xl:min-w-[350px] min-h-[200px]">
@@ -34,8 +39,10 @@ export default function CoursePanel({
       <div className="pl-6 mr-auto">
         <H3 className="!text-2xl">{courseName}</H3>
         <div
-          className={`bg-[#${tagbg}] bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
-        
+          className={`${
+            tagbg && "bg-[#" + tagbg + "]"
+          } bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
+          style={{ backgroundColor: tagbg || "red" }}
         >
           {tag}
         </div>
@@ -44,7 +51,7 @@ export default function CoursePanel({
           {liveClass}
         </P>
         <div className="flex font-semibold my-2 items-start">
-          <span className="text-gold">{rating}</span> 
+          <span className="text-gold">{rating}</span>
           <StarRating rating={parseFloat(rating) || 0} />
         </div>
         <span className="text-gray-500 !text-lg md:font-semibold">
