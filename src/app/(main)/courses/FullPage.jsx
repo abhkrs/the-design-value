@@ -1,17 +1,17 @@
 "use client";
 
 import H1 from "@/components/typography/H1";
-import H2 from "@/components/typography/H2";
 import P from "@/components/typography/P";
 import CoursePanel from "@/components/uielements/CoursePanel";
 import Section from "@/components/uielements/Section";
 import { useEffect, useState } from "react";
 import api from "../../../../utils/api";
-import Image from "next/image";
-import Link from "next/link";
+import SkeletonLoader from "@/components/uielements/SkeletonLoader";
 export default function FullPage() {
   const [allCourses, setAllCourses] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const numberOfSkeletons = 4;
+
   useEffect(() => {
     const getAllCourse = async () => {
       const response = await api.get("/Courses/allCourses");
@@ -42,6 +42,32 @@ export default function FullPage() {
         </P>
       </Section>
       <div className="2xl:container md:p-4 md:px-12 lg:px-28 mx-auto">
+        {!isLoaded &&
+          Array.from({ length: numberOfSkeletons }, (_, index) => (
+            <div
+              key={index}
+              className="bg-white flex flex-col items-center md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0 mb-5"
+            >
+              <div className="relative xl:min-w-[350px] min-h-[200px]">
+                <SkeletonLoader className={"min-w-[350px] min-h-[200px]"} />
+              </div>
+              <div className="pl-6 mr-auto basis-[60%] mt-auto">
+                <SkeletonLoader className={"!w-[70%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!w-[20%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!w-[30%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!w-[25%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!w-[55%] min-h-[30px] mb-3"} />
+              </div>
+              <div className="flex flex-col xl:justify-end basis-[20%]">
+                <SkeletonLoader
+                  className={"!w-[85%] min-h-[30px] mb-3 mx-auto"}
+                />
+                <SkeletonLoader
+                  className={"!w-[100%] min-h-[40px] mb-3 !rounded-lg"}
+                />
+              </div>
+            </div>
+          ))}
         {isLoaded &&
           allCourses &&
           allCourses.map((courseDetails, index) => (
@@ -57,6 +83,7 @@ export default function FullPage() {
                 courseFor={courseDetails.For}
                 type={courseDetails.Type}
                 perMonth={courseDetails.PerMonth}
+                rating={courseDetails?.Rating}
                 url={`/courses/${courseDetails.slug}`}
               />
             </div>

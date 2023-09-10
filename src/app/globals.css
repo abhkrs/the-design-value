@@ -1,34 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Serif+Text&family=Lato:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Serif+Text&family=Lato:wght@400;700&display=swap");
 
 body {
   background: #f2fafb;
 }
 
-h1, h2, h3, h4, h5, h6, .dm-sans {
-  font-family: 'DM Serif Display', serif !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.dm-sans {
+  font-family: "DM Serif Display", serif !important;
   font-weight: 700;
 }
 
-.alice-carousel__dots-item{
+.alice-carousel__dots-item {
   width: 16px !important;
-  height: 16PX !important;
+  height: 16px !important;
   border-radius: 10px !important;
 }
 
-.alice-carousel__dots-item:hover{
+.alice-carousel__dots-item:hover {
   background: #397367 !important;
 }
 
-.alice-carousel__dots .__active{
+.alice-carousel__dots .__active {
   background: #397367 !important;
   width: 32px !important;
   border-radius: 10px !important;
 }
 
-.shadow-top{
+.shadow-top {
   filter: drop-shadow(0px -7px 11px rgba(0, 0, 0, 0.19));
 }
 
@@ -38,15 +44,32 @@ h1, h2, h3, h4, h5, h6, .dm-sans {
 
 @keyframes slideLeft {
   0% {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
   50% {
     transform: translateX(-25%);
-    opacity: 0.0;
-}
+    opacity: 0;
+  }
   100% {
-      transform: translateX(-100%);
-      opacity: 0;
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* skeleton loader */
+
+.skeleton-loader {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
   }
 }

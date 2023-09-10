@@ -45,6 +45,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
       });
     }
   };
+  console.log(selectedCourse);
   return (
     <>
       <ToastContainer
@@ -61,7 +62,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
       />
       <div className="bg-white p-8 rounded w-full relative lg:px-16">
         <H3 className="!text-2xl mb-4">
-          🧑🏽‍🎓 Register for {selectedCourse.courseName}{" "}
+          🧑🏽‍🎓 Register for {selectedCourse?.courseDetails?.CourseName}{" "}
         </H3>
         <button
           type="button"
@@ -72,7 +73,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
         </button>
         <hr />
         <P className="mt-4 bg-gold px-2 py-1 !text-white max-w-max">
-          Your Batch will start from July
+          Your Batch will start from {selectedCourse?.courseDetails?.StartMonth}
         </P>
 
         <form className="relative mt-8">

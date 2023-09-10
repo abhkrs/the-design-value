@@ -168,9 +168,9 @@ const CallbackForm = ({ onClose, courseNumber, courseDetails }) => {
                 <option value="" disabled>
                   Select a time slot
                 </option>
-                {courseData.slotId.map((slot, index) => (
-                  <option key={index} value={slot}>
-                    {slot}
+                {courseDetails?.AvailableSlots.map((slot, index) => (
+                  <option key={index} value={slot.slotUid}>
+                    {slot.slotUid}
                   </option>
                 ))}
               </select>

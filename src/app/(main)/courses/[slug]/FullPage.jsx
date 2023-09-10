@@ -10,31 +10,12 @@ import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
 import SectionDark from "@/components/uielements/SectionDark";
 import Image from "next/image";
-import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Modal from "@/components/ui/Modal";
 import AboutCourse from "@/components/sections/AboutCourse";
 import ViewCertificate from "@/components/sections/ViewCertificate";
 import CallbackForm from "@/components/APIComponents/CallbackForm";
-
-function StarRating({ rating }) {
-  const stars = [];
-  let remainingRating = rating;
-
-  for (let i = 1; i <= 5; i++) {
-    if (remainingRating >= 1) {
-      stars.push(<FaStar key={i} className="mx-1 mt-1 text-gold" />);
-      remainingRating -= 1;
-    } else if (remainingRating >= 0.5) {
-      stars.push(<FaStarHalfAlt key={i} className="mx-1 mt-1 text-gold" />);
-      remainingRating = 0; // To prevent displaying more stars
-    } else {
-      stars.push(<FaRegStar key={i} className="mx-1 mt-1 text-gold" />);
-    }
-  }
-
-  return <div className="flex items-center">{stars}</div>;
-}
+import StarRating from "@/components/uielements/StarRating";
 
 function FullPage() {
   const router = usePathname();
@@ -58,7 +39,7 @@ function FullPage() {
   } = useContext(RegistrationContext);
   const [callBackForm, setCallBackForm] = useState(false);
   useEffect(() => {
-    if (selectedCourse.courseName) {
+    if (selectedCourse && selectedCourse.courseName) {
       openRegistrationModal();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -173,7 +154,9 @@ function FullPage() {
               onClick={handleCourseClick}
               className="px-8 py-3 rounded-full bg-black hover:bg-primary !text-white !text-lg w-full my-3"
             >
-              Register for Internship & Course
+              {slug === "uiux-certification-with-100-paid-internship"
+                ? "Register for Internship & Course"
+                : "Register for Course "}
             </button>
           </div>
         </div>
