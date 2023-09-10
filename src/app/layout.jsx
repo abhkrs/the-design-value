@@ -33,7 +33,10 @@ export default function RootLayout({ children }) {
           <html lang="en">
             <body className={`${inter.className} ${dmsans.variable}`}>
               <Header />
+              <div className="min-h-[85vh]">
+
               {children}
+              </div>
               <Footer />
             </body>
           </html>

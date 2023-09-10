@@ -50,6 +50,7 @@ export function RegistrationProvider({ children }) {
   };
 
   const closeRegistrationModal = () => {
+    setSelectedCourse()
     setCourseModal(() => ({
       enabled: false,
       body: courseModalBody,

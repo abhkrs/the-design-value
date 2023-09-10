@@ -1,14 +1,11 @@
 "use client";
 
 import H1 from "@/components/typography/H1";
-import H2 from "@/components/typography/H2";
 import P from "@/components/typography/P";
 import CoursePanel from "@/components/uielements/CoursePanel";
 import Section from "@/components/uielements/Section";
 import { useEffect, useState } from "react";
 import api from "../../../../utils/api";
-import Image from "next/image";
-import Link from "next/link";
 export default function FullPage() {
   const [allCourses, setAllCourses] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -57,6 +54,7 @@ export default function FullPage() {
                 courseFor={courseDetails.For}
                 type={courseDetails.Type}
                 perMonth={courseDetails.PerMonth}
+                rating={courseDetails?.Rating}
                 url={`/courses/${courseDetails.slug}`}
               />
             </div>

@@ -4,6 +4,7 @@ import P from "../typography/P";
 import H3 from "../typography/H3";
 import Link from "next/link";
 import Image from "next/image";
+import StarRating from "./StarRating";
 
 export default function CoursePanel({
   courseName,
@@ -17,11 +18,12 @@ export default function CoursePanel({
   type,
   perMonth,
   url,
+  rating,
 }) {
   tagbg = tagbg.toString();
   return (
-    <div className="bg-white flex flex-col md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0">
-      <div className="relative xl:min-w-[350px] min-h-[300px]">
+    <div className="bg-white flex flex-col items-center md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0">
+      <div className="relative xl:min-w-[350px] min-h-[200px]">
         <Image
           src={img}
           alt={courseName}
@@ -41,13 +43,10 @@ export default function CoursePanel({
         <P className="text-secondary font-semibold min-h-[12px] mt-3 !text-lg">
           {liveClass}
         </P>
-        <span className="flex text-gold font-semibold my-2">
-          <span className="mr-2 -mt-1">4.8</span> <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStarHalfAlt />
-        </span>
+        <div className="flex font-semibold my-2 items-start">
+          <span className="text-gold">{rating}</span> 
+          <StarRating rating={parseFloat(rating) || 0} />
+        </div>
         <span className="text-gray-500 !text-lg md:font-semibold">
           <span className="block md:inline-block">
             <FaCircle className="inline mr-2 md:mx-2 w-2 h-2 mb-1 md:hidden" />
@@ -64,7 +63,7 @@ export default function CoursePanel({
           </span>
         </span>
       </div>
-      <div className="flex flex-col xl:justify-end -mt-2">
+      <div className="flex flex-col xl:justify-end mt-auto">
         <div className="relative hidden md:block xl:hidden w-full min-h-[70%] mb-4">
           <Image
             src={img}
