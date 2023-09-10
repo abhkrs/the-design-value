@@ -20,7 +20,7 @@ export default function CoursePanel({
 }) {
   tagbg = tagbg.toString();
   return (
-    <div className="bg-white flex flex-col md:flex-row px-6 py-6 md:py-10 gap-6 md:gap-0">
+    <div className="bg-white flex flex-col md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0">
       <div className="relative xl:min-w-[350px] min-h-[300px]">
         <Image
           src={img}
@@ -29,7 +29,7 @@ export default function CoursePanel({
           className="object-cover h-auto w-auto"
         />
       </div>
-      <div className="md:px-6 xl:px-8">
+      <div className="pl-6 mr-auto">
         <H3 className="!text-2xl">{courseName}</H3>
         <div
           className={`bg-[#${tagbg}] bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
@@ -37,7 +37,7 @@ export default function CoursePanel({
         >
           {tag}
         </div>
-        <P className="!text-lg xl:w-4/5">{details}</P>
+        {/* <P className="!text-lg xl:w-4/5">{details}</P> */}
         <P className="text-secondary font-semibold min-h-[12px] mt-3 !text-lg">
           {liveClass}
         </P>

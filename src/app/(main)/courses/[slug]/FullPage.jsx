@@ -10,12 +10,31 @@ import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
 import SectionDark from "@/components/uielements/SectionDark";
 import Image from "next/image";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Modal from "@/components/ui/Modal";
 import AboutCourse from "@/components/sections/AboutCourse";
 import ViewCertificate from "@/components/sections/ViewCertificate";
 import CallbackForm from "@/components/APIComponents/CallbackForm";
+
+function StarRating({ rating }) {
+  const stars = [];
+  let remainingRating = rating;
+
+  for (let i = 1; i <= 5; i++) {
+    if (remainingRating >= 1) {
+      stars.push(<FaStar key={i} className="mx-1 mt-1 text-gold" />);
+      remainingRating -= 1;
+    } else if (remainingRating >= 0.5) {
+      stars.push(<FaStarHalfAlt key={i} className="mx-1 mt-1 text-gold" />);
+      remainingRating = 0; // To prevent displaying more stars
+    } else {
+      stars.push(<FaRegStar key={i} className="mx-1 mt-1 text-gold" />);
+    }
+  }
+
+  return <div className="flex items-center">{stars}</div>;
+}
 
 function FullPage() {
   const router = usePathname();
@@ -73,13 +92,9 @@ function FullPage() {
           <P className="my-6 !text-base md:!text-lg !text-[#d4d4d4]">
             {courseDetails.Details}
           </P>
-          <div className="text-gold text-lg font-semibold flex my-4">
-            4.8
-            <FaStar className="mx-1 ml-4 mt-1" />
-            <FaStar className="mx-1 mt-1" />
-            <FaStar className="mx-1 mt-1" />
-            <FaStar className="mx-1 mt-1" />
-            <FaStarHalfAlt className="mx-1 mt-1" />
+          <div className="text-lg font-semibold flex my-4 items-start">
+            <span className="text-gold">{courseDetails?.Rating}</span>
+            <StarRating rating={parseFloat(courseDetails?.Rating) || 0} />
           </div>
           <P className="bg-secondary !text-base px-2 py-1 !text-white max-w-max font-normal">
             86% Placement Rate after internship
@@ -101,9 +116,7 @@ function FullPage() {
         </div>
         <div className="lg:w-1/3 relative lg:-top-10 z-30 hidden lg:block">
           <div className="bg-white shadow-md p-6 lg:fixed lg:mr-10">
-            <H3 className="!font-semibold !text-xl">
-              Live Mentorship Guidance
-            </H3>
+            <H3 className="!font-semibold !text-xl">{courseDetails.For}</H3>
             <P className="!text-lg my-2 !text-white !bg-[#E59819] max-w-max px-2 py-1 capitalize">
               Batch starting from {courseDetails.StartMonth}
             </P>
@@ -118,26 +131,25 @@ function FullPage() {
               registered Certification
             </div>
             <div className="border-b py-2">
-              🧑🏻‍💻 Hands-on-learning via GoogleMeet
+              🧑🏻‍💻 {courseDetails?.PopUpData?.handsOn}
             </div>
             <div className="border-b py-2">
               📆{" "}
               <span className="ml-1">
-                Batches on Mon, Tue, Wed, Fri, Sat, Sun
+                {courseDetails?.PopUpData?.batchesOn}
               </span>
             </div>
-            <div className="py-2">✅ 100% Guaranteed Internship</div>
+            <div className="py-2">✅ {courseDetails?.PopUpData?.support}</div>
             <P className="!text-sm text-gray-600 !italic pl-1">
-              <span className="font-bold">Note:</span> We will be providing
-              Internship to those students specifically, who will complete the
-              whole course and will be eligible for the certificate.
+              <span className="font-bold">Note:</span>{" "}
+              {courseDetails?.PopUpData?.jobNote}
             </P>
             <div className="mt-6 mb-3">
               <span className="p-2 bg-[#CE4863] mr-2 text-white">
-                😲 Flat 58% Off
+                😲 Flat {courseDetails.discountPercent}% Off
               </span>
-              <span className="my-auto font-semibold">
-                Hurry! Offer Valid till 20th May
+              <span className="my-auto font-semibold leading-3">
+                Hurry! Offer valid till the 20th of next month
               </span>
             </div>
             <div className="mb-3 py-2">
@@ -145,7 +157,7 @@ function FullPage() {
                 INR {courseDetails.PerMonth} per month
               </span>
               <span className="line-through text-gray-600">
-                INR 6,000 per month
+                INR {courseDetails.actualPrice} per month
               </span>
             </div>
             <button
@@ -172,7 +184,7 @@ function FullPage() {
           <div className=" flex mb-3">
             <div className="mx-auto text-center w-[40%] mt-1">
               <div className="p-2 bg-[#CE4863] mr-2 !text-sm !text-white">
-                😲 Flat 58% Off
+                😲 Flat {courseDetails.discountPercent}% Off
               </div>
               {/* <div className="my-auto !text-sm block mt-2 font-semibold">
           Hurry! Offer Valid till 20th May
@@ -180,7 +192,7 @@ function FullPage() {
             </div>
             <div className="!text-md mx-auto text-center w-[60%]">
               <div className="line-through text-gray-600">
-                INR 6,000 per month
+                INR {courseDetails.actualPrice} per month
               </div>
               <div className=" text-primary mr-2 font-bold">
                 INR 2,500 per month
@@ -208,7 +220,7 @@ function FullPage() {
       </SectionDark>
       <div className="lg:hidden">
         <div className=" p-6">
-          <H3 className="!font-semibold !text-xl">Live Mentorship Guidance</H3>
+          <H3 className="!font-semibold !text-xl"> {courseDetails.For}</H3>
           <P>
             Learn, practice, and apply job/internship ready skills with expert
             guidance
@@ -224,20 +236,16 @@ function FullPage() {
             registered Certification
           </div>
           <div className="border-b py-2">
-            🧑🏻‍💻 Hands-on-learning via GoogleMeet
+            🧑🏻‍💻 {courseDetails?.PopUpData?.handsOn}
           </div>
           <div className="border-b py-2">
             📆{" "}
-            <span className="ml-1">
-              Batches on Mon, Tue, Wed, Thu ( 7pm - 9 pm) and Sat, Sun ( 2pm - 4
-              pm)
-            </span>
+            <span className="ml-1">{courseDetails?.PopUpData?.batchesOn}</span>
           </div>
-          <div className="py-2">✅ 100% Guaranteed Internship</div>
+          <div className="py-2">✅ {courseDetails?.PopUpData?.support}</div>
           <P className="!text-sm text-gray-600 !italic pl-1">
-            <span className="font-bold">Note:</span> We will be providing
-            Internship to those students specifically, who will complete the
-            whole course and will be eligible for the certificate.
+            <span className="font-bold">Note:</span>{" "}
+            {courseDetails?.PopUpData?.jobNote}
           </P>
         </div>
       </div>
