@@ -10,7 +10,7 @@ export const RegistrationContext = createContext();
 
 export function RegistrationProvider({ children }) {
   const [courseModal, setCourseModal] = useState();
-  
+
   const [selectedCourse, setSelectedCourse] = useState({
     courseName: "",
     courseId: "",
@@ -40,8 +40,6 @@ export function RegistrationProvider({ children }) {
     />
   );
 
-  
-
   const openRegistrationModal = () => {
     setCourseModal(() => ({
       enabled: true,
@@ -50,7 +48,7 @@ export function RegistrationProvider({ children }) {
   };
 
   const closeRegistrationModal = () => {
-    setSelectedCourse()
+    setSelectedCourse();
     setCourseModal(() => ({
       enabled: false,
       body: courseModalBody,
@@ -65,6 +63,7 @@ export function RegistrationProvider({ children }) {
 
   useEffect(() => {
     if (userDetails && userDetails?.uuid) {
+      setSelectedCourse();
       handleSubscribe(userDetails);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,7 +100,6 @@ export function RegistrationProvider({ children }) {
         closeRegistrationModal,
         getCourseName,
         submitUserDetails,
-        
       }}
     >
       {children}
