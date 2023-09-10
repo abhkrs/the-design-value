@@ -11,7 +11,6 @@ export default function CoursePanel({
   img,
   tag,
   tagbg,
-  details,
   liveClass,
   duration,
   courseFor,
@@ -20,11 +19,9 @@ export default function CoursePanel({
   url,
   rating,
 }) {
-  // tagbg = tagbg.toString();
-  // const backgroundColor = (color) => {
-  //   return `'bg-[#${color}]'`;
-  // };
-  console.log(tagbg);
+  useEffect(() => {
+    console.log(tagbg);
+  }, [tagbg]);
 
   return (
     <div className="bg-white flex flex-col items-center md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0">
@@ -38,14 +35,17 @@ export default function CoursePanel({
       </div>
       <div className="pl-6 mr-auto">
         <H3 className="!text-2xl">{courseName}</H3>
-        <div
-          className={`${
-            tagbg && "bg-[#" + tagbg + "]"
-          } bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
-          style={{ backgroundColor: tagbg || "red" }}
-        >
-          {tag}
-        </div>
+        {tagbg && (
+          <div
+            className={`${
+              tagbg && "bg-[#" + tagbg + "]"
+            } bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded ${
+              tagbg && "text-[#" + tagbg + "]"
+            }`}
+          >
+            {tag}
+          </div>
+        )}
         {/* <P className="!text-lg xl:w-4/5">{details}</P> */}
         <P className="text-secondary font-semibold min-h-[12px] mt-3 !text-lg">
           {liveClass}

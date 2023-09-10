@@ -154,7 +154,9 @@ function FullPage() {
               onClick={handleCourseClick}
               className="px-8 py-3 rounded-full bg-black hover:bg-primary !text-white !text-lg w-full my-3"
             >
-              Register for Internship & Course
+              {slug === "uiux-certification-with-100-paid-internship"
+                ? "Register for Internship & Course"
+                : "Register for Course "}
             </button>
           </div>
         </div>
