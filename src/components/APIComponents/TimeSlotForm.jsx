@@ -107,7 +107,7 @@ const TimeSlotForm = () => {
         <form onSubmit={handleSubmit} className="space-y-4 lg:col-span-2">
           <div className="grid grid-cols-2 gap-6">
             <div>
-              {/* <label className='block p-2 '>
+              <label className='block p-2 '>
                 From Date:
                 <input
                   type="date"
@@ -115,8 +115,8 @@ const TimeSlotForm = () => {
                   onChange={(e) => setFromDate(e.target.value)}
                   className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
                 />
-              </label> */}
-              <label className='block p-2'>
+              </label>
+              {/* <label className='block p-2'>
                 From Date:
                 <input
                   type="date"
@@ -124,7 +124,7 @@ const TimeSlotForm = () => {
                   onChange={(e) => setFromDate(e.target.value)}
                   className="border border-gray-300 px-4 py-3 w-full rounded placeholder-secondary text-lg"
                 />
-              </label>
+              </label> */}
 
               <label className='block p-2 '>
                 Start Hour:
