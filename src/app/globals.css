@@ -63,9 +63,6 @@ h6,
   width: 100%;
   height: 100%;
   background-color: #f0f0f0;
-  animation-duration: 1s; /* Adjust the animation duration as needed */
-  animation-timing-function: linear; /* Optional: Adjust the timing function */
-  animation-iteration-count: infinite; /* Optional: Make the animation repeat */
 }
 
 @keyframes skeleton-loading {
