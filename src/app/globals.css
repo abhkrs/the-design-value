@@ -73,3 +73,12 @@ h6,
     background-position: 200px 0;
   }
 }
+
+.faq-contents p, .faq-contents li{
+  margin-bottom: 10px;
+}
+.faq-contents ul{
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding-left: 15px;
+}
