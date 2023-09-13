@@ -151,20 +151,22 @@ const Accordion = () => {
                   </span>
                 </div>
                 <div
-                  className={`flex ${index === activeIndex ? "active" : ""}`}
+                  className={`flex relative ${index === activeIndex ? "active" : ""}`}
                   onClick={() => toggleAccordion(index)}
                 >
+                  <div className="mr-14">
                   <span className="!text-4xl dm-sans text-secondary font-bold mr-4 hidden md:block">
                     {index < 10 ? "0" : ""}{index + 1}
                   </span>
                   <span className="text-xl md:text-2xl font-semibold mt-2 md:mt-0">{item.title}</span>
-                  <button className="ml-auto">
+                  </div>
+                  <button className="absolute right-0">
                     <Image
                       src={index === activeIndex ? "/images/xmark.png" : "/images/plus.png"}
                       alt="plus minus"
                       height="35"
                       width="35"
-                      className="!h-12 md:!h-auto !w-14 ml-2 md:!w-auto"
+                      className="h-8 w-8 md:h-14 md:w-14"
                     />
                   </button>
                 </div>
