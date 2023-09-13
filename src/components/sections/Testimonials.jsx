@@ -88,9 +88,9 @@ const testimonialData = [
 
 function Testimonials() {
   const testiSlides = testimonialData.map((card) => (
-    <div className="card bg-white mx-2" key={card.id}>
-      <div className="p-6">
-        <P className="mb-6 !leading-relaxed text-lg">{card.authorMsg}</P>
+    <div className="card flex flex-col justify-between p-6 bg-white mx-2 min-h-[320px] sm:min-h-[250px] md:min-h-[280px] lg:min-h-[300px] xl:min-h-[220px]" key={card.id}>
+      <P className="mb-1 !leading-relaxed text-lg">{card.authorMsg}</P>
+      <div>
         <P className="!text-black font-semibold capitalize text-start">{card.authorName}</P>
         <P className="mt-1 capitalize">{card.authorJob}</P>
       </div>

@@ -115,8 +115,8 @@ const MentorsForm = () => {
       </div>
       <div className="relative">
         {isOpen && (
-          <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
-            <div className="bg-white p-8 rounded shadow-lg w-2/3 relative lg:px-16">
+          <div className="fixed top-0 left-0 right-0 bottom-0 overflow-y-auto bg-black bg-opacity-75 z-50 flex items-center justify-center">
+            <div className="bg-white p-8 mt-32 sm:mt-0 rounded shadow-lg sm:w-2/3 relative lg:px-16">
               <H3 className="!text-2xl mb-4">😇 We are eager to know you!</H3>
               <button
                 onClick={() => {
@@ -134,7 +134,7 @@ const MentorsForm = () => {
               <hr />
 
               <form onSubmit={handleSubmit} className="relative mt-8">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   {/* First Column */}
                   <div>
                     <div className="mb-4">
@@ -147,6 +147,16 @@ const MentorsForm = () => {
                         className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
                       />
                     </div>
+                    <div className="mb-4 md:hidden">
+                      <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Your Email ID*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
                     <div className="mb-4">
                       <input
                         type="tel"
@@ -155,6 +165,26 @@ const MentorsForm = () => {
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Your Mobile Number*"
                         className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary w-full"
+                      />
+                    </div>
+                    <div className="mb-4 md:hidden">
+                      <input
+                        type="text"
+                        id="linkedin"
+                        value={linkedin}
+                        onChange={(e) => setLinkedin(e.target.value)}
+                        placeholder="LinkedIn Profile"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
+                    <div className="mb-4 md:hidden">
+                      <input
+                        type="text"
+                        id="city"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="City*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
                       />
                     </div>
                     <div className="mb-4">
@@ -187,9 +217,19 @@ const MentorsForm = () => {
                         className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
                       />
                     </div>
+                    <div className="mb-4 md:hidden">
+                      <input
+                        type="text"
+                        id="salary"
+                        value={salary}
+                        onChange={(e) => setSalary(e.target.value)}
+                        placeholder="Expected Salary per Month*"
+                        className="border border-gray-300 px-3 py-2 w-full rounded placeholder-secondary"
+                      />
+                    </div>
                   </div>
                   {/* Second Column */}
-                  <div>
+                  <div className="hidden md:block">
                     <div className="mb-4">
                       <input
                         type="email"

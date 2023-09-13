@@ -38,15 +38,15 @@ const newResponsive = {
   0: {
     items: 1,
   },
-  992: {
+  700: {
     items: 2,
   },
 };
 
 export default function Mentors() {
   const mentorSlides = mentormonialData.map((card) => (
-    <div className="bg-white grid grid-cols-7 rounded-lg p-5 mx-2 xl:min-h-[240px] lg:min-h-[260px]" key={card.id}>
-      <div className="relative h-full w-full col-span-3">
+    <div className="bg-white grid lg:grid-cols-2 xl:grid-cols-7 rounded-lg p-5 mx-2 md:min-h-[500px] lg:min-h-[400px] xl:min-h-[220px]" key={card.id}>
+      <div className="relative h-full w-full xl:col-span-3 min-h-[210px] sm:min-h-[300px] lg:min-h-[220px]">
         <Image
           src={card.mentorImg}
           alt={card.mentorName}
@@ -54,10 +54,12 @@ export default function Mentors() {
           className="object-cover rounded-md"
         />
       </div>
-      <div className="ml-4 relative col-span-4">
+      <div className="lg:ml-4 mt-4 lg:mt-0 xl:col-span-4 flex flex-col justify-between">
+        <div className="relative">
         <Link href="#" className="absolute top-1 right-0 bg-secondary bg-opacity-50 rounded-full"><FaLinkedinIn className="h-10 w-10 text-primary p-2"/></Link>
         <P className="!text-black font-semibold capitalize !text-2xl mr-10">{card.mentorName}</P>
         <P className="mr-10 mb-4 mt-1">Mentor at <span className="text-secondary text-lg">TheDesignValue</span></P>
+        </div>
         <P className="mb-4 mr-4 !leading-relaxed text-lg">{card.mentorMsg}</P>
         <P className="mt-2 mr-4 capitalize !text-[#E59819] italic">{card.mentorExp}+ years of industry experience</P>
       </div>
