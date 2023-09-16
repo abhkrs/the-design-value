@@ -9,6 +9,7 @@ export const PaymentContext = createContext();
 export function PaymentProvider({ children }) {
   const router = useRouter();
   const handleSubscribe = async (data) => {
+    console.log(data);
     await initializeRazorpay();
     const subscribe = await fetch("/api/createorder", {
       method: "POST",
@@ -40,8 +41,11 @@ export function PaymentProvider({ children }) {
           paymentStatus: 1,
           reason: `NA`,
         };
+        if (data.regId) {
+          payload.RegId = data.regId;
+        }
 
-        const paymentResponse = await api.post("/Register/regUsr", payload);
+        const paymentResponse = await api.post(data?.apiUrl, payload);
 
         console.log(paymentResponse);
         if (paymentResponse.status === "Success") {
@@ -56,7 +60,8 @@ export function PaymentProvider({ children }) {
           });
         }
 
-        router.push("/payment-success");
+        router.push(data?.callBackUrl || "/payment-success");
+        location.reload();
       },
     };
 

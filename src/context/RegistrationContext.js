@@ -79,7 +79,13 @@ export function RegistrationProvider({ children }) {
         courseUid: response?.courseUid,
         batchId: response?.batchId,
         coursePrice: selectedCourse.coursePrice,
+        apiUrl: "/Register/regUsr",
+        callBackUrl: "/payment-success",
       }));
+      toast.success(response?.message, {
+        autoClose: 3000,
+        theme: "colored",
+      });
     } else {
       toast.error(response?.message, {
         autoClose: 3000,

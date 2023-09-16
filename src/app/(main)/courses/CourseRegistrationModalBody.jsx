@@ -45,7 +45,6 @@ function CourseRegistrationModalBody({ selectedCourse }) {
       });
     }
   };
-  console.log(selectedCourse);
   return (
     <>
       <ToastContainer
