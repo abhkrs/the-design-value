@@ -42,7 +42,7 @@ export default function Page() {
     console.log(response);
     setshowLoader(false);
     if (response.status === "Failed") {
-      toast.error(response.message, {
+      toast.error(response.message.__all__[0], {
         autoClose: 3000,
         theme: "colored",
       });

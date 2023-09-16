@@ -10,10 +10,13 @@ import { FaCheckSquare, FaCircle } from "react-icons/fa";
 import AuthWrap from "../AuthWrap";
 import { useEffect, useState } from "react";
 import { decryptData } from "../../../../../utils/encryption";
+import Modal from "@/components/ui/Modal";
+import ResetPassword from "./ResetPassword";
 
 export default function Page() {
   const [userDetails, setUserDetails] = useState({});
   const [courseList, setCourseList] = useState([]);
+  const [resetPasswordModal, setResetPasswordModal] = useState();
   useEffect(() => {
     const userDetails = sessionStorage.getItem("userDetails");
     const registrationData = sessionStorage.getItem("registrationData");
@@ -26,9 +29,18 @@ export default function Page() {
       setCourseList(decryptedRegistrationData);
     }
   }, []);
+  const openResetPasswordModal = () => {
+    setResetPasswordModal(() => ({
+      enabled: true,
+      body: ResetPassword,
+      header: 'Reset your password',
+      noOutSideClose: true
+    }));
+  };
   return (
     <AuthWrap>
       <main>
+      <Modal {...resetPasswordModal} />
         <Section>
           <div className="grid gap-10 mt-6">
             <div className="bg-white p-6 md:p-10 grid lg:grid-cols-3 gap-6">
@@ -45,9 +57,9 @@ export default function Page() {
                 </P>
               </div>
               <div className="flex flex-col align-end justify-center gap-6">
-                <a className="text-secondary text-xl text-end cursor-pointer">
+                <button type="button" onClick={openResetPasswordModal} className="text-secondary text-xl text-end cursor-pointer">
                   Reset Your Password?
-                </a>
+                </button>
                 <Link
                   href="/contact"
                   className="rounded-md bg-black !text-white text-xl hover:bg-primary px-6 py-3 max-w-max min-w-max mx-auto lg:ms-auto lg:me-0"
