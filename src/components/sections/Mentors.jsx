@@ -38,15 +38,15 @@ const newResponsive = {
   0: {
     items: 1,
   },
-  700: {
+  900: {
     items: 2,
   },
 };
 
 export default function Mentors() {
   const mentorSlides = mentormonialData.map((card) => (
-    <div className="bg-white grid lg:grid-cols-2 xl:grid-cols-7 rounded-lg p-5 mx-2 md:min-h-[500px] lg:min-h-[400px] xl:min-h-[220px]" key={card.id}>
-      <div className="relative h-full w-full xl:col-span-3 min-h-[210px] sm:min-h-[300px] lg:min-h-[220px]">
+    <div className="bg-white grid lg:grid-cols-2 xl:grid-cols-7 rounded-lg p-5 mx-2 min-h-[500px] md:min-h-[570px] lg:min-h-[410px] xl:min-h-[220px]" key={card.id}>
+      <div className="relative h-full w-full xl:col-span-3 min-h-[210px] sm:min-h-[350px] md:min-h-[300px] lg:min-h-[220px]">
         <Image
           src={card.mentorImg}
           alt={card.mentorName}
