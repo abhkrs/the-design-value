@@ -18,6 +18,58 @@ h6,
   font-weight: 700;
 }
 
+@media (max-width:600px) {
+  .testi .alice-carousel__dots{
+    display: none !important;
+  }
+
+  .alice-carousel__prev-btn, .alice-carousel__next-btn{
+    display: block;
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    z-index: 9;
+    width: 40px !important;
+    height: 40px !important;
+    
+  }
+
+  .alice-carousel__prev-btn{
+    left: -20px;
+  }
+
+  .alice-carousel__next-btn{
+    right: -10px;
+  }
+
+  .testi .alice-carousel__prev-btn p,.testi .alice-carousel__next-btn p{
+    border-radius: 50%;
+    background: #cecece80;
+    height: 40px !important;
+    width: 40px !important;
+    box-shadow: 0 5px 5px #0002;
+  }
+
+  .testi .alice-carousel__prev-btn p span,.testi .alice-carousel__next-btn p span{
+    position: relative;
+    color: #000 !important;
+    font-size: 26px;
+    top: -5px;
+  }
+  .testi .alice-carousel__prev-btn p span{
+    left: -7px;
+  }
+  .testi .alice-carousel__next-btn p span{
+    right: -7px;
+  }
+}
+
+@media (min-width:600px) {
+  .alice-carousel__prev-btn, .alice-carousel__next-btn{
+    display: none !important;
+  }
+}
+
 .alice-carousel__dots-item {
   width: 16px !important;
   height: 16px !important;

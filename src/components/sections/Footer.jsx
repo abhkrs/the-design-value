@@ -70,38 +70,43 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <H3 className="!text-white !text-xl mb-4">Connect with us</H3>
+            <H3 className="!text-white !text-xl mb-4">Connect With Us</H3>
             <div className="flex text-secondary gap-4 text-xl">
               <Link
-                href="https://www.facebook.com/"
+                href="https://www.facebook.com/profile.php?id=100079632523791"
+                target="_blank"
                 className="hover:bg-primary bg-primary rounded-full p-1"
               >
                 <FaFacebookF />
               </Link>
 
-              <Link
+              {/* <Link
                 href="https://twitter.com/"
+                target="_blank"
                 className="hover:bg-primary bg-primary rounded-full p-1"
               >
                 <FaTwitter />
-              </Link>
+              </Link> */}
 
               <Link
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/thedesignvalue.in/"
+                target="_blank"
                 className="hover:bg-primary bg-primary rounded-full p-1"
               >
                 <FaInstagram />
               </Link>
 
-              <Link
+              {/* <Link
                 href="https://www.pinterest.com/"
+                target="_blank"
                 className="hover:bg-primary bg-primary rounded-full p-1"
               >
                 <FaPinterestP />
-              </Link>
+              </Link> */}
 
               <Link
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/company/the-design-value/"
+                target="_blank"
                 className="hover:bg-primary bg-primary rounded-full p-1"
               >
                 <FaLinkedinIn />

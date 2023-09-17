@@ -86,9 +86,10 @@ const testimonialData = [
   // },
 ];
 
+
 function Testimonials() {
   const testiSlides = testimonialData.map((card) => (
-    <div className="card flex flex-col justify-between p-6 bg-white mx-2 min-h-[320px] sm:min-h-[250px] md:min-h-[280px] lg:min-h-[300px] xl:min-h-[242px]" key={card.id}>
+    <div className="card shadow-md rounded-md mb-2 flex flex-col justify-between p-6 bg-white mx-2 min-h-[320px] sm:min-h-[250px] md:min-h-[280px] lg:min-h-[300px] xl:min-h-[242px]" key={card.id}>
       <P className="mb-1 !leading-relaxed text-lg">{card.authorMsg}</P>
       <div>
         <P className="!text-black font-semibold capitalize text-start">{card.authorName}</P>
@@ -97,7 +98,7 @@ function Testimonials() {
     </div>
   ));
   return (
-    <Section className="mt-4">
+    <Section className="mt-4 testi">
       <div className="h-32 relative flex flex-col justify-end">
         <div className="absolute top-0 md:!left-0 left-[50%] translate-x-[-50%]">
           <div className="relative h-16 w-16 md:h-24 md:w-28">
@@ -109,8 +110,8 @@ function Testimonials() {
           <P className="mt-2 !text-xl">Get inspired by these stories.</P>
         </div>
       </div>
-      <div className="mt-16 md:mt-10 mb-6">
-        <Slider slides={testiSlides} noControl noDots={false} />
+      <div className="mt-16 md:mt-10 mb-6 relative">
+        <Slider slides={testiSlides} noControl={false} noDots={false} />
       </div>
     </Section>
   );

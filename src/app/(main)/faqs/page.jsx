@@ -154,7 +154,7 @@ const Accordion = () => {
                   className={`flex relative ${index === activeIndex ? "active" : ""}`}
                   onClick={() => toggleAccordion(index)}
                 >
-                  <div className="mr-14">
+                  <div className="md:mr-14 mr-9">
                   <span className="!text-4xl dm-sans text-secondary font-bold mr-4 hidden md:block">
                     {index < 10 ? "0" : ""}{index + 1}
                   </span>
