@@ -11,6 +11,10 @@ import { decryptData } from "../../../utils/encryption";
 
 const menu = [
   {
+    name: "Home",
+    url: "/",
+  },
+  {
     name: "Courses",
     url: "/courses",
   },

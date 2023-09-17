@@ -9,16 +9,12 @@ body {
 
 h1,
 h2,
-h3,
-h4,
-h5,
-h6,
 .dm-sans {
   font-family: "DM Serif Display", serif !important;
   font-weight: 700;
 }
 
-@media (max-width:600px) {
+@media (max-width:640px) {
   .testi .alice-carousel__dots{
     display: none !important;
   }
@@ -64,7 +60,7 @@ h6,
   }
 }
 
-@media (min-width:600px) {
+@media (min-width:640px) {
   .alice-carousel__prev-btn, .alice-carousel__next-btn{
     display: none !important;
   }

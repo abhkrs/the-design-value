@@ -99,7 +99,7 @@ export default function Page() {
               src="/images/login.png"
               fill={true}
               alt="login page image"
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full object-top"
             />
           </div>
         </div>

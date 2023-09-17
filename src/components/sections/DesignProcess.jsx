@@ -37,8 +37,7 @@ export default function DesignProcess() {
           <div className="lg:pr-6 pr-auto text-center lg:text-start">
             <H3>Research</H3>
             <P>
-              Gain insights and understand user needs to inform the design
-              process.
+              Gain insights and understand user needs to inform the design process.
             </P>
           </div>
         </div>
@@ -62,10 +61,9 @@ export default function DesignProcess() {
             </div>
           </div>
           <div className="lg:pr-6 pr-auto text-center lg:text-start">
-            <H3>Research</H3>
+            <H3>Define</H3>
             <P>
-              Gain insights and understand user needs to inform the design
-              process.
+            Clearly articulate the problem statement and define the scope of the design project.
             </P>
           </div>
         </div>
@@ -89,10 +87,9 @@ export default function DesignProcess() {
             </div>
           </div>
           <div className="lg:pr-6 pr-auto text-center lg:text-start">
-            <H3>Research</H3>
+            <H3>Ideate</H3>
             <P>
-              Gain insights and understand user needs to inform the design
-              process.
+            Generate creative and diverse ideas to explore potential design solutions.
             </P>
           </div>
         </div>
@@ -108,10 +105,9 @@ export default function DesignProcess() {
             </div>
           </div>
           <div className="lg:pr-6 pr-auto text-center lg:text-start">
-            <H3>Research</H3>
+            <H3>Design</H3>
             <P>
-              Gain insights and understand user needs to inform the design
-              process.
+            Transform ideas into visually appealing and functional designs that meet user requirements.
             </P>
           </div>
         </div>

@@ -101,7 +101,7 @@ export default function Page() {
                   href="tel:+916290191296"
                   className="rounded-md bg-black !text-white text-xl hover:bg-primary px-6 py-3 max-w-max min-w-max mx-auto lg:ms-auto lg:me-0"
                 >
-                  +91 6290191296
+                  Contact Us
                 </Link>
               </div>
             </div>

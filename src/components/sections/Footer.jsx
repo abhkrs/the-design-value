@@ -27,22 +27,21 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <H3 className="!text-white !text-xl mb-3">Quick Links</H3>
             <P>
               <Link
                 href="/cources"
-                className="rounded-full p-1 flex gap-2 text-white hover:text-secondary"
+                className="p-1 flex gap-2 text-white hover:text-secondary"
               >
-                - Cources
+                Courses
               </Link>
             </P>
 
             <P>
               <Link
                 href="/faqs"
-                className="rounded-full p-1 flex gap-2 text-white hover:text-secondary"
+                className="p-1 flex gap-2 text-white hover:text-secondary"
               >
-                - FAQs
+                FAQs
               </Link>
             </P>
 
@@ -75,7 +74,7 @@ export default function Footer() {
               <Link
                 href="https://www.facebook.com/profile.php?id=100079632523791"
                 target="_blank"
-                className="hover:bg-primary bg-primary rounded-full p-1"
+                className="hover:bg-primary bg-transparent text-white rounded-full p-1"
               >
                 <FaFacebookF />
               </Link>
@@ -91,7 +90,7 @@ export default function Footer() {
               <Link
                 href="https://www.instagram.com/thedesignvalue.in/"
                 target="_blank"
-                className="hover:bg-primary bg-primary rounded-full p-1"
+                className="hover:bg-primary bg-transparent text-white rounded-full p-1"
               >
                 <FaInstagram />
               </Link>
@@ -107,7 +106,7 @@ export default function Footer() {
               <Link
                 href="https://www.linkedin.com/company/the-design-value/"
                 target="_blank"
-                className="hover:bg-primary bg-primary rounded-full p-1"
+                className="hover:bg-primary bg-transparent text-white rounded-full p-1"
               >
                 <FaLinkedinIn />
               </Link>

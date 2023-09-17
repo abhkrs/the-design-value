@@ -7,8 +7,8 @@ import Image from 'next/image'
 export default function StudentsWorking() {
   return (
     <SectionDark>
-        <div className="grid md:grid-cols-2">
-            <div className="flex flex-col justify-center py-20">
+        <div className="grid md:grid-cols-2 text-center md:text-start">
+            <div className="flex flex-col justify-center lg:my-20 md:py-12 py-8">
                 <H2 className="text-white capitalize">Current students <span className='lg:block lg:mt-4'>working in...</span></H2>
                 <P className="!text-white !text-xl mt-6">Join our vibrant design community and unlock your potential in UI/UX design. Our talented students have secured exciting positions in renowned companies, making their mark in the industry and IT networks with their creativity and expertise.</P>
             </div>

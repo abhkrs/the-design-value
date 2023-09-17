@@ -7,7 +7,7 @@ import H4 from "../typography/H4";
 
 export default function LearningExp() {
   return (
-    <Section className="grid md:grid-cols-2 gap-6 my-20">
+    <Section className="grid md:grid-cols-2 gap-6 lg:my-20 md:py-12 py-8">
       <div className="relative min-h-[300px] order-2 md:order-1">
         <Image
           src="/images/learning-experience.png"

@@ -146,7 +146,7 @@ const Accordion = () => {
             {accordionData.map((item, index) => (
               <div key={index} className="bg-white p-6 md:rounded-lg shadow">
                 <div>
-                  <span className="!text-4xl text-gray-400 font-bold mr-4 md:hidden">
+                  <span className="!text-4xl text-secondary font-bold mr-4 md:hidden">
                     {index < 10 ? "0" : ""}{index + 1}
                   </span>
                 </div>
@@ -154,26 +154,26 @@ const Accordion = () => {
                   className={`flex relative ${index === activeIndex ? "active" : ""}`}
                   onClick={() => toggleAccordion(index)}
                 >
-                  <div className="md:mr-14 mr-9">
-                  <span className="!text-4xl dm-sans text-secondary font-bold mr-4 hidden md:block">
-                    {index < 10 ? "0" : ""}{index + 1}
-                  </span>
-                  <span className="text-xl md:text-2xl font-semibold mt-2 md:mt-0">{item.title}</span>
+                  <div className="md:mr-11 mr-9 md:flex">
+                    <span className="!text-4xl dm-sans text-secondary font-bold mr-4 hidden md:block">
+                      {index < 10 ? "0" : ""}{index + 1}
+                    </span>
+                    <span className="text-xl md:text-2xl font-semibold mt-2 md:mt-1 cursor-pointer">{item.title}</span>
                   </div>
-                  <button className="absolute right-0">
+                  <button className="absolute right-0 top-0">
                     <Image
                       src={index === activeIndex ? "/images/xmark.png" : "/images/plus.png"}
                       alt="plus minus"
                       height="35"
                       width="35"
-                      className="h-8 w-8 md:h-14 md:w-14"
+                      className="h-8 w-8 md:h-10 md:w-10"
                     />
                   </button>
                 </div>
                 {index === activeIndex && (
-                  <div className="faq-contents">
+                  <div className="faq-contents md:mr-12 lg:mr-18">
                     {index === activeIndex && (
-                      <div className="-ml-3 md:ml-10 p-3 pb-0 md:mt-0 text-lg">
+                      <div className="-ml-3 md:ml-10 p-3 pb-0 md:mt-0 text-lg text-[#3C3C43]">
                         <div dangerouslySetInnerHTML={{ __html: item.content }} />
                       </div>
                     )}

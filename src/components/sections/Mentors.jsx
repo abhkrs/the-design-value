@@ -60,18 +60,18 @@ export default function Mentors() {
         <P className="!text-black font-semibold capitalize !text-2xl mr-10">{card.mentorName}</P>
         <P className="mr-10 mb-4 mt-1">Mentor at <span className="text-secondary text-lg">TheDesignValue</span></P>
         </div>
-        <P className="mb-4 mr-4 !leading-relaxed text-lg">{card.mentorMsg}</P>
-        <P className="mt-2 mr-4 capitalize !text-[#E59819] italic">{card.mentorExp}+ years of industry experience</P>
+        <P className="mb-4 mr-4 !leading-relaxed text-lg text-center sm:text-start">{card.mentorMsg}</P>
+        <P className="mt-2 mr-4 capitalize !text-[#E59819] italic text-center sm:text-start">{card.mentorExp}+ years of industry experience</P>
       </div>
     </div>
   ));
 
   return (
-    <Section className="py-14">
-      <H2>
+    <Section className="md:py-14 py-8">
+      <H2 className="text-center md:text-start">
         Meet Our <span className="text-secondary">Mentors</span>
       </H2>
-      <div className="mt-16 md:mt-10 mb-6 -ml-2">
+      <div className="mt-8 md:mt-10 mb-6 -ml-2">
         <Slider slides={mentorSlides} noControl noDots={false} responsive={newResponsive} />
       </div>
     </Section>

@@ -89,10 +89,10 @@ const testimonialData = [
 
 function Testimonials() {
   const testiSlides = testimonialData.map((card) => (
-    <div className="card shadow-md rounded-md mb-2 flex flex-col justify-between p-6 bg-white mx-2 min-h-[320px] sm:min-h-[250px] md:min-h-[280px] lg:min-h-[300px] xl:min-h-[242px]" key={card.id}>
+    <div className="card text-center md:text-start shadow-md rounded-md mb-2 flex flex-col justify-between p-6 bg-white mx-2 min-h-[320px] sm:min-h-[250px] md:min-h-[280px] lg:min-h-[300px] xl:min-h-[242px]" key={card.id}>
       <P className="mb-1 !leading-relaxed text-lg">{card.authorMsg}</P>
       <div>
-        <P className="!text-black font-semibold capitalize text-start">{card.authorName}</P>
+        <P className="!text-black font-semibold capitalize">{card.authorName}</P>
         <P className="mt-1 capitalize">{card.authorJob}</P>
       </div>
     </div>
@@ -101,17 +101,20 @@ function Testimonials() {
     <Section className="mt-4 testi">
       <div className="h-32 relative flex flex-col justify-end">
         <div className="absolute top-0 md:!left-0 left-[50%] translate-x-[-50%]">
-          <div className="relative h-16 w-16 md:h-24 md:w-28">
+          <div className="relative h-12 w-16 md:h-24 md:w-28">
             <Image src="/images/quote.png" fill={true} className={""} alt="" />
           </div>
         </div>
-        <div className="px-6 text-center md:text-start relative top-10 md:top-0">
+        <div className="px-6 text-center md:text-start relative top-14 md:top-0">
           <H2>Real <span className="text-primary">Stories</span> from Our <span className="text-primary">Students</span></H2>
           <P className="mt-2 !text-xl">Get inspired by these stories.</P>
         </div>
       </div>
-      <div className="mt-16 md:mt-10 mb-6 relative">
-        <Slider slides={testiSlides} noControl={false} noDots={false} />
+      <div className="mt-20 md:mt-10 mb-6 relative">
+        <Slider slides={testiSlides} noControl noDots={false} />
+          <div className="flex justify-center gap-4 mt-2 sm:hidden">
+            <P className="!text-4xl !text-primary">&lsaquo;</P> <P className="!text-4xl !text-primary">&rsaquo;</P>
+          </div>
       </div>
     </Section>
   );

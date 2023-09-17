@@ -38,7 +38,7 @@ export default function CoursePanel({
 
   return (
     <div className="bg-white flex flex-col items-center md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0">
-      <div className="relative xl:min-w-[350px] min-h-[200px]">
+      <div className="relative min-w-full md:hidden lg:block lg:min-w-[250px] xl:min-w-[300px] min-h-[200px] sm:min-h-[300px] lg:min-h-full">
         <Image
           src={img}
           alt={courseName}
@@ -47,7 +47,7 @@ export default function CoursePanel({
         />
       </div>
       <div className="pl-6 mr-auto">
-        <H3 className="!text-2xl">{courseName}</H3>
+        <H3 className="!text-2xl font-semibold">{courseName}</H3>
         {tagbg && (
           <div
             className={`${style} bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
@@ -56,14 +56,14 @@ export default function CoursePanel({
           </div>
         )}
         {/* <P className="!text-lg xl:w-4/5">{details}</P> */}
-        <P className="text-secondary font-semibold min-h-[12px] mt-3 !text-lg">
+        <P className="text-secondary min-h-[12px] mt-3 !text-lg">
           {liveClass}
         </P>
         <div className="flex font-semibold my-2 items-start">
           <span className="text-gold">{rating}</span>
           <StarRating rating={parseFloat(rating) || 0} />
         </div>
-        <span className="text-gray-500 !text-lg md:font-semibold">
+        <span className="text-gray-500 !text-lg">
           <span className="block md:inline-block">
             <FaCircle className="inline mr-2 md:mx-2 w-2 h-2 mb-1 md:hidden" />
             {duration}
@@ -79,8 +79,8 @@ export default function CoursePanel({
           </span>
         </span>
       </div>
-      <div className="flex flex-col xl:justify-end mt-auto">
-        <div className="relative hidden md:block xl:hidden w-full min-h-[70%] mb-4">
+      <div className="flex flex-col xl:justify-end w-full md:w-auto pl-4 mt-auto">
+        <div className="relative hidden md:block lg:hidden w-full min-h-[200px] min-w-full mb-4">
           <Image
             src={img}
             alt={courseName}
@@ -89,7 +89,7 @@ export default function CoursePanel({
           />
         </div>
         <div className="flex flex-col justify-end">
-          <P className="font-bold !text-black mb-2 md:ms-2 !text-lg">
+          <P className="font-bold !text-black mb-2 ms-2 !text-lg">
             INR&nbsp;{perMonth}&nbsp;per month
           </P>
           <Link

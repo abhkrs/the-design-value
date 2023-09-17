@@ -189,7 +189,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
 
             {isSubmitted && !timeSlot && (
               <p className="text-[red] text-xs font-bold py-1">
-                * Batch is reauired
+                * Please select a batch.
               </p>
             )}
           </div>
