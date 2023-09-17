@@ -5,56 +5,111 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
+  FaMailBulk,
+  FaPhoneAlt,
   FaPinterestP,
   FaTwitter,
 } from "react-icons/fa";
 import P from "../typography/P";
+import SectionDark from "../uielements/SectionDark";
+import H2 from "../typography/H2";
+import H3 from "../typography/H3";
 
 export default function Footer() {
   return (
-    <footer className="bg-center bg-cover bg-no-repeat !text-white bottom-0 p-4 pt-8 md:pt-4" style={{ backgroundImage: `url('/images/bglgr.png')` }}>
-      <div className="flex flex-col md:flex-row justify-between">
-        <Link href="/" className="text-xl">
-          The<span className="text-primary">Design</span>Value
-        </Link>
-        <P>Under Development</P>
-        <div className="flex text-secondary gap-4 text-xl">
-          <Link
-            href="https://www.facebook.com/"
-            className="hover:bg-primary bg-primary rounded-full p-1"
-          >
-            <FaFacebookF />
-          </Link>
+    <footer>
+      <SectionDark className={'bg-opacity-50 bg-black'}>
+        <div className="grid lg:grid-cols-12 md:grid-cols-2 gap-4 pt-6">
+          <div className="lg:col-span-3">
+            <Link href="/">
+              <H2 className="!text-white !text-3xl -mt-2">The<span className="text-primary">Design</span>Value</H2>
+            </Link>
+          </div>
 
-          <Link
-            href="https://twitter.com/"
-            className="hover:bg-primary bg-primary rounded-full p-1"
-          >
-            <FaTwitter />
-          </Link>
+          <div className="lg:col-span-2">
+            <H3 className="!text-white !text-xl mb-3">Quick Links</H3>
+            <P>
+              <Link
+                href="/cources"
+                className="rounded-full p-1 flex gap-2 text-white hover:text-secondary"
+              >
+                - Cources
+              </Link>
+            </P>
 
-          <Link
-            href="https://www.instagram.com/"
-            className="hover:bg-primary bg-primary rounded-full p-1"
-          >
-            <FaInstagram />
-          </Link>
+            <P>
+              <Link
+                href="/faqs"
+                className="rounded-full p-1 flex gap-2 text-white hover:text-secondary"
+              >
+                - FAQs
+              </Link>
+            </P>
 
-          <Link
-            href="https://www.pinterest.com/"
-            className="hover:bg-primary bg-primary rounded-full p-1"
-          >
-            <FaPinterestP />
-          </Link>
+          </div>
 
-          <Link
-            href="https://www.linkedin.com/"
-            className="hover:bg-primary bg-primary rounded-full p-1"
-          >
-            <FaLinkedinIn />
-          </Link>
+          <div className="lg:col-span-4">
+            <H3 className="!text-white !text-xl mb-4">Contact Us</H3>
+            <P>
+              <Link
+                href="mailto:connect.thedesignvalue@gmail.com"
+                className="rounded-full p-1 flex gap-2 text-white hover:text-secondary mb-2"
+              >
+                <FaMailBulk /> <span className="!text-md -mt-1">connect.thedesignvalue@gmail.com</span>
+              </Link>
+            </P>
+
+            <P>
+              <Link
+                href="tel:+916290191296"
+                className="rounded-full p-1 flex gap-2 text-white hover:text-secondary"
+              >
+                <FaPhoneAlt /> <span className="!text-md -mt-1">+91 62901 91296</span>
+              </Link>
+            </P>
+          </div>
+
+          <div className="lg:col-span-3">
+            <H3 className="!text-white !text-xl mb-4">Connect with us</H3>
+            <div className="flex text-secondary gap-4 text-xl">
+              <Link
+                href="https://www.facebook.com/"
+                className="hover:bg-primary bg-primary rounded-full p-1"
+              >
+                <FaFacebookF />
+              </Link>
+
+              <Link
+                href="https://twitter.com/"
+                className="hover:bg-primary bg-primary rounded-full p-1"
+              >
+                <FaTwitter />
+              </Link>
+
+              <Link
+                href="https://www.instagram.com/"
+                className="hover:bg-primary bg-primary rounded-full p-1"
+              >
+                <FaInstagram />
+              </Link>
+
+              <Link
+                href="https://www.pinterest.com/"
+                className="hover:bg-primary bg-primary rounded-full p-1"
+              >
+                <FaPinterestP />
+              </Link>
+
+              <Link
+                href="https://www.linkedin.com/"
+                className="hover:bg-primary bg-primary rounded-full p-1"
+              >
+                <FaLinkedinIn />
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
+      </SectionDark>
     </footer>
   );
 }

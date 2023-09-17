@@ -87,10 +87,10 @@ export default function Page() {
                   Reset Your Password?
                 </button>
                 <Link
-                  href="/contact"
+                  href="tel:+916290191296"
                   className="rounded-md bg-black !text-white text-xl hover:bg-primary px-6 py-3 max-w-max min-w-max mx-auto lg:ms-auto lg:me-0"
                 >
-                  CONTACT US
+                  +91 6290191296
                 </Link>
               </div>
             </div>
