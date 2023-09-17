@@ -13,6 +13,9 @@ import { decryptData } from "../../../../../utils/encryption";
 import Modal from "@/components/ui/Modal";
 import ResetPassword from "./ResetPassword";
 import { PaymentContext } from "@/context/PaymentContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export default function Page() {
   const [userDetails, setUserDetails] = useState({});
@@ -62,6 +65,18 @@ export default function Page() {
   return (
     <AuthWrap>
       <main>
+      <ToastContainer
+        limit={1}
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
         <Modal {...resetPasswordModal} setModal={setResetPasswordModal} />
         <Section>
           <div className="grid gap-10 mt-6">
