@@ -10,12 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { decryptData, encryptData } from "../../../../utils/encryption";
 import { LoginContext } from "@/context/LoginContext";
 import Modal from "@/components/ui/Modal";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Page() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showLoader, setshowLoader] = useState(false);
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
 
   const { setIsUserLoggedIn, forgotPasswordModal, openForgotPasswordModal } =
     useContext(LoginContext);
@@ -115,14 +117,25 @@ export default function Page() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <input
-              type="password"
-              name="password"
-              className="p-3 placeholder-secondary text-xl border-gray-200 rounded border"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                name="new-re-password"
+                type={showPassword ? "text" : "password"}
+                className="p-3 placeholder-secondary text-xl w-full border-gray-200 rounded border"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPassword(!showPassword);
+                }} // Toggle password visibility on button click
+                className="absolute top-2/4 -translate-y-2/4 right-8 md:right-4 text-primary"
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
+            </div>
             <button
               disabled={showLoader}
               type="button"

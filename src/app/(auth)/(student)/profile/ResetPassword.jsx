@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 function ResetPassword() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
   const [showLoader, setShowLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
   const [showRePassword, setShowRePassword] = useState(false); // State for toggling password visibility
@@ -19,28 +20,36 @@ function ResetPassword() {
     setShowRePassword(!showRePassword);
   };
 
-  const handleLogin = async () => {
+  const handleRestPassword = async () => {
     if (username && password) {
-      setShowLoader(true);
-      const response = await api.post("/Register/changePassword", {
-        userId: username,
-        new_password: password,
-      });
-      console.log(response);
-      setShowLoader(false);
-      if (response.status === "Failed") {
-        toast.error(response.message.__all__[0], {
+      if (rePassword !== password) {
+        toast.error("Password and confirm password doesn't match", {
           autoClose: 3000,
           theme: "colored",
         });
         toast.clearWaitingQueue();
       } else {
-        toast.error("Password updated successfully", {
-          autoClose: 3000,
-          theme: "colored",
+        setShowLoader(true);
+        const response = await api.post("/Register/changePassword", {
+          userId: username,
+          new_password: password,
         });
-        toast.clearWaitingQueue();
-        handleLogout();
+        console.log(response);
+        setShowLoader(false);
+        if (response.status === "Failed") {
+          toast.error(response.message.__all__[0], {
+            autoClose: 3000,
+            theme: "colored",
+          });
+          toast.clearWaitingQueue();
+        } else {
+          toast.error("Password updated successfully", {
+            autoClose: 3000,
+            theme: "colored",
+          });
+          toast.clearWaitingQueue();
+          handleLogout();
+        }
       }
     } else {
       toast.error("Please add required feilds", {
@@ -62,7 +71,7 @@ function ResetPassword() {
       />
       <div className="relative">
         <input
-            name="new-password"
+          name="new-password"
           type={showPassword ? "text" : "password"}
           className="p-3 placeholder-secondary text-xl w-full border-gray-200 rounded border"
           placeholder="Password"
@@ -83,8 +92,8 @@ function ResetPassword() {
           type={showRePassword ? "text" : "password"}
           className="p-3 placeholder-secondary text-xl w-full border-gray-200 rounded border"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={rePassword}
+          onChange={(e) => setRePassword(e.target.value)}
         />
         <button
           type="button"
@@ -98,7 +107,7 @@ function ResetPassword() {
         disabled={showLoader}
         type="button"
         className="p-3 bg-black text-white rounded-full text-xl flex items-center justify-center"
-        onClick={handleLogin}
+        onClick={handleRestPassword}
       >
         {showLoader && (
           <div role="status">
@@ -121,7 +130,7 @@ function ResetPassword() {
             <span className="sr-only">Loading...</span>
           </div>
         )}
-        Login
+        Reset your password
       </button>
     </div>
   );

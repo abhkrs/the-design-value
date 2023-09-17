@@ -4,9 +4,10 @@ import H3 from "@/components/typography/H3";
 import P from "@/components/typography/P";
 import { RegistrationContext } from "@/context/RegistrationContext";
 import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { decryptData } from "../../../../utils/encryption";
 
 function CourseRegistrationModalBody({ selectedCourse }) {
   const { closeRegistrationModal, setSelectedCourse, submitUserDetails } =
@@ -18,6 +19,21 @@ function CourseRegistrationModalBody({ selectedCourse }) {
   const [timeSlot, setTimeSlot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userDetails = sessionStorage.getItem("userDetails");
+    if (userDetails) {
+      const decryptedUserDetails = JSON.parse(decryptData(userDetails));
+      console.log(decryptedUserDetails);
+      if (decryptedUserDetails) {
+        setIsUserLoggedIn(true);
+        setName(decryptedUserDetails.FullName);
+        setPhone(decryptedUserDetails.MobNo);
+        setEmail(decryptedUserDetails.Email);
+      }
+    }
+  }, []);
 
   const submitForm = async () => {
     setIsSubmitted(true);
@@ -83,7 +99,10 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your Full Name*"
-              className="border border-gray-300 px-3  py-2 md:md:w-1/2 w-full  rounded placeholder-secondary"
+              className={`border border-gray-300 px-3  py-2 md:md:w-1/2 w-full  rounded placeholder-secondary ${
+                isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+              }`}
+              readOnly={isUserLoggedIn}
             />
             {isSubmitted && !name && (
               <p className="text-[red] text-xs font-bold py-1">
@@ -98,7 +117,10 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your Email ID*"
-              className="border border-gray-300 px-3  py-2 md:w-1/2 w-full  rounded placeholder-secondary"
+              className={`border border-gray-300 px-3  py-2 md:w-1/2 w-full  rounded placeholder-secondary ${
+                isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+              }`}
+              readOnly={isUserLoggedIn}
             />
             {isSubmitted && !name && (
               <p className="text-[red] text-xs font-bold py-1">
@@ -108,7 +130,11 @@ function CourseRegistrationModalBody({ selectedCourse }) {
           </div>
           <div className="mb-4">
             <div className="flex">
-              <div className="border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold">
+              <div
+                className={`border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold ${
+                  isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+                }`}
+              >
                 +91
               </div>
               <span className="text-gray-400 border-t border-b py-2 border-gray-300">
@@ -120,7 +146,10 @@ function CourseRegistrationModalBody({ selectedCourse }) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Your Mobile Number*"
-                className="border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary md:w-[43.8%] rounded-r  border-l-0 "
+                className={`border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary md:w-[43.8%] rounded-r  border-l-0 ${
+                  isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+                }`}
+                readOnly={isUserLoggedIn}
               />
             </div>
             {isSubmitted && !phone && (

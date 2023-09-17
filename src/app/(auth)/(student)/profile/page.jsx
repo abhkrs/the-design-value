@@ -13,6 +13,8 @@ import { decryptData } from "../../../../../utils/encryption";
 import Modal from "@/components/ui/Modal";
 import ResetPassword from "./ResetPassword";
 import { PaymentContext } from "@/context/PaymentContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Page() {
   const [userDetails, setUserDetails] = useState({});
@@ -33,9 +35,6 @@ export default function Page() {
     }
   }, []);
 
-  console.log(courseList);
-  console.log(userDetails);
-
   const resetPasswordModalBody = () => <ResetPassword />;
 
   const openResetPasswordModal = () => {
@@ -53,15 +52,27 @@ export default function Page() {
       courseUid: false,
       batchId: false,
       coursePrice: courseList[0]?.price,
-      apiUrl:'/Register/payFees',
-      callBackUrl:'/profile',
-      regId:courseList[0]?.regUid,
+      apiUrl: "/Register/payFees",
+      callBackUrl: "/profile",
+      regId: courseList[0]?.regUid,
     };
     await handleSubscribe(payload);
   };
   return (
     <AuthWrap>
       <main>
+        <ToastContainer
+          limit={1}
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Modal {...resetPasswordModal} setModal={setResetPasswordModal} />
         <Section>
           <div className="grid gap-10 mt-6">
@@ -99,6 +110,7 @@ export default function Page() {
                 key={program.regUid}
                 className="bg-white flex flex-col md:flex-row px-6 py-6 md:py-10 gap-6 md:gap-0 text-center md:text-start justify-between"
               >
+                {/* <pre>{JSON.stringify(program, null, 2)}</pre> */}
                 <div className="relative min-w-[300px] min-h-[300px] md:min-h-0">
                   <Image
                     src={program.img || "/images/course1.png"}

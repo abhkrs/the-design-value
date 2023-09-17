@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FaCircle, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
 import P from "../typography/P";
 import H3 from "../typography/H3";
 import Link from "next/link";
@@ -23,6 +23,19 @@ export default function CoursePanel({
     console.log(tagbg);
   }, [tagbg]);
 
+  let style;
+
+  switch (tagbg) {
+    case "AC3E20":
+      style = "bg-[#AC3E20] text-[#AC3E20]";
+      break;
+    case "008A0E":
+      style = "bg-[#008A0E] text-[#008A0E]";
+      break;
+    default:
+      style = "bg-[#008A0E] text-[#008A0E]";
+  }
+
   return (
     <div className="bg-white flex flex-col items-center md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0">
       <div className="relative xl:min-w-[350px] min-h-[200px]">
@@ -37,11 +50,7 @@ export default function CoursePanel({
         <H3 className="!text-2xl">{courseName}</H3>
         {tagbg && (
           <div
-            className={`${
-              tagbg && "bg-[#" + tagbg + "]"
-            } bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded ${
-              tagbg && "text-[#" + tagbg + "]"
-            }`}
+            className={`${style} bg-opacity-25 max-w-max py-1 font-semibold px-6 my-4 rounded`}
           >
             {tag}
           </div>
