@@ -15,14 +15,14 @@ const Accordion = () => {
       title: "Will we get 100% Paid Internship?",
       content: `<p>Absolutely! We are committed to helping our students kickstart their careers in UI/UX design, and our 100% guaranteed paid internship program is a testament to that commitment. <br> Upon successfully completing the UI/UX with Internship course, you will have the opportunity to embark on a paid internship that not only provides practical experience but also helps you earn while you learn. The stipend for the internship will be determined based on your</p> <p>The duration of the internship program typically ranges from 1 to 3 months, depending on your progress and the specific requirements of the internship position. During this time, you'll have the chance to apply your newly acquired UI/UX design skills in real-world projects, gain invaluable industry insights, and build your professional portfolio.</p><p>Our goal is to equip you with the knowledge and experience you need to succeed in the field of UI/UX design, and our paid internship program is designed to be a stepping stone towards achieving that goal. Rest assured, we are dedicated to your success and providing you with the best opportunities to jumpstart your career in this exciting field.</p>`,
     },
-    {
-      title:
-        "Will we get 100% Job Placement?",
-      content:
-        `<p>Absolutely! As part of our comprehensive 12-month UI/UX design course, you will be automatically enrolled in a mandatory paid internship program. The internship duration can vary, typically lasting from 1 to 3 months. This internship provides essential hands-on experience and is an integral part of our curriculum.</p>
-        <p>Additionally, we offer job placement training sessions to enhance your employability. Our team will work with you to create a standout design portfolio, refine your interview skills, and optimize your CV. </p>
-        <p>It's worth noting that our current placement rate for students who have completed our program is an impressive 91%. While we cannot predict individual outcomes, we are fully committed to providing you with the support and tools you need to pursue a rewarding career in UI/UX design.</p>`
-    },
+    // {
+    //   title:
+    //     "Will we get 100% Job Placement?",
+    //   content:
+    //     `<p>Absolutely! As part of our comprehensive 12-month UI/UX design course, you will be automatically enrolled in a mandatory paid internship program. The internship duration can vary, typically lasting from 1 to 3 months. This internship provides essential hands-on experience and is an integral part of our curriculum.</p>
+    //     <p>Additionally, we offer job placement training sessions to enhance your employability. Our team will work with you to create a standout design portfolio, refine your interview skills, and optimize your CV. </p>
+    //     <p>It's worth noting that our current placement rate for students who have completed our program is an impressive 91%. While we cannot predict individual outcomes, we are fully committed to providing you with the support and tools you need to pursue a rewarding career in UI/UX design.</p>`
+    // },
     {
       title: "What is the average Job CTC package in UI/UX?",
       content: `<p>The average CTC (Cost to Company) package for UI/UX (User Interface/User Experience) designers in India can vary significantly depending on factors such as location, experience, education, and the specific company or industry. As of my last knowledge update in September 2021, here's a general range you can expect: </p>

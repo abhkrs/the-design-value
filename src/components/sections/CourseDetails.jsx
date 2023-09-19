@@ -1,6 +1,7 @@
 import React from 'react'
 import AccordionTab from '../uielements/AccordionTab'
 import H3 from '../typography/H3'
+import P from '../typography/P'
 
 export default function CourseDetails() {
   return (
@@ -231,6 +232,9 @@ export default function CourseDetails() {
                   <li>Streamlining the design-to-development workflow.</li>
                 </ul>
               </ol>
+            </AccordionTab>
+            <AccordionTab heading="Building your UI/UX Portfolio">
+              <P>Our course is dedicated to helping you create a remarkable portfolio on Behance that not only demonstrates your design skills but also effectively highlights your creative prowess. You&apos;ll learn the art of presenting your work in a way that sets you apart in the competitive design industry, giving you a distinctive edge as a UI/UX designer.</P>
             </AccordionTab>
           </div>
   )
