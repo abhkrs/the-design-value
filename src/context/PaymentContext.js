@@ -9,64 +9,68 @@ export const PaymentContext = createContext();
 export function PaymentProvider({ children }) {
   const router = useRouter();
   const handleSubscribe = async (data) => {
-    console.log(data);
-    await initializeRazorpay();
-    const subscribe = await fetch("/api/createorder", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ amount: data.coursePrice }),
-    });
-    const res = await subscribe.json();
-    console.log(res.order.id);
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_ID,
-      amount: res.order.amount,
-      currency: "INR",
-      name: "Design Value",
-      description: "UI/UX Design with 100% Paid Internship",
-      order_id: res.order.id,
-      theme: {
-        color: "#5da399",
-      },
-      overlay: false,
-      handler: async (response) => {
-        const payload = {
-          uuid: data?.uuid,
-          courseUid: data?.courseUid,
-          batchId: data?.batchId,
-          paymentId: response.razorpay_payment_id,
-          AmountPaid: data?.coursePrice,
-          paymentStatus: 1,
-          reason: `NA`,
-        };
-        if (data.regId) {
-          payload.RegId = data.regId;
-        }
+    try {
+      console.log(data);
+      await initializeRazorpay();
+      const subscribe = await fetch("/api/createorder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount: data.coursePrice }),
+      });
+      const res = await subscribe.json();
+      console.log(res.order.id);
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_ID,
+        amount: res.order.amount,
+        currency: "INR",
+        name: "Design Value",
+        description: "UI/UX Design with 100% Paid Internship",
+        order_id: res.order.id,
+        theme: {
+          color: "#5da399",
+        },
+        overlay: false,
+        handler: async (response) => {
+          const payload = {
+            uuid: data?.uuid,
+            courseUid: data?.courseUid,
+            batchId: data?.batchId,
+            paymentId: response.razorpay_payment_id,
+            AmountPaid: data?.coursePrice,
+            paymentStatus: 1,
+            reason: `NA`,
+          };
+          if (data.regId) {
+            payload.RegId = data.regId;
+          }
 
-        const paymentResponse = await api.post(data?.apiUrl, payload);
+          const paymentResponse = await api.post(data?.apiUrl, payload);
 
-        console.log(paymentResponse);
-        if (paymentResponse.status === "Success") {
-          toast.success(response?.message, {
-            autoClose: 3000,
-            theme: "colored",
-          });
-        } else {
-          toast.error(response?.message, {
-            autoClose: 3000,
-            theme: "colored",
-          });
-        }
+          console.log(paymentResponse);
+          if (paymentResponse.status === "Success") {
+            toast.success(response?.message, {
+              autoClose: 3000,
+              theme: "colored",
+            });
+          } else {
+            toast.error(response?.message, {
+              autoClose: 3000,
+              theme: "colored",
+            });
+          }
 
-        router.push(data?.callBackUrl || "/payment-success");
-        location.reload();
-      },
-    };
-
-    const rpay = new window.Razorpay(options);
-    rpay.open();
+          router.push(data?.callBackUrl);
+          // location.reload();
+        },
+      };
+      const rpay = new window.Razorpay(options);
+      rpay.open();
+    } catch (error) {
+      console.error("Error in handleSubscribe:", error);
+      // Handle the error appropriately, e.g., show an error message to the user.
+    }
   };
 
   const initializeRazorpay = async () => {
