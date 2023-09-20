@@ -10,7 +10,7 @@ import SkeletonLoader from "@/components/uielements/SkeletonLoader";
 export default function FullPage() {
   const [allCourses, setAllCourses] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const numberOfSkeletons = 1;
+  const numberOfSkeletons = 4;
 
   useEffect(() => {
     const getAllCourse = async () => {
@@ -42,7 +42,7 @@ export default function FullPage() {
         </P>
       </Section>
       <div className="2xl:container md:p-4 md:px-12 lg:px-28 mx-auto">
-        {isLoaded &&
+        {!isLoaded &&
           Array.from({ length: numberOfSkeletons }, (_, index) => (
             <div
               key={index}
