@@ -214,7 +214,7 @@ function FullPage() {
               INR {courseDetails.actualPrice} per month
             </div>
             <div className=" text-primary mr-2 font-bold">
-              INR 2,500 per month
+              INR {courseDetails.PerMonth} per month
             </div>
           </div>
         </div>
