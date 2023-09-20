@@ -56,7 +56,6 @@ function Header() {
     if (userRole) {
       const decryptedUserRole = JSON.parse(decryptData(userRole));
       setUserRole(decryptedUserRole);
-      console.log(decryptedUserRole);
       if (decryptedUserRole.isSuperAdmin && !adminItemAdded) {
         const newItem = {
           name: "Admin",
