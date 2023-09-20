@@ -81,7 +81,7 @@ export default function Batches() {
                     <P>{batch.BatchSLot}</P>
                     <div
                       className={`${
-                        !userRole.isSuperAdmin && "pointer-events-none"
+                        !userRole?.isSuperAdmin && "pointer-events-none"
                       }`}
                     >
                       <ToggleBatch avail={batch.Available} batchId={batch.Id} />

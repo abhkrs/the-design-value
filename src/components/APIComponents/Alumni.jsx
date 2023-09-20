@@ -228,7 +228,7 @@ export default function Alumni() {
                             stdData={student}
                             onSuccess={handleAddCertificateSuccess}
                           />
-                          {userRole.isSuperAdmin && (
+                          {userRole?.isSuperAdmin && (
                             <DeleteRegStudent
                               stdData={student}
                               onSuccess={handleDeleteSuccess}
