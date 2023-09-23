@@ -125,9 +125,9 @@ export default function Page() {
                     Currently enrolled for{" "}
                     <span className="font-semibold">{program.Batch} Batch</span>
                   </P>
-                  <P className="text-secondary font-semibold min-h-[18px] mt-4 mb-3">
+                  {/* <P className="text-secondary font-semibold min-h-[18px] mt-4 mb-3">
                     Course will end in&nbsp;{program.endingOn || "Jan"}
-                  </P>
+                  </P> */}
                   <P className="text-gray-600">
                     {program.Duration}
                     <FaCircle className="inline mx-2 w-2 h-2 mb-1" />

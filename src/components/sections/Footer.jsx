@@ -45,6 +45,24 @@ export default function Footer() {
               </Link>
             </P>
 
+            <P>
+              <Link
+                href="/privacy-policy"
+                className="p-1 flex gap-2 text-white hover:text-secondary"
+              >
+                Privacy Policy
+              </Link>
+            </P>
+
+            <P>
+              <Link
+                href="/terms-conditions"
+                className="p-1 flex gap-2 text-white hover:text-secondary"
+              >
+                Terms & Conditions
+              </Link>
+            </P>
+
           </div>
 
           <div className="lg:col-span-4">
