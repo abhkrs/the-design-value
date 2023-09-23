@@ -48,17 +48,17 @@ export default function FullPage() {
               key={index}
               className="bg-white flex flex-col items-center md:flex-row justify-between px-6 py-6 md:py-10 gap-2 md:gap-0 mb-5"
             >
-              <div className="relative xl:min-w-[350px] min-h-[200px]">
-                <SkeletonLoader className={"min-w-[350px] min-h-[200px]"} />
+              <div className="relative xl:min-w-[350px] min-h-[200px] md:w-[350px] md:h-[200px] h-[300px] w-full">
+                <SkeletonLoader className={"min-w-[350px] min-h-[200px] w-full"} />
               </div>
-              <div className="pl-6 mr-auto basis-[60%] mt-auto">
-                <SkeletonLoader className={"!w-[70%] min-h-[30px] mb-3"} />
-                <SkeletonLoader className={"!w-[20%] min-h-[30px] mb-3"} />
-                <SkeletonLoader className={"!w-[30%] min-h-[30px] mb-3"} />
-                <SkeletonLoader className={"!w-[25%] min-h-[30px] mb-3"} />
-                <SkeletonLoader className={"!w-[55%] min-h-[30px] mb-3"} />
+              <div className="sm:pl-6 pl-2 md:mr-auto md:w-[60%] w-full mt-auto">
+                <SkeletonLoader className={"md:!w-[70%] !w-[95%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!md:w-[20%] !w-[60%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!md:w-[30%] !w-[70%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!md:w-[25%] !w-[60%] min-h-[30px] mb-3"} />
+                <SkeletonLoader className={"!md:w-[55%] !w-[80%] min-h-[30px] mb-3"} />
               </div>
-              <div className="flex flex-col xl:justify-end basis-[20%]">
+              <div className="flex flex-col xl:justify-end md:w-[20%] sm:w-[30%] w-[50%] md:mx-auto mr-auto">
                 <SkeletonLoader
                   className={"!w-[85%] min-h-[30px] mb-3 mx-auto"}
                 />

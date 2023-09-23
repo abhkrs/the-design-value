@@ -120,17 +120,22 @@ function FullPage() {
                 {courseDetails?.PopUpData?.batchesOn}
               </span>
             </div>
-            <div className="py-2">✅ {courseDetails?.PopUpData?.support}</div>
-            <P className="!text-sm text-gray-600 !italic pl-1">
-              <span className="font-bold">Note:</span>{" "}
-              {courseDetails?.PopUpData?.jobNote}
-            </P>
+            {courseDetails?.PopUpData?.support && (
+              <div className="py-2">✅ {courseDetails?.PopUpData?.support}</div>
+            )}
+
+            {courseDetails?.PopUpData?.jobNote && (
+              <P className="!text-sm text-gray-600 !italic pl-1">
+                <span className="font-bold">Note:</span>{" "}
+                {courseDetails?.PopUpData?.jobNote}
+              </P>
+            )}
             <div className="mt-6 mb-3">
               <span className="p-2 bg-[#CE4863] mr-2 text-white">
                 😲 Flat {courseDetails.discountPercent}% Off
               </span>
               <span className="my-auto font-semibold leading-3">
-                Hurry! Offer valid till the 20th of next month
+                Hurry! Offer till end of this month
               </span>
             </div>
             <div className="mb-3 py-2">
@@ -160,7 +165,6 @@ function FullPage() {
             </button>
           </div>
         </div>
-
       </SectionDark>
       <div className="lg:hidden">
         <div className=" p-6">
@@ -214,7 +218,7 @@ function FullPage() {
               INR {courseDetails.actualPrice} per month
             </div>
             <div className=" text-primary mr-2 font-bold">
-              INR 2,500 per month
+              INR {courseDetails.PerMonth} per month
             </div>
           </div>
         </div>

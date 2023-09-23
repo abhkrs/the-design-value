@@ -111,7 +111,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
             />
             {isSubmitted && !name && (
               <p className="text-[red] text-xs font-bold py-1">
-                * Name is reauired
+                * Name is required
               </p>
             )}
           </div>
@@ -128,7 +128,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
             />
             {isSubmitted && !name && (
               <p className="text-[red] text-xs font-bold py-1">
-                * Email is reauired
+                * Email is required
               </p>
             )}
           </div>
@@ -156,7 +156,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
             </div>
             {isSubmitted && !phone && (
               <p className="text-[red] text-xs font-bold py-1">
-                * Phone is reauired
+                * Phone is required
               </p>
             )}
           </div>
@@ -168,7 +168,9 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               {selectedCourse.courseDetails.BatchDetails.map((batch) => (
                 <button
                   key={batch.BatchUid}
-                  className={`py-1 px-3 border rounded min-w-max ${timeSlot === batch.SlotName
+                  disabled={!batch.Availabe}
+                  className={`py-1 px-3 border rounded min-w-max ${
+                    timeSlot === batch.SlotName
                       ? " bg-secondary text-white shadow border-gray-300"
                       : batch.Availabe
                         ? " bg-white border-gray-300 shadow"
