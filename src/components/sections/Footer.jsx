@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <P>
               <Link
-                href="/cources"
+                href="/courses"
                 className="p-1 flex gap-2 text-white hover:text-secondary"
               >
                 Courses

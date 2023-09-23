@@ -197,14 +197,14 @@ function CourseRegistrationModalBody({ selectedCourse }) {
             )}
           </div>
           <div className="mt-2">
-            <label className="flex items-center">
+            <label className="">
               <input
                 type="checkbox"
                 checked={acceptTerms}
                 onChange={toggleAcceptTerms}
                 className="mr-2"
               />
-              I accept the <Link href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary underline mx-1">Privacy Policies</Link> and <Link href="/terms-conditions" target="_blank" rel="noopener noreferrer" className="text-primary underline mx-1">Terms & Conditions</Link>.
+              I accept the<Link href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary underline mx-1">Privacy Policies</Link> and <Link href="/terms-conditions" target="_blank" rel="noopener noreferrer" className="text-primary underline ms-1">Terms & Conditions</Link>.
             </label>
             {isSubmitted && !acceptTerms && (
               <p className="text-[red] text-xs font-bold py-1">
