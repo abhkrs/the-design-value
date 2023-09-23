@@ -19,15 +19,17 @@ export default function CoursePanel({
   url,
   rating,
 }) {
-  useEffect(() => {
-    console.log(tagbg);
-  }, [tagbg]);
-
   let style;
 
   switch (tagbg) {
     case "AC3E20":
       style = "bg-[#AC3E20] text-[#AC3E20]";
+      break;
+    case "008A0E":
+      style = "bg-[#008A0E] text-[#008A0E]";
+      break;
+    case "084FC7":
+      style = "bg-[#084FC7] text-[#084FC7]";
       break;
     case "008A0E":
       style = "bg-[#008A0E] text-[#008A0E]";
@@ -43,7 +45,7 @@ export default function CoursePanel({
           src={img}
           alt={courseName}
           fill={true}
-          className="object-cover h-auto w-auto"
+          className="object-fit h-auto w-auto"
         />
       </div>
       <div className="pl-6 mr-auto">
@@ -56,9 +58,7 @@ export default function CoursePanel({
           </div>
         )}
         {/* <P className="!text-lg xl:w-4/5">{details}</P> */}
-        <P className="text-secondary min-h-[12px] mt-3 !text-lg">
-          {liveClass}
-        </P>
+        <P className="text-secondary min-h-[12px] mt-3 !text-lg">{liveClass}</P>
         <div className="flex font-semibold my-2 items-start">
           <span className="text-gold">{rating}</span>
           <StarRating rating={parseFloat(rating) || 0} />
@@ -85,7 +85,7 @@ export default function CoursePanel({
             src={img}
             alt={courseName}
             fill={true}
-            className="object-cover h-auto w-auto"
+            className="object-fit h-auto w-auto"
           />
         </div>
         <div className="flex flex-col justify-end">

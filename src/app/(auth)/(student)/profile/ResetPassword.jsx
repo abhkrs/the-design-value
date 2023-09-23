@@ -91,7 +91,7 @@ function ResetPassword() {
           name="new-re-password"
           type={showRePassword ? "text" : "password"}
           className="p-3 placeholder-secondary text-xl w-full border-gray-200 rounded border"
-          placeholder="Password"
+          placeholder="Confirm password"
           value={rePassword}
           onChange={(e) => setRePassword(e.target.value)}
         />
