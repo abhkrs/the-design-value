@@ -74,7 +74,7 @@ export default function FullPage() {
             <div className="grid gap-10 md:my-6" key={courseDetails.UId}>
               <CoursePanel
                 courseName={courseDetails.CourseName}
-                img={`/images/course${index + 1}.png`}
+                img={`/images/courseimages/${courseDetails?.imgName}`}
                 tag={courseDetails.Tag}
                 tagbg={`${courseDetails.TagColor}`}
                 details={courseDetails.Details}
