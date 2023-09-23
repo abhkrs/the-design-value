@@ -208,7 +208,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
             </label>
             {isSubmitted && !acceptTerms && (
               <p className="text-[red] text-xs font-bold py-1">
-                * Please accept the terms and conditions to proceed.
+                * Please accept the privacy policies and terms & conditions to proceed.
               </p>
             )}
           </div>
