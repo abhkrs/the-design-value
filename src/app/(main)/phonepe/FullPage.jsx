@@ -11,27 +11,27 @@ function FullPage() {
     });
 
     const apiUrl = "https://sandbox.cashfree.com/pg/orders";
-    const appId = "TEST100253676612d2dbe513c200299676352001";
-    const secretKey = "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d";
+    const clientId = "TEST100253676612d2dbe513c200299676352001";
+    const clientSecret = "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d";
 
     const requestData = {
-      order_id: "order_162694514352088774455",
-      order_amount: 10.12,
-      order_currency: "INR",
-      order_note: "Additional order info",
       customer_details: {
-        customer_id: "12345",
-        customer_name: "name",
-        customer_email: "care@cashfree.com",
-        customer_phone: "9816512345",
+        customer_id: "T887744",
+        customer_email: "tanmay1dey@gmail.com",
+        customer_phone: "7980429183",
+        customer_name: "Tanmay Dey",
       },
+      order_id: `T877444${Math.random()}`,
+      order_amount: 100,
+      order_currency: "INR",
     };
 
     const headers = {
+      Accept: "application/json",
       "Content-Type": "application/json",
       "x-api-version": "2022-09-01",
-      "x-client-id": appId,
-      "x-client-secret": secretKey,
+      "x-client-id": clientId,
+      "x-client-secret": clientSecret,
     };
 
     fetch(apiUrl, {
