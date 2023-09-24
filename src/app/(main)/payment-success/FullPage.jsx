@@ -29,11 +29,8 @@ export default function FullPage() {
 
       if (orderId) {
         console.log(orderId);
-        const requestData = {
-          order_id: orderId,
-          cashFreeUrl: "https://sandbox.cashfree.com/pg/orders",
-        };
-        fetch("/api/cashfree", {
+        const apiUrl = `/api/confirmpayment?orderId=${orderId}`;
+        fetch(apiUrl, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -41,7 +38,6 @@ export default function FullPage() {
             "x-client-id": "TEST100253676612d2dbe513c200299676352001",
             "x-client-secret": "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d",
           },
-          body: JSON.stringify(requestData),
         })
           .then((response) => {
             if (!response.ok) {
