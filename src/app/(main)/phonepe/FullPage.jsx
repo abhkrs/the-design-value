@@ -1,58 +1,85 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { sha256 } from "js-sha256";
+import { load } from "@cashfreepayments/cashfree-js";
+import React from "react";
 
 function FullPage() {
-  useEffect(() => {
-    const eventPayload = {
-      merchantId: "M2306160483220675579140",
-      transactionId: "TX123456789",
-      merchantOrderId: "M123456789",
-      amount: 100,
-      instrumentType: "MOBILE",
-      instrumentReference: "9xxxxxxxxxx",
-      message: "collect for XXX order",
-      email: "amitxxx75@gmail.com",
-      expiresIn: 180,
-      shortName: "DemoCustomer",
-      subMerchant: "DemoMerchant",
-      storeId: "store1",
-      terminalId: "terminal1",
-    };
+  async function handelPyament() {
+    await initializeRazorpay();
+    const cashfree = await load({
+      mode: "sandbox", //or production
+    });
 
-    // Convert the object to a JSON string
-    const jsonPayload = JSON.stringify(eventPayload);
+    const apiUrl = "https://sandbox.cashfree.com/pg/orders";
+    const appId = "TEST100253676612d2dbe513c200299676352001";
+    const secretKey = "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d";
 
-    // Base64 encode the JSON string
-    const encodedPayload = btoa(jsonPayload);
-
-    const saltKey = "8289e078-be0b-484d-ae60-052f117f8deb";
-    const saltIndex = 1;
-    const string = `${encodedPayload}/v3/debit${saltKey}###${saltIndex}`;
-    const shaString = sha256(string);
-    console.log(encodedPayload);
-    console.log(shaString);
-
-    const options = {
-      method: "POST",
-      headers: {
-        accept: "text/plain",
-        "Content-Type": "application/json",
-        "X-VERIFY": shaString,
-        "X-CALLBACK-URL": "https://www.demoMerchant.com/callback",
+    const requestData = {
+      order_id: "order_162694514352088774455",
+      order_amount: 10.12,
+      order_currency: "INR",
+      order_note: "Additional order info",
+      customer_details: {
+        customer_id: "12345",
+        customer_name: "name",
+        customer_email: "care@cashfree.com",
+        customer_phone: "9816512345",
       },
-      body: JSON.stringify({
-        request: encodedPayload,
-      }),
     };
 
-    fetch("https://mercury-uat.phonepe.com/v3/debit", options)
-      .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
-  }, []);
-  return <div>FullPage</div>;
+    const headers = {
+      "Content-Type": "application/json",
+      "x-api-version": "2022-09-01",
+      "x-client-id": appId,
+      "x-client-secret": secretKey,
+    };
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Response:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+  const initializeRazorpay = async () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
+      // document.body.appendChild(script);
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+    });
+  };
+  return (
+    <div>
+      <button
+        className="bg-primary h-6 w-12"
+        onClick={() => {
+          handelPyament();
+        }}
+      >
+        Pay
+      </button>
+    </div>
+  );
 }
 
 export default FullPage;

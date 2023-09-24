@@ -10,7 +10,6 @@ export function PaymentProvider({ children }) {
   const router = useRouter();
   const handleSubscribe = async (data) => {
     try {
-      console.log(data);
       await initializeRazorpay();
       const subscribe = await fetch("/api/createorder", {
         method: "POST",
