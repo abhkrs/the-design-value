@@ -10,10 +10,9 @@ function FullPage() {
       mode: "sandbox", //or production
     });
 
-    const apiUrl = "https://sandbox.cashfree.com/pg/orders";
-    const clientId = "TEST100253676612d2dbe513c200299676352001";
-    const clientSecret = "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d";
+    const apiUrl = "/api/cashfree"; // Use the relative path to your custom API route
 
+    // Your request data
     const requestData = {
       customer_details: {
         customer_id: "T887744",
@@ -21,22 +20,19 @@ function FullPage() {
         customer_phone: "7980429183",
         customer_name: "Tanmay Dey",
       },
-      order_id: `T877444${Math.random()}`,
+      order_id: `ORDER-${new Date().getTime()}`,
       order_amount: 100,
       order_currency: "INR",
     };
-
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "x-api-version": "2022-09-01",
-      "x-client-id": clientId,
-      "x-client-secret": clientSecret,
-    };
-
+    const baseUrl = window.location.origin;
     fetch(apiUrl, {
       method: "POST",
-      headers: headers,
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-version": "2022-09-01",
+        "x-client-id": "TEST100253676612d2dbe513c200299676352001",
+        "x-client-secret": "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d",
+      },
       body: JSON.stringify(requestData),
     })
       .then((response) => {
@@ -47,6 +43,14 @@ function FullPage() {
       })
       .then((data) => {
         console.log("Response:", data);
+        cashfree
+          .checkout({
+            paymentSessionId: data.payment_session_id,
+            returnUrl: `${baseUrl}/payment-success`,
+          })
+          .then(function () {
+            console.log("on going redirection");
+          });
       })
       .catch((error) => {
         console.error("Error:", error);
