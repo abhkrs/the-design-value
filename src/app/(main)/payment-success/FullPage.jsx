@@ -30,7 +30,6 @@ export default function FullPage() {
       const orderId = queryParams["order_id"];
 
       if (orderId) {
-        console.log(orderId);
         const apiUrl = `/api/confirmpayment?orderId=${orderId}`;
         fetch(apiUrl, {
           method: "GET",
@@ -48,7 +47,6 @@ export default function FullPage() {
             return response.json();
           })
           .then((data) => {
-            console.log("Response:", data);
             if (data.order_status === "PAID") {
               setPaymentSucces(true);
             }

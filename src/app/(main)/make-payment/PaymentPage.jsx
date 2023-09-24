@@ -3,7 +3,7 @@
 import { load } from "@cashfreepayments/cashfree-js";
 import React from "react";
 
-function FullPage() {
+function PaymentPage() {
   async function handelPyament() {
     await initializeRazorpay();
     const cashfree = await load({
@@ -84,4 +84,4 @@ function FullPage() {
   );
 }
 
-export default FullPage;
+export default PaymentPage;

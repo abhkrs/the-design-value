@@ -1,8 +1,8 @@
 import React from "react";
-import FullPage from "./FullPage";
+import PaymentPage from "./PaymentPage";
 
 function page() {
-  return <FullPage />;
+  return <PaymentPage />;
 }
 
 export default page;
