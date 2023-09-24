@@ -46,7 +46,7 @@ function FullPage() {
         cashfree
           .checkout({
             paymentSessionId: data.payment_session_id,
-            returnUrl: `${baseUrl}/payment-success`,
+            returnUrl: `${baseUrl}/payment-success?order_id=${requestData.order_id}`,
           })
           .then(function () {
             console.log("on going redirection");
@@ -60,8 +60,6 @@ function FullPage() {
     return new Promise((resolve) => {
       const script = document.createElement("script");
       script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
-      // document.body.appendChild(script);
-
       script.onload = () => {
         resolve(true);
       };
