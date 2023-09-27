@@ -8,14 +8,15 @@ export const PhonePeContext = createContext();
 export function PhonePeProvider({ children }) {
   async function handelPhonePePayament(data) {
     console.log(data);
+    const baseUrl = window.location.origin;
     const payload = {
       merchantId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
       merchantTransactionId: "MT7850590068188104",
       merchantUserId: "MUID123",
       amount: 10000,
-      redirectUrl: "https://webhook.site/redirect-url",
+      redirectUrl: `${baseUrl}/payment-success?order_id=MT7850590068188104`,
       redirectMode: "REDIRECT",
-      callbackUrl: "https://webhook.site/callback-url",
+      callbackUrl: `${baseUrl}/payment-success?order_id=MT7850590068188104`,
       mobileNumber: "9999999999",
       paymentInstrument: {
         type: "PAY_PAGE",
@@ -37,12 +38,28 @@ export function PhonePeProvider({ children }) {
     console.log(shaPayload);
     const sha256Data = `${shaPayload}###${process.env.NEXT_PUBLIC_PHONEPE_SALT_INDEX}`;
 
+    // Make a request to the API route and handle the response
     await fetch("/api/phonepe-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ sha256Data, base64Payload }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ sha256Data, base64Payload }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          // If the response status is OK (e.g., 200), parse the JSON response
+          const responseData = await response.json();
+          console.log(responseData);
+          window.location.href =
+            responseData?.data?.instrumentResponse?.redirectInfo?.url;
+        } else {
+          // If the response status is not OK, handle the error
+          console.error(`Error: ${response.status} - ${response.statusText}`);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 

@@ -15,7 +15,7 @@ export default async (req, res) => {
     };
 
     const response = await fetch(
-      "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
+      `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID}/MT7850590068188104`,
       options
     );
 
