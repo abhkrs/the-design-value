@@ -6,6 +6,7 @@ import { PaymentContext } from "@/context/PaymentContext";
 import { toast } from "react-toastify";
 import CourseRegistrationModalBody from "@/app/(main)/courses/CourseRegistrationModalBody";
 import { CashFreePaymentContext } from "./CashFreePaymentContext";
+import { PhonePeContext } from "./PhonePeContext";
 
 export const RegistrationContext = createContext();
 
@@ -20,8 +21,9 @@ export function RegistrationProvider({ children }) {
   });
   const [userDetails, setUserDetails] = useState(null);
 
-  const { handleSubscribe } = useContext(PaymentContext);
-  const { handelPayament } = useContext(CashFreePaymentContext);
+  //const { handleSubscribe } = useContext(PaymentContext);
+  //const { handelPayament } = useContext(CashFreePaymentContext);
+  const { handelPhonePePayament } = useContext(PhonePeContext);
 
   const onRegistrationConfirm = (_selectedCourse, _userDetails) => {
     console.log(_selectedCourse);
@@ -67,7 +69,8 @@ export function RegistrationProvider({ children }) {
     if (userDetails && userDetails?.uuid) {
       setSelectedCourse();
       // handleSubscribe(userDetails);
-      handelPayament(userDetails);
+      // handelPayament(userDetails);
+      handelPhonePePayament(userDetails);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);

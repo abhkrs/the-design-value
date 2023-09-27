@@ -7,6 +7,7 @@ import { RegistrationProvider } from "@/context/RegistrationContext";
 import { PaymentProvider } from "@/context/PaymentContext";
 import { LoginProvider } from "@/context/LoginContext";
 import { CashFreeProvider } from "@/context/CashFreePaymentContext";
+import { PhonePeProvider } from "@/context/PhonePeContext";
 
 const inter = Inter({
   weight: ["400", "700"],
@@ -30,17 +31,19 @@ export default function RootLayout({ children }) {
   return (
     <PaymentProvider>
       <CashFreeProvider>
-        <RegistrationProvider>
-          <LoginProvider>
-            <html lang="en">
-              <body className={`${inter.className} ${dmsans.variable}`}>
-                <Header />
-                <div className="min-h-[85vh]">{children}</div>
-                <Footer />
-              </body>
-            </html>
-          </LoginProvider>
-        </RegistrationProvider>
+        <PhonePeProvider>
+          <RegistrationProvider>
+            <LoginProvider>
+              <html lang="en">
+                <body className={`${inter.className} ${dmsans.variable}`}>
+                  <Header />
+                  <div className="min-h-[85vh]">{children}</div>
+                  <Footer />
+                </body>
+              </html>
+            </LoginProvider>
+          </RegistrationProvider>
+        </PhonePeProvider>
       </CashFreeProvider>
     </PaymentProvider>
   );

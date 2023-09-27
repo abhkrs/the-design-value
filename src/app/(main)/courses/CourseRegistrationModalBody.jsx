@@ -9,10 +9,13 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { decryptData } from "../../../../utils/encryption";
 import Link from "next/link";
+import { PhonePeContext } from "@/context/PhonePeContext";
 
 function CourseRegistrationModalBody({ selectedCourse }) {
   const { closeRegistrationModal, setSelectedCourse, submitUserDetails } =
     useContext(RegistrationContext);
+    const { handelPhonePePayament } = useContext(PhonePeContext);
+
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,6 +32,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
 
   useEffect(() => {
     const userDetails = sessionStorage.getItem("userDetails");
+    handelPhonePePayament()
     if (userDetails) {
       const decryptedUserDetails = JSON.parse(decryptData(userDetails));
       console.log(decryptedUserDetails);
