@@ -9,13 +9,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { decryptData } from "../../../../utils/encryption";
 import Link from "next/link";
-import { PhonePeContext } from "@/context/PhonePeContext";
 
 function CourseRegistrationModalBody({ selectedCourse }) {
   const { closeRegistrationModal, setSelectedCourse, submitUserDetails } =
     useContext(RegistrationContext);
-    const { handelPhonePePayament } = useContext(PhonePeContext);
-
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,7 +29,6 @@ function CourseRegistrationModalBody({ selectedCourse }) {
 
   useEffect(() => {
     const userDetails = sessionStorage.getItem("userDetails");
-    handelPhonePePayament()
     if (userDetails) {
       const decryptedUserDetails = JSON.parse(decryptData(userDetails));
       console.log(decryptedUserDetails);
@@ -109,8 +105,9 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your Full Name*"
-              className={`border border-gray-300 px-3  py-2 md:md:w-1/2 w-full  rounded placeholder-secondary ${isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
-                }`}
+              className={`border border-gray-300 px-3  py-2 md:md:w-1/2 w-full  rounded placeholder-secondary ${
+                isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+              }`}
               readOnly={isUserLoggedIn}
             />
             {isSubmitted && !name && (
@@ -126,8 +123,9 @@ function CourseRegistrationModalBody({ selectedCourse }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your Email ID*"
-              className={`border border-gray-300 px-3  py-2 md:w-1/2 w-full  rounded placeholder-secondary ${isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
-                }`}
+              className={`border border-gray-300 px-3  py-2 md:w-1/2 w-full  rounded placeholder-secondary ${
+                isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+              }`}
               readOnly={isUserLoggedIn}
             />
             {isSubmitted && !name && (
@@ -139,8 +137,9 @@ function CourseRegistrationModalBody({ selectedCourse }) {
           <div className="mb-4">
             <div className="flex">
               <div
-                className={`border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold ${isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
-                  }`}
+                className={`border border-gray-300 pl-3 pr-2  py-2 rounded-l border-r-0 !text-gray-600 font-semibold ${
+                  isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+                }`}
               >
                 +91
               </div>
@@ -153,8 +152,9 @@ function CourseRegistrationModalBody({ selectedCourse }) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Your Mobile Number*"
-                className={`border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary md:w-[43.8%] rounded-r  border-l-0 ${isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
-                  }`}
+                className={`border border-gray-300 pl-2 pr-3 py-2 placeholder-secondary md:w-[43.8%] rounded-r  border-l-0 ${
+                  isUserLoggedIn && "bg-gray-200 cursor-not-allowed"
+                }`}
                 readOnly={isUserLoggedIn}
               />
             </div>
@@ -177,12 +177,12 @@ function CourseRegistrationModalBody({ selectedCourse }) {
                     timeSlot === batch.SlotName
                       ? " bg-secondary text-white shadow border-gray-300"
                       : batch.Availabe
-                        ? " bg-white border-gray-300 shadow"
-                        : " bg-gray-200 cursor-not-allowed"
-                    }`}
+                      ? " bg-white border-gray-300 shadow"
+                      : " bg-gray-200 cursor-not-allowed"
+                  }`}
                   onClick={() => {
                     if (timeSlot === batch.SlotName) {
-                      setTimeSlot(null); 
+                      setTimeSlot(null);
                     } else {
                       setTimeSlot(batch.SlotName);
                     }
@@ -208,11 +208,30 @@ function CourseRegistrationModalBody({ selectedCourse }) {
                 onChange={toggleAcceptTerms}
                 className="mr-2"
               />
-              I accept the<Link href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary underline mx-1">Privacy Policies</Link> and <Link href="/terms-conditions" target="_blank" rel="noopener noreferrer" className="text-primary underline ms-1">Terms & Conditions</Link>.
+              I accept the
+              <Link
+                href="/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline mx-1"
+              >
+                Privacy Policies
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/terms-conditions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline ms-1"
+              >
+                Terms & Conditions
+              </Link>
+              .
             </label>
             {isSubmitted && !acceptTerms && (
               <p className="text-[red] text-xs font-bold py-1">
-                * Please accept the privacy policies and terms & conditions to proceed.
+                * Please accept the privacy policies and terms & conditions to
+                proceed.
               </p>
             )}
           </div>

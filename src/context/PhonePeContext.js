@@ -28,18 +28,14 @@ export function PhonePeProvider({ children }) {
       "base64"
     );
 
-    console.log(base64Payload);
-
     const shaPayload = sha256(
-      `${base64Payload}/pg/v1/pay099eb0cd-02cf-4e2a-8aca-3e6c6aff0399`,
+      `${base64Payload}/pg/v1/pay${process.env.NEXT_PUBLIC_PHONEPE_SALT_ID}`,
       "base64"
     );
-
-    console.log(shaPayload);
     const sha256Data = `${shaPayload}###${process.env.NEXT_PUBLIC_PHONEPE_SALT_INDEX}`;
 
     // Make a request to the API route and handle the response
-    await fetch("/api/phonepe-payment", {
+    await fetch("/api/phonepepayment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

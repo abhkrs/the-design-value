@@ -1,21 +1,20 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
   try {
-    const { sha256Data, base64Payload } = req.body;
+    const { sha256Data, orderId } = req.query;
+    console.log(sha256Data, orderId);
     const options = {
-      method: "POST",
+      method: "GET",
       headers: {
         accept: "application/json",
         "Content-Type": "application/json",
-        "X-VERIFY": sha256Data,
+        "X-VERIFY": `${sha256Data}###${process.env.NEXT_PUBLIC_PHONEPE_SALT_INDEX}`,
+        "X-MERCHANT-ID": process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
       },
-      body: JSON.stringify({
-        request: base64Payload,
-      }),
     };
 
     const response = await fetch(
-      `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID}/MT7850590068188104`,
+      `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID}/${orderId}`,
       options
     );
 

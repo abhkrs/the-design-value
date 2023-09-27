@@ -7,6 +7,7 @@ import Section from "@/components/uielements/Section";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { sha256 } from "js-sha256";
 
 export default function FullPage() {
   const [showLoader, setShowLoader] = useState(true);
@@ -30,32 +31,70 @@ export default function FullPage() {
       const orderId = queryParams["order_id"];
 
       if (orderId) {
-        const apiUrl = `/api/confirmpayment?orderId=${orderId}`;
+        // Phone pe
+
+        const shaPayload = sha256(
+          `/pg/v1/status/${process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID}/${orderId}${process.env.NEXT_PUBLIC_PHONEPE_SALT_ID}`,
+          "base64"
+        );
+
+        const apiUrl = `/api/phonepegetstatus?orderId=${orderId}&sha256Data=${shaPayload}`;
+
         fetch(apiUrl, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "x-api-version": "2022-09-01",
-            "x-client-id": "TEST100253676612d2dbe513c200299676352001",
-            "x-client-secret": "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d",
           },
         })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
+          .then(async (response) => {
+            if (response.ok) {
+              // If the response status is OK (e.g., 200), parse the JSON response
+              const responseData = await response.json();
+              console.log(responseData);
+
+              if (responseData.code === "PAYMENT_SUCCESS") {
+                setPaymentSucces(true);
+              }
+              setShowLoader(false);
+            } else {
+              // If the response status is not OK, handle the error
+              console.error(
+                `Error: ${response.status} - ${response.statusText}`
+              );
             }
-            return response.json();
-          })
-          .then((data) => {
-            if (data.order_status === "PAID") {
-              setPaymentSucces(true);
-            }
-            setShowLoader(false);
           })
           .catch((error) => {
-            console.error("Error:", error);
+            console.error(error);
             setShowLoader(false);
           });
+
+        // Cashfree payment
+        //const apiUrl = `/api/confirmpayment?orderId=${orderId}`;
+        // fetch(apiUrl, {
+        //   method: "GET",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     "x-api-version": "2022-09-01",
+        //     "x-client-id": "TEST100253676612d2dbe513c200299676352001",
+        //     "x-client-secret": "TESTdd5d3df8ca9e7bbf6c739312f870befbd20af39d",
+        //   },
+        // })
+        //   .then((response) => {
+        //     if (!response.ok) {
+        //       throw new Error("Network response was not ok");
+        //     }
+        //     return response.json();
+        //   })
+        //   .then((data) => {
+        //     if (data.order_status === "PAID") {
+        //       setPaymentSucces(true);
+        //     }
+        //     setShowLoader(false);
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error:", error);
+        //     setShowLoader(false);
+        //   });
       }
     }
   }, [router]);
