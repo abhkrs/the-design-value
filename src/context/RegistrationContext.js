@@ -2,10 +2,8 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../utils/api";
-import { PaymentContext } from "@/context/PaymentContext";
 import { toast } from "react-toastify";
 import CourseRegistrationModalBody from "@/app/(main)/courses/CourseRegistrationModalBody";
-import { CashFreePaymentContext } from "./CashFreePaymentContext";
 import { PhonePeContext } from "./PhonePeContext";
 
 export const RegistrationContext = createContext();
@@ -85,6 +83,7 @@ export function RegistrationProvider({ children }) {
         courseUid: response?.courseUid,
         batchId: response?.batchId,
         coursePrice: selectedCourse.coursePrice,
+        mobile: payload.mobile,
         apiUrl: "/Register/regUsr",
         callBackUrl: "/payment-success",
       }));

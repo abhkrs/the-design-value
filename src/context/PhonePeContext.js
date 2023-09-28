@@ -2,22 +2,49 @@
 
 import { createContext } from "react";
 import { sha256 } from "js-sha256";
+import api from "../../utils/api";
+import { toast } from "react-toastify";
 
 export const PhonePeContext = createContext();
 
 export function PhonePeProvider({ children }) {
   async function handelPhonePePayament(data) {
-    console.log(data);
+    const orderId = `ORDER-${data.uuid}${new Date().getTime()}`;
+
+    const payentPayload = {
+      uuid: data?.uuid,
+      courseUid: data?.courseUid,
+      batchId: data?.batchId,
+      paymentId: orderId,
+      AmountPaid: data?.coursePrice,
+      paymentStatus: 0,
+      reason: `NA`,
+    };
+    if (data.regId) {
+      payload.RegId = data.regId;
+    }
+
+    const paymentResponse = await api.post("/Register/regUsr", payentPayload);
+    console.log(paymentResponse);
+    if (paymentResponse.status !== "Success") {
+      toast.error(paymentResponse?.message, {
+        autoClose: 3000,
+        theme: "colored",
+      });
+      return;
+    }
+
+    // return;
     const baseUrl = window.location.origin;
     const payload = {
       merchantId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
-      merchantTransactionId: "MT7850590068188104",
-      merchantUserId: "MUID123",
-      amount: 10000,
-      redirectUrl: `${baseUrl}/payment-success?order_id=MT7850590068188104`,
+      merchantTransactionId: orderId,
+      merchantUserId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_USER_ID,
+      amount: Number(data?.coursePrice * 100),
+      redirectUrl: `${baseUrl}/payment-success?order_id=${orderId}`,
       redirectMode: "REDIRECT",
-      callbackUrl: `${baseUrl}/payment-success?order_id=MT7850590068188104`,
-      mobileNumber: "9999999999",
+      callbackUrl: `${baseUrl}/payment-success?order_id=${orderId}`,
+      mobileNumber: data?.mobile,
       paymentInstrument: {
         type: "PAY_PAGE",
       },
