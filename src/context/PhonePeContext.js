@@ -36,14 +36,21 @@ export function PhonePeProvider({ children }) {
 
     // return;
     const baseUrl = window.location.origin;
+    let redirectUrl = `${baseUrl}/payment-success?order_id=${orderId}`;
+    if(data?.multiReg === 1){
+      redirectUrl = `${redirectUrl}&multiReg=${data?.multiReg}`
+    }
+    if(data?.nextMonth) {
+      redirectUrl = `${redirectUrl}&multiReg=${data?.nextMonth}`
+    }
     const payload = {
       merchantId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
       merchantTransactionId: orderId,
       merchantUserId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_USER_ID,
       amount: Number(data?.coursePrice * 100),
-      redirectUrl: `${baseUrl}/payment-success?order_id=${orderId}`,
+      redirectUrl: redirectUrl,
       redirectMode: "REDIRECT",
-      callbackUrl: `${baseUrl}/payment-success?order_id=${orderId}`,
+      callbackUrl: redirectUrl,
       mobileNumber: data?.mobile,
       paymentInstrument: {
         type: "PAY_PAGE",

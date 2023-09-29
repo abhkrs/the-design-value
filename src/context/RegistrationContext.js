@@ -84,6 +84,7 @@ export function RegistrationProvider({ children }) {
         batchId: response?.batchId,
         coursePrice: selectedCourse.coursePrice,
         mobile: payload.mobile,
+        multiReg: response?.multiReg,
         apiUrl: "/Register/regUsr",
         callBackUrl: "/payment-success",
       }));
