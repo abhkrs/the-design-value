@@ -41,7 +41,7 @@ export function PhonePeProvider({ children }) {
       redirectUrl = `${redirectUrl}&multiReg=${data?.multiReg}`
     }
     if(data?.nextMonth) {
-      redirectUrl = `${redirectUrl}&multiReg=${data?.nextMonth}`
+      redirectUrl = `${redirectUrl}&nextMonth=1`
     }
     const payload = {
       merchantId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
