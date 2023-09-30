@@ -26,71 +26,74 @@ export function PhonePeProvider({ children }) {
 
     const paymentResponse = await api.post("/Register/regUsr", payentPayload);
     console.log(paymentResponse);
-    if (paymentResponse.status !== "Success") {
+    if (paymentResponse.stauts === "Success") {
+      toast.success(paymentResponse?.message, {
+        autoClose: 3000,
+        theme: "colored",
+      });
+
+      const baseUrl = window.location.origin;
+      let redirectUrl = `${baseUrl}/payment-success?order_id=${orderId}`;
+      if (data?.multiReg === 1) {
+        redirectUrl = `${redirectUrl}&multiReg=${data?.multiReg}`;
+      }
+      if (data?.nextMonth) {
+        redirectUrl = `${redirectUrl}&nextMonth=1`;
+      }
+      const payload = {
+        merchantId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
+        merchantTransactionId: orderId,
+        merchantUserId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_USER_ID,
+        amount: Number(data?.coursePrice * 100),
+        redirectUrl: redirectUrl,
+        redirectMode: "REDIRECT",
+        callbackUrl: redirectUrl,
+        mobileNumber: data?.mobile,
+        paymentInstrument: {
+          type: "PAY_PAGE",
+        },
+      };
+      const payloadString = JSON.stringify(payload, null, 2);
+      const payloadWithLF = payloadString.replace(/\r\n/g, "\n");
+      const base64Payload = Buffer.from(payloadWithLF, "utf-8").toString(
+        "base64"
+      );
+
+      const shaPayload = sha256(
+        `${base64Payload}/pg/v1/pay${process.env.NEXT_PUBLIC_PHONEPE_SALT_ID}`,
+        "base64"
+      );
+      const sha256Data = `${shaPayload}###${process.env.NEXT_PUBLIC_PHONEPE_SALT_INDEX}`;
+
+      // Make a request to the API route and handle the response
+      await fetch("/api/phonepepayment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sha256Data, base64Payload }),
+      })
+        .then(async (response) => {
+          if (response.ok) {
+            // If the response status is OK (e.g., 200), parse the JSON response
+            const responseData = await response.json();
+            console.log(responseData);
+            window.location.href =
+              responseData?.data?.instrumentResponse?.redirectInfo?.url;
+          } else {
+            // If the response status is not OK, handle the error
+            console.error(`Error: ${response.status} - ${response.statusText}`);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
       toast.error(paymentResponse?.message, {
         autoClose: 3000,
         theme: "colored",
       });
-      return;
     }
-
-    // return;
-    const baseUrl = window.location.origin;
-    let redirectUrl = `${baseUrl}/payment-success?order_id=${orderId}`;
-    if(data?.multiReg === 1){
-      redirectUrl = `${redirectUrl}&multiReg=${data?.multiReg}`
-    }
-    if(data?.nextMonth) {
-      redirectUrl = `${redirectUrl}&nextMonth=1`
-    }
-    const payload = {
-      merchantId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
-      merchantTransactionId: orderId,
-      merchantUserId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_USER_ID,
-      amount: Number(data?.coursePrice * 100),
-      redirectUrl: redirectUrl,
-      redirectMode: "REDIRECT",
-      callbackUrl: redirectUrl,
-      mobileNumber: data?.mobile,
-      paymentInstrument: {
-        type: "PAY_PAGE",
-      },
-    };
-    const payloadString = JSON.stringify(payload, null, 2);
-    const payloadWithLF = payloadString.replace(/\r\n/g, "\n");
-    const base64Payload = Buffer.from(payloadWithLF, "utf-8").toString(
-      "base64"
-    );
-
-    const shaPayload = sha256(
-      `${base64Payload}/pg/v1/pay${process.env.NEXT_PUBLIC_PHONEPE_SALT_ID}`,
-      "base64"
-    );
-    const sha256Data = `${shaPayload}###${process.env.NEXT_PUBLIC_PHONEPE_SALT_INDEX}`;
-
-    // Make a request to the API route and handle the response
-    await fetch("/api/phonepepayment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ sha256Data, base64Payload }),
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          // If the response status is OK (e.g., 200), parse the JSON response
-          const responseData = await response.json();
-          console.log(responseData);
-          window.location.href =
-            responseData?.data?.instrumentResponse?.redirectInfo?.url;
-        } else {
-          // If the response status is not OK, handle the error
-          console.error(`Error: ${response.status} - ${response.statusText}`);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
   return (

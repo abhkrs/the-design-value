@@ -75,6 +75,7 @@ export function RegistrationProvider({ children }) {
 
   const submitUserDetails = async (payload) => {
     const response = await api.post("/Register/createUsr", payload);
+    console.log(response);
 
     if (response && response.status === "Success") {
       setUserDetails((prev) => ({
@@ -82,7 +83,7 @@ export function RegistrationProvider({ children }) {
         uuid: response?.uuid,
         courseUid: response?.courseUid,
         batchId: response?.batchId,
-        coursePrice: selectedCourse.coursePrice,
+        coursePrice: selectedCourse?.coursePrice,
         mobile: payload.mobile,
         multiReg: response?.multiReg,
         apiUrl: "/Register/regUsr",

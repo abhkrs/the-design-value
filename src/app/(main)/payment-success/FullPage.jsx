@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { sha256 } from "js-sha256";
+import api from "../../../../utils/api";
 
 export default function FullPage() {
   const [showLoader, setShowLoader] = useState(true);
@@ -32,7 +33,6 @@ export default function FullPage() {
 
       if (orderId) {
         // Phone pe
-
         const shaPayload = sha256(
           `/pg/v1/status/${process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID}/${orderId}${process.env.NEXT_PUBLIC_PHONEPE_SALT_ID}`,
           "base64"
@@ -53,6 +53,18 @@ export default function FullPage() {
               console.log(responseData);
 
               if (responseData.code === "PAYMENT_SUCCESS") {
+                const payentPayload ={
+                  paymentId: orderId,
+                  paymentStatus: 1
+                }
+                const paymentResponse = await api.post("/Register/payupdate", payentPayload);
+                console.log(paymentResponse);
+                if (paymentResponse.status === "Success") {
+                  toast.success(paymentResponse?.message, {
+                    autoClose: 3000,
+                    theme: "colored",
+                  });
+                }
                 setPaymentSucces(true);
               }
               setShowLoader(false);
