@@ -78,7 +78,7 @@ function FullPage() {
             <StarRating rating={parseFloat(courseDetails?.Rating) || 0} />
           </div>
           <P className="bg-secondary !text-base px-2 py-1 !text-white max-w-max font-normal">
-            86% Placement Rate after internship
+            {courseDetails?.placementRate || 95}% Placement Rate after internship
           </P>
           <div className="text-gray-400 mt-6 flex justify-start">
             A verified course by{" "}
@@ -92,7 +92,8 @@ function FullPage() {
             </div>
           </div>
           <P className="!text-gold mt-4">
-            <span className="font-bold">1,277 </span> people already enrolled
+            <span className="font-bold">{courseDetails?.peopleEnrolled} </span>{" "}
+            people already enrolled
           </P>
         </div>
         <div className="lg:w-1/3 relative lg:-top-10 z-30 hidden lg:block">
@@ -190,11 +191,15 @@ function FullPage() {
             📆{" "}
             <span className="ml-1">{courseDetails?.PopUpData?.batchesOn}</span>
           </div>
-          <div className="py-2">✅ {courseDetails?.PopUpData?.support}</div>
-          <P className="!text-sm text-gray-600 !italic pl-1">
-            <span className="font-bold">Note:</span>{" "}
-            {courseDetails?.PopUpData?.jobNote}
-          </P>
+          {courseDetails?.PopUpData?.jobNote && (
+            <>
+              <div className="py-2">✅ {courseDetails?.PopUpData?.support}</div>
+              <P className="!text-sm text-gray-600 !italic pl-1">
+                <span className="font-bold">Note:</span>{" "}
+                {courseDetails?.PopUpData?.jobNote}
+              </P>
+            </>
+          )}
         </div>
       </div>
       <AboutCourse />
