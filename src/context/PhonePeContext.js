@@ -9,6 +9,7 @@ export const PhonePeContext = createContext();
 
 export function PhonePeProvider({ children }) {
   async function handelPhonePePayament(data) {
+    console.log(data);
     const orderId = `ORDER-${data.uuid}${new Date().getTime()}`;
 
     const payentPayload = {
@@ -26,7 +27,7 @@ export function PhonePeProvider({ children }) {
 
     const paymentResponse = await api.post("/Register/regUsr", payentPayload);
     console.log(paymentResponse);
-    if (paymentResponse.stauts === "Success") {
+    if (paymentResponse.status === "Success") {
       toast.success(paymentResponse?.message, {
         autoClose: 3000,
         theme: "colored",
