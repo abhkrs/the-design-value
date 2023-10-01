@@ -65,10 +65,9 @@ export function RegistrationProvider({ children }) {
 
   useEffect(() => {
     if (userDetails && userDetails?.uuid) {
-      setSelectedCourse();
       // handleSubscribe(userDetails);
       // handelPayament(userDetails);
-      handelPhonePePayament(userDetails);
+      handelPhonePePayament(userDetails);      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);
