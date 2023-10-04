@@ -26,12 +26,13 @@ export default function Page() {
     const userDetails = sessionStorage.getItem("userDetails");
     const registrationData = sessionStorage.getItem("registrationData");
     if (userDetails && registrationData) {
-      const decryptedUserDetails = JSON.parse(decryptData(userDetails));      
+      const decryptedUserDetails = JSON.parse(decryptData(userDetails));
       const decryptedRegistrationData = JSON.parse(
         decryptData(registrationData)
       );
       setUserDetails(decryptedUserDetails);
       setCourseList(decryptedRegistrationData);
+      console.log(decryptedRegistrationData);
     }
   }, []);
 
@@ -45,16 +46,15 @@ export default function Page() {
       noOutSideClose: true,
     }));
   };
-  const payForNextMonth = async () => {
+  const payForNextMonth = async (course) => {
+    console.log(course);
     setShowLoader(true);
     const payload = {
-      uuid: userDetails?.userId,
-      courseUid: false,
-      batchId: false,
-      coursePrice: courseList[0]?.price,
+      uuid: userDetails?.userId,      
+      coursePrice: course?.price,
       apiUrl: "/Register/payFees",
       callBackUrl: "/profile",
-      regId: courseList[0]?.regUid,
+      regUid: course?.regUid,
       nextMonth: 1,
     };
     await handelPhonePePayament(payload);
@@ -157,7 +157,9 @@ export default function Page() {
                           disabled={showLoader}
                           type="button"
                           className="rounded-full bg-black !text-white !text-lg hover:bg-primary px-6 py-2 max-w-max min-w-max mx-auto md:mr-auto flex items-center justify-center"
-                          onClick={payForNextMonth}
+                          onClick={() => {
+                            payForNextMonth(program);
+                          }}
                         >
                           {showLoader && (
                             <div role="status">

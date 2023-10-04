@@ -21,11 +21,11 @@ export function PhonePeProvider({ children }) {
       paymentStatus: 0,
       reason: `NA`,
     };
-    if (data.regId) {
-      payentPayload.RegId = data.regId;
+    if (data.regUid) {
+      payentPayload.RegId = data.regUid;
     }
 
-    const paymentResponse = await api.post("/Register/regUsr", payentPayload);
+    const paymentResponse = await api.post(data?.apiUrl, payentPayload);
     console.log(paymentResponse);
     if (paymentResponse.status === "Success") {
       toast.success(paymentResponse?.message, {
@@ -80,7 +80,7 @@ export function PhonePeProvider({ children }) {
             // If the response status is OK (e.g., 200), parse the JSON response
             const responseData = await response.json();
             console.log(responseData);
-            // window.location.href =
+            window.location.href =
               responseData?.data?.instrumentResponse?.redirectInfo?.url;
           } else {
             // If the response status is not OK, handle the error
