@@ -119,7 +119,7 @@ export default function Page() {
                 {/* <pre>{JSON.stringify(program, null, 2)}</pre> */}
                 <div className="relative min-w-[300px] min-h-[300px] md:min-h-0">
                   <Image
-                    src={program.imgName || "/images/course1.png"}
+                    src={program?.imgName || "/images/course1.png"}
                     alt={program.Course}
                     fill={true}
                     className="object-cover"
