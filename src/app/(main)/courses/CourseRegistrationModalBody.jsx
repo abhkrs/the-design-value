@@ -28,7 +28,7 @@ function CourseRegistrationModalBody({ selectedCourse }) {
   };
 
   useEffect(() => {
-    const userDetails = sessionStorage.getItem("userDetails");
+    const userDetails = localStorage.getItem("userDetails");
     if (userDetails) {
       const decryptedUserDetails = JSON.parse(decryptData(userDetails));
       console.log(decryptedUserDetails);

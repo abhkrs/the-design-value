@@ -23,7 +23,7 @@ export default function Page() {
     useContext(LoginContext);
 
   useEffect(() => {
-    let userRole = sessionStorage.getItem("userRole");
+    let userRole = localStorage.getItem("userRole");
     console.log(userRole);
     if (userRole) {
       const decryptedUserRole = userRole
@@ -50,7 +50,7 @@ export default function Page() {
       });
     } else if (response.is_superuser) {
       setIsUserLoggedIn(true);
-      sessionStorage.clear();
+      localStorage.clear();
       const encryptedData = encryptData(response.AdminData);
       let userRole = {
         role: "TDV-admin",
@@ -58,21 +58,21 @@ export default function Page() {
       };
       console.log(userRole);
       userRole = encryptData(userRole);
-      sessionStorage.setItem("userDetails", encryptedData);
-      sessionStorage.setItem("userRole", userRole);
+      localStorage.setItem("userDetails", encryptedData);
+      localStorage.setItem("userRole", userRole);
       router.push("/dashboard");
     } else {
       setIsUserLoggedIn(true);
-      sessionStorage.clear();
+      localStorage.clear();
       const encryptedData = encryptData(response.StudentData);
       const RegistrationData = encryptData(response.RegistrationData);
       let userRole = {
         role: "TDV-student",
       };
       userRole = encryptData(userRole);
-      sessionStorage.setItem("userDetails", encryptedData);
-      sessionStorage.setItem("registrationData", RegistrationData);
-      sessionStorage.setItem("userRole", userRole);
+      localStorage.setItem("userDetails", encryptedData);
+      localStorage.setItem("registrationData", RegistrationData);
+      localStorage.setItem("userRole", userRole);
       router.push("/profile");
     }
   };

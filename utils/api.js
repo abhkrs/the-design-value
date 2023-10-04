@@ -1,7 +1,7 @@
 const apiFn = async (method, path, payload, onError) => {
   let token;
   if (typeof window !== 'undefined') {
-    token = sessionStorage.getItem('token');
+    token = localStorage.getItem('token');
   }
   const headers = {
     Accept: '*/*',
