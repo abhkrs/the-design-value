@@ -12,21 +12,21 @@ import { useContext, useEffect, useState } from "react";
 import { decryptData } from "../../../../../utils/encryption";
 import Modal from "@/components/ui/Modal";
 import ResetPassword from "./ResetPassword";
-import { PaymentContext } from "@/context/PaymentContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PhonePeContext } from "@/context/PhonePeContext";
 
 export default function Page() {
   const [userDetails, setUserDetails] = useState({});
   const [courseList, setCourseList] = useState([]);
   const [resetPasswordModal, setResetPasswordModal] = useState();
   const [showLoader, setShowLoader] = useState(false);
-  const { handleSubscribe } = useContext(PaymentContext);
+  const { handelPhonePePayament } = useContext(PhonePeContext);
   useEffect(() => {
     const userDetails = sessionStorage.getItem("userDetails");
     const registrationData = sessionStorage.getItem("registrationData");
     if (userDetails && registrationData) {
-      const decryptedUserDetails = JSON.parse(decryptData(userDetails));
+      const decryptedUserDetails = JSON.parse(decryptData(userDetails));      
       const decryptedRegistrationData = JSON.parse(
         decryptData(registrationData)
       );
@@ -55,8 +55,9 @@ export default function Page() {
       apiUrl: "/Register/payFees",
       callBackUrl: "/profile",
       regId: courseList[0]?.regUid,
+      nextMonth: 1,
     };
-    await handleSubscribe(payload);
+    await handelPhonePePayament(payload);
   };
   return (
     <AuthWrap>

@@ -11,7 +11,6 @@ function AuthWrap({ children }) {
 
   useEffect(() => {
     let userRole = sessionStorage.getItem("userRole");
-    console.log(userRole);
     if (userRole) {
       const decryptedUserRole = JSON.parse(decryptData(userRole));
       if (!userRole || decryptedUserRole.role !== "TDV-student") {

@@ -22,7 +22,7 @@ export function PhonePeProvider({ children }) {
       reason: `NA`,
     };
     if (data.regId) {
-      payload.RegId = data.regId;
+      payentPayload.RegId = data.regId;
     }
 
     const paymentResponse = await api.post("/Register/regUsr", payentPayload);
@@ -32,6 +32,7 @@ export function PhonePeProvider({ children }) {
         autoClose: 3000,
         theme: "colored",
       });
+      toast.clearWaitingQueue();
 
       const baseUrl = window.location.origin;
       let redirectUrl = `${baseUrl}/payment-success?order_id=${orderId}`;
@@ -79,7 +80,7 @@ export function PhonePeProvider({ children }) {
             // If the response status is OK (e.g., 200), parse the JSON response
             const responseData = await response.json();
             console.log(responseData);
-            window.location.href =
+            // window.location.href =
               responseData?.data?.instrumentResponse?.redirectInfo?.url;
           } else {
             // If the response status is not OK, handle the error
@@ -94,6 +95,7 @@ export function PhonePeProvider({ children }) {
         autoClose: 3000,
         theme: "colored",
       });
+      toast.clearWaitingQueue();
     }
   }
 

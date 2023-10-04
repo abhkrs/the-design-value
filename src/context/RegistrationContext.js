@@ -98,6 +98,7 @@ export function RegistrationProvider({ children }) {
         theme: "colored",
       });
     }
+    toast.clearWaitingQueue();
   };
 
   return (

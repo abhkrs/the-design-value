@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react"; // Import useEffect from "react"
 import H2 from "@/components/typography/H2";
 import P from "@/components/typography/P";
-import Section from "@/components/uielements/Section";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { sha256 } from "js-sha256";
 import api from "../../../../utils/api";
+import { toast } from "react-toastify";
 
 export default function FullPage() {
   const [showLoader, setShowLoader] = useState(true);
@@ -64,10 +64,12 @@ export default function FullPage() {
                     autoClose: 3000,
                     theme: "colored",
                   });
+                  toast.clearWaitingQueue();
                 }
                 setPaymentSucces(true);
               }
               setShowLoader(false);
+              router.refresh();
             } else {
               // If the response status is not OK, handle the error
               console.error(
