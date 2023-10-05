@@ -182,7 +182,7 @@ export default function Page() {
                           Pay Fee for the next month
                         </button>
                       ) : (
-                        <p className="text-primary">Fee paid for this month</p>
+                        <p className="text-primary">Fee paid for next month</p>
                       )}
                     </>
                   )}
