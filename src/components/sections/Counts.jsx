@@ -15,7 +15,7 @@ export default function Counts() {
             </div>
             <div className="grid lg:grid-cols-4 sm:grid-cols-2 mt-12 mb-8 capitalize gap-6 !text-white">
                 <div className="sm:border-r lg:pr-6 pr-auto">
-                    <Counter countEnd='341' />
+                    <Counter countEnd='1277' />
                     <P className="!text-white !text-xl mt-4">Students Enrolled so far</P>
                     <hr className="w-2/3 sm:hidden mx-auto mt-8" />
                 </div>
@@ -25,12 +25,12 @@ export default function Counts() {
                     <hr className="w-2/3 sm:hidden mx-auto mt-8" />
                 </div>
                 <div className="sm:border-r lg:pr-6 pr-auto">
-                    <Counter countEnd='63' />
+                    <Counter countEnd='656' />
                     <P className="!text-white !text-xl mt-4">Jobs Provided</P>
                     <hr className="w-2/3 sm:hidden mx-auto mt-8" />
                 </div>
                 <div className=" lg:pr-6 pr-auto">
-                    <Counter countEnd='147' />
+                    <Counter countEnd='763' />
                     <P className="!text-white !text-xl mt-4">Internship Provided</P>
                 </div>
             </div>

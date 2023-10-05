@@ -8,7 +8,6 @@ import Alumni from "@/components/APIComponents/Alumni";
 import Batches from "@/components/APIComponents/Batches";
 import MentorAdmin from "@/components/APIComponents/MentorAdmin";
 import CallBackPanel from "@/components/sections/CallBackPanel";
-import Section from "@/components/uielements/Section";
 import AuthWrap from "../AuthWrap";
 
 const sections = [
@@ -55,12 +54,11 @@ export default function Page() {
   return (
     <AuthWrap>
       <main>
-        <Section>
-          <div className="lg:hidden h-96 flex justify-center items-center">
-            This page is not availabe for Mobile or tablets. Please login on
-            Laptop/Desktop. Don&apos;t forget to logout here.
+  <div className="lg:px-12 xl:px-28 lg:my-14 my-8">
+          <div className="md:hidden h-96 flex justify-center items-center px-8">
+            This page is not availabe for Mobile devices. Please login on Tablet /Laptop /Desktop. If you are on tablet and still seeing this then rotate your screen.
           </div>
-          <div className="bg-white rounded-lg px-8 py-12 hidden lg:block">
+          <div className="bg-white rounded-lg px-8 py-12 hidden md:block">
             <div className="flex justify-between">
               <div></div>
               <div className="flex justify-around gap-4">
@@ -84,7 +82,7 @@ export default function Page() {
               </React.Fragment>
             ))}
           </div>
-        </Section>
+          </div>
       </main>
     </AuthWrap>
   );

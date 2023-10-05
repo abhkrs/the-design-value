@@ -68,6 +68,7 @@ function Header() {
     }
   }, [isUserLoggedIn, adminItemAdded]);
 
+
   const allowedPaths = [
     "/admin",
     "/admin/dashboard",
@@ -79,10 +80,10 @@ function Header() {
   const nonPromoted = allowedPaths.includes(pathName);
 
   return (
-    <header className="sticky !top-0 left-0 right-0 bg-light md:bg-white z-50 w-full">
+    <header className="sticky !top-0 left-0 right-0 bg-light lg:bg-white z-50 w-full">
       <div
         className={`${
-          topbar && !nonPromoted ? "md:hidden" : "hidden"
+          topbar && !nonPromoted ? "lg:hidden" : "hidden"
         } bg-primary !text-white p-6`}
       >
         <button
@@ -112,7 +113,7 @@ function Header() {
           >
             The<span className="text-primary">Design</span>Value
           </Link>
-          <div className="md:flex hidden">
+          <div className="lg:flex hidden">
             {menu.map((data, index) => (
               <Link
                 key={index}
@@ -126,7 +127,7 @@ function Header() {
               </Link>
             ))}
           </div>
-          <div className="gap-4 justify-end hidden md:flex">
+          <div className="gap-4 justify-end hidden lg:flex">
             {isUserLoggedIn ? (
               <>
                 {userRole.role === "TDV-admin" ? (
@@ -161,7 +162,7 @@ function Header() {
             )}
           </div>
         </div>
-        <div className="bg-black block md:hidden container-fluid !text-white mt-3 px-3 py-3">
+        <div className="bg-black block lg:hidden container-fluid !text-white mt-3 px-3 py-3">
           <div className="flex justify-between">
             <button
               kind=""
@@ -233,7 +234,7 @@ function Header() {
       </nav>
       <div
         className={`${
-          topbar && !nonPromoted ? "hidden md:flex" : "hidden"
+          topbar && !nonPromoted ? "hidden lg:flex" : "hidden"
         } bg-black !text-white p-3 justify-center`}
       >
         <P className="capitalize cursor-default mr-2 !text-white">
