@@ -18,7 +18,7 @@ function ForgotPassword() {
       const response = await api.post("/Register/forgotPW", {
         username,
       });
-      if (response.stauts) {
+      if (response.status === 'Success') {
         toast.success(response?.message, {
           autoClose: 3000,
           theme: "colored",

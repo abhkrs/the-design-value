@@ -2,9 +2,9 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../utils/api";
-import { PaymentContext } from "@/context/PaymentContext";
 import { toast } from "react-toastify";
 import CourseRegistrationModalBody from "@/app/(main)/courses/CourseRegistrationModalBody";
+import { PhonePeContext } from "./PhonePeContext";
 
 export const RegistrationContext = createContext();
 
@@ -19,7 +19,9 @@ export function RegistrationProvider({ children }) {
   });
   const [userDetails, setUserDetails] = useState(null);
 
-  const { handleSubscribe } = useContext(PaymentContext);
+  //const { handleSubscribe } = useContext(PaymentContext);
+  //const { handelPayament } = useContext(CashFreePaymentContext);
+  const { handelPhonePePayament } = useContext(PhonePeContext);
 
   const onRegistrationConfirm = (_selectedCourse, _userDetails) => {
     console.log(_selectedCourse);
@@ -63,14 +65,16 @@ export function RegistrationProvider({ children }) {
 
   useEffect(() => {
     if (userDetails && userDetails?.uuid) {
-      setSelectedCourse();
-      handleSubscribe(userDetails);
+      // handleSubscribe(userDetails);
+      // handelPayament(userDetails);
+      handelPhonePePayament(userDetails);      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);
 
   const submitUserDetails = async (payload) => {
     const response = await api.post("/Register/createUsr", payload);
+    console.log(response);
 
     if (response && response.status === "Success") {
       setUserDetails((prev) => ({
@@ -78,7 +82,9 @@ export function RegistrationProvider({ children }) {
         uuid: response?.uuid,
         courseUid: response?.courseUid,
         batchId: response?.batchId,
-        coursePrice: selectedCourse.coursePrice,
+        coursePrice: selectedCourse?.coursePrice,
+        mobile: payload.mobile,
+        multiReg: response?.multiReg,
         apiUrl: "/Register/regUsr",
         callBackUrl: "/payment-success",
       }));
@@ -92,6 +98,7 @@ export function RegistrationProvider({ children }) {
         theme: "colored",
       });
     }
+    toast.clearWaitingQueue();
   };
 
   return (

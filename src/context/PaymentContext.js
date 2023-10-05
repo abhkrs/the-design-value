@@ -10,7 +10,6 @@ export function PaymentProvider({ children }) {
   const router = useRouter();
   const handleSubscribe = async (data) => {
     try {
-      console.log(data);
       await initializeRazorpay();
       const subscribe = await fetch("/api/createorder", {
         method: "POST",
@@ -47,8 +46,6 @@ export function PaymentProvider({ children }) {
           }
 
           const paymentResponse = await api.post(data?.apiUrl, payload);
-
-          console.log(paymentResponse);
           if (paymentResponse.status === "Success") {
             toast.success(response?.message, {
               autoClose: 3000,

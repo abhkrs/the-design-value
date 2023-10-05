@@ -52,7 +52,7 @@ function Header() {
   const { isUserLoggedIn, handleLogout } = useContext(LoginContext);
 
   useEffect(() => {
-    let userRole = sessionStorage.getItem("userRole");
+    let userRole = localStorage.getItem("userRole");
     if (userRole) {
       const decryptedUserRole = JSON.parse(decryptData(userRole));
       setUserRole(decryptedUserRole);

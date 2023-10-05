@@ -83,7 +83,7 @@ export default function Alumni() {
   };
 
   useEffect(() => {
-    const userRole = sessionStorage.getItem("userRole");
+    const userRole = localStorage.getItem("userRole");
     if (userRole) {
       const decryptedUserRole = JSON.parse(decryptData(userRole));
       setUserRole(decryptedUserRole);

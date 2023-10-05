@@ -12,26 +12,31 @@ import { useContext, useEffect, useState } from "react";
 import { decryptData } from "../../../../../utils/encryption";
 import Modal from "@/components/ui/Modal";
 import ResetPassword from "./ResetPassword";
-import { PaymentContext } from "@/context/PaymentContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PhonePeContext } from "@/context/PhonePeContext";
+import api from "../../../../../utils/api";
 
 export default function Page() {
   const [userDetails, setUserDetails] = useState({});
   const [courseList, setCourseList] = useState([]);
   const [resetPasswordModal, setResetPasswordModal] = useState();
   const [showLoader, setShowLoader] = useState(false);
-  const { handleSubscribe } = useContext(PaymentContext);
+  const [loadingCourse, setLoadingCourse] = useState(false);
+  const { handelPhonePePayament } = useContext(PhonePeContext);
   useEffect(() => {
-    const userDetails = sessionStorage.getItem("userDetails");
-    const registrationData = sessionStorage.getItem("registrationData");
-    if (userDetails && registrationData) {
+    const getUserData = async (userId) => {
+      const courseData = await api.post("/Register/studData", {
+        studID: userId,
+      });
+      setCourseList(courseData?.RegistrationData);
+      console.log(courseData?.RegistrationData);
+    };
+    const userDetails = localStorage.getItem("userDetails");
+    if (userDetails) {
       const decryptedUserDetails = JSON.parse(decryptData(userDetails));
-      const decryptedRegistrationData = JSON.parse(
-        decryptData(registrationData)
-      );
       setUserDetails(decryptedUserDetails);
-      setCourseList(decryptedRegistrationData);
+      getUserData(decryptedUserDetails?.userId);
     }
   }, []);
 
@@ -45,18 +50,19 @@ export default function Page() {
       noOutSideClose: true,
     }));
   };
-  const payForNextMonth = async () => {
+  const payForNextMonth = async (course) => {
+    console.log(course);
     setShowLoader(true);
+    setLoadingCourse(course?.regUid);
     const payload = {
       uuid: userDetails?.userId,
-      courseUid: false,
-      batchId: false,
-      coursePrice: courseList[0]?.price,
+      coursePrice: course?.price,
       apiUrl: "/Register/payFees",
       callBackUrl: "/profile",
-      regId: courseList[0]?.regUid,
+      regUid: course?.regUid,
+      nextMonth: 1,
     };
-    await handleSubscribe(payload);
+    await handelPhonePePayament(payload);
   };
   return (
     <AuthWrap>
@@ -113,7 +119,10 @@ export default function Page() {
                 {/* <pre>{JSON.stringify(program, null, 2)}</pre> */}
                 <div className="relative min-w-[300px] min-h-[300px] md:min-h-0">
                   <Image
-                    src={program.img || "/images/course1.png"}
+                    src={
+                      `/images/courseimages/${program?.imgName}` ||
+                      "/images/course1.png"
+                    }
                     alt={program.Course}
                     fill={true}
                     className="object-cover"
@@ -125,9 +134,6 @@ export default function Page() {
                     Currently enrolled for{" "}
                     <span className="font-semibold">{program.Batch} Batch</span>
                   </P>
-                  {/* <P className="text-secondary font-semibold min-h-[18px] mt-4 mb-3">
-                    Course will end in&nbsp;{program.endingOn || "Jan"}
-                  </P> */}
                   <P className="text-gray-600">
                     {program.Duration}
                     <FaCircle className="inline mx-2 w-2 h-2 mb-1" />
@@ -146,19 +152,17 @@ export default function Page() {
                   {!program.CourseStatus && (
                     <>
                       {!program.paymentStatus ? (
-                        // <button
-                        //   className="rounded-full bg-black !text-white !text-lg hover:bg-primary px-6 py-2 max-w-max min-w-max mx-auto md:mr-auto"
-                        //   onClick={payForNextMonth}
-                        // >
-                        //   Pay Fee for the next month
-                        // </button>
                         <button
-                          disabled={showLoader}
+                          disabled={
+                            showLoader && loadingCourse === program?.regUid
+                          }
                           type="button"
                           className="rounded-full bg-black !text-white !text-lg hover:bg-primary px-6 py-2 max-w-max min-w-max mx-auto md:mr-auto flex items-center justify-center"
-                          onClick={payForNextMonth}
+                          onClick={() => {
+                            payForNextMonth(program);
+                          }}
                         >
-                          {showLoader && (
+                          {showLoader && loadingCourse === program?.regUid && (
                             <div role="status">
                               <svg
                                 aria-hidden="true"

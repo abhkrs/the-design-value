@@ -16,7 +16,7 @@ export function LoginProvider({ children }) {
     adminId: null, // Add adminId to the state
   });
   const handleLogout = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     setIsUserLoggedIn(false);
     location.reload();
     router.push("/login");
