@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 export default function FullPage() {
   const [showLoader, setShowLoader] = useState(true);
   const [paymentSucces, setPaymentSucces] = useState(false);
+  const [nextMonth, setNextMonth] = useState(false);
+  const [multiReg, setMultiReg] = useState(false);
   const router = useRouter();
   useEffect(() => {
     const currentUrl = window.location.href;
@@ -32,7 +34,6 @@ export default function FullPage() {
       const orderId = queryParams["order_id"];
       const multiReg = queryParams["multiReg"];
       const nextMonth = queryParams["nextMonth"];
-      
 
       if (orderId) {
         // Phone pe
@@ -60,11 +61,13 @@ export default function FullPage() {
                   paymentId: orderId,
                   paymentStatus: 1,
                 };
-                if(multiReg){
-                  payentPayload.multiReg = 1
+                if (multiReg) {
+                  payentPayload.multiReg = 1;
+                  setMultiReg(true);
                 }
-                if(nextMonth){
-                  payentPayload.nextMonth = 1
+                if (nextMonth) {
+                  payentPayload.nextMonth = 1;
+                  setNextMonth(true);
                 }
 
                 const paymentResponse = await api.post(
@@ -148,9 +151,11 @@ export default function FullPage() {
           <P className="text-center !text-secondary my-2 !text-xl">
             Your payment has been successful.
           </P>
-          <P className="text-center !text-lg">
-            Email has been sent to you with your student Log In details.
-          </P>
+          {!nextMonth && (
+            <P className="text-center !text-lg">
+              Email has been sent to you {multiReg ? 'with confirmation.' : 'with your student Log In details.'} 
+            </P>
+          )}
           <P className="text-center mt-12">
             <Link
               className="bg-black hover:bg-secondary !text-white px-6 sm:px-20 py-2 text-xl rounded-full"

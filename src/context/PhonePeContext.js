@@ -80,7 +80,6 @@ export function PhonePeProvider({ children }) {
           if (response.ok) {
             // If the response status is OK (e.g., 200), parse the JSON response
             const responseData = await response.json();
-            console.log(responseData);
             window.location.href =
               responseData?.data?.instrumentResponse?.redirectInfo?.url;
           } else {
