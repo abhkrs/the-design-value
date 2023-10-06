@@ -30,6 +30,9 @@ export default function FullPage() {
 
       // Get the order_id parameter
       const orderId = queryParams["order_id"];
+      const multiReg = queryParams["multiReg"];
+      const nextMonth = queryParams["nextMonth"];
+      
 
       if (orderId) {
         // Phone pe
@@ -53,10 +56,17 @@ export default function FullPage() {
               console.log(responseData);
 
               if (responseData.code === "PAYMENT_SUCCESS") {
-                const payentPayload = {
+                let payentPayload = {
                   paymentId: orderId,
                   paymentStatus: 1,
                 };
+                if(multiReg){
+                  payentPayload.multiReg = 1
+                }
+                if(nextMonth){
+                  payentPayload.nextMonth = 1
+                }
+
                 const paymentResponse = await api.post(
                   "/Register/payupdate",
                   payentPayload

@@ -36,12 +36,13 @@ export function PhonePeProvider({ children }) {
 
       const baseUrl = window.location.origin;
       let redirectUrl = `${baseUrl}/payment-success?order_id=${orderId}`;
-      if (data?.multiReg === 1) {
+      if (data?.multiReg) {
         redirectUrl = `${redirectUrl}&multiReg=${data?.multiReg}`;
       }
       if (data?.nextMonth) {
         redirectUrl = `${redirectUrl}&nextMonth=1`;
       }
+
       const payload = {
         merchantId: process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID,
         merchantTransactionId: orderId,
