@@ -13,15 +13,7 @@ export default function AboutCourse() {
           <div className="bg-white md:px-12 py-10 rounded md:shadow ">
             <H3 className="!text-2xl">About The Course </H3>
             <P className="text-gray-600 mt-4 !text-base">
-              This is a complete UI/UX design course where you will be learning
-              the principals of design and the tools of UI design from beginner
-              to masterclass level. After the 5 months duration of this course,{" "}
-              <Link href="/" className="text-secondary underline">
-                eligible students
-              </Link>{" "}
-              will get a verified certificate authorised by TheDesignValue and
-              paid internship offer from us or other companies from the IT
-              industry.
+              This is a complete UI/UX design course where you will be learning the principals of design and the tools of UI design from beginner to masterclass level. After the 5 months duration of this course,eligible students will get a verified certificate authorised by TheDesignValue and paid internship offer from us or other companies from the IT industry.
             </P>
           </div>
           <Whatyouwilllearn />

@@ -27,7 +27,7 @@ export default function Modal({
         !enabled && "hidden"
       } flex justify-center items-center `}
     >
-       <div className="modal sm:min-w-[520px] sm:min-h-[300px] min-w-full min-h-full bg-white shadow-lg">
+       <div className="modal sm:min-w-[520px] sm:min-h-[300px] mt-32 sm:mt-0 bg-white shadow-lg">
         <div className="p-0 modal-box" ref={outSideClickRef}>
         <div
             className={`${

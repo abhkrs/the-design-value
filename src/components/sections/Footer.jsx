@@ -7,8 +7,6 @@ import {
   FaLinkedinIn,
   FaMailBulk,
   FaPhoneAlt,
-  FaPinterestP,
-  FaTwitter,
 } from "react-icons/fa";
 import P from "../typography/P";
 import SectionDark from "../uielements/SectionDark";
@@ -97,13 +95,6 @@ export default function Footer() {
                 <FaFacebookF />
               </Link>
 
-              {/* <Link
-                href="https://twitter.com/"
-                target="_blank"
-                className="hover:bg-primary bg-primary rounded-full p-1"
-              >
-                <FaTwitter />
-              </Link> */}
 
               <Link
                 href="https://www.instagram.com/thedesignvalue.in/"
@@ -112,14 +103,6 @@ export default function Footer() {
               >
                 <FaInstagram />
               </Link>
-
-              {/* <Link
-                href="https://www.pinterest.com/"
-                target="_blank"
-                className="hover:bg-primary bg-primary rounded-full p-1"
-              >
-                <FaPinterestP />
-              </Link> */}
 
               <Link
                 href="https://www.linkedin.com/company/the-design-value/"

@@ -13,7 +13,7 @@ export default function ViewCertificate() {
     <SectionDark className="!-mt-5 md:mt-0">
       <div className="lg:w-2/3 !text-white md:py-6 pb-5">
         <H2 className="!text-[26px] md:!text-4xl !font-normal">
-          Earn a certificate in UI/UX design along with Internship
+          Earn a certificate in UI/UX design.
         </H2>
         <P className="my-4 mb-6 !text-base md:!text-lg !text-[#d4d4d4]">
           Add this credential to your LinkedIn profile, resume, or CV Share it
