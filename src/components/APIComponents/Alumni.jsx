@@ -37,9 +37,7 @@ export default function Alumni() {
           email: registrationData[key].Email,
           mobile: registrationData[key].MobNo,
           course: registrationData[key].Course,
-          feePaid: registrationData[key].PaymentDetails.some(
-            (payment) => payment.PaymentStatus === true
-          ),
+          feePaid: registrationData[key].paymentStatus,
           whatsapp: registrationData[key].WhatsApp,
           regUid: registrationData[key].regUid,
           studentID: registrationData[key].StudentId,

@@ -70,7 +70,7 @@ export default function Page() {
                       activeSection === id ? "border-primary" : ""
                     }`}
                   >
-                    <img src={icon} alt="" className="w-6 h-6 -ms-1 mr-2" />
+                    <img src={icon} alt="icon" className="w-6 h-6 -ms-1 mr-2" />
                     <span className="leading-none">{label}</span>
                   </button>
                 ))}

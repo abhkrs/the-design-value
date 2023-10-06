@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 export default function FullPage() {
   const [showLoader, setShowLoader] = useState(true);
   const [paymentSucces, setPaymentSucces] = useState(false);
+  const [nextMonth, setNextMonth] = useState(false);
+  const [multiReg, setMultiReg] = useState(false);
   const router = useRouter();
   useEffect(() => {
     const currentUrl = window.location.href;
@@ -30,6 +32,8 @@ export default function FullPage() {
 
       // Get the order_id parameter
       const orderId = queryParams["order_id"];
+      const multiReg = queryParams["multiReg"];
+      const nextMonth = queryParams["nextMonth"];
 
       if (orderId) {
         // Phone pe
@@ -53,11 +57,23 @@ export default function FullPage() {
               console.log(responseData);
 
               if (responseData.code === "PAYMENT_SUCCESS") {
-                const payentPayload ={
+                let payentPayload = {
                   paymentId: orderId,
-                  paymentStatus: 1
+                  paymentStatus: 1,
+                };
+                if (multiReg) {
+                  payentPayload.multiReg = 1;
+                  setMultiReg(true);
                 }
-                const paymentResponse = await api.post("/Register/payupdate", payentPayload);
+                if (nextMonth) {
+                  payentPayload.nextMonth = 1;
+                  setNextMonth(true);
+                }
+
+                const paymentResponse = await api.post(
+                  "/Register/payupdate",
+                  payentPayload
+                );
                 console.log(paymentResponse);
                 if (paymentResponse.status === "Success") {
                   toast.success(paymentResponse?.message, {
@@ -109,7 +125,11 @@ export default function FullPage() {
         //     console.error("Error:", error);
         //     setShowLoader(false);
         //   });
+      } else {
+        router.back();
       }
+    } else {
+      router.back();
     }
   }, [router]);
 
@@ -131,9 +151,17 @@ export default function FullPage() {
           <P className="text-center !text-secondary my-2 !text-xl">
             Your payment has been successful.
           </P>
-          <P className="text-center !text-lg">
-            Email has been sent to you with your student Log In details.
-          </P>
+          {!nextMonth ? (
+            <P className="text-center !text-lg">
+              {multiReg
+                ? "Email has been sent to you with confirmation."
+                : "Email has been sent to you with your student log in details."}
+            </P>
+          ) : (
+            <P className="text-center !text-lg">
+              You have successfully paid fee for this month.
+            </P>
+          )}
           <P className="text-center mt-12">
             <Link
               className="bg-black hover:bg-secondary !text-white px-6 sm:px-20 py-2 text-xl rounded-full"
@@ -148,21 +176,17 @@ export default function FullPage() {
         <>
           <div className="relative mx-auto mt-20 w-24 h-24">
             <Image
-              src="/images/wow.png"
+              src="/images/oops.svg"
               fill={true}
               alt="Payment done"
               className="object-contain w-full h-full"
             />
           </div>
-          <H2 className="text-center !text-black mb-5 md:mt-2">
-            Payment Failed
-          </H2>
-          <P className="text-center !text-secondary my-2 !text-xl">
-            Your payment has been successful.
+
+          <P className="text-center !text-[#AF2600] my-2 !text-2xl">
+            Your payment has failed!
           </P>
-          <P className="text-center !text-lg">
-            Email has been sent to you with your student Log In details.
-          </P>
+          <P className="text-center !text-lg">Please try again...</P>
           <P className="text-center mt-12">
             <Link
               className="bg-black hover:bg-secondary !text-white px-6 sm:px-20 py-2 text-xl rounded-full"

@@ -60,7 +60,7 @@ export default function Page() {
       apiUrl: "/Register/payFees",
       callBackUrl: "/profile",
       regUid: course?.regUid,
-      nextMonth: 1,
+      nextMonth: true,
     };
     await handelPhonePePayament(payload);
   };
