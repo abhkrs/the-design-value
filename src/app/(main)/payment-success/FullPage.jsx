@@ -151,9 +151,15 @@ export default function FullPage() {
           <P className="text-center !text-secondary my-2 !text-xl">
             Your payment has been successful.
           </P>
-          {!nextMonth && (
+          {!nextMonth ? (
             <P className="text-center !text-lg">
-              Email has been sent to you {multiReg ? 'with confirmation.' : 'with your student Log In details.'} 
+              {multiReg
+                ? "Email has been sent to you with confirmation."
+                : "Email has been sent to you with your student log in details."}
+            </P>
+          ) : (
+            <P className="text-center !text-lg">
+              You have successfully paid fee for this month.
             </P>
           )}
           <P className="text-center mt-12">
