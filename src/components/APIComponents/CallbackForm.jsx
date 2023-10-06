@@ -67,11 +67,16 @@ const CallbackForm = ({ onClose, courseNumber, courseDetails }) => {
       );
 
       if (response.ok) {
-        setSubmissionResult(true);
-        setTimeout(() => {
-          setSubmissionResult(null);
-          onClose();
-        }, 3000);
+        const jsonResponse = await response.json();
+        if (jsonResponse.status === "Success") {
+          setSubmissionResult(true);
+          setTimeout(() => {
+            setSubmissionResult(null);
+            onClose();
+          }, 3000);
+        } else {
+          setSubmissionResult(false);
+        }
       } else {
         setSubmissionResult(false);
       }
