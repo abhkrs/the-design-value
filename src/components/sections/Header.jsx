@@ -49,7 +49,15 @@ function Header() {
   const [topbar, setTopbar] = useState(false);
   const [userRole, setUserRole] = useState(false);
   const [adminItemAdded, setAdminItemAdded] = useState(false);
-  const { isUserLoggedIn, handleLogout } = useContext(LoginContext);
+  const { isUserLoggedIn, handleLogout, setIsUserLoggedIn } =
+    useContext(LoginContext);
+
+  useEffect(() => {
+    let userRole = localStorage.getItem("userRole");
+    if (userRole) {
+      setIsUserLoggedIn(true);
+    }
+  }, [setIsUserLoggedIn]);
 
   useEffect(() => {
     let userRole = localStorage.getItem("userRole");
