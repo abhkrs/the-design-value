@@ -207,7 +207,7 @@ function FullPage() {
       <Testimonials />
       <div className="fixed bottom-0 left-0 right-0 z-20 bg-white rounded-t-xl p-4 lg:hidden w-full shadow-top">
         <P className="!text-lg mb-2 !text-white !bg-[#E59819] text-center px-2 py-1 -mt-1">
-          Batch starting from July
+          Batch starting from {courseDetails.StartMonth}
         </P>
         <div className=" flex mb-3">
           <div className="mx-auto text-center w-[40%] mt-1">
